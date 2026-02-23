@@ -27,7 +27,7 @@
   "hero": {
     "badge": "Join Our Growing Network",
     "titlePrefix": "Partner with",
-    "subtitle": "A growth platform for consultants and practitioners\nto expand into DPDP & ESG, elevate client value,\nand become a complete, future-ready advisory firm —\nthrough strategic collaboration with us.",
+    "subtitle": "Become the Partner Your Clients Can't Replace.",
     "becomePartner": "Become a Partner",
     "partnerLogin": "Partner Login",
     "highlights": {
@@ -1282,5 +1282,92 @@
       "submitting": "Submitting..."
     },
     "submitFailed": "Submission failed. Please try again."
+  },
+  "startChatting": {
+    "hero": {
+      "title": "Ready to partner with BnC Global?",
+      "subtitle": "We work globally to help partners onboard, stay compliant, and grow together."
+    },
+    "quickCards": [
+      {
+        "title": "Partner Opportunities",
+        "subtitle": "Learn how to become a partner"
+      },
+      {
+        "title": "Services Details",
+        "subtitle": "Explore our core offerings"
+      },
+      {
+        "title": "Global Services",
+        "subtitle": "Coverage across India & GCC"
+      },
+      {
+        "title": "Contact",
+        "subtitle": "Talk to our team for guidance"
+      }
+    ],
+    "quickCardMessage": "{{title}} - {{subtitle}}",
+    "chat": {
+      "placeholder": "Ask anything...",
+      "assistantDisclaimer": "BnC Global AI can make mistakes. Check important info.",
+      "speakMessage": "Speak message",
+      "openRequirement": "Open requirement recorder",
+      "voiceInput": "Voice input",
+      "sendMessage": "Send message",
+      "resizePanels": "Resize panels",
+      "mic": {
+        "notSupported": "Voice input is not supported in this browser.",
+        "generic": "Voice input error.",
+        "genericWithCode": "Voice input error: {{code}}"
+      },
+      "botFallback": "Thanks! We received your message. Our team will reply shortly.",
+      "errorPrefix": "Error: {{message}}.",
+      "errorGeneric": "Error sending message.",
+      "errorSuffix": "Please check webhook configuration."
+    },
+    "categories": {
+      "title": "Partnership Categories",
+      "items": [
+        {
+          "title": "International Partners",
+          "description": "Cross-border collaboration and global market expansion."
+        },
+        {
+          "title": "Sales Partners",
+          "description": "Co-sell and grow revenue through partner-led demand."
+        },
+        {
+          "title": "Technology Partners",
+          "description": "Integrations and AI-driven solutions for clients."
+        },
+        {
+          "title": "Service Partners",
+          "description": "Specialized delivery aligned to core service lines."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Get Started with BnC",
+      "subtitle": "Plan your partnership launch with an AI-guided checklist built for global partners.",
+      "button": "Start Partnership Journey"
+    },
+    "enablement": {
+      "title": "Partner Enablement",
+      "viewResources": "View resources",
+      "cards": [
+        {
+          "title": "Partner Success Kits",
+          "description": "Pitch decks, case studies, and co-branded assets."
+        },
+        {
+          "title": "Enablement Resources",
+          "description": "Training, FAQs, and onboarding materials."
+        },
+        {
+          "title": "Growth Opportunities",
+          "description": "Active regions, industries, and demand signals."
+        }
+      ]
+    }
   }
 }

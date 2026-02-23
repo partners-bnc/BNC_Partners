@@ -116,7 +116,7 @@ const Hero = () => {
                 </span>
               </div>
 
-              <h1 className="font-sora text-4xl md:text-6xl font-extrabold mb-3 leading-tight -mt-3 sm:-mt-5">
+              <h1 className="font-sora text-4xl md:text-6xl font-semibold mb-3 leading-tight -mt-3 sm:-mt-5">
                 Partner with
                 <span className="block" style={{ color: '#2C5AA0' }}>BnC Global</span>
               </h1>
