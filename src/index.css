@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap');
 
 /* Local Font Definitions */
 @font-face {
@@ -59,6 +59,7 @@ body {
   background-color: white;
   color: #333;
   overflow-x: hidden;
+  text-align: start;
 }
 
 #root {
@@ -71,6 +72,7 @@ body {
 html[dir="rtl"] body {
   direction: rtl;
   text-align: right;
+  font-family: 'Tajawal', 'Geist', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 html[dir="ltr"] body {
@@ -82,6 +84,21 @@ html[dir="rtl"] input,
 html[dir="rtl"] textarea {
   direction: rtl;
   text-align: right;
+}
+
+html[dir="rtl"] input::placeholder,
+html[dir="rtl"] textarea::placeholder {
+  text-align: right;
+}
+
+html[dir="rtl"] :is(h1, h2, h3, h4, h5, h6, p, span, label, button, a, li, strong, small) {
+  font-family: 'Tajawal', 'Geist', 'Poppins', sans-serif;
+  letter-spacing: normal;
+}
+
+html[dir="rtl"] :is(ul.list-disc, ul.list-decimal, ol.list-disc, ol.list-decimal) {
+  padding-right: 1.25rem;
+  padding-left: 0;
 }
 
 html[dir="rtl"] .text-left {
@@ -100,6 +117,14 @@ html[dir="rtl"] .mr-auto {
 
 html[dir="rtl"] .flipInRtl {
   transform: scaleX(-1);
+}
+
+html[dir="rtl"] [class*="space-x-"] > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+html[dir="rtl"] [class*="divide-x"] > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-x-reverse: 1;
 }
 
 a {

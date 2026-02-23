@@ -294,6 +294,8 @@ const StartChattingSection = ({ embedded = false }) => {
   const plusPositionClass = isRtl ? 'right-4' : 'left-4';
   const actionPositionClass = isRtl ? 'left-3' : 'right-3';
   const micIndicatorPositionClass = isRtl ? '-left-0.5' : '-right-0.5';
+  const botAvatarMarginClass = isRtl ? 'ml-3' : 'mr-3';
+  const botTimestampAlignClass = isRtl ? 'text-right' : 'text-left';
   const rightPanelClass = embedded
     ? `w-full h-full bg-gray-50 overflow-y-auto overflow-x-hidden pt-6 pb-6 ${isRtl ? 'pr-6 pl-0' : 'pl-6 pr-0'} scroll-smooth scrollbar-thin-bnc`
     : 'w-full h-full bg-gray-50 overflow-y-auto overflow-x-hidden p-6 scroll-smooth scrollbar-thin-bnc';
@@ -347,11 +349,11 @@ const StartChattingSection = ({ embedded = false }) => {
                 </div>
               )}
 
-              <div className="mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden" dir={isRtl ? 'ltr' : undefined}>
+              <div className="mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden">
                 {messages.map((msg, idx) => (
                   <div key={idx} className={`mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
-                      <div className="mr-3 mt-1 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm">
+                      <div className={`${botAvatarMarginClass} mt-1 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm`}>
                         <Building2 className="h-4 w-4 text-[#2C5AA0]" />
                       </div>
                     )}
@@ -388,7 +390,7 @@ const StartChattingSection = ({ embedded = false }) => {
                       {msg.time && (
                         <div
                           className={`mt-1 text-[10px] text-gray-400 ${
-                            msg.type === 'user' ? 'text-right' : 'text-left'
+                            msg.type === 'user' ? 'text-right' : botTimestampAlignClass
                           }`}
                         >
                           {msg.time}

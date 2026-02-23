@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import PartnerFormModal from './PartnerFormModal';
 
 const CTA = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isRtl = i18n.language === 'ar';
+  const buttonDirection = isRtl ? 'sm:flex-row-reverse' : 'sm:flex-row';
 
   return (
     <>
-      <section className="text-white py-16" style={{backgroundColor: '#2C3544'}}>
+      <section className="text-white py-16" style={{backgroundColor: '#2C3544'}} dir={isRtl ? 'rtl' : 'ltr'}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 relative">
             <span className="block">
@@ -20,7 +22,7 @@ const CTA = () => {
             {t('cta.subtitle')}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className={`flex flex-col gap-4 justify-center mb-8 ${buttonDirection}`}>
             <button 
               onClick={() => setIsModalOpen(true)}
               className="bg-[#2C5AA0] text-white px-8 py-3 rounded-full font-semibold transition-colors hover:bg-[#1e3f73] flex items-center justify-center gap-2"
