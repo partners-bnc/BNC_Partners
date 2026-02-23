@@ -5,11 +5,9 @@ export const services = [
     summary: 'Strategic finance guidance to drive profitability and compliance.',
     bullets: [
       'Virtual CFO Services',
-      'Cost & Management Accounting',
-      'Profit Optimization & Cost Efficiency',
-      'Financial Planning, Reporting & MIS',
-      'IFRS, GAAP & GAAS Compliance',
-      'Due Diligence & Valuation'
+      'Financial Planning & Analysis (FP&A)',
+      'Budget & Cost Management',
+      'Reporting & MIS'
     ],
     tags: ['high-selling', 'high-demand'],
     country: ['india', 'saudi-arabia', 'other'],

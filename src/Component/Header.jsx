@@ -27,6 +27,10 @@ const Header = () => {
     }
   }, [location.search]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
   const handleLogout = () => {
     localStorage.removeItem('partnerUser');
     setIsLoggedIn(false);
@@ -65,7 +69,7 @@ const Header = () => {
               </button>
               
               {/* Logo + Company Name */}
-              <Link to="/" className="flex items-center gap-2">
+              <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' })}>
                 <img 
                   src="https://static.wixstatic.com/media/0446e3_50ff54e1251b45ef8a1066bca3a75b0e~mv2.png/v1/fill/w_256,h_256,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/b%20nc%20global.png" 
                   alt="BnC Global" 
@@ -84,6 +88,7 @@ const Header = () => {
                 {location.pathname !== '/' && (
                   <Link
                     to="/"
+                    onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' })}
                     className={`font-geist text-base relative transition-colors duration-300 ${
                       isActivePath('/') ? 'text-[#2C5AA0] font-semibold' : 'text-gray-700 hover:text-[#2C5AA0]'
                     }`}
@@ -140,12 +145,7 @@ const Header = () => {
 
             {/* Right Section */}
             <div className={`flex items-center gap-3 ${rightPadding}`}>
-              <Link
-                to="/start-chatting"
-                className="hidden md:inline-flex items-center bg-white border border-[#2C5AA0] text-[#2C5AA0] hover:bg-[#2C5AA0] hover:text-white px-4 py-2 rounded-lg font-poppins font-semibold text-sm transition-colors duration-300"
-              >
-                {t('header.aiChatting')}
-              </Link>
+              
               {isLoggedIn ? (
                 <div className="flex items-center gap-3">
                   <Link 

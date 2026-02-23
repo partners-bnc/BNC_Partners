@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './Component/Header';
 import Footer from './Component/Footer';
-import FloatingChatButton from './Component/FloatingChatButton';
 import Home from './pages/Home';
 import Partnerships from './pages/Partnerships';
 import Login from './auth/Login';
@@ -49,7 +48,6 @@ function App() {
                 </Routes>
               </main>
               <Footer />
-              <FloatingChatButton />
             </>
           } />
         </Routes>

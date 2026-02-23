@@ -86,6 +86,7 @@ const GlobalServices = () => {
   const [activeSection, setActiveSection] = useState('manpower');
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -99,6 +100,7 @@ const GlobalServices = () => {
     if (!stored) return;
     try {
       const user = JSON.parse(stored);
+      setIsLoggedIn(true);
       const fullName = `${user?.firstName || ''} ${user?.lastName || ''}`.trim();
       setFormValues((prev) => ({
         ...prev,
@@ -474,7 +476,7 @@ const GlobalServices = () => {
                           placeholder={t('globalServices.form.placeholders.fullName')}
                           className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
                           required
-                          readOnly
+                          readOnly={isLoggedIn}
                         />
                         <input
                           type="email"
@@ -484,7 +486,7 @@ const GlobalServices = () => {
                           placeholder={t('globalServices.form.placeholders.email')}
                           className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
                           required
-                          readOnly
+                          readOnly={isLoggedIn}
                         />
                         <input
                           type="tel"
@@ -493,7 +495,7 @@ const GlobalServices = () => {
                           onChange={handleChange}
                           placeholder={t('globalServices.form.placeholders.phone')}
                           className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
-                          readOnly
+                          readOnly={isLoggedIn}
                         />
                         <input
                           type="text"

@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect, useMemo } from 'react';
-import { FaUser, FaHeadset } from 'react-icons/fa';
+import { FaUser, FaHeadset, FaMicrophone } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../Component/Header';
@@ -7,6 +7,7 @@ import Footer from '../Component/Footer';
 import AIProfileModal from '../Component/AIProfileModal';
 import ReferralModal from '../Component/ReferralModal';
 import TermsAgreementModal from '../Component/TermsAgreementModal';
+import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
 
 const PartnerDashboard = () => {
@@ -15,6 +16,7 @@ const PartnerDashboard = () => {
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
   const [isReferralModalOpen, setIsReferralModalOpen] = useState(false);
   const [isAgreementOpen, setIsAgreementOpen] = useState(false);
+  const [isRequirementModalOpen, setIsRequirementModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('india');
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ const PartnerDashboard = () => {
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
   const inputAlign = isRtl ? 'text-right' : 'text-left';
   const searchButtonMargin = isRtl ? 'mr-3' : 'ml-3';
+  const voiceButtonMargin = isRtl ? 'mr-4' : 'ml-4';
   const statusAlign = isRtl ? 'sm:mr-auto sm:w-auto sm:items-start' : 'sm:ml-auto sm:w-auto sm:items-end';
   const quickAlign = isRtl ? 'justify-start' : 'justify-end';
   const cardButtonPos = isRtl ? 'left-6' : 'right-6';
@@ -253,23 +256,36 @@ const PartnerDashboard = () => {
             </div>
 
             <div className="mt-8 flex justify-center">
-              <div className="flex w-full max-w-2xl items-center rounded-full bg-white px-4 py-2.5 shadow-sm ring-1 ring-slate-200">
-                <input
-                  type="text"
-                  placeholder={t('partnerDashboard.searchPlaceholder')}
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
-                  className={`w-full bg-transparent text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none ${inputAlign}`}
-                />
+              <div className="flex w-full max-w-2xl items-center">
+                <div className="flex flex-1 items-center rounded-full bg-white px-4 py-2.5 shadow-sm ring-1 ring-slate-200">
+                  <input
+                    type="text"
+                    placeholder={t('partnerDashboard.searchPlaceholder')}
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    className={`w-full bg-transparent text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none ${inputAlign}`}
+                  />
+                  <button
+                    type="button"
+                    className={`${searchButtonMargin} inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700`}
+                    aria-label={t('partnerDashboard.searchAria')}
+                  >
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                </div>
                 <button
                   type="button"
-                  className={`${searchButtonMargin} inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700`}
-                  aria-label={t('partnerDashboard.searchAria')}
+                  onClick={() => setIsRequirementModalOpen(true)}
+                  className={`${voiceButtonMargin} inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50`}
+                  aria-label="Open voice requirement"
                 >
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="7" />
-                    <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
-                  </svg>
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                    <FaMicrophone className="h-4 w-4" />
+                  </span>
+                  Voice Requirement
                 </button>
               </div>
             </div>
@@ -533,6 +549,10 @@ const PartnerDashboard = () => {
             return updated;
           });
         }}
+      />
+      <RequirementVoiceModal
+        isOpen={isRequirementModalOpen}
+        onClose={() => setIsRequirementModalOpen(false)}
       />
     </>
   );

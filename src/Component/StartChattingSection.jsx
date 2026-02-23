@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Volume2
 } from 'lucide-react';
+import RequirementVoiceModal from './RequirementVoiceModal';
 
 const StartChattingSection = ({ embedded = false }) => {
   const [message, setMessage] = useState('');
@@ -19,6 +20,7 @@ const StartChattingSection = ({ embedded = false }) => {
   const [isListening, setIsListening] = useState(false);
   const [micError, setMicError] = useState('');
   const [speakingIndex, setSpeakingIndex] = useState(null);
+  const [isRequirementModalOpen, setIsRequirementModalOpen] = useState(false);
   const recognitionRef = useRef(null);
   const speechStopTimerRef = useRef(null);
   const messagesEndRef = useRef(null);
@@ -33,25 +35,25 @@ const StartChattingSection = ({ embedded = false }) => {
       title: 'International Partners',
       description: 'Cross-border collaboration and global market expansion.',
       icon: Building2,
-      image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&fit=crop&auto=format'
+      image: '/favicon/001.jpg.jpeg'
     },
     {
       title: 'Sales Partners',
       description: 'Co-sell and grow revenue through partner-led demand.',
       icon: Users,
-      image: 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?w=800&q=80&fit=crop&auto=format'
+      image: '/favicon/002.jpg.jpeg'
     },
     {
       title: 'Technology Partners',
       description: 'Integrations and AI-driven solutions for clients.',
       icon: Sparkles,
-      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80&fit=crop&auto=format'
+      image: '/favicon/003.jpg.jpeg'
     },
     {
       title: 'Service Partners',
       description: 'Specialized delivery aligned to core service lines.',
       icon: Briefcase,
-      image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80&fit=crop&auto=format'
+      image: '/favicon/004.jpg.jpeg'
     }
   ];
 
@@ -184,6 +186,10 @@ const StartChattingSection = ({ embedded = false }) => {
       setIsListening(false);
     }
     sendMessage(message);
+  };
+
+  const handleRequirementSend = (text) => {
+    sendMessage(text);
   };
 
   const handleQuickCardClick = (title, subtitle) => {
@@ -431,7 +437,11 @@ const StartChattingSection = ({ embedded = false }) => {
                     }
                   }}
                 />
-                <button className="absolute left-4 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-200 rounded-lg transition-colors">
+                <button
+                  onClick={() => setIsRequirementModalOpen(true)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                  aria-label="Open requirement recorder"
+                >
                   <Plus className="w-5 h-5 text-gray-500" />
                 </button>
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-2">
@@ -581,6 +591,11 @@ const StartChattingSection = ({ embedded = false }) => {
           )}
         </div>
       </div>
+      <RequirementVoiceModal
+        isOpen={isRequirementModalOpen}
+        onClose={() => setIsRequirementModalOpen(false)}
+        onSend={handleRequirementSend}
+      />
     </section>
   );
 };

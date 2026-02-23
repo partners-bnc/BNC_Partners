@@ -82,6 +82,17 @@ const Hero = () => {
   return (
     <>
       <section className="relative min-h-screen overflow-hidden text-slate-900 -mt-16 pt-16 sm:pt-24 lg:pt-15">
+        <Link
+          to="/start-chatting"
+          className="fixed -bottom-10 -right-3 z-40 inline-flex items-center justify-center rounded-full bg-transparent p-2 hover:opacity-90 transition-all"
+          aria-label="Get AI help"
+        >
+          <img
+            src="/favicon/WhatsApp_Image_2026-02-23_at_1.56.29_PM-removebg-preview.png"
+            alt="ChatBot AI"
+            className="h-50 w-50 object-contain"
+          />
+        </Link>
         <div className="absolute inset-0 bg-[#F7F2ED]">
           <div className="absolute -top-28 -right-20 h-96 w-96 rounded-full bg-gradient-to-br from-[#2C5AA0]/25 via-[#7ea5ff]/25 to-transparent blur-3xl" />
           <div className="absolute right-[-120px] top-[-60px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(44,90,160,0.35),rgba(126,165,255,0.18),rgba(255,255,255,0))] blur-3xl" />
@@ -94,7 +105,7 @@ const Hero = () => {
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-10 sm:py-12 lg:py-20">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-            <div className="text-center lg:text-left lg:-mt-6 mt-0 sm:mt-10 relative z-20">
+            <div className="text-center lg:text-left lg:-mt-10 mt-0 sm:mt-10 relative z-20">
               <div className="relative inline-flex items-center gap-2 rounded-full border border-slate-900/60 bg-[#e8f1ff] px-4 py-1.5 text-xs font-semibold mb-4 sm:mb-6 -mt-1 backdrop-blur-sm text-slate-900 overflow-hidden shadow-[0_10px_26px_rgba(15,23,42,0.12)]">
                 <span className="absolute inset-0 bg-gradient-to-r from-[#2C5AA0]/20 via-[#7ea5ff]/20 to-transparent blur-md" />
                 <span className="relative flex items-center gap-2">
@@ -112,7 +123,6 @@ const Hero = () => {
 
               <p className="font-geist text-lg md:text-xl mb-8 max-w-2xl mx-auto lg:mx-0 text-slate-600">
                 {t('hero.subtitle')
-                  .replace(' unlock ', '\nunlock ')
                   .split('\n')
                   .map((line, index) => (
                     <span key={index} className="block">
@@ -151,16 +161,16 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="flex flex-row gap-3 justify-between mb-6 w-full max-w-md mx-auto lg:mx-0">
+              <div className="flex flex-row gap-2 justify-between mb-6 w-full max-w-md mx-auto lg:mx-0">
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-4 py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
+                  className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
                 >
                   {t('hero.becomePartner')}
                 </button>
                 <Link
                   to="/login"
-                  className="bg-white hover:bg-slate-50 text-slate-800 border border-black px-4 py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
+                  className="bg-white hover:bg-slate-50 text-slate-800 border border-black px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
