@@ -154,7 +154,7 @@ const ServiceDetail = () => {
   };
   const knowMoreDescription = serviceTaglines[service?.id] || activeSectionData.description;
 
-  const subServiceDetails = {
+  const subServiceDetailsDefault = {
     'financial-advisory': [
       {
         title: 'Virtual CFO Services',
@@ -628,10 +628,13 @@ const ServiceDetail = () => {
       }
     ]
   };
-  const subServicesForService = subServiceDetails[service?.id] || null;
-  const subServiceTitles = subServicesForService ? subServicesForService.map((item) => item.title) : [];
-  const activeSubServiceData = subServicesForService
-    ? subServicesForService.find((item) => item.title === activeSubService)
+  const localizedSubServices = t('serviceDetail.subServices', {
+    returnObjects: true,
+    defaultValue: subServiceDetailsDefault
+  });
+  const subServicesForService = localizedSubServices?.[service?.id] || subServiceDetailsDefault[service?.id] || null;
+  const activeSubServiceData = subServicesForService && activeSubService !== null
+    ? subServicesForService[activeSubService]
     : null;
   const sectionIconMap = {
     'know-more': FiInfo,
@@ -939,7 +942,7 @@ const ServiceDetail = () => {
                           </span>
                           <div>
                             <h4 className="font-poppins text-lg font-semibold">
-                              Voice Requirement
+                              {t('serviceDetail.voiceRequirement.title')}
                             </h4>
                             <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
                           </div>
@@ -949,28 +952,30 @@ const ServiceDetail = () => {
                         <div>
                           {service.bullets.length > 0 ? (
                             <ul className="space-y-2 text-gray-700 list-disc list-outside font-geist leading-relaxed pl-5">
-                              {service.bullets.map((item) => {
-                                const isClickable = subServiceTitles.includes(item);
-                                const isActive = activeSubService === item;
+                              {service.bullets.map((item, index) => {
+                                const subService = subServicesForService?.[index] || null;
+                                const isClickable = Boolean(subService);
+                                const isActive = activeSubService === index;
+                                const displayText = subService?.title || item;
                                 return (
-                                  <li key={item}>
+                                  <li key={`${item}-${index}`}>
                                     {isClickable ? (
                                       <button
                                         type="button"
-                                        onClick={() => setActiveSubService(isActive ? null : item)}
+                                        onClick={() => setActiveSubService(isActive ? null : index)}
                                         className={`text-left w-full transition flex items-center justify-between ${isRtl ? 'flex-row-reverse' : ''} ${
                                           isActive
                                             ? 'text-[#1e3a8a] font-semibold'
                                             : 'text-gray-700 hover:text-[#1e3a8a]'
                                         } ${inputAlign}`}
                                       >
-                                        <span>{item}</span>
+                                        <span>{displayText}</span>
                                         <span className={`${isRtl ? 'ml-0 mr-3' : 'ml-3'} text-[#2C5AA0]`}>
                                           {isActive ? <FiChevronUp className="h-4 w-4" /> : <FiChevronDown className="h-4 w-4" />}
                                         </span>
                                       </button>
                                     ) : (
-                                      <span>{item}</span>
+                                      <span>{displayText}</span>
                                     )}
                                   </li>
                                 );
@@ -984,7 +989,7 @@ const ServiceDetail = () => {
                         </div>
                         <div className={`border-t border-slate-200 pt-4 md:border-t-0 md:pt-0 ${isRtl ? 'md:border-r md:pr-6' : 'md:border-l md:pl-6'}`}>
                           <p className="font-geist text-gray-600">
-                            Record your requirement by voice and send it instantly.
+                            {t('serviceDetail.voiceRequirement.description')}
                           </p>
                           <div className="mt-4">
                             <button
@@ -992,11 +997,11 @@ const ServiceDetail = () => {
                               onClick={() => setIsRequirementModalOpen(true)}
                               className="inline-flex items-center gap-2 rounded-full bg-[#2C5AA0] text-white px-5 py-2.5 text-sm font-semibold shadow hover:bg-[#1e3a8a] transition"
                             >
-                              Start Voice Recording
-                            </button>
-                          </div>
+                            {t('serviceDetail.voiceRequirement.button')}
+                          </button>
                         </div>
                       </div>
+                    </div>
                     </div>
 
                     {activeSubServiceData && (
@@ -1017,7 +1022,7 @@ const ServiceDetail = () => {
                         </p>
                         <div className={`mt-5 ${sectionPadding}`}>
                           <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-geist">
-                            Our Methodology
+                            {t('serviceDetail.subServiceMethodologyLabel')}
                           </p>
                           <p className="mt-2 font-geist text-sm font-semibold text-slate-800">
                             {activeSubServiceData.methodologyTitle}

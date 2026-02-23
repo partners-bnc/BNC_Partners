@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mic, Send, X, Keyboard, AudioLines } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const RequirementVoiceModal = ({
   isOpen,
@@ -7,6 +8,10 @@ const RequirementVoiceModal = ({
   onSend,
   defaultMode = 'voice'
 }) => {
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.language === 'ar';
+  const textAlign = isRtl ? 'text-right' : 'text-left';
+  const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
   const [mode, setMode] = useState(defaultMode);
   const [requirement, setRequirement] = useState('');
   const [interimText, setInterimText] = useState('');
@@ -29,11 +34,11 @@ const RequirementVoiceModal = ({
     if (!isOpen) return undefined;
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      setMicError('Voice input is not supported in this browser.');
+      setMicError(t('requirementVoiceModal.errors.notSupported'));
       return undefined;
     }
     const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
+    recognition.lang = isRtl ? 'ar-SA' : 'en-US';
     recognition.interimResults = true;
     recognition.continuous = false;
     recognition.onstart = () => {
@@ -70,7 +75,9 @@ const RequirementVoiceModal = ({
     };
     recognition.onerror = (event) => {
       setIsListening(false);
-      setMicError(event?.error ? `Voice input error: ${event.error}` : 'Voice input error.');
+      setMicError(event?.error
+        ? t('requirementVoiceModal.errors.genericWithCode', { code: event.error })
+        : t('requirementVoiceModal.errors.generic'));
     };
     recognition.onend = () => {
       setIsListening(false);
@@ -83,11 +90,11 @@ const RequirementVoiceModal = ({
       }
       recognition.stop();
     };
-  }, [isOpen]);
+  }, [isOpen, isRtl, t]);
 
   const handleMicToggle = () => {
     if (!recognitionRef.current) {
-      setMicError('Voice input is not supported in this browser.');
+      setMicError(t('requirementVoiceModal.errors.notSupported'));
       return;
     }
     if (isListening) {
@@ -116,24 +123,31 @@ const RequirementVoiceModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       <div className="w-full max-w-2xl rounded-3xl bg-white shadow-2xl border border-slate-200/70 overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+        <div className={`flex items-center justify-between px-6 py-4 border-b border-slate-100 ${rowDirection}`}>
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-slate-500">Requirement</div>
-            <h2 className="text-xl font-bold text-slate-900">Tell us your requirement</h2>
+            <div className="text-xs uppercase tracking-[0.2em] text-slate-500">
+              {t('requirementVoiceModal.title')}
+            </div>
+            <h2 className="text-xl font-bold text-slate-900">
+              {t('requirementVoiceModal.subtitle')}
+            </h2>
           </div>
           <button
             onClick={onClose}
             className="h-10 w-10 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors flex items-center justify-center"
-            aria-label="Close"
+            aria-label={t('requirementVoiceModal.close')}
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         <div className="px-6 pt-5">
-          <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-2xl border border-slate-100">
+          <div className={`flex items-center gap-2 bg-slate-50 p-2 rounded-2xl border border-slate-100 ${rowDirection}`}>
             <button
               onClick={() => setMode('voice')}
               className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all ${
@@ -143,7 +157,7 @@ const RequirementVoiceModal = ({
               }`}
             >
               <AudioLines className="h-4 w-4" />
-              Voice
+              {t('requirementVoiceModal.voice')}
             </button>
             <button
               onClick={() => setMode('typing')}
@@ -154,7 +168,7 @@ const RequirementVoiceModal = ({
               }`}
             >
               <Keyboard className="h-4 w-4" />
-              Typing
+              {t('requirementVoiceModal.typing')}
             </button>
           </div>
         </div>
@@ -162,7 +176,7 @@ const RequirementVoiceModal = ({
         <div className="px-6 py-6">
           {mode === 'voice' ? (
             <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-[#f4f8ff] via-white to-[#f9fbff] p-6">
-              <div className="flex flex-col items-center text-center">
+              <div className={`flex flex-col items-center ${textAlign}`}>
                 <div className={`relative h-24 w-24 rounded-full flex items-center justify-center ${
                   isListening ? 'bg-[#2C5AA0]/10' : 'bg-slate-100'
                 }`}>
@@ -180,65 +194,71 @@ const RequirementVoiceModal = ({
                         : 'bg-white text-[#2C5AA0] border border-slate-200 shadow'
                     }`}
                     aria-pressed={isListening}
-                    aria-label="Toggle voice recording"
+                    aria-label={t('requirementVoiceModal.toggleRecording')}
                   >
                     <Mic className="h-5 w-5" />
                   </button>
                 </div>
                 <p className="mt-4 text-sm font-semibold text-slate-900">
-                  {isListening ? 'Listening… speak your requirement' : 'Tap to start recording'}
+                  {isListening
+                    ? t('requirementVoiceModal.listening')
+                    : t('requirementVoiceModal.tapToStart')}
                 </p>
                 <p className="text-xs text-slate-500 mt-1">
-                  Voice is the primary option. We will convert speech to text.
+                  {t('requirementVoiceModal.voiceHelper')}
                 </p>
               </div>
 
               <div className="mt-5">
-                <label className="text-xs font-semibold text-slate-500">Live transcript</label>
+                <label className="text-xs font-semibold text-slate-500">
+                  {t('requirementVoiceModal.liveTranscript')}
+                </label>
                 <textarea
                   value={`${requirement}${interimText ? `${requirement ? ' ' : ''}${interimText}` : ''}`}
                   onChange={(e) => {
                     setRequirement(e.target.value);
                     setInterimText('');
                   }}
-                  placeholder="Your requirement will appear here…"
-                  className="mt-2 w-full min-h-[120px] rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/40"
+                  placeholder={t('requirementVoiceModal.transcriptPlaceholder')}
+                  className={`mt-2 w-full min-h-[120px] rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/40 ${textAlign}`}
                 />
                 {micError && (
-                  <p className="mt-2 text-xs text-red-500">{micError}</p>
+                  <p className={`mt-2 text-xs text-red-500 ${textAlign}`}>{micError}</p>
                 )}
               </div>
             </div>
           ) : (
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <label className="text-xs font-semibold text-slate-500">Type your requirement</label>
+              <label className="text-xs font-semibold text-slate-500">
+                {t('requirementVoiceModal.typeLabel')}
+              </label>
               <textarea
                 value={requirement}
                 onChange={(e) => setRequirement(e.target.value)}
-                placeholder="Share roles, counts, duration, timeline, location…"
-                className="mt-2 w-full min-h-[200px] rounded-xl border border-slate-200 p-4 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/40"
+                placeholder={t('requirementVoiceModal.typePlaceholder')}
+                className={`mt-2 w-full min-h-[200px] rounded-xl border border-slate-200 p-4 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/40 ${textAlign}`}
               />
             </div>
           )}
         </div>
 
-        <div className="px-6 pb-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-          <div className="text-xs text-slate-500">
-            Tip: Include role, location, duration, and timeline.
+        <div className={`px-6 pb-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between ${rowDirection}`}>
+          <div className={`text-xs text-slate-500 ${textAlign}`}>
+            {t('requirementVoiceModal.tip')}
           </div>
-          <div className="flex gap-2">
+          <div className={`flex gap-2 ${rowDirection}`}>
             <button
               onClick={() => setRequirement('')}
               className="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50 transition-colors"
             >
-              Clear
+              {t('requirementVoiceModal.clear')}
             </button>
             <button
               onClick={handleSend}
               disabled={!requirement.trim()}
               className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#2C5AA0] text-white text-sm font-semibold shadow hover:bg-[#1e3f73] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
-              Send
+              {t('requirementVoiceModal.send')}
               <Send className="h-4 w-4" />
             </button>
           </div>
