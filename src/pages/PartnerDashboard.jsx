@@ -9,6 +9,7 @@ import ReferralModal from '../Component/ReferralModal';
 import TermsAgreementModal from '../Component/TermsAgreementModal';
 import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
+import { fetchPartnerData, logout, submitVoiceRequirement } from '../lib/supabaseData';
 
 const PartnerDashboard = () => {
   const [partnerData, setPartnerData] = useState(null);
@@ -32,34 +33,6 @@ const PartnerDashboard = () => {
   const quickAlign = isRtl ? 'justify-start' : 'justify-end';
   const cardButtonPos = isRtl ? 'left-6' : 'right-6';
 
-  const fetchPartnerData = async (email) => {
-    try {
-      const params = new URLSearchParams({
-        action: 'getPartnerData',
-        email: email
-      });
-      
-      const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        return result.data;
-      } else {
-        console.error('Failed to fetch partner data:', result.message);
-        return null;
-      }
-    } catch (error) {
-      console.error('Error fetching partner data:', error);
-      return null;
-    }
-  };
-
   useEffect(() => {
     const userData = localStorage.getItem('partnerUser');
     if (!userData) {
@@ -70,34 +43,55 @@ const PartnerDashboard = () => {
     try {
       const user = JSON.parse(userData);
       setPartnerData(user);
+      setLoading(false);
+      let isRefreshing = false;
+      let isMounted = true;
       
       const refreshData = async () => {
-        const freshData = await fetchPartnerData(user.email);
-        if (freshData) {
-          setPartnerData((prev) => {
-            const merged = {
-              ...freshData,
-              agreementSigned: prev?.agreementSigned || freshData.agreementSigned,
-              agreementSignedName: prev?.agreementSignedName || freshData.agreementSignedName,
-              agreementSignedAt: prev?.agreementSignedAt || freshData.agreementSignedAt
-            };
-            const prevSnapshot = JSON.stringify(prev || {});
-            const nextSnapshot = JSON.stringify(merged || {});
-            if (prevSnapshot === nextSnapshot) {
-              return prev;
-            }
-            localStorage.setItem('partnerUser', JSON.stringify(merged));
-            return merged;
-          });
+        if (isRefreshing) return;
+        isRefreshing = true;
+        try {
+          const freshData = await fetchPartnerData(user.email, user.id);
+          if (freshData) {
+            setPartnerData((prev) => {
+              const merged = {
+                ...freshData,
+                agreementSigned: prev?.agreementSigned || freshData.agreementSigned,
+                agreementSignedName: prev?.agreementSignedName || freshData.agreementSignedName,
+                agreementSignedAt: prev?.agreementSignedAt || freshData.agreementSignedAt
+              };
+              const prevSnapshot = JSON.stringify(prev || {});
+              const nextSnapshot = JSON.stringify(merged || {});
+              if (prevSnapshot === nextSnapshot) {
+                return prev;
+              }
+              localStorage.setItem('partnerUser', JSON.stringify(merged));
+              return merged;
+            });
+          }
+        } catch (error) {
+          const message = String(error?.message || '').toLowerCase();
+          if (message.includes('lockmanager') || message.includes('lock') || message.includes('timeout')) {
+            console.warn('Skipping refresh due to temporary auth lock timeout:', error);
+            return;
+          }
+          console.error('Failed to refresh partner data:', error);
+        } finally {
+          isRefreshing = false;
         }
       };
       
-      refreshData().then(() => setLoading(false));
+      refreshData().catch((error) => {
+        console.error('Initial partner refresh failed:', error);
+      });
       
-      // Auto-refresh every 5 seconds
-      const interval = setInterval(refreshData, 5000);
+      // Keep profile in sync without excessive auth-lock churn.
+      const interval = setInterval(refreshData, 15000);
       
-      return () => clearInterval(interval);
+      return () => {
+        isMounted = false;
+        clearInterval(interval);
+      };
     } catch (error) {
       console.error('Error parsing user data:', error);
       navigate('/login');
@@ -115,9 +109,32 @@ const PartnerDashboard = () => {
     }
   }, [location.search, partnerData?.aiProfileCompleted]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('partnerUser');
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     navigate('/login');
+  };
+
+  const handleVoiceRequirementSubmit = async (text) => {
+    try {
+      await submitVoiceRequirement({
+        requirement: text,
+        partnerId: partnerData?.id || null,
+        partnerEmail: partnerData?.email || '',
+        recipientEmail: 'rohanbncglobal@gmail.com',
+        source: 'partner-dashboard'
+      });
+    } catch (error) {
+      if (error instanceof Error && error.message === 'AUTH_REQUIRED') {
+        navigate('/login');
+        throw new Error('Please log in to submit your requirement.');
+      }
+      throw error;
+    }
   };
 
   const agreementSigned = Boolean(partnerData?.agreementSigned);
@@ -553,6 +570,7 @@ const PartnerDashboard = () => {
       <RequirementVoiceModal
         isOpen={isRequirementModalOpen}
         onClose={() => setIsRequirementModalOpen(false)}
+        onSend={handleVoiceRequirementSubmit}
       />
     </>
   );

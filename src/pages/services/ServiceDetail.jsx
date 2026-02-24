@@ -19,6 +19,7 @@ import Header from '../../Component/Header';
 import Footer from '../../Component/Footer';
 import { getServiceById } from '../../data/services';
 import RequirementVoiceModal from '../../Component/RequirementVoiceModal';
+import { submitEnquiry, submitVoiceRequirement } from '../../lib/supabaseData';
 
 const ServiceDetail = () => {
   const navigate = useNavigate();
@@ -675,7 +676,7 @@ const ServiceDetail = () => {
     setActiveSubService(null);
   }, [serviceId, activeSection]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formTypeLabel = activeSection === 'manpower'
       ? 'Manpower'
@@ -683,37 +684,79 @@ const ServiceDetail = () => {
         ? 'Training'
         : 'Enquiry';
 
-    const params = new URLSearchParams({
-      action: 'submitEnquiry',
-      country: country || '',
-      countryLabel: countryLabel || '',
-      service: service?.title || '',
-      formType: formTypeLabel,
-      name: formValues.name || '',
-      email: formValues.email || '',
-      phone: formValues.phone || '',
-      company: formValues.company || '',
-      message: formValues.message || ''
-    });
-
-    const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
     setIsSubmitting(true);
-    fetch(url, { method: 'GET', mode: 'cors' })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success) {
-          setSubmitted(true);
-        } else {
-          alert(result.message || t('serviceDetail.submitFailed'));
+    try {
+      const stored = localStorage.getItem('partnerUser');
+      let partnerId = null;
+      if (stored) {
+        try {
+          partnerId = JSON.parse(stored)?.id || null;
+        } catch (error) {
+          console.error('Could not parse partner user from localStorage:', error);
         }
-      })
-      .catch((error) => {
-        console.error('Enquiry submission error:', error);
-        alert(t('serviceDetail.submitFailed'));
-      })
-      .finally(() => {
-        setIsSubmitting(false);
+      }
+
+      await submitEnquiry({
+        partnerId,
+        country: country || '',
+        countryLabel: countryLabel || '',
+        service: service?.title || '',
+        formType: formTypeLabel,
+        name: formValues.name || '',
+        email: formValues.email || '',
+        phone: formValues.phone || '',
+        company: formValues.company || '',
+        message: formValues.message || ''
       });
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Enquiry submission error:', error);
+      alert(t('serviceDetail.submitFailed'));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleOpenRequirementModal = () => {
+    const stored = localStorage.getItem('partnerUser');
+    if (!stored) {
+      alert('Please log in first to submit your voice requirement.');
+      navigate('/login');
+      return;
+    }
+    setIsRequirementModalOpen(true);
+  };
+
+  const handleRequirementSend = async (text) => {
+    let partnerId = null;
+    let partnerEmail = '';
+    try {
+      const stored = localStorage.getItem('partnerUser');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        partnerId = parsed?.id || null;
+        partnerEmail = parsed?.email || '';
+      }
+    } catch (error) {
+      console.error('Could not parse partner user from localStorage:', error);
+    }
+
+    try {
+      await submitVoiceRequirement({
+        requirement: text,
+        partnerId,
+        partnerEmail,
+        recipientEmail: 'rohanbncglobal@gmail.com',
+        source: 'service-detail'
+      });
+    } catch (error) {
+      if (error instanceof Error && error.message === 'AUTH_REQUIRED') {
+        navigate('/login');
+        throw new Error('Please log in to submit your requirement.');
+      }
+      throw error;
+    }
   };
 
   const formTitleMap = {
@@ -994,7 +1037,7 @@ const ServiceDetail = () => {
                           <div className="mt-4">
                             <button
                               type="button"
-                              onClick={() => setIsRequirementModalOpen(true)}
+                              onClick={handleOpenRequirementModal}
                               className="inline-flex items-center gap-2 rounded-full bg-[#2C5AA0] text-white px-5 py-2.5 text-sm font-semibold shadow hover:bg-[#1e3a8a] transition"
                             >
                             {t('serviceDetail.voiceRequirement.button')}
@@ -1368,6 +1411,7 @@ const ServiceDetail = () => {
       <RequirementVoiceModal
         isOpen={isRequirementModalOpen}
         onClose={() => setIsRequirementModalOpen(false)}
+        onSend={handleRequirementSend}
       />
     </>
   );

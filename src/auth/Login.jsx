@@ -1,7 +1,8 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { fetchPartnerData, loginAdmin, loginPartner } from '../lib/supabaseData';
 
 const Login = () => {
   const location = useLocation();
@@ -71,53 +72,32 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsLoading(true);
-    
+
     try {
-      let params, url;
-      
       if (activeTab === 'admin') {
-        params = new URLSearchParams({
-          action: 'adminLogin',
-          adminId: formData.email,
-          password: formData.password
-        });
-      } else {
-        params = new URLSearchParams({
-          action: 'login',
-          email: formData.email,
-          password: formData.password
-        });
+        const { admin } = await loginAdmin(formData.email, formData.password);
+        localStorage.setItem('adminUser', JSON.stringify(admin));
+        alert(t('login.alerts.adminSuccess'));
+        window.location.href = '/admin-dashboard';
+        return;
       }
-      
-      url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        if (activeTab === 'admin') {
-          localStorage.setItem('adminUser', JSON.stringify(result.admin));
-          alert(t('login.alerts.adminSuccess'));
-          window.location.href = '/admin-dashboard';
-        } else {
-          localStorage.setItem('partnerUser', JSON.stringify(result.user));
-          alert(t('login.alerts.partnerSuccess', { name: result.user.firstName }));
-          window.location.href = '/dashboard';
-        }
-      } else {
-        setErrors({ general: result.message });
+
+      await loginPartner(formData.email, formData.password);
+      const partner = await fetchPartnerData(formData.email);
+      if (!partner) {
+        throw new Error('Partner profile not found');
       }
+
+      localStorage.setItem('partnerUser', JSON.stringify(partner));
+      alert(t('login.alerts.partnerSuccess', { name: partner.firstName }));
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login error:', error);
-      setErrors({ general: t('login.errors.loginFailed') });
+      setErrors({ general: error?.message || t('login.errors.loginFailed') });
     } finally {
       setIsLoading(false);
     }
@@ -372,4 +352,5 @@ const Login = () => {
 };
 
 export default Login;
+
 

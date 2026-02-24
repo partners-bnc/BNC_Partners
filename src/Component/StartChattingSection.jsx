@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import {
   Send,
   Mic,
@@ -13,8 +14,10 @@ import {
   Volume2
 } from 'lucide-react';
 import RequirementVoiceModal from './RequirementVoiceModal';
+import { submitVoiceRequirement } from '../lib/supabaseData';
 
 const StartChattingSection = ({ embedded = false }) => {
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
@@ -175,8 +178,46 @@ const StartChattingSection = ({ embedded = false }) => {
     sendMessage(message);
   };
 
-  const handleRequirementSend = (text) => {
-    sendMessage(text);
+  const handleRequirementSend = async (text) => {
+    let partnerId = null;
+    let partnerEmail = '';
+    try {
+      const stored = localStorage.getItem('partnerUser');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        partnerId = parsed?.id || null;
+        partnerEmail = parsed?.email || '';
+      }
+    } catch (error) {
+      console.error('Could not parse partner user from localStorage:', error);
+    }
+
+    try {
+      await submitVoiceRequirement({
+        requirement: text,
+        partnerId,
+        partnerEmail,
+        recipientEmail: 'rohanbncglobal@gmail.com',
+        source: 'start-chatting'
+      });
+      sendMessage(text);
+    } catch (error) {
+      if (error instanceof Error && error.message === 'AUTH_REQUIRED') {
+        navigate('/login');
+        throw new Error('Please log in to submit your requirement.');
+      }
+      throw error;
+    }
+  };
+
+  const handleOpenRequirementModal = () => {
+    const stored = localStorage.getItem('partnerUser');
+    if (!stored) {
+      alert('Please log in first to submit your voice requirement.');
+      navigate('/login');
+      return;
+    }
+    setIsRequirementModalOpen(true);
   };
 
   const handleQuickCardClick = (title, subtitle) => {
@@ -434,7 +475,7 @@ const StartChattingSection = ({ embedded = false }) => {
                   }}
                 />
                 <button
-                  onClick={() => setIsRequirementModalOpen(true)}
+                  onClick={handleOpenRequirementModal}
                   className={`absolute ${plusPositionClass} top-1/2 -translate-y-1/2 p-2 hover:bg-gray-200 rounded-lg transition-colors`}
                   aria-label={t('startChatting.chat.openRequirement')}
                 >

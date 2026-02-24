@@ -16,9 +16,28 @@ const RequirementVoiceModal = ({
   const [requirement, setRequirement] = useState('');
   const [interimText, setInterimText] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [micError, setMicError] = useState('');
+  const [submitError, setSubmitError] = useState('');
   const recognitionRef = useRef(null);
   const speechStopTimerRef = useRef(null);
+  const getSubmitErrorMessage = (error) => {
+    if (!error) return 'Failed to submit requirement.';
+    if (typeof error === 'string') return error;
+    if (error instanceof Error && error.message) return error.message;
+    if (typeof error === 'object') {
+      if (typeof error.message === 'string' && error.message.trim()) return error.message;
+      if (typeof error.error_description === 'string' && error.error_description.trim()) return error.error_description;
+      if (typeof error.details === 'string' && error.details.trim()) return error.details;
+      if (typeof error.hint === 'string' && error.hint.trim()) return error.hint;
+      try {
+        return JSON.stringify(error);
+      } catch (jsonError) {
+        return 'Failed to submit requirement.';
+      }
+    }
+    return 'Failed to submit requirement.';
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -26,7 +45,9 @@ const RequirementVoiceModal = ({
       setRequirement('');
       setInterimText('');
       setMicError('');
+      setSubmitError('');
       setIsListening(false);
+      setIsSending(false);
     }
   }, [isOpen, defaultMode]);
 
@@ -106,18 +127,26 @@ const RequirementVoiceModal = ({
     recognitionRef.current.start();
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const text = requirement.trim();
-    if (!text) return;
-    if (typeof onSend === 'function') {
-      onSend(text);
-    } else {
-      console.log('Requirement sent:', text);
+    if (!text || isSending) return;
+    setSubmitError('');
+    setIsSending(true);
+    try {
+      if (typeof onSend === 'function') {
+        await onSend(text);
+      } else {
+        console.log('Requirement sent:', text);
+      }
+      setRequirement('');
+      setInterimText('');
+      setIsListening(false);
+      onClose?.();
+    } catch (error) {
+      setSubmitError(getSubmitErrorMessage(error));
+    } finally {
+      setIsSending(false);
     }
-    setRequirement('');
-    setInterimText('');
-    setIsListening(false);
-    onClose?.();
   };
 
   if (!isOpen) return null;
@@ -249,20 +278,26 @@ const RequirementVoiceModal = ({
           <div className={`flex gap-2 ${rowDirection}`}>
             <button
               onClick={() => setRequirement('')}
+              disabled={isSending}
               className="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50 transition-colors"
             >
               {t('requirementVoiceModal.clear')}
             </button>
             <button
               onClick={handleSend}
-              disabled={!requirement.trim()}
+              disabled={!requirement.trim() || isSending}
               className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#2C5AA0] text-white text-sm font-semibold shadow hover:bg-[#1e3f73] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
-              {t('requirementVoiceModal.send')}
+              {isSending ? 'Sending...' : t('requirementVoiceModal.send')}
               <Send className="h-4 w-4" />
             </button>
           </div>
         </div>
+        {submitError && (
+          <div className={`px-6 pb-6 text-xs text-red-500 ${textAlign}`}>
+            {submitError}
+          </div>
+        )}
       </div>
     </div>
   );

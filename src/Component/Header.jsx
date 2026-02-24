@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Sidebar from './Sidebar';
 import PartnerFormModal from './PartnerFormModal';
+import { logout } from '../lib/supabaseData';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -31,10 +32,15 @@ const Header = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }, [location.pathname]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('partnerUser');
     setIsLoggedIn(false);
     setUser(null);
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     window.location.href = '/';
   };
 
@@ -187,3 +193,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

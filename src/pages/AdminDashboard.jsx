@@ -1,9 +1,10 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUsers, FaCheckCircle, FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Component/Header';
 import Sidebar from '../Component/Sidebar';
+import { fetchAdminDashboardData, logout } from '../lib/supabaseData';
 
 const AdminDashboard = () => {
   const [adminData, setAdminData] = useState(null);
@@ -19,24 +20,8 @@ const AdminDashboard = () => {
 
   const fetchAdminData = async () => {
     try {
-      const params = new URLSearchParams({
-        action: 'getAdminData'
-      });
-      
-      const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        setDashboardData(result.data);
-      } else {
-        console.error('Failed to fetch admin data:', result.message);
-      }
+      const data = await fetchAdminDashboardData();
+      setDashboardData(data);
     } catch (error) {
       console.error('Error fetching admin data:', error);
     }
@@ -63,8 +48,13 @@ const AdminDashboard = () => {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('adminUser');
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     navigate('/login');
   };
 
@@ -218,5 +208,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
 
 

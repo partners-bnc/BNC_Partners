@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   FaTimes,
   FaUserTie,
@@ -35,6 +35,7 @@ import {
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import './AIProfileModal.css';
+import { submitAIProfile } from '../lib/supabaseData';
 
 const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   const { t, i18n } = useTranslation();
@@ -337,8 +338,8 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   };
 
   const submitInterview = async () => {
-    if (isSubmitting) return; // Prevent multiple submissions
-    
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
     try {
       const servicesValue = formData.services.includes('other') && formData.otherService.trim()
@@ -348,38 +349,24 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
             .join(', ')
         : formData.services.join(', ');
 
-      const params = new URLSearchParams({
-        action: 'submitAIProfile',
-        email: partnerData?.email,
+      await submitAIProfile({
+        partnerEmail: partnerData?.email,
+        partnerId: partnerData?.id,
         partnerType: formData.partnerType,
         services: servicesValue,
         industries: formData.industries.join(', '),
         experienceIndustries: formData.experienceIndustries.join(', '),
-        experienceDetails: JSON.stringify(formData.experienceDetails),
+        experienceDetails: formData.experienceDetails,
         bio: formData.bio
       });
-      
-      const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        console.log('AI Profile submitted successfully');
-        setIsSubmitted(true);
-        onSubmitted?.();
-        setTimeout(() => {
-          resetForm();
-          onClose();
-        }, 1800);
-      } else {
-        console.error('AI Profile submission failed:', result.message);
-        alert(t('aiProfile.submitFailed'));
-      }
+
+      console.log('AI Profile submitted successfully');
+      setIsSubmitted(true);
+      onSubmitted?.();
+      setTimeout(() => {
+        resetForm();
+        onClose();
+      }, 1800);
     } catch (error) {
       console.error('Error submitting AI Profile:', error);
       alert(t('aiProfile.submitFailed'));
@@ -723,6 +710,7 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
 };
 
 export default AIProfileModal;
+
 
 
 

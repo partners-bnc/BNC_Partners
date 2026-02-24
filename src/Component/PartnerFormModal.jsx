@@ -1,6 +1,7 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { FaTimes, FaArrowRight, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { checkPartnerEmailExists, registerPartner } from '../lib/supabaseData';
 
 const PartnerFormModal = ({ isOpen, onClose }) => {
   const { i18n } = useTranslation();
@@ -265,21 +266,8 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
     setIsCheckingEmail(true);
     try {
-      const params = new URLSearchParams({
-        action: 'checkEmail',
-        email: email
-      });
-
-      const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
-
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-
-      const result = await response.json();
-
-      if (result.exists) {
+      const exists = await checkPartnerEmailExists(email);
+      if (exists) {
         setErrors((prev) => ({ ...prev, email: 'You have already registered with this email address.' }));
         setEmailExists(true);
       } else {
@@ -382,59 +370,37 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateStep(4)) {
-      setIsSubmitting(true);
-      try {
-        const params = new URLSearchParams({
-          action: 'register',
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          countryCode: formData.countryCode,
-          country: formData.country,
-          city: formData.city,
-          password: formData.password
-        });
+    if (!validateStep(4)) return;
+    if (emailExists) return;
 
-        const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
+    setIsSubmitting(true);
+    try {
+      await registerPartner({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        countryCode: formData.countryCode,
+        country: formData.country,
+        city: formData.city,
+        password: formData.password
+      });
 
-        const response = await fetch(url, {
-          method: 'GET',
-          mode: 'no-cors'
-        });
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        const verifyParams = new URLSearchParams({
-          action: 'login',
-          email: formData.email,
-          password: formData.password
-        });
-
-        const verifyUrl = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${verifyParams}`;
-
-        const verifyResponse = await fetch(verifyUrl, {
-          method: 'GET',
-          mode: 'cors'
-        });
-
-        const verifyResult = await verifyResponse.json();
-
-        if (verifyResult.success) {
-          setIsSubmitted(true);
-          console.log('Form submitted:', formData);
-        } else if (verifyResult.message === 'Invalid email or password') {
-          alert('Registration failed: Email already exists. Please use a different email address.');
-        } else {
-          alert('Registration failed: ' + verifyResult.message);
-        }
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('Error submitting form. Please try again.');
-      } finally {
-        setIsSubmitting(false);
+      setIsSubmitted(true);
+      console.log('Form submitted:', formData);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      if (error?.message === 'EMAIL_ALREADY_EXISTS') {
+        setErrors((prev) => ({ ...prev, email: 'You have already registered with this email address.' }));
+        setCurrentStep(2);
+        setEmailExists(true);
+      } else if (error?.message === 'EMAIL_RATE_LIMIT') {
+        alert('Signup is temporarily rate-limited. Please wait a few minutes and try again.');
+      } else {
+        alert(error?.message || 'Error submitting form. Please try again.');
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -764,6 +730,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 };
 
 export default PartnerFormModal;
+
 
 
 

@@ -1,6 +1,7 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { fetchPartnerData, loginPartner } from '../lib/supabaseData';
 
 const PartnerLogin = () => {
   const { i18n } = useTranslation();
@@ -47,39 +48,24 @@ const PartnerLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsLoading(true);
-    
+
     try {
-      const params = new URLSearchParams({
-        action: 'login',
-        email: formData.email,
-        password: formData.password
-      });
-      
-      const url = `https://script.google.com/macros/s/AKfycbxFTbVglGTWrOFI0VVjM4NwcQ80kUtuvLhwPPwNw-Vi3OMF3Cn7tzC3cz_iyCzSNY8T9g/exec?${params}`;
-      
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        // Store user data in localStorage
-        localStorage.setItem('partnerUser', JSON.stringify(result.user));
-        alert('Login successful! Welcome ' + result.user.firstName);
-        // Redirect to dashboard or home page
-        window.location.href = '/dashboard';
-      } else {
-        setErrors({ general: result.message });
+      await loginPartner(formData.email, formData.password);
+      const partner = await fetchPartnerData(formData.email);
+      if (!partner) {
+        throw new Error('Partner profile not found');
       }
+
+      localStorage.setItem('partnerUser', JSON.stringify(partner));
+      alert('Login successful! Welcome ' + partner.firstName);
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login error:', error);
-      setErrors({ general: 'Login failed. Please try again.' });
+      setErrors({ general: error?.message || 'Login failed. Please try again.' });
     } finally {
       setIsLoading(false);
     }
@@ -163,5 +149,6 @@ const PartnerLogin = () => {
 };
 
 export default PartnerLogin;
+
 
 
