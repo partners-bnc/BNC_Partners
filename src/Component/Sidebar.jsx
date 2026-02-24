@@ -10,8 +10,17 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
-  const sidePosition = isRtl ? 'right-0 rounded-l-3xl' : 'left-0 rounded-r-3xl';
-  const hiddenTranslate = isRtl ? 'translate-x-full' : '-translate-x-full';
+  const sidePosition = 'left-0 rounded-r-3xl';
+  const hiddenTranslate = '-translate-x-full';
+  const languageOptions = isRtl
+    ? [
+      { code: 'ar', label: t('language.arabic') },
+      { code: 'en', label: t('language.english') }
+    ]
+    : [
+      { code: 'en', label: t('language.english') },
+      { code: 'ar', label: t('language.arabic') }
+    ];
 
   const handleApplyNowClick = () => {
     onClose();
@@ -59,29 +68,21 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
             {/* Navigation */}
             <div className="flex-1">
               <div className="mb-4">
-                <div className="inline-flex items-center rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm">
-                  <button
-                    type="button"
-                    onClick={() => i18n.changeLanguage('en')}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
-                      i18n.language === 'en'
-                        ? 'bg-[#2C5AA0] text-white shadow'
-                        : 'text-slate-600 hover:text-[#1e3a8a]'
-                    }`}
-                  >
-                    {t('language.english')}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => i18n.changeLanguage('ar')}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
-                      i18n.language === 'ar'
-                        ? 'bg-[#2C5AA0] text-white shadow'
-                        : 'text-slate-600 hover:text-[#1e3a8a]'
-                    }`}
-                  >
-                    {t('language.arabic')}
-                  </button>
+                <div className={`inline-flex items-center rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm ${rowDirection}`}>
+                  {languageOptions.map((option) => (
+                    <button
+                      key={option.code}
+                      type="button"
+                      onClick={() => i18n.changeLanguage(option.code)}
+                      className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
+                        i18n.language === option.code
+                          ? 'bg-[#2C5AA0] text-white shadow'
+                          : 'text-slate-600 hover:text-[#1e3a8a]'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
                 </div>
               </div>
               <nav className="space-y-1">

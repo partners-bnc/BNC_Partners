@@ -5,10 +5,21 @@ import PartnerFormModal from './PartnerFormModal';
 import { WorldMap } from '../components/ui/world-map';
 
 const Hero = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mapKey, setMapKey] = useState(0);
   const location = useLocation();
+  const isRtl = i18n.language === 'ar';
+  const textAlign = isRtl ? 'text-right' : 'text-left';
+  const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
+  const lgTextAlign = isRtl ? 'lg:text-right' : 'lg:text-left';
+  const lgContainerAlign = isRtl ? 'lg:mr-0 lg:ml-auto' : 'lg:mx-0';
+  const highlightContainerAlign = isRtl ? 'lg:mr-0 lg:ml-auto' : 'lg:mx-0';
+  const highlightRowJustify = isRtl ? 'justify-end' : 'justify-start';
+  const mapWrapAlign = isRtl ? 'lg:justify-start' : 'lg:justify-end';
+  const mapOrigin = isRtl ? 'origin-top-left' : 'origin-top-right';
+  const mapShift = isRtl ? 'lg:-translate-x-28 xl:-translate-x-36' : 'lg:translate-x-28 xl:translate-x-36';
+  const floatingChatPosition = isRtl ? '-left-3' : '-right-3';
 
   useEffect(() => {
     if (location.pathname === '/partner-form') {
@@ -81,10 +92,10 @@ const Hero = () => {
 
   return (
     <>
-      <section className="relative min-h-screen overflow-hidden text-slate-900 -mt-16 pt-16 sm:pt-24 lg:pt-15">
+      <section className="relative min-h-screen overflow-hidden text-slate-900 -mt-16 pt-16 sm:pt-24 lg:pt-15" dir={isRtl ? 'rtl' : 'ltr'}>
         <Link
           to="/start-chatting"
-          className="fixed -bottom-10 -right-3 z-40 inline-flex items-center justify-center rounded-full bg-transparent p-2 hover:opacity-90 transition-all"
+          className={`fixed -bottom-10 ${floatingChatPosition} z-40 inline-flex items-center justify-center rounded-full bg-transparent p-2 hover:opacity-90 transition-all`}
           aria-label="Get AI help"
         >
           <img
@@ -94,10 +105,10 @@ const Hero = () => {
           />
         </Link>
         <div className="absolute inset-0 bg-[#F7F2ED]">
-          <div className="absolute -top-28 -right-20 h-96 w-96 rounded-full bg-gradient-to-br from-[#2C5AA0]/25 via-[#7ea5ff]/25 to-transparent blur-3xl" />
-          <div className="absolute right-[-120px] top-[-60px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(44,90,160,0.35),rgba(126,165,255,0.18),rgba(255,255,255,0))] blur-3xl" />
-          <div className="absolute right-10 top-40 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(30,63,115,0.22),rgba(126,165,255,0.12),rgba(245,242,237,0))] blur-2xl" />
-          <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-gradient-to-tr from-emerald-400/20 via-cyan-400/15 to-transparent blur-3xl" />
+          <div className={`absolute -top-28 ${isRtl ? '-left-20' : '-right-20'} h-96 w-96 rounded-full bg-gradient-to-br from-[#2C5AA0]/25 via-[#7ea5ff]/25 to-transparent blur-3xl`} />
+          <div className={`absolute ${isRtl ? 'left-[-120px]' : 'right-[-120px]'} top-[-60px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(44,90,160,0.35),rgba(126,165,255,0.18),rgba(255,255,255,0))] blur-3xl`} />
+          <div className={`absolute ${isRtl ? 'left-10' : 'right-10'} top-40 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(30,63,115,0.22),rgba(126,165,255,0.12),rgba(245,242,237,0))] blur-2xl`} />
+          <div className={`absolute bottom-0 ${isRtl ? 'right-0' : 'left-0'} h-80 w-80 rounded-full bg-gradient-to-tr from-emerald-400/20 via-cyan-400/15 to-transparent blur-3xl`} />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(44,90,160,0.12),transparent_55%)]" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#f1f6ff] via-[#f7f2ed] to-[#eef2ff]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(255,255,255,0.7),rgba(255,255,255,0.15),rgba(245,242,237,0))]" />
@@ -105,10 +116,10 @@ const Hero = () => {
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-10 sm:py-12 lg:py-20">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-            <div className="text-center lg:text-left lg:-mt-10 mt-0 sm:mt-10 relative z-20">
-              <div className="relative inline-flex items-center gap-2 rounded-full border border-slate-900/60 bg-[#e8f1ff] px-4 py-1.5 text-xs font-semibold mb-4 sm:mb-6 -mt-1 backdrop-blur-sm text-slate-900 overflow-hidden shadow-[0_10px_26px_rgba(15,23,42,0.12)]">
+            <div className={`text-center ${lgTextAlign} lg:-mt-10 mt-0 sm:mt-10 relative z-20`}>
+              <div className={`relative inline-flex items-center gap-2 rounded-full border border-slate-900/60 bg-[#e8f1ff] px-4 py-1.5 text-xs font-semibold mb-4 sm:mb-6 -mt-1 backdrop-blur-sm text-slate-900 overflow-hidden shadow-[0_10px_26px_rgba(15,23,42,0.12)] ${rowDirection}`}>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#2C5AA0]/20 via-[#7ea5ff]/20 to-transparent blur-md" />
-                <span className="relative flex items-center gap-2">
+                <span className={`relative flex items-center gap-2 ${rowDirection}`}>
                   <svg className="h-4 w-4 text-slate-900" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2.5l1.9 4.7 4.9 1.2-4.1 3.4 1.2 5-3.9-2.6-3.9 2.6 1.2-5-4.1-3.4 4.9-1.2L12 2.5z" />
                   </svg>
@@ -116,12 +127,12 @@ const Hero = () => {
                 </span>
               </div>
 
-              <h1 className="font-sora text-4xl md:text-6xl font-semibold mb-3 leading-tight -mt-3 sm:-mt-5">
-                Partner with
+              <h1 className={`font-sora text-4xl md:text-6xl font-semibold mb-3 leading-tight -mt-3 sm:-mt-5 ${textAlign}`}>
+                {t('hero.titlePrefix')}
                 <span className="block" style={{ color: '#2C5AA0' }}>BnC Global</span>
               </h1>
 
-              <p className="font-geist text-lg md:text-xl mb-8 max-w-2xl mx-auto lg:mx-0 text-slate-600">
+              <p className={`font-geist text-lg md:text-xl mb-8 max-w-2xl mx-auto ${lgContainerAlign} text-slate-600`}>
                 {t('hero.subtitle')
                   .split('\n')
                   .map((line, index) => (
@@ -131,8 +142,8 @@ const Hero = () => {
                   ))}
               </p>
 
-              <div className="mb-8 -mt-2">
-                <div className="flex items-center gap-3 text-slate-700">
+              <div className={`mb-8 -mt-2 max-w-md mx-auto ${highlightContainerAlign} ${textAlign}`}>
+                <div className={`flex w-full items-center gap-3 text-slate-700 ${rowDirection} ${highlightRowJustify}`}>
                   <span className="inline-flex h-4 w-4 items-center justify-center text-[#2C5AA0]">
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <circle cx="12" cy="12" r="9" />
@@ -141,7 +152,7 @@ const Hero = () => {
                   </span>
                   <p className="font-geist text-sm md:text-base">{t('hero.highlights.finance')}</p>
                 </div>
-                <div className="mt-3 flex items-center gap-3 text-slate-700">
+                <div className={`mt-3 flex w-full items-center gap-3 text-slate-700 ${rowDirection} ${highlightRowJustify}`}>
                   <span className="inline-flex h-4 w-4 items-center justify-center text-[#2C5AA0]">
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <circle cx="12" cy="12" r="9" />
@@ -150,7 +161,7 @@ const Hero = () => {
                   </span>
                   <p className="font-geist text-sm md:text-base">{t('hero.highlights.manpower')}</p>
                 </div>
-                <div className="mt-3 flex items-center gap-3 text-slate-700">
+                <div className={`mt-3 flex w-full items-center gap-3 text-slate-700 ${rowDirection} ${highlightRowJustify}`}>
                   <span className="inline-flex h-4 w-4 items-center justify-center text-[#2C5AA0]">
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <circle cx="12" cy="12" r="9" />
@@ -161,7 +172,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="flex flex-row gap-2 justify-between mb-6 w-full max-w-md mx-auto lg:mx-0">
+              <div className={`flex gap-2 justify-between mb-6 w-full max-w-md mx-auto ${lgContainerAlign} ${rowDirection}`}>
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
@@ -179,8 +190,8 @@ const Hero = () => {
                 </Link>
               </div>
 
-              <div className="mt-5 sm:mt-7 max-w-md mx-auto lg:mx-0" style={{ perspective: '1400px' }}>
-                <div className="relative cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-b from-white/95 via-white/80 to-slate-100/80 px-5 py-3 shadow-[0_26px_60px_rgba(15,23,42,0.18)] backdrop-blur transform-gpu [transform:rotateX(6deg)_rotateY(-6deg)] transition duration-300 hover:[transform:rotateX(0deg)_rotateY(0deg)_translateY(-8px)_scale(1.01)] hover:shadow-[0_44px_96px_rgba(15,23,42,0.24)] hover:ring-1 hover:ring-[#2C5AA0]/30">
+              <div className={`mt-5 sm:mt-7 max-w-md mx-auto ${lgContainerAlign}`} style={{ perspective: '1400px' }}>
+                <div className={`relative cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-b from-white/95 via-white/80 to-slate-100/80 px-5 py-3 shadow-[0_26px_60px_rgba(15,23,42,0.18)] backdrop-blur transform-gpu ${isRtl ? '[transform:rotateX(6deg)_rotateY(6deg)]' : '[transform:rotateX(6deg)_rotateY(-6deg)]'} transition duration-300 hover:[transform:rotateX(0deg)_rotateY(0deg)_translateY(-8px)_scale(1.01)] hover:shadow-[0_44px_96px_rgba(15,23,42,0.24)] hover:ring-1 hover:ring-[#2C5AA0]/30`}>
                   <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.9),transparent_55%)] pointer-events-none" />
                   <div className="relative grid grid-cols-3 gap-2 text-center">
                     <div>
@@ -200,8 +211,8 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="relative flex justify-center lg:justify-end z-10">
-              <div className="relative w-full max-w-[1500px] -mt-8 lg:-mt-68 lg:translate-x-28 xl:translate-x-36 lg:scale-[1.55] xl:scale-[1.7] 2xl:scale-[1.85] origin-top-right">
+            <div className={`relative flex justify-center ${mapWrapAlign} z-10`}>
+              <div className={`relative w-full max-w-[1500px] -mt-8 lg:-mt-68 ${mapShift} lg:scale-[1.55] xl:scale-[1.7] 2xl:scale-[1.85] ${mapOrigin}`}>
                 <WorldMap
                   key={mapKey}
                   lineColor="#2C5AA0"
