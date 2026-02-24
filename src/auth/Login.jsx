@@ -130,9 +130,29 @@ const Login = () => {
       className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-6"
       style={{
         backgroundImage:
-          'radial-gradient(1000px 600px at 3% -20%, rgba(44, 90, 160, 0.32), transparent 58%), radial-gradient(900px 600px at 94% 112%, rgba(30, 63, 115, 0.28), transparent 58%), linear-gradient(180deg, #ffffff 0%, #eef3fb 100%)'
+          'linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #204681 50%, #204681 100%)'
       }}
     >
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-1/2"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.35) 1.2px, transparent 1.2px)',
+          backgroundSize: '18px 18px',
+          backgroundPosition: 'center'
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-1/2"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.22) 1.1px, transparent 1.1px)',
+          backgroundSize: '20px 20px',
+          backgroundPosition: 'center'
+        }}
+      />
+
+
       <div className={topBlobPos} />
       <div className={bottomBlobPos} />
       <div className="w-full max-w-4xl">
@@ -144,9 +164,9 @@ const Login = () => {
               <div className={`inline-flex items-center gap-3 ${rowDirection}`}>
                 <div className="h-14 w-14 rounded-full flex items-center justify-center">
                   <img
-                    src="/favicon/b%20nc%20global%20(2).avif"
+                    src="/favicon/trans.png"
                     alt="BnC Global"
-                    className="h-12 w-12 object-contain"
+                    className="h-14 w-14 object-contain"
                   />
                 </div>
                 <div>
@@ -327,7 +347,7 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center disabled:opacity-50 shadow-lg shadow-[#2C5AA0]/20"
+                  className="w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center disabled:opacity-50 shadow-lg shadow-[#2C5AA0]/20 border border-transparent"
                 >
                   {isLoading
                     ? t('login.signingIn')
@@ -335,7 +355,7 @@ const Login = () => {
                 </button>
                 <Link
                   to="/?open=partner"
-                  className="w-full border border-[#2C5AA0]/30 text-[#1e3f73] py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center hover:bg-[#2C5AA0]/10"
+                  className="w-full border border-slate-200 text-slate-700 bg-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center shadow-sm hover:bg-slate-50"
                 >
                   {t('login.newAccount')}
                 </Link>

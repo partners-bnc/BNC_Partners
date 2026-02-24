@@ -1005,6 +1005,105 @@
       "Any disputes will be handled in good faith and resolved per applicable laws.",
       "Agreement remains valid until terminated by either party with written notice."
     ],
+    "sections": [
+      {
+        "title": "1. Parties and Purpose",
+        "paragraphs": [
+          "This Partner Agreement (\"Agreement\") is entered into between BnC Global Pvt. Ltd. (\"BnC Global\") and the undersigned partner (\"Partner\"). The purpose of this Agreement is to define the terms under which the Partner may collaborate with BnC Global to deliver services, generate qualified enquiries, and participate in joint opportunities.",
+          "By signing, the Partner confirms authority to enter this Agreement on behalf of its organization and agrees to operate in alignment with BnC Global standards and brand values."
+        ]
+      },
+      {
+        "title": "2. Scope of Collaboration",
+        "paragraphs": [
+          "BnC Global may refer opportunities, share leads, or invite the Partner to deliver defined services. The Partner may also introduce client requirements or opportunities to BnC Global for joint delivery.",
+          "Specific project scope, pricing, and timelines will be documented separately for each engagement and will form part of this Agreement once accepted by both parties."
+        ],
+        "bullets": [
+          "Service delivery is subject to country, sector, and regulatory requirements.",
+          "All work must be performed by qualified professionals or approved subcontractors.",
+          "Any deviation from agreed scope requires written approval."
+        ]
+      },
+      {
+        "title": "3. Term and Onboarding",
+        "paragraphs": [
+          "This Agreement becomes effective on the signature date and remains active unless terminated in accordance with Section 12.",
+          "The Partner agrees to complete onboarding steps, including profile completion, compliance declarations, and any required documentation before commencing delivery."
+        ]
+      },
+      {
+        "title": "4. Roles and Responsibilities",
+        "paragraphs": [
+          "The Partner is responsible for timely delivery, professional conduct, and maintaining accurate records related to work performed.",
+          "BnC Global will provide engagement details, agreed commercial terms, and collaboration support as required."
+        ],
+        "bullets": [
+          "Maintain confidentiality of all client and platform information.",
+          "Provide status updates, reports, and documentation on request.",
+          "Comply with applicable laws, including data protection obligations."
+        ]
+      },
+      {
+        "title": "5. Quality Standards",
+        "paragraphs": [
+          "All deliverables must meet BnC Global quality benchmarks. Where required, BnC Global may conduct quality reviews, audits, or request corrective actions.",
+          "Repeated quality issues or material non-compliance may lead to suspension or termination."
+        ]
+      },
+      {
+        "title": "6. Commercial Terms",
+        "paragraphs": [
+          "Commercial terms, including pricing, revenue share, or referral fees, will be specified per engagement. Payments are subject to successful delivery and acceptance of work.",
+          "The Partner is responsible for taxes, statutory obligations, and invoices in accordance with local law."
+        ]
+      },
+      {
+        "title": "7. Confidentiality and Data Protection",
+        "paragraphs": [
+          "Both parties agree to keep confidential all non-public information, including client data, pricing, processes, and technical documentation.",
+          "Data must be handled securely and only for the purposes of fulfilling the engagement."
+        ],
+        "bullets": [
+          "No disclosure to third parties without written consent.",
+          "Maintain reasonable administrative, technical, and physical safeguards.",
+          "Promptly notify BnC Global of any suspected breach."
+        ]
+      },
+      {
+        "title": "8. Intellectual Property",
+        "paragraphs": [
+          "Pre-existing intellectual property remains with the originating party. Work products created specifically for an engagement will be owned as agreed in the project scope.",
+          "The Partner may not use BnC Global trademarks or brand assets without prior written approval."
+        ]
+      },
+      {
+        "title": "9. Non-Solicitation",
+        "paragraphs": [
+          "During the term of this Agreement and for twelve (12) months thereafter, the Partner shall not directly solicit BnC Global clients, prospects, or employees for competing services without written consent."
+        ]
+      },
+      {
+        "title": "10. Liability and Indemnity",
+        "paragraphs": [
+          "Each party is responsible for its own acts and omissions. The Partner agrees to indemnify BnC Global against claims arising from Partner negligence, misconduct, or breach of this Agreement.",
+          "Neither party shall be liable for indirect, incidental, or consequential damages, except where prohibited by law."
+        ]
+      },
+      {
+        "title": "11. Termination",
+        "paragraphs": [
+          "Either party may terminate this Agreement with written notice. BnC Global may terminate immediately in the event of material breach, fraud, or compliance violations.",
+          "Upon termination, the Partner must return or securely destroy confidential materials and cease use of BnC Global brand assets."
+        ]
+      },
+      {
+        "title": "12. Dispute Resolution and Governing Law",
+        "paragraphs": [
+          "The parties will attempt to resolve disputes in good faith through senior management discussions. If unresolved, disputes will be subject to applicable laws and competent jurisdiction as defined in engagement documentation."
+        ]
+      }
+    ],
     "eSignatureLabel": "E-Signature",
     "eSignaturePlaceholder": "Type your full name",
     "acceptText": "I have read and agree to the Terms & Conditions and the Partner Agreement.",
@@ -1324,7 +1423,7 @@
       },
       "botFallback": "Thanks! We received your message. Our team will reply shortly.",
       "errorPrefix": "Error: {{message}}.",
-      "errorGeneric": "Error sending message.",
+      "errorGeneric": "Error, please try again.",
       "errorSuffix": "Please check webhook configuration."
     },
     "categories": {
