@@ -749,8 +749,9 @@
     "password": "Password",
     "enterPassword": "Enter your password",
     "signingIn": "Signing in...",
-    "signInAs": "Sign In as {{role}}",
-    "createAccount": "Create an account",
+    "partnerSignIn": "Partner Sign In",
+    "adminSignIn": "Admin Sign In",
+    "newAccount": "New Account",
     "backToRegistration": "Back to Registration",
     "errors": {
       "adminIdRequired": "Admin ID is required",
@@ -764,9 +765,10 @@
       "partnerSuccess": "Login successful! Welcome {{name}}"
     },
     "sidePanel": {
-      "description": "Access your partner or admin dashboard and manage services, enquiries, and registrations in one place.",
-      "secureAccess": "Secure role-based access",
-      "onboardingUpdates": "Partner onboarding updates",
+      "description": "Become a BnC Global Partner and expand your accounting and finance services worldwide. Access real opportunities, automate workflows, and manage partnerships efficiently.",
+      "secureAccess": "Global business exposure",
+      "onboardingUpdates": "Smart enquiry management",
+      "partnerEcosystem": "AI-powered partner ecosystem",
       "email": "Email",
       "whatsapp": "WhatsApp",
       "call": "Call"
