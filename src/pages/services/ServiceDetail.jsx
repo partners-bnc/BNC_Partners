@@ -994,11 +994,18 @@ const ServiceDetail = () => {
                           <div className="mt-4">
                             <button
                               type="button"
-                              onClick={() => setIsRequirementModalOpen(true)}
+                              onClick={() => {
+                                const stored = localStorage.getItem('partnerUser');
+                                if (!stored) {
+                                  window.location.href = '/login';
+                                  return;
+                                }
+                                setIsRequirementModalOpen(true);
+                              }}
                               className="inline-flex items-center gap-2 rounded-full bg-[#2C5AA0] text-white px-5 py-2.5 text-sm font-semibold shadow hover:bg-[#1e3a8a] transition"
                             >
-                            {t('serviceDetail.voiceRequirement.button')}
-                          </button>
+                              {t('serviceDetail.voiceRequirement.button')}
+                            </button>
                         </div>
                       </div>
                     </div>
