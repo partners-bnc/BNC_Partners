@@ -158,12 +158,9 @@ const StartChattingSection = ({ embedded = false }) => {
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      const errText = error?.message
-        ? t('startChatting.chat.errorPrefix', { message: error.message })
-        : t('startChatting.chat.errorGeneric');
       setMessages((prev) => [
         ...prev,
-        { type: 'bot', text: `${errText} ${t('startChatting.chat.errorSuffix')}`, time: formatTime(new Date()) }
+        { type: 'bot', text: t('startChatting.chat.errorGeneric'), time: formatTime(new Date()) }
       ]);
     } finally {
       setIsLoading(false);
@@ -590,10 +587,13 @@ const StartChattingSection = ({ embedded = false }) => {
                     <Sparkles className="w-5 h-5" />
                   </div>
                 </div>
-                <button className={`mt-5 w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#1b3562] text-white text-sm font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group ${isRtl ? 'flex-row-reverse' : ''}`}>
+                <a
+                  href="/?open=partner"
+                  className={`mt-5 w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#1b3562] text-white text-sm font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group ${isRtl ? 'flex-row-reverse' : ''}`}
+                >
                   {t('startChatting.cta.button')}
                   <ArrowRight className={`w-4 h-4 transition-transform ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
-                </button>
+                </a>
               </div>
 
               <div className="bg-white rounded-2xl p-5 shadow-sm">

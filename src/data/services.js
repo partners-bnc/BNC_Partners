@@ -11,7 +11,7 @@ export const services = [
     ],
     tags: ['high-selling', 'high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/KjZd_UqgvJo',
+    videoUrl: 'https://www.youtube.com/embed/HzF-a7TzpAU',
     secondaryVideoUrl: '',
     description: [
       'We help leadership teams translate growth plans into disciplined financial roadmaps.',
@@ -44,7 +44,7 @@ export const services = [
     ],
     tags: ['high-selling', 'high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/MKH0rvpBHis',
+    videoUrl: 'https://www.youtube.com/embed/QVonU_i0VXc',
     secondaryVideoUrl: '',
     description: [
       'We assess your data footprint and map regulatory obligations early.',
@@ -86,7 +86,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/T5CsH7RxaPQ',
+    videoUrl: 'https://www.youtube.com/embed/849G-8A8EVs',
     secondaryVideoUrl: '',
     description: [
       'We identify critical risks across governance, operations, and technology.',
@@ -117,7 +117,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/CmvW1HWofM4',
+    videoUrl: 'https://www.youtube.com/embed/il2EtEBzOfg',
     secondaryVideoUrl: '',
     description: [
       'We translate ESG expectations into practical initiatives and KPIs.',
@@ -147,7 +147,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: '',
+    videoUrl: 'https://www.youtube.com/embed/jn0yu2af7Rk',
     secondaryVideoUrl: '',
     description: [
       'We evaluate current systems and map gaps against business goals.',
@@ -170,7 +170,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.linkedin.com/embed/feed/update/urn:li:activity:7408019530272337920',
+    videoUrl: 'https://www.youtube.com/embed/nnR6_sf0Bs0',
     secondaryVideoUrl: '',
     description: [
       'We design shared service models that balance cost and control.',
@@ -195,7 +195,7 @@ export const services = [
     ],
     tags: ['high-selling'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/CmvW1HWofM4',
+    videoUrl: 'https://www.youtube.com/embed/JkUlon3kf8Q',
     secondaryVideoUrl: '',
     description: [
       'Programs are tailored to role, seniority, and industry context.',
@@ -223,7 +223,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.instagram.com/reel/DNNUxq6K8Ei/embed',
+    videoUrl: 'https://www.youtube.com/embed/4A1EuCt9ScE',
     secondaryVideoUrl: '',
     description: [
       'We map role requirements and turnaround expectations upfront.',

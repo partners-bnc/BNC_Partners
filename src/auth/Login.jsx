@@ -17,6 +17,7 @@ const Login = () => {
   const topBlobPos = isRtl ? 'pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#2C5AA0]/15 blur-3xl' : 'pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#2C5AA0]/15 blur-3xl';
   const bottomBlobPos = isRtl ? 'pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#1e3f73]/15 blur-3xl' : 'pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[#1e3f73]/15 blur-3xl';
   const [activeTab, setActiveTab] = useState('partner');
+  const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -28,9 +29,9 @@ const Login = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const loginType = searchParams.get('type');
-    if (loginType === 'admin') {
-      setActiveTab('admin');
-    }
+    const adminOnly = loginType === 'admin';
+    setIsAdminOnly(adminOnly);
+    setActiveTab(adminOnly ? 'admin' : 'partner');
   }, [location]);
 
   const handleChange = (e) => {
@@ -44,6 +45,7 @@ const Login = () => {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -104,7 +106,33 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f2f5fb] relative overflow-hidden flex items-center justify-center px-4 py-6">
+    <div
+      className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-6"
+      style={{
+        backgroundImage:
+          'linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #204681 50%, #204681 100%)'
+      }}
+    >
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-1/2"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.35) 1.2px, transparent 1.2px)',
+          backgroundSize: '18px 18px',
+          backgroundPosition: 'center'
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-1/2"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.22) 1.1px, transparent 1.1px)',
+          backgroundSize: '20px 20px',
+          backgroundPosition: 'center'
+        }}
+      />
+
+
       <div className={topBlobPos} />
       <div className={bottomBlobPos} />
       <div className="w-full max-w-4xl">
@@ -116,9 +144,9 @@ const Login = () => {
               <div className={`inline-flex items-center gap-3 ${rowDirection}`}>
                 <div className="h-14 w-14 rounded-full flex items-center justify-center">
                   <img
-                    src="/favicon/b%20nc%20global%20(2).avif"
+                    src="/favicon/trans.png"
                     alt="BnC Global"
-                    className="h-12 w-12 object-contain"
+                    className="h-14 w-14 object-contain"
                   />
                 </div>
                 <div>
@@ -128,11 +156,11 @@ const Login = () => {
                   <h1 className="text-2xl font-semibold mt-1">{t('login.welcomeBack')}</h1>
                 </div>
               </div>
-              <p className="mt-6 text-sm text-white/80 leading-relaxed">
+              <p className="mt-3 text-sm text-white/80 leading-relaxed">
                 {t('login.sidePanel.description')}
               </p>
             </div>
-            <div className="relative space-y-4 text-sm text-white/80">
+            <div className="relative mt-6 space-y-3 text-sm text-white/80">
               <div className={`flex items-center gap-3 ${rowDirection}`}>
                 <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center">
                   <FaShieldAlt />
@@ -145,30 +173,36 @@ const Login = () => {
                 </div>
                 {t('login.sidePanel.onboardingUpdates')}
               </div>
+              <div className={`flex items-center gap-3 ${rowDirection}`}>
+                <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center">
+                  <FaLock />
+                </div>
+                {t('login.sidePanel.partnerEcosystem')}
+              </div>
               <div className="flex items-center justify-center pt-2">
-                <div className="grid gap-3 w-full max-w-sm">
-                  <a
-                    href="mailto:info@bncglobal.in"
-                    className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
-                  >
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                        {t('login.sidePanel.email')}
-                      </p>
-                      <p className="text-sm font-semibold text-white">info@bncglobal.in</p>
-                    </div>
-                    <div className="h-10 w-10 rounded-xl bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition">
-                      <svg
-                        className="h-5 w-5 text-white"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4.236 8 4.8 8-4.8V6l-8 4.8L4 6v2.236z" />
-                      </svg>
-                    </div>
-                  </a>
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3 w-full max-w-md">
+                  <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-3">
+                    <a
+                      href="mailto:info@bncglobal.in"
+                      className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
+                    >
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+                          {t('login.sidePanel.email')}
+                        </p>
+                        <p className="text-sm font-semibold text-white">patner@bncglobal.in</p>
+                      </div>
+                      <div className="h-10 w-10 rounded-xl flex items-center justify-center transition">
+                        <svg
+                          className="h-5 w-5 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4.236 8 4.8 8-4.8V6l-8 4.8L4 6v2.236z" />
+                        </svg>
+                      </div>
+                    </a>
                     <a
                       href="https://wa.me/919958711796"
                       target="_blank"
@@ -177,11 +211,11 @@ const Login = () => {
                     >
                       <div>
                         <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                        {t('login.sidePanel.whatsapp')}
+                          {t('login.sidePanel.whatsapp')}
                         </p>
-                      <p className="text-sm font-semibold text-white whitespace-nowrap">+91 99587 11796</p>
-                    </div>
-                    <div className={`h-10 w-10 rounded-xl bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition ${iconMargin}`}>
+                        <p className="text-sm font-semibold text-white whitespace-nowrap">+91 99587 11796</p>
+                      </div>
+                      <div className={`h-10 w-10 rounded-xl flex items-center justify-center transition ${iconMargin}`}>
                         <svg
                           className="h-5 w-5 text-white"
                           fill="currentColor"
@@ -189,27 +223,6 @@ const Login = () => {
                           aria-hidden="true"
                         >
                           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.149-.67.15-.198.297-.768.967-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.67-1.611-.916-2.206-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.414-.074-.124-.272-.198-.57-.347M12.057 2.347c-5.523 0-10.017 4.494-10.017 10.017 0 1.77.463 3.445 1.355 4.94L2 22l4.861-1.277c1.413.771 3.007 1.195 4.696 1.195h.001c5.523 0 10.017-4.494 10.017-10.017S17.58 2.347 12.057 2.347m0 18.138c-1.52 0-2.985-.404-4.263-1.168l-.305-.182-2.883.758.769-2.81-.199-.32a8.27 8.27 0 0 1-1.259-4.404c0-4.561 3.711-8.273 8.273-8.273 4.561 0 8.273 3.712 8.273 8.273 0 4.561-3.712 8.273-8.273 8.273" />
-                        </svg>
-                      </div>
-                    </a>
-                    <a
-                      href="tel:+919810575613"
-                      className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
-                    >
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                        {t('login.sidePanel.call')}
-                        </p>
-                      <p className="text-sm font-semibold text-white whitespace-nowrap">+91 9304002266</p>
-                    </div>
-                    <div className={`h-10 w-10 rounded-xl bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition ${iconMargin}`}>
-                        <svg
-                          className="h-5 w-5 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z" />
                         </svg>
                       </div>
                     </a>
@@ -235,28 +248,21 @@ const Login = () => {
 
             {/* Tabs */}
             <div className="flex mb-5 bg-gray-100 rounded-xl p-1">
-              <button
-                onClick={() => setActiveTab('partner')}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg font-semibold transition-all ${isRtl ? 'flex-row-reverse' : ''} ${
-                  activeTab === 'partner'
-                    ? 'bg-white text-[#1e3f73] shadow'
-                    : 'text-gray-600 hover:text-gray-800'
-                }`}
-              >
-                <FaUser />
-                {t('login.partnerLogin')}
-              </button>
-              <button
-                onClick={() => setActiveTab('admin')}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg font-semibold transition-all ${isRtl ? 'flex-row-reverse' : ''} ${
-                  activeTab === 'admin'
-                    ? 'bg-white text-[#1e3f73] shadow'
-                    : 'text-gray-600 hover:text-gray-800'
-                }`}
-              >
-                <FaShieldAlt />
-                {t('login.adminLogin')}
-              </button>
+              {isAdminOnly ? (
+                <div
+                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg font-semibold bg-white text-[#1e3f73] shadow ${isRtl ? 'flex-row-reverse' : ''}`}
+                >
+                  <FaShieldAlt />
+                  {t('login.adminLogin')}
+                </div>
+              ) : (
+                <div
+                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg font-semibold bg-white text-[#1e3f73] shadow ${isRtl ? 'flex-row-reverse' : ''}`}
+                >
+                  <FaUser />
+                  {t('login.partnerLogin')}
+                </div>
+              )}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -284,9 +290,7 @@ const Login = () => {
                   placeholder={activeTab === 'admin' ? t('login.enterAdminId') : t('login.enterEmail')}
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                <p className="text-[11px] text-gray-400 mt-1">
-                  {activeTab === 'admin' ? t('login.useAdminId') : t('login.useRegisteredEmail')}
-                </p>
+                
               </div>
 
               {/* Password */}
@@ -318,20 +322,24 @@ const Login = () => {
                 {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center disabled:opacity-50 shadow-lg shadow-[#2C5AA0]/20"
-              >
-                {isLoading ? t('login.signingIn') : t('login.signInAs', { role: activeTab === 'partner' ? t('login.partnerLogin') : t('login.adminLogin') })}
-              </button>
-              <Link
-                to="/?open=partner"
-                className="w-full border border-[#2C5AA0]/30 text-[#1e3f73] py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center hover:bg-[#2C5AA0]/10"
-              >
-                {t('login.createAccount')}
-              </Link>
+              {/* Submit + Create */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center disabled:opacity-50 shadow-lg shadow-[#2C5AA0]/20 border border-transparent"
+                >
+                  {isLoading
+                    ? t('login.signingIn')
+                    : (activeTab === 'partner' ? t('login.partnerSignIn') : t('login.adminSignIn'))}
+                </button>
+                <Link
+                  to="/?open=partner"
+                  className="w-full border border-slate-200 text-slate-700 bg-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center shadow-sm hover:bg-slate-50"
+                >
+                  {t('login.newAccount')}
+                </Link>
+              </div>
             </form>
 
             {/* Back Link */}
@@ -352,5 +360,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

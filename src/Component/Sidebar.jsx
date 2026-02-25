@@ -34,13 +34,13 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
 
   return (
     <>
-      <div className={`fixed inset-0 z-50 transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+      <div className={`fixed inset-0 z-50 transition-all duration-150 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
         <div 
-          className={`absolute inset-0 transition-all duration-300 ${isOpen ? 'bg-black/30 backdrop-blur-[2px]' : 'bg-transparent'}`} 
+          className={`absolute inset-0 transition-all duration-150 ${isOpen ? 'bg-black/30 backdrop-blur-[2px]' : 'bg-transparent'}`} 
           onClick={onClose}
         ></div>
         
-        <div className={`absolute top-0 h-full w-80 bg-gradient-to-b from-white via-[#f7f9ff] to-[#edf2fb] shadow-2xl transform transition-all duration-300 ease-out ${sidePosition} ${isOpen ? 'translate-x-0' : hiddenTranslate}`}>
+        <div className={`absolute top-0 h-full w-80 bg-gradient-to-b from-white via-[#f7f9ff] to-[#edf2fb] shadow-2xl transform transition-all duration-150 ease-out ${sidePosition} ${isOpen ? 'translate-x-0' : hiddenTranslate}`}>
           <div className={`p-6 h-full flex flex-col ${textAlign}`}>
             {/* Header */}
             <div className={`flex items-start justify-between mb-6 ${rowDirection}`}>
