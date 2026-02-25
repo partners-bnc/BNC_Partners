@@ -19,8 +19,12 @@ const RequirementVoiceModal = ({
   const [isSending, setIsSending] = useState(false);
   const [micError, setMicError] = useState('');
   const [submitError, setSubmitError] = useState('');
+  const [recordedAudioFile, setRecordedAudioFile] = useState(null);
   const recognitionRef = useRef(null);
   const speechStopTimerRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const mediaStreamRef = useRef(null);
+  const audioChunksRef = useRef([]);
   const getSubmitErrorMessage = (error) => {
     if (!error) return 'Failed to submit requirement.';
     if (typeof error === 'string') return error;
@@ -48,8 +52,76 @@ const RequirementVoiceModal = ({
       setSubmitError('');
       setIsListening(false);
       setIsSending(false);
+      setRecordedAudioFile(null);
     }
   }, [isOpen, defaultMode]);
+
+  const stopAudioStream = () => {
+    if (!mediaStreamRef.current) return;
+    mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+    mediaStreamRef.current = null;
+  };
+
+  const stopAudioRecording = () => {
+    const recorder = mediaRecorderRef.current;
+    if (recorder && recorder.state !== 'inactive') {
+      recorder.stop();
+      return;
+    }
+    stopAudioStream();
+  };
+
+  const startAudioRecording = async () => {
+    if (!navigator?.mediaDevices?.getUserMedia || typeof window.MediaRecorder === 'undefined') {
+      setMicError(t('requirementVoiceModal.errors.notSupported'));
+      return false;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaStreamRef.current = stream;
+      audioChunksRef.current = [];
+
+      const preferredTypes = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/ogg;codecs=opus',
+        'audio/mp4'
+      ];
+      const mimeType = preferredTypes.find((type) => window.MediaRecorder.isTypeSupported(type)) || '';
+      const recorder = mimeType
+        ? new window.MediaRecorder(stream, { mimeType })
+        : new window.MediaRecorder(stream);
+
+      recorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      recorder.onstop = () => {
+        const chunks = audioChunksRef.current;
+        if (!chunks.length) {
+          stopAudioStream();
+          return;
+        }
+        const blobType = recorder.mimeType || 'audio/webm';
+        const blob = new Blob(chunks, { type: blobType });
+        const extension = blobType.includes('ogg') ? 'ogg' : blobType.includes('mp4') ? 'm4a' : 'webm';
+        const file = new File([blob], `voice-requirement-${Date.now()}.${extension}`, { type: blobType });
+        setRecordedAudioFile(file);
+        stopAudioStream();
+      };
+
+      mediaRecorderRef.current = recorder;
+      recorder.start();
+      return true;
+    } catch (error) {
+      stopAudioStream();
+      setMicError(t('requirementVoiceModal.errors.notSupported'));
+      return false;
+    }
+  };
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -103,6 +175,7 @@ const RequirementVoiceModal = ({
     recognition.onend = () => {
       setIsListening(false);
       setInterimText('');
+      stopAudioRecording();
     };
     recognitionRef.current = recognition;
     return () => {
@@ -110,20 +183,25 @@ const RequirementVoiceModal = ({
         clearTimeout(speechStopTimerRef.current);
       }
       recognition.stop();
+      stopAudioRecording();
+      stopAudioStream();
     };
   }, [isOpen, isRtl, t]);
 
-  const handleMicToggle = () => {
+  const handleMicToggle = async () => {
     if (!recognitionRef.current) {
       setMicError(t('requirementVoiceModal.errors.notSupported'));
       return;
     }
     if (isListening) {
       recognitionRef.current.stop();
+      stopAudioRecording();
       setIsListening(false);
       return;
     }
     setMicError('');
+    const started = await startAudioRecording();
+    if (!started) return;
     recognitionRef.current.start();
   };
 
@@ -134,13 +212,17 @@ const RequirementVoiceModal = ({
     setIsSending(true);
     try {
       if (typeof onSend === 'function') {
-        await onSend(text);
+        await onSend({
+          text,
+          audioFile: recordedAudioFile || null
+        });
       } else {
         console.log('Requirement sent:', text);
       }
       setRequirement('');
       setInterimText('');
       setIsListening(false);
+      setRecordedAudioFile(null);
       onClose?.();
     } catch (error) {
       setSubmitError(getSubmitErrorMessage(error));
@@ -277,7 +359,11 @@ const RequirementVoiceModal = ({
           </div>
           <div className={`flex gap-2 ${rowDirection}`}>
             <button
-              onClick={() => setRequirement('')}
+              onClick={() => {
+                setRequirement('');
+                setInterimText('');
+                setRecordedAudioFile(null);
+              }}
               disabled={isSending}
               className="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50 transition-colors"
             >
