@@ -114,7 +114,7 @@ const Login = () => {
       <div
         className="absolute inset-0 -z-10 bg-center bg-cover bg-no-repeat"
         style={{
-          backgroundImage: "url('/favicon/WhatsApp%20Image%202026-02-25%20at%204.06.00%20PM.jpeg')",
+          backgroundImage: "url('/favicon/WhatsApp%20Image%202026-02-25%20at%206.49.50%20PM.jpeg')",
           filter: 'blur(2px)'
         }}
       />
