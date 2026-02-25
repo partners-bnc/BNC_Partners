@@ -1994,7 +1994,7 @@ const ServiceDetail = () => {
                             <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
                           </div>
                         </div>
-                        {service.description && service.description.length > 0 ? (
+                        {Array.isArray(service.description) && service.description.length > 0 ? (
                           <p className={`text-gray-600 font-geist mt-3 ${sectionPadding}`}>
                             {service.description.join(' ')}
                           </p>

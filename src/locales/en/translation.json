@@ -2015,6 +2015,10 @@
       "done": "Done",
       "start": "Start"
     },
+    "referral": {
+      "title": "Referral",
+      "start": "Start"
+    },
     "agreement": {
       "title": "Agreement",
       "alertCompleteProfile": "Please complete your AI Profile before signing the agreement.",
@@ -2032,6 +2036,13 @@
       "partner",
       "questionnaire",
       "complete"
+    ],
+    "referralSearchTokens": [
+      "referral",
+      "refer",
+      "client",
+      "candidate",
+      "earn"
     ]
   },
   "adminDashboard": {

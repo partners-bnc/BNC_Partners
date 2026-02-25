@@ -165,11 +165,16 @@ const PartnerDashboard = () => {
   const query = searchTerm.trim().toLowerCase();
   const matchesSearch = (value) =>
     !query || (value && value.toLowerCase().includes(query));
+  const normalizeTokensText = (tokens) => {
+    if (Array.isArray(tokens)) return tokens.join(' ');
+    if (typeof tokens === 'string') return tokens;
+    return '';
+  };
 
   const aiProfileTokens = t('partnerDashboard.aiProfileSearchTokens', { returnObjects: true });
-  const showAIProfile = matchesSearch(aiProfileTokens.join(' '));
+  const showAIProfile = matchesSearch(normalizeTokensText(aiProfileTokens));
   const referralTokens = t('partnerDashboard.referralSearchTokens', { returnObjects: true });
-  const showReferral = matchesSearch(referralTokens.join(' '));
+  const showReferral = matchesSearch(normalizeTokensText(referralTokens));
 
   const embeddedCountryKey = selectedCountry === 'global' ? 'other' : selectedCountry;
   const embeddedServices = useMemo(() => {
