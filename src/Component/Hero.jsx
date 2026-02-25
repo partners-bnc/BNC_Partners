@@ -7,6 +7,7 @@ import { WorldMap } from '../components/ui/world-map';
 const Hero = () => {
   const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [partnerUser, setPartnerUser] = useState(null);
   const location = useLocation();
   const heroAnimationVideoSrc = import.meta.env.VITE_HERO_ANIMATION_VIDEO_SRC || '';
   const isRtl = i18n.language === 'ar';
@@ -26,6 +27,20 @@ const Hero = () => {
       setIsModalOpen(true);
     }
   }, [location]);
+
+  useEffect(() => {
+    const storedPartner = localStorage.getItem('partnerUser');
+    if (!storedPartner) return;
+
+    try {
+      setPartnerUser(JSON.parse(storedPartner));
+    } catch (error) {
+      console.error('Could not parse partner user from localStorage:', error);
+    }
+  }, []);
+
+  const isLoggedIn = Boolean(partnerUser);
+  const partnerName = partnerUser?.firstName || partnerUser?.name || partnerUser?.email || '';
 
   const mapDots = [
     {
@@ -108,8 +123,17 @@ const Hero = () => {
               </div>
 
               <h1 className={`font-sora text-4xl md:text-6xl font-semibold mb-3 leading-tight -mt-3 sm:-mt-5 ${textAlign}`}>
-                {t('hero.titlePrefix')}
-                <span className="block" style={{ color: '#2C5AA0' }}>BnC Global</span>
+                {isLoggedIn ? (
+                  <>
+                    Welcome
+                    <span className="block" style={{ color: '#2C5AA0' }}>{partnerName}</span>
+                  </>
+                ) : (
+                  <>
+                    {t('hero.titlePrefix')}
+                    <span className="block" style={{ color: '#2C5AA0' }}>BnC Global</span>
+                  </>
+                )}
               </h1>
 
               <p className={`font-geist text-lg md:text-xl mb-8 max-w-2xl mx-auto ${lgContainerAlign} text-slate-600`}>
@@ -152,23 +176,25 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className={`flex gap-2 justify-between mb-6 w-full max-w-md mx-auto ${lgContainerAlign} ${rowDirection}`}>
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
-                >
-                  {t('hero.becomePartner')}
-                </button>
-                <Link
-                  to="/login"
-                  className="bg-white hover:bg-slate-50 text-slate-800 border border-black px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                  </svg>
-                  {t('hero.partnerLogin')}
-                </Link>
-              </div>
+              {!isLoggedIn && (
+                <div className={`flex gap-2 justify-between mb-6 w-full max-w-md mx-auto ${lgContainerAlign} ${rowDirection}`}>
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
+                  >
+                    {t('hero.becomePartner')}
+                  </button>
+                  <Link
+                    to="/login"
+                    className="bg-white hover:bg-slate-50 text-slate-800 border border-black px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                    </svg>
+                    {t('hero.partnerLogin')}
+                  </Link>
+                </div>
+              )}
 
               <div className={`mt-5 sm:mt-7 max-w-md mx-auto ${lgContainerAlign}`} style={{ perspective: '1400px' }}>
                 <div className={`relative cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-b from-white/95 via-white/80 to-slate-100/80 px-5 py-3 shadow-[0_26px_60px_rgba(15,23,42,0.18)] backdrop-blur transform-gpu ${isRtl ? '[transform:rotateX(6deg)_rotateY(6deg)]' : '[transform:rotateX(6deg)_rotateY(-6deg)]'} transition duration-300 hover:[transform:rotateX(0deg)_rotateY(0deg)_translateY(-8px)_scale(1.01)] hover:shadow-[0_44px_96px_rgba(15,23,42,0.24)] hover:ring-1 hover:ring-[#2C5AA0]/30`}>
