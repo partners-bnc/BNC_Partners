@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Header from './Component/Header';
 import Footer from './Component/Footer';
 import Home from './pages/Home';
-import Partnerships from './pages/Partnerships';
+import InternationalPartners from './pages/partners/InternationalPartners';
+import SalesPartners from './pages/partners/SalesPartners';
+import TechnologyPartners from './pages/partners/TechnologyPartners';
+import ServicePartners from './pages/partners/ServicePartners';
 import Login from './auth/Login';
 import PartnerDashboard from './pages/PartnerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -43,7 +46,10 @@ function App() {
               <main className="flex-grow">
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/partnerships" element={<Partnerships />} />
+                  <Route path="/partnerships/international" element={<InternationalPartners />} />
+                  <Route path="/partnerships/sales" element={<SalesPartners />} />
+                  <Route path="/partnerships/technology" element={<TechnologyPartners />} />
+                  <Route path="/partnerships/service" element={<ServicePartners />} />
                   <Route path="/partner-form" element={<Home />} />
                 </Routes>
               </main>

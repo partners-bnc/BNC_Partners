@@ -1,7 +1,7 @@
 {
   "language": {
     "english": "English",
-    "arabic": "العربية"
+    "arabic": "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©"
   },
   "header": {
     "home": "Home",
@@ -98,7 +98,7 @@
     "talkToExpert": "Talk to Expert"
   },
   "footer": {
-    "copyright": "Copyrights © 2026 BnC Global Pvt. Ltd."
+    "copyright": "Copyrights Â© 2026 BnC Global Pvt. Ltd."
   },
   "bncServices": {
     "title": "BnC Services",
@@ -264,443 +264,1509 @@
       "bncGlobalKsa": "BNC Global (KSA)"
     },
     "voiceRequirement": {
-      "title": "Voice Requirement",
-      "description": "Record your requirement by voice and send it instantly.",
+      "title": "Voice Requirement Submission",
+      "description": "Record your business or service requirement using voice and submit it instantly. Our team will review your request and connect you with the most suitable financial solution.",
       "button": "Start Voice Recording"
     },
     "subServiceMethodologyLabel": "Our Methodology",
+    "subServiceCoreOfferingLabel": "Our Core Offering",
+    "subServiceValueLabel": "The Value to You as a Consultant",
+    "subServiceWhyUsLabel": "Why Us?",
     "subServices": {
+      "physical-verification-stock-fixed-asset": [
+        {
+          "title": "Fixed Asset Physical Verification",
+          "coreOfferingIntro": "Comprehensive, line-by-line on-site verification of fixed assets across locations to validate existence, location, and operational condition.",
+          "coreOffering": [
+            "Physical existence check",
+            "Location & custodian validation",
+            "Missing/obsolete asset identification",
+            "FAR reconciliation",
+            "Exception reporting"
+          ],
+          "methodologyTitle": "Plan ? Verify ? Reconcile ? Report",
+          "steps": [
+            "Plan verification scope and asset universe",
+            "Conduct structured on-site inspection",
+            "Reconcile findings with FAR",
+            "Deliver discrepancy and risk report"
+          ],
+          "valueToConsultant": [
+            "Expand into audit-support and compliance assignments",
+            "Increase recurring annual verification mandates",
+            "Strengthen financial reporting credibility",
+            "Deliver measurable governance impact"
+          ],
+          "whyUs": [
+            "Technology-enabled verification process",
+            "Multi-location execution capability",
+            "Strong accounting and compliance expertise",
+            "Detailed, audit-ready documentation"
+          ]
+        },
+        {
+          "title": "Asset Tagging & Identification",
+          "coreOfferingIntro": "Structured tagging solutions using barcodes, QR codes, RFID, metal, polyester, or vinyl tags to enable traceability and future audit efficiency.",
+          "coreOffering": [
+            "Unique ID allocation",
+            "Durable tagging solutions",
+            "Custodian & location mapping",
+            "ERP-integrated tagging"
+          ],
+          "methodologyTitle": "Identify ? Tag ? Capture ? Integrate",
+          "steps": [
+            "Identify all taggable assets",
+            "Deploy appropriate tagging solution",
+            "Capture asset data digitally",
+            "Integrate tagging data with FAR"
+          ],
+          "valueToConsultant": [
+            "Offer long-term asset control frameworks",
+            "Improve future audit efficiency for clients",
+            "Create repeat engagement opportunities",
+            "Position yourself as a technology-driven advisor"
+          ],
+          "whyUs": [
+            "Durable, industry-specific tagging materials",
+            "Digital asset capture tools",
+            "Scalable tagging deployment",
+            "Compliance-aligned tracking systems"
+          ]
+        },
+        {
+          "title": "FAR (Fixed Asset Register) Updation & Reconciliation",
+          "coreOfferingIntro": "Complete review, correction, and restructuring of the Fixed Asset Register to ensure accuracy and regulatory compliance.",
+          "coreOffering": [
+            "Additions, disposals & transfers update",
+            "Depreciation alignment (SLM/WDV)",
+            "CWIP adjustments",
+            "ERP-compatible digital FAR",
+            "Audit trail documentation"
+          ],
+          "methodologyTitle": "Review ? Correct ? Align ? Document",
+          "steps": [
+            "Review existing FAR accuracy",
+            "Correct discrepancies",
+            "Align depreciation & accounting treatment",
+            "Document for audit readiness"
+          ],
+          "valueToConsultant": [
+            "Strengthen financial statement reliability",
+            "Expand into accounting compliance advisory",
+            "Increase audit-support revenue",
+            "Build long-term governance credibility"
+          ],
+          "whyUs": [
+            "Deep accounting standard expertise",
+            "Strong reconciliation frameworks",
+            "ERP compatibility support",
+            "Audit-focused documentation precision"
+          ]
+        },
+        {
+          "title": "Componentization (IFRS / Ind AS / IAS 16 Compliance)",
+          "coreOfferingIntro": "Identification and segregation of significant asset components for separate depreciation and regulatory compliance.",
+          "coreOffering": [
+            "Component breakdown analysis",
+            "Useful life assessment",
+            "Separate depreciation calculation",
+            "Register restructuring",
+            "Replacement accounting support"
+          ],
+          "methodologyTitle": "Analyse ? Segregate ? Calculate ? Update",
+          "steps": [
+            "Analyse major asset categories",
+            "Segregate components with varying useful lives",
+            "Calculate revised depreciation schedules",
+            "Update FAR accordingly"
+          ],
+          "valueToConsultant": [
+            "Enter IFRS/Ind AS advisory domain",
+            "Increase technical compliance engagements",
+            "Strengthen board-level advisory credibility",
+            "Expand into international reporting mandates"
+          ],
+          "whyUs": [
+            "Strong IFRS/Ind AS knowledge base",
+            "Practical implementation expertise",
+            "Compliance-driven documentation approach",
+            "Experience across industries"
+          ]
+        },
+        {
+          "title": "Stock & Inventory Verification",
+          "coreOfferingIntro": "Structured physical verification and reconciliation of stock to ensure accuracy and prevent shrinkage or misstatement.",
+          "coreOffering": [
+            "Physical inventory count",
+            "ERP reconciliation",
+            "Slow-moving/obsolete stock identification",
+            "Warehouse process review",
+            "Exception reporting"
+          ],
+          "methodologyTitle": "Count ? Reconcile ? Analyse ? Recommend",
+          "steps": [
+            "Conduct physical count",
+            "Reconcile with system records",
+            "Analyse discrepancies",
+            "Recommend control improvements"
+          ],
+          "valueToConsultant": [
+            "Expand into operational assurance",
+            "Increase recurring verification mandates",
+            "Strengthen working capital governance",
+            "Improve client cost control"
+          ],
+          "whyUs": [
+            "Structured count procedures",
+            "Technology-assisted reconciliation",
+            "Strong control-focused reporting",
+            "Multi-location execution capability"
+          ]
+        },
+        {
+          "title": "Condition Assessment & Asset Health Review",
+          "coreOfferingIntro": "Evaluation of asset condition, operational efficiency, and impairment indicators to support financial and strategic decisions.",
+          "coreOffering": [
+            "Operational status check",
+            "Impairment indicators",
+            "Maintenance review inputs",
+            "Replacement planning guidance",
+            "Insurance adequacy inputs"
+          ],
+          "methodologyTitle": "Inspect ? Evaluate ? Quantify ? Advise",
+          "steps": [
+            "Inspect physical and operational state",
+            "Evaluate impairment or risk exposure",
+            "Quantify potential financial impact",
+            "Advise on maintenance or replacement strategy"
+          ],
+          "valueToConsultant": [
+            "Enter strategic asset advisory",
+            "Support capex decision-making",
+            "Increase board-level engagement",
+            "Strengthen long-term advisory positioning"
+          ],
+          "whyUs": [
+            "Risk-focused evaluation framework",
+            "Financial and operational integration",
+            "Governance-aligned advisory",
+            "Practical, decision-ready insights"
+          ]
+        },
+        {
+          "title": "Regulatory & Compliance Review",
+          "coreOfferingIntro": "Comprehensive review to ensure asset-related compliance with Companies Act, CARO, IFRS/Ind AS, and internal control frameworks.",
+          "coreOffering": [
+            "Compliance checklist mapping",
+            "Control environment assessment",
+            "Documentation review",
+            "Audit readiness support",
+            "Management action plan"
+          ],
+          "methodologyTitle": "Map ? Evaluate ? Align ? Certify Readiness",
+          "steps": [
+            "Map applicable regulatory requirements",
+            "Evaluate compliance gaps",
+            "Align processes and documentation",
+            "Prepare for audit and statutory review"
+          ],
+          "valueToConsultant": [
+            "Expand into regulatory advisory",
+            "Increase high-value compliance engagements",
+            "Strengthen client governance reputation",
+            "Position yourself as a risk and compliance partner"
+          ],
+          "whyUs": [
+            "Strong regulatory interpretation expertise",
+            "Governance-driven approach",
+            "Structured documentation standards",
+            "End-to-end compliance readiness support"
+          ]
+        }
+      ],
+      "personal-business-loan": [
+        {
+          "title": "CGTMSE Loan",
+          "coreOfferingIntro": "Collateral-free loans under the CGTMSE scheme to support MSME growth and expansion.",
+          "coreOffering": [
+            "MSME eligibility structuring",
+            "Loan documentation support",
+            "Bank coordination",
+            "Compliance guidance",
+            "Credit guarantee alignment"
+          ],
+          "methodologyTitle": "Assess ? Structure ? Apply ? Facilitate",
+          "steps": [
+            "Assess eligibility and credit profile",
+            "Structure loan application strategically",
+            "Facilitate documentation and submission",
+            "Coordinate with lenders for approval"
+          ],
+          "valueToConsultant": [
+            "Expand into MSME funding advisory",
+            "Increase client retention",
+            "Offer end-to-end growth support",
+            "Strengthen long-term client dependency"
+          ],
+          "whyUs": [
+            "Deep MSME funding understanding",
+            "Structured documentation approach",
+            "Strong lender network coordination",
+            "Faster, smoother processing"
+          ]
+        },
+        {
+          "title": "Working Capital Loan",
+          "coreOfferingIntro": "Short-term financing solutions to support operational cash flow needs.",
+          "coreOffering": [
+            "Inventory funding",
+            "Receivable financing",
+            "Business cycle support",
+            "Structured working capital assessment"
+          ],
+          "methodologyTitle": "Evaluate ? Calculate ? Structure ? Secure",
+          "steps": [
+            "Evaluate cash flow cycle",
+            "Calculate funding requirement",
+            "Structure appropriate facility",
+            "Secure bank approval"
+          ],
+          "valueToConsultant": [
+            "Strengthen operational advisory",
+            "Improve client liquidity management",
+            "Increase recurring engagement",
+            "Become a financial growth partner"
+          ],
+          "whyUs": [
+            "Cash-flow focused assessment",
+            "Practical lender negotiation support",
+            "Governance-aligned financial structuring",
+            "Fast documentation turnaround"
+          ]
+        },
+        {
+          "title": "LAP OD Limit (Loan Against Property ? Overdraft)",
+          "coreOfferingIntro": "Overdraft facility backed by property to enable flexible fund usage.",
+          "coreOffering": [
+            "Property valuation coordination",
+            "OD structuring",
+            "Flexible withdrawal options",
+            "Interest optimisation support"
+          ],
+          "methodologyTitle": "Value ? Structure ? Negotiate ? Activate",
+          "steps": [
+            "Assess property valuation",
+            "Structure OD limit",
+            "Negotiate competitive rates",
+            "Activate and monitor utilisation"
+          ],
+          "valueToConsultant": [
+            "Offer flexible funding solutions",
+            "Increase advisory revenue",
+            "Support expansion and liquidity management",
+            "Strengthen client trust"
+          ],
+          "whyUs": [
+            "Competitive structuring approach",
+            "Bank coordination expertise",
+            "Transparent advisory process",
+            "Quick approval assistance"
+          ]
+        },
+        {
+          "title": "Unsecured Business Loan",
+          "coreOfferingIntro": "Collateral-free business loans based on financial strength and credit profile.",
+          "coreOffering": [
+            "Credit assessment support",
+            "Financial documentation preparation",
+            "Fast-track processing",
+            "Short-term and growth financing"
+          ],
+          "methodologyTitle": "Review ? Strengthen ? Apply ? Disburse",
+          "steps": [
+            "Review financial eligibility",
+            "Strengthen documentation",
+            "Apply with suitable lenders",
+            "Support smooth disbursement"
+          ],
+          "valueToConsultant": [
+            "Offer quick funding solutions",
+            "Increase client dependency",
+            "Strengthen growth advisory",
+            "Improve service portfolio depth"
+          ],
+          "whyUs": [
+            "Strong lender network",
+            "Quick processing frameworks",
+            "Practical credit profiling",
+            "Transparent advisory"
+          ]
+        },
+        {
+          "title": "Loan Against Property (Term Loan)",
+          "coreOfferingIntro": "Structured term loans secured against residential or commercial property.",
+          "coreOffering": [
+            "Property-backed funding",
+            "Long-tenure structuring",
+            "Competitive interest negotiation",
+            "Capital expansion support"
+          ],
+          "methodologyTitle": "Assess ? Structure ? Negotiate ? Close",
+          "steps": [
+            "Assess valuation and funding capacity",
+            "Structure repayment plan",
+            "Negotiate best lending terms",
+            "Close and support documentation"
+          ],
+          "valueToConsultant": [
+            "Support large capital expansion",
+            "Increase high-ticket engagements",
+            "Deepen financial advisory positioning",
+            "Build long-term relationships"
+          ],
+          "whyUs": [
+            "Structured funding advisory",
+            "Strong bank coordination",
+            "Transparent cost breakdown",
+            "End-to-end documentation support"
+          ]
+        },
+        {
+          "title": "Personal Loans (Car / Home / Education)",
+          "coreOfferingIntro": "Quick and structured personal financing solutions tailored to individual needs.",
+          "coreOffering": [
+            "Car loans",
+            "Home loans",
+            "Education loans",
+            "Eligibility structuring",
+            "EMI planning support"
+          ],
+          "methodologyTitle": "Evaluate ? Compare ? Apply ? Secure",
+          "steps": [
+            "Evaluate eligibility",
+            "Compare lender options",
+            "Apply with optimal structuring",
+            "Secure approval and disbursement"
+          ],
+          "valueToConsultant": [
+            "Expand into retail financial advisory",
+            "Strengthen client lifetime value",
+            "Increase cross-selling opportunities",
+            "Build trust beyond business advisory"
+          ],
+          "whyUs": [
+            "Multi-lender comparison support",
+            "Competitive rate negotiation",
+            "Smooth documentation handling",
+            "Transparent advisory"
+          ]
+        },
+        {
+          "title": "Cash Credit / Overdraft (OD) Limits",
+          "coreOfferingIntro": "Flexible revolving credit facilities to manage daily operational requirements.",
+          "coreOffering": [
+            "Working capital assessment",
+            "Limit structuring",
+            "Renewal and enhancement support",
+            "Bank compliance coordination"
+          ],
+          "methodologyTitle": "Assess ? Structure ? Approve ? Monitor",
+          "steps": [
+            "Assess cash flow cycle",
+            "Structure suitable limit",
+            "Support sanction process",
+            "Assist in renewals and enhancements"
+          ],
+          "valueToConsultant": [
+            "Strengthen client liquidity management",
+            "Increase recurring advisory",
+            "Position yourself as a financial growth enabler",
+            "Improve client operational continuity"
+          ],
+          "whyUs": [
+            "Cash-flow centric structuring",
+            "Strong financial analysis support",
+            "End-to-end sanction assistance",
+            "Long-term renewal guidance"
+          ]
+        }
+      ],
       "financial-advisory": [
         {
           "title": "Virtual CFO Services",
-          "brief": "Not every client can hire a full-time CFO — but every growing business needs strategic financial leadership. We enable you to deliver Virtual CFO capabilities, helping clients with strategy, governance, cash flow control, and performance direction — positioning you as their long-term financial partner.",
-          "methodologyTitle": "Understand → Strategise → Execute → Review",
+          "coreOfferingIntro": "We enable you to deliver structured Virtual CFO support, including:",
+          "coreOffering": [
+            "Strategic financial planning & forecasting",
+            "Cash flow and working capital management",
+            "Profitability and margin optimisation",
+            "Board-level reporting & investor readiness",
+            "Financial structuring and growth strategy support"
+          ],
+          "methodologyTitle": "Assess ? Architect ? Implement ? Optimise",
           "steps": [
-            "Assess financial health and growth objectives",
-            "Develop structured financial strategy",
-            "Implement governance and reporting systems",
-            "Ongoing performance review and advisory"
+            "Assess financial health and operational stability",
+            "Architect a strategic finance roadmap",
+            "Implement governance-driven reporting systems",
+            "Optimise performance through continuous review"
+          ],
+          "valueToConsultant": [
+            "Build high-value recurring retainers",
+            "Participate in strategic decision-making",
+            "Increase engagement size per client",
+            "Transition from compliance provider to growth advisor"
+          ],
+          "whyUs": [
+            "Practical CFO-led frameworks",
+            "Real implementation experience across industries",
+            "Structured advisory models you can replicate confidently",
+            "Strategic depth without operational complexity"
           ]
         },
         {
           "title": "Budget & Cost Management",
-          "brief": "Uncontrolled costs erode margins silently. We help you guide clients in building disciplined budgeting frameworks and cost optimisation strategies that protect profitability without slowing growth.",
-          "methodologyTitle": "Analyse → Allocate → Control → Optimise",
+          "coreOfferingIntro": "We help you implement disciplined financial control systems for your clients:",
+          "coreOffering": [
+            "Annual and rolling budgeting frameworks",
+            "Cost allocation and monitoring systems",
+            "Variance tracking & performance dashboards",
+            "Margin improvement strategies"
+          ],
+          "methodologyTitle": "Plan ? Control ? Analyse ? Improve",
           "steps": [
-            "Cost structure assessment",
-            "Budget framework design",
-            "Variance tracking mechanisms",
-            "Continuous cost improvement planning"
+            "Design structured budget architecture",
+            "Establish tracking and accountability mechanisms",
+            "Analyse deviations and financial leakages",
+            "Improve cost efficiency and profitability"
+          ],
+          "valueToConsultant": [
+            "Deliver measurable bottom-line impact",
+            "Strengthen client profitability narratives",
+            "Increase repeat and cross-service opportunities",
+            "Position yourself as a performance-focused advisor"
+          ],
+          "whyUs": [
+            "Data-driven cost optimisation frameworks",
+            "Experience across multi-sector financial structures",
+            "Scalable models adaptable to SMEs and enterprises",
+            "Execution-oriented approach, not theoretical advice"
           ]
         },
         {
           "title": "Financial Planning & Analysis (FP&A)",
-          "brief": "Financial planning is no longer annual forecasting — it is continuous decision intelligence. We empower you to provide structured forecasting, scenario planning, and performance analytics that drive informed business decisions.",
-          "methodologyTitle": "Forecast → Model → Evaluate → Advise",
+          "coreOfferingIntro": "We support you in delivering forward-looking financial intelligence:",
+          "coreOffering": [
+            "Revenue and growth forecasting models",
+            "Scenario planning and sensitivity analysis",
+            "Capital allocation advisory",
+            "Business performance evaluation frameworks"
+          ],
+          "methodologyTitle": "Model ? Evaluate ? Forecast ? Advise",
           "steps": [
-            "Revenue and expense forecasting",
-            "Scenario and sensitivity modelling",
-            "KPI-driven performance analysis",
-            "Strategic advisory insights"
+            "Develop customised financial models",
+            "Evaluate revenue and cost drivers",
+            "Forecast under multiple strategic scenarios",
+            "Provide board-ready strategic recommendations"
+          ],
+          "valueToConsultant": [
+            "Offer premium, insight-led advisory services",
+            "Influence investment and expansion decisions",
+            "Strengthen your positioning as a transformation partner",
+            "Increase long-term client dependency"
+          ],
+          "whyUs": [
+            "Structured modelling templates and frameworks",
+            "Strong analytical and governance expertise",
+            "Practical advisory integration support",
+            "Clear, executive-level communication tools"
           ]
         },
         {
           "title": "Reporting & MIS",
-          "brief": "Clear reporting builds confidence at the board and investor level. We help you implement structured MIS frameworks that convert raw numbers into actionable business intelligence.",
-          "methodologyTitle": "Structure → Standardise → Visualise → Improve",
+          "coreOfferingIntro": "We help you establish clarity through structured reporting systems:",
+          "coreOffering": [
+            "KPI-based performance dashboards",
+            "Integrated financial and operational MIS",
+            "Executive-level summary reporting",
+            "Real-time financial visibility frameworks"
+          ],
+          "methodologyTitle": "Structure ? Integrate ? Visualise ? Optimise",
           "steps": [
-            "Define reporting requirements",
-            "Build standard MIS formats",
-            "Dashboard and performance tracking",
-            "Ongoing refinement and automation"
+            "Define measurable KPIs aligned with strategy",
+            "Integrate financial and operational datasets",
+            "Visualise insights for leadership clarity",
+            "Optimise reporting cycles and accuracy"
+          ],
+          "valueToConsultant": [
+            "Build executive trust through clarity",
+            "Improve decision-making speed for clients",
+            "Position yourself as the interpreter of business intelligence",
+            "Strengthen advisory stickiness and retention"
+          ],
+          "whyUs": [
+            "Proven MIS structuring experience",
+            "Governance-aligned reporting frameworks",
+            "Scalable systems for growing organisations",
+            "Focus on clarity, usability, and impact"
           ]
         }
       ],
       "cybersecurity-data-privacy": [
         {
-          "title": "ISO/IEC 27001 Certification",
-          "brief": "Information security is now a business expectation. We enable you to guide clients through ISO/IEC 27001 certification, strengthening data protection, governance, and stakeholder trust.",
-          "methodologyTitle": "Assess → Design → Implement → Certify",
+          "title": "AI Audit",
+          "coreOfferingIntro": "As AI adoption grows, governance gaps increase. We help you guide clients in evaluating AI systems for risk, bias, data integrity, compliance exposure, and operational reliability.",
+          "coreOffering": [
+            "AI governance framework assessment",
+            "Model risk and bias evaluation",
+            "Data integrity and usage review",
+            "Regulatory exposure mapping",
+            "AI control and documentation readiness"
+          ],
+          "methodologyTitle": "Discover ? Evaluate ? Strengthen ? Govern",
           "steps": [
-            "Gap assessment against ISO standards",
-            "ISMS framework design",
-            "Policy and control implementation",
-            "Certification readiness support"
+            "Identify AI usage across business functions",
+            "Evaluate algorithmic risks and compliance gaps",
+            "Strengthen governance and control mechanisms",
+            "Implement monitoring and documentation frameworks"
+          ],
+          "valueToConsultant": [
+            "Enter a high-growth, emerging advisory domain",
+            "Position yourself as a future-ready advisor",
+            "Increase premium advisory billing",
+            "Become indispensable in tech-enabled organisations"
+          ],
+          "whyUs": [
+            "Governance-driven AI audit frameworks",
+            "Risk and compliance integration expertise",
+            "Practical, implementation-focused approach",
+            "Designed for evolving regulatory landscapes"
+          ]
+        },
+        {
+          "title": "Cybersecurity Certification ? ISO 27001",
+          "coreOfferingIntro": "We enable you to support clients in achieving and maintaining ISO 27001 certification by building structured Information Security Management Systems (ISMS).",
+          "coreOffering": [
+            "ISMS framework development",
+            "Risk assessment and gap analysis",
+            "Policy and control documentation",
+            "Implementation support",
+            "Pre-certification audit readiness"
+          ],
+          "methodologyTitle": "Assess ? Design ? Implement ? Certify",
+          "steps": [
+            "Conduct security posture assessment",
+            "Design compliant ISMS architecture",
+            "Implement security controls and policies",
+            "Prepare for certification audit"
+          ],
+          "valueToConsultant": [
+            "Add globally recognised certification advisory",
+            "Strengthen client credibility in global markets",
+            "Increase project-based and recurring revenue",
+            "Build long-term compliance engagements"
+          ],
+          "whyUs": [
+            "Structured certification roadmap",
+            "Experienced compliance and audit specialists",
+            "Clear documentation and control frameworks",
+            "End-to-end implementation support"
+          ]
+        },
+        {
+          "title": "Global Data Privacy Compliance ? GDPR",
+          "coreOfferingIntro": "With increasing global data regulations, businesses must align with GDPR standards. We support you in guiding clients through structured data protection and privacy governance frameworks.",
+          "coreOffering": [
+            "Data mapping and privacy impact assessment",
+            "Consent and data processing framework design",
+            "Cross-border data compliance alignment",
+            "Data subject rights implementation",
+            "Privacy policy and documentation structuring"
+          ],
+          "methodologyTitle": "Map ? Assess ? Align ? Monitor",
+          "steps": [
+            "Map personal data flows",
+            "Assess regulatory exposure and risk",
+            "Align processes with GDPR standards",
+            "Establish monitoring and review mechanisms"
+          ],
+          "valueToConsultant": [
+            "Offer cross-border compliance expertise",
+            "Increase advisory credibility in global markets",
+            "Strengthen trust-driven client relationships",
+            "Expand into recurring governance services"
+          ],
+          "whyUs": [
+            "Strong regulatory and governance foundation",
+            "Practical privacy control implementation",
+            "Alignment with evolving global data laws",
+            "Focus on operational feasibility"
           ]
         },
         {
           "title": "SOC Certification (Type 1 & Type 2)",
-          "brief": "Global clients demand SOC assurance before partnerships. We help you prepare clients for SOC 1/2 (Type 1 & Type 2) compliance — improving credibility and unlocking enterprise opportunities.",
-          "methodologyTitle": "Scope → Evaluate → Remediate → Audit Support",
+          "coreOfferingIntro": "We assist you in enabling clients to achieve SOC 1 / SOC 2 readiness and certification, strengthening trust with global customers and partners.",
+          "coreOffering": [
+            "Control framework design",
+            "Risk assessment and gap analysis",
+            "Documentation and evidence preparation",
+            "Internal readiness review",
+            "Audit coordination support"
+          ],
+          "methodologyTitle": "Evaluate ? Control ? Document ? Certify",
           "steps": [
-            "Define control scope and readiness",
-            "Test internal controls",
-            "Implement corrective actions",
-            "Coordinate with external auditors"
-          ]
-        },
-        {
-          "title": "GDPR Compliance",
-          "brief": "If your clients handle EU data, GDPR compliance is mandatory. We help you structure privacy frameworks that reduce legal exposure and reputational risk.",
-          "methodologyTitle": "Map → Align → Protect → Monitor",
-          "steps": [
-            "Data mapping and risk identification",
-            "Policy and consent framework alignment",
-            "Security control implementation",
-            "Ongoing compliance monitoring"
+            "Evaluate internal controls environment",
+            "Implement trust service criteria controls",
+            "Document policies and operational evidence",
+            "Support audit and certification process"
+          ],
+          "valueToConsultant": [
+            "Unlock high-value compliance projects",
+            "Strengthen client trust in technology environments",
+            "Increase international business readiness",
+            "Create recurring audit support revenue"
+          ],
+          "whyUs": [
+            "Structured SOC readiness programs",
+            "Strong internal control expertise",
+            "Clear evidence-based documentation processes",
+            "Practical execution support"
           ]
         },
         {
           "title": "HIPAA Compliance",
-          "brief": "Healthcare data requires strict protection. We support consultants in guiding healthcare and health-tech clients toward HIPAA-compliant systems and safeguards.",
-          "methodologyTitle": "Review → Secure → Document → Validate",
+          "coreOfferingIntro": "Healthcare data protection requires strict regulatory compliance. We support consultants in guiding healthcare and health-tech clients through HIPAA compliance frameworks.",
+          "coreOffering": [
+            "HIPAA gap assessment",
+            "Security and privacy rule alignment",
+            "Data safeguard implementation",
+            "Risk management planning",
+            "Compliance documentation support"
+          ],
+          "methodologyTitle": "Assess ? Secure ? Document ? Maintain",
           "steps": [
-            "Risk assessment of health data systems",
-            "Administrative and technical safeguards",
-            "Documentation and training",
-            "Compliance validation"
-          ]
-        },
-        {
-          "title": "Global Data Privacy Compliance",
-          "brief": "Data laws are evolving worldwide. We help you equip clients with cross-border privacy frameworks that ensure compliance across multiple jurisdictions.",
-          "methodologyTitle": "Identify → Harmonise → Implement → Govern",
-          "steps": [
-            "Multi-country regulatory mapping",
-            "Unified privacy framework development",
-            "Process integration",
-            "Continuous governance oversight"
-          ]
-        },
-        {
-          "title": "Cybersecurity Implementation",
-          "brief": "Strategy without execution creates vulnerability. We support real-world cybersecurity implementation — from access controls to system hardening — protecting client infrastructure.",
-          "methodologyTitle": "Diagnose → Deploy → Test → Strengthen",
-          "steps": [
-            "Security posture assessment",
-            "Technology and control deployment",
-            "Penetration and vulnerability testing",
-            "Continuous improvement plan"
-          ]
-        },
-        {
-          "title": "AI Audit",
-          "brief": "AI adoption brings new risks — bias, privacy breaches, governance gaps. We help you guide clients in auditing AI systems to ensure ethical, compliant, and secure deployment.",
-          "methodologyTitle": "Evaluate → Assess Risk → Recommend → Monitor",
-          "steps": [
-            "AI model governance review",
-            "Data integrity and bias testing",
-            "Risk mitigation recommendations",
-            "Ongoing compliance monitoring"
+            "Assess protected health information (PHI) handling",
+            "Secure technical and administrative safeguards",
+            "Document compliance controls",
+            "Establish continuous monitoring mechanisms"
+          ],
+          "valueToConsultant": [
+            "Expand into specialised healthcare compliance advisory",
+            "Increase high-ticket compliance engagements",
+            "Build authority in regulated industries",
+            "Strengthen long-term governance partnerships"
+          ],
+          "whyUs": [
+            "Strong governance and control background",
+            "Integrated cybersecurity and compliance expertise",
+            "Clear implementation-driven frameworks",
+            "Designed for complex regulatory environments"
           ]
         }
       ],
       "risk-advisory": [
         {
           "title": "Corporate Governance & Compliance",
-          "brief": "Strong governance builds investor trust and long-term stability. We help consulting firms guide their clients in establishing robust governance structures, regulatory compliance frameworks, and board-level accountability systems — ensuring credibility in a fast-changing regulatory environment.",
-          "methodologyTitle": "Assess → Align → Implement → Monitor",
+          "coreOfferingIntro": "We help you establish structured governance frameworks that enhance transparency, accountability, and regulatory compliance.",
+          "coreOffering": [
+            "Governance structure design",
+            "Regulatory compliance mapping",
+            "Board reporting frameworks",
+            "Compliance monitoring systems",
+            "Policy alignment with legal requirements"
+          ],
+          "methodologyTitle": "Assess ? Align ? Implement ? Monitor",
           "steps": [
-            "Review existing governance and compliance structure",
-            "Map regulatory exposure and compliance gaps",
-            "Design practical governance frameworks",
-            "Support implementation and ongoing monitoring"
+            "Assess governance gaps and regulatory exposure",
+            "Align policies with applicable laws and standards",
+            "Implement structured governance controls",
+            "Monitor compliance through review mechanisms"
+          ],
+          "valueToConsultant": [
+            "Strengthen client credibility and investor confidence",
+            "Expand into board-level advisory",
+            "Increase long-term governance retainers",
+            "Become a trusted strategic partner"
+          ],
+          "whyUs": [
+            "Strong regulatory and governance expertise",
+            "Practical, execution-oriented frameworks",
+            "Scalable models for SMEs and enterprises",
+            "Focus on sustainable compliance, not just documentation"
           ]
         },
         {
           "title": "Internal Audit & Controls",
-          "brief": "Internal audit is no longer fault-finding — it is value protection. We enable you to deliver risk-based internal audit and control assessments that strengthen financial integrity and operational efficiency for your clients.",
-          "methodologyTitle": "Identify → Evaluate → Strengthen → Report",
-          "steps": [
+          "coreOfferingIntro": "We support you in delivering risk-based internal audit and control evaluations that protect financial and operational integrity.",
+          "coreOffering": [
             "Risk-based audit planning",
-            "Control testing and gap identification",
-            "Process improvement recommendations",
-            "Clear, board-ready reporting"
+            "Control testing and assessment",
+            "Process risk identification",
+            "Governance and compliance reporting"
+          ],
+          "methodologyTitle": "Identify ? Evaluate ? Strengthen ? Report",
+          "steps": [
+            "Identify key operational and financial risks",
+            "Evaluate control effectiveness",
+            "Strengthen weak areas through corrective measures",
+            "Deliver clear, actionable reports"
+          ],
+          "valueToConsultant": [
+            "Offer structured assurance services",
+            "Increase recurring audit assignments",
+            "Improve client risk resilience",
+            "Build authority in governance advisory"
+          ],
+          "whyUs": [
+            "Risk-driven audit frameworks",
+            "Deep control environment expertise",
+            "Practical recommendations, not theoretical insights",
+            "Strong reporting clarity"
           ]
         },
         {
           "title": "Policies, SOPs & Process Reengineering",
-          "brief": "Undefined processes create inefficiency and compliance risk. We help you structure, document, and redesign client processes to improve clarity, accountability, and scalability.",
-          "methodologyTitle": "Map → Diagnose → Redesign → Standardise",
+          "coreOfferingIntro": "We help you structure and redesign client processes to improve efficiency, accountability, and scalability.",
+          "coreOffering": [
+            "SOP drafting and documentation",
+            "Policy framework development",
+            "Process gap and bottleneck analysis",
+            "Operational workflow redesign"
+          ],
+          "methodologyTitle": "Map ? Diagnose ? Redesign ? Standardise",
           "steps": [
-            "Process mapping workshops",
-            "Gap and bottleneck analysis",
-            "SOP drafting and policy development",
-            "Implementation and change support"
+            "Map existing workflows",
+            "Diagnose inefficiencies and risks",
+            "Redesign processes for optimisation",
+            "Standardise through documented SOPs"
+          ],
+          "valueToConsultant": [
+            "Deliver operational transformation",
+            "Increase cross-functional advisory scope",
+            "Improve client productivity and clarity",
+            "Create long-term advisory dependency"
+          ],
+          "whyUs": [
+            "Structured process engineering approach",
+            "Governance-aligned documentation standards",
+            "Industry-wide implementation experience",
+            "Focus on measurable operational impact"
           ]
         },
         {
           "title": "Business Intelligence & Continuous Improvement",
-          "brief": "Data-driven decision-making separates average firms from market leaders. We help you enable clients with structured reporting, dashboards, and performance tracking systems that drive continuous improvement.",
-          "methodologyTitle": "Collect → Analyse → Visualise → Optimise",
+          "coreOfferingIntro": "We help you enable data-driven performance management systems that drive informed decision-making.",
+          "coreOffering": [
+            "KPI identification frameworks",
+            "Performance dashboards",
+            "Financial and operational analytics",
+            "Continuous improvement systems"
+          ],
+          "methodologyTitle": "Collect ? Analyse ? Visualise ? Optimise",
           "steps": [
-            "Identify key performance drivers",
-            "Build structured reporting frameworks",
-            "Implement dashboards and insights",
-            "Continuous monitoring and refinement"
+            "Collect relevant business data",
+            "Analyse performance drivers",
+            "Visualise insights through dashboards",
+            "Optimise through ongoing monitoring"
+          ],
+          "valueToConsultant": [
+            "Deliver insight-led advisory services",
+            "Strengthen executive trust",
+            "Expand into performance consulting",
+            "Increase advisory premium"
+          ],
+          "whyUs": [
+            "Structured analytics frameworks",
+            "Integration of financial and operational data",
+            "Clear visual reporting systems",
+            "Practical implementation support"
           ]
         },
         {
           "title": "IT, Systems & Fraud Risk Audits",
-          "brief": "As businesses digitise, system vulnerabilities increase. We support consultants in assessing IT controls, fraud exposure, and system risks — protecting client assets and reputation.",
-          "methodologyTitle": "Review → Test → Detect → Secure",
+          "coreOfferingIntro": "We support you in assessing technology controls and fraud vulnerabilities to protect client systems and reputation.",
+          "coreOffering": [
+            "IT control assessment",
+            "Fraud risk analysis",
+            "System security reviews",
+            "Control enhancement recommendations"
+          ],
+          "methodologyTitle": "Review ? Test ? Detect ? Secure",
           "steps": [
-            "IT system risk assessment",
-            "Control environment testing",
-            "Fraud risk identification",
-            "Remediation roadmap"
+            "Review system architecture and access controls",
+            "Test vulnerabilities and control weaknesses",
+            "Detect fraud exposure points",
+            "Secure systems with corrective strategies"
+          ],
+          "valueToConsultant": [
+            "Enter technology risk advisory",
+            "Increase governance-focused engagements",
+            "Strengthen client protection frameworks",
+            "Enhance long-term compliance relationships"
+          ],
+          "whyUs": [
+            "Integrated IT and governance expertise",
+            "Practical fraud risk detection frameworks",
+            "Strong internal control background",
+            "Execution-focused remediation support"
           ]
         },
         {
           "title": "Stock & Fixed Asset Verification",
-          "brief": "Asset mismanagement directly impacts profitability. We help you deliver structured verification of stock and fixed assets to ensure financial accuracy and prevent leakage.",
-          "methodologyTitle": "Plan → Verify → Reconcile → Report",
-          "steps": [
+          "coreOfferingIntro": "We assist in verifying inventory and fixed assets to ensure financial accuracy and prevent loss or misstatement.",
+          "coreOffering": [
             "Physical verification planning",
-            "Asset validation and tagging review",
-            "Reconciliation with financial records",
-            "Exception reporting and corrective guidance"
+            "Asset tagging review",
+            "Inventory reconciliation",
+            "Exception and discrepancy reporting"
+          ],
+          "methodologyTitle": "Plan ? Verify ? Reconcile ? Report",
+          "steps": [
+            "Plan structured verification exercises",
+            "Conduct physical validation",
+            "Reconcile with financial records",
+            "Report discrepancies and corrective actions"
+          ],
+          "valueToConsultant": [
+            "Strengthen financial statement reliability",
+            "Provide tangible operational assurance",
+            "Increase recurring compliance engagements",
+            "Improve client cost control"
+          ],
+          "whyUs": [
+            "Structured verification processes",
+            "Strong reconciliation expertise",
+            "Clear documentation and reporting",
+            "Reliable execution support"
           ]
         },
         {
           "title": "SAR Reconciliation & Process Review",
-          "brief": "System Application Reports (SAR) and financial reconciliations must align with operational reality. We assist in reviewing reconciliation frameworks to reduce reporting errors and strengthen reliability.",
-          "methodologyTitle": "Examine → Reconcile → Rectify → Control",
+          "coreOfferingIntro": "We support consultants in reviewing reconciliation frameworks to reduce reporting errors and improve control reliability.",
+          "coreOffering": [
+            "SAR and financial reconciliation review",
+            "Process accuracy testing",
+            "Control gap identification",
+            "Improvement framework design"
+          ],
+          "methodologyTitle": "Examine ? Reconcile ? Rectify ? Control",
           "steps": [
-            "Review reconciliation processes",
-            "Identify mismatches and inefficiencies",
-            "Recommend corrective mechanisms",
-            "Implement stronger review controls"
+            "Examine reconciliation procedures",
+            "Reconcile system and financial records",
+            "Rectify process inefficiencies",
+            "Strengthen control checkpoints"
+          ],
+          "valueToConsultant": [
+            "Improve financial reporting integrity",
+            "Increase operational confidence",
+            "Expand into system-level advisory",
+            "Build stronger compliance credibility"
+          ],
+          "whyUs": [
+            "Structured reconciliation frameworks",
+            "Strong financial control expertise",
+            "Process-driven correction strategies",
+            "Focus on long-term reliability"
           ]
         },
         {
           "title": "Third-Party Risk Management",
-          "brief": "Vendors, partners, and outsourced functions introduce hidden risks. We help you equip clients with structured third-party risk assessment frameworks to prevent compliance failures and operational disruption.",
-          "methodologyTitle": "Screen → Assess → Monitor → Mitigate",
-          "steps": [
+          "coreOfferingIntro": "We help you enable clients to assess and manage vendor and partner risks proactively.",
+          "coreOffering": [
             "Vendor risk profiling",
-            "Due diligence framework design",
-            "Ongoing monitoring mechanisms",
-            "Risk mitigation planning"
+            "Due diligence frameworks",
+            "Contract risk evaluation",
+            "Ongoing third-party monitoring systems"
+          ],
+          "methodologyTitle": "Screen ? Assess ? Monitor ? Mitigate",
+          "steps": [
+            "Screen vendors for risk exposure",
+            "Assess compliance and financial stability",
+            "Monitor performance and risk indicators",
+            "Mitigate through structured risk plans"
+          ],
+          "valueToConsultant": [
+            "Expand into vendor governance advisory",
+            "Strengthen client supply chain security",
+            "Increase compliance-driven engagements",
+            "Build long-term governance partnerships"
+          ],
+          "whyUs": [
+            "Risk-based third-party frameworks",
+            "Integrated compliance and governance expertise",
+            "Practical monitoring systems",
+            "Scalable advisory models"
           ]
         }
       ],
       "esg-advisory": [
         {
           "title": "ESG & Sustainability Reporting",
-          "brief": "Investors, regulators, and stakeholders now expect structured ESG disclosures. We enable you to guide clients in building transparent sustainability reports that enhance credibility, valuation, and investor confidence.",
-          "methodologyTitle": "Assess → Structure → Report → Improve",
+          "coreOfferingIntro": "We help you enable clients to build structured ESG frameworks and credible sustainability reports aligned with global standards.",
+          "coreOffering": [
+            "ESG materiality assessment",
+            "Sustainability reporting frameworks",
+            "Governance and disclosure alignment",
+            "Investor-ready ESG documentation",
+            "Performance tracking systems"
+          ],
+          "methodologyTitle": "Assess ? Structure ? Report ? Improve",
           "steps": [
-            "ESG maturity assessment",
-            "Framework alignment (global standards)",
-            "Data consolidation and reporting design",
-            "Continuous performance improvement roadmap"
+            "Assess ESG impact areas and regulatory exposure",
+            "Structure reporting aligned to global frameworks",
+            "Prepare transparent, defensible disclosures",
+            "Improve through measurable ESG KPIs"
+          ],
+          "valueToConsultant": [
+            "Unlock high-demand sustainability advisory revenue",
+            "Strengthen client investor readiness",
+            "Expand into board-level ESG discussions",
+            "Position yourself as a future-ready advisory partner"
+          ],
+          "whyUs": [
+            "Governance-led ESG approach",
+            "Alignment with global reporting standards",
+            "Practical implementation expertise",
+            "Focus on measurable, reportable outcomes"
           ]
         },
         {
           "title": "Supply Chain Audit & Data Gathering",
-          "brief": "ESG responsibility extends beyond the company — into its supply chain. We help you equip clients with structured supplier audits and ESG data collection systems to reduce hidden risks.",
-          "methodologyTitle": "Map → Audit → Validate → Strengthen",
+          "coreOfferingIntro": "We support you in evaluating supplier practices and collecting ESG-related operational data across the value chain.",
+          "coreOffering": [
+            "Supplier ESG due diligence",
+            "Risk-based vendor assessments",
+            "Data collection frameworks",
+            "Compliance verification processes"
+          ],
+          "methodologyTitle": "Map ? Audit ? Validate ? Monitor",
           "steps": [
-            "Supplier risk mapping",
-            "ESG audit frameworks",
-            "Data validation processes",
-            "Risk mitigation planning"
+            "Map supply chain exposure",
+            "Audit supplier ESG practices",
+            "Validate operational data",
+            "Monitor through structured reporting systems"
+          ],
+          "valueToConsultant": [
+            "Expand into supply chain governance advisory",
+            "Increase cross-border compliance opportunities",
+            "Strengthen client operational resilience",
+            "Create recurring vendor risk engagements"
+          ],
+          "whyUs": [
+            "Risk-based audit frameworks",
+            "Structured supplier evaluation tools",
+            "Strong governance integration",
+            "Scalable monitoring systems"
           ]
         },
         {
           "title": "Carbon Emissions Estimation",
-          "brief": "Carbon transparency is becoming mandatory. We support consultants in helping clients measure, track, and manage carbon emissions — building accountability and sustainability positioning.",
-          "methodologyTitle": "Measure → Analyse → Benchmark → Reduce",
+          "coreOfferingIntro": "We assist you in helping clients quantify and manage their carbon footprint across Scope 1, 2, and 3 emissions.",
+          "coreOffering": [
+            "Emissions data identification",
+            "Carbon footprint calculations",
+            "Reduction strategy planning",
+            "Reporting alignment with global standards"
+          ],
+          "methodologyTitle": "Identify ? Measure ? Analyse ? Reduce",
           "steps": [
-            "Emission source identification (Scope 1, 2, 3)",
-            "Data modelling and estimation",
-            "Industry benchmarking",
-            "Reduction strategy guidance"
+            "Identify emission sources across operations",
+            "Measure carbon footprint accurately",
+            "Analyse emission hotspots",
+            "Recommend reduction and optimisation strategies"
+          ],
+          "valueToConsultant": [
+            "Enter climate-focused advisory markets",
+            "Increase ESG reporting revenue",
+            "Support clients in meeting investor expectations",
+            "Position yourself as a sustainability transformation partner"
+          ],
+          "whyUs": [
+            "Structured carbon accounting frameworks",
+            "Regulatory-aware measurement approach",
+            "Practical reduction strategy integration",
+            "Alignment with international reporting norms"
           ]
         },
         {
           "title": "Climate Risk Assessment",
-          "brief": "Climate risks directly impact financial performance and long-term resilience. We help you assess and integrate climate-related risks into business strategy and reporting.",
-          "methodologyTitle": "Identify → Evaluate → Model → Mitigate",
-          "steps": [
-            "Physical and transition risk analysis",
-            "Scenario modelling",
+          "coreOfferingIntro": "We help you guide clients in assessing physical and transition climate risks affecting business continuity and financial performance.",
+          "coreOffering": [
+            "Physical climate exposure analysis",
+            "Regulatory and transition risk mapping",
             "Financial impact assessment",
-            "Risk mitigation framework"
+            "Scenario planning frameworks"
+          ],
+          "methodologyTitle": "Evaluate ? Model ? Quantify ? Mitigate",
+          "steps": [
+            "Evaluate climate exposure across operations",
+            "Model risk under different scenarios",
+            "Quantify financial and operational impact",
+            "Develop mitigation and adaptation strategies"
+          ],
+          "valueToConsultant": [
+            "Provide forward-looking risk advisory",
+            "Strengthen long-term resilience frameworks",
+            "Increase strategic engagement at leadership level",
+            "Expand into climate governance consulting"
+          ],
+          "whyUs": [
+            "Integrated risk and sustainability expertise",
+            "Financial impact-focused analysis",
+            "Scenario-based advisory models",
+            "Practical, decision-ready insights"
           ]
         },
         {
           "title": "Compliance Trainings",
-          "brief": "ESG transformation requires organisational alignment. We provide structured training programs to build awareness, accountability, and implementation capability across client teams.",
-          "methodologyTitle": "Educate → Align → Implement → Reinforce",
+          "coreOfferingIntro": "We support you in delivering structured ESG, governance, and regulatory training programs to client leadership and teams.",
+          "coreOffering": [
+            "ESG awareness workshops",
+            "Governance and compliance training modules",
+            "Climate and sustainability education sessions",
+            "Leadership sensitisation programs"
+          ],
+          "methodologyTitle": "Educate ? Engage ? Equip ? Reinforce",
           "steps": [
-            "Role-based ESG workshops",
-            "Policy and reporting guidance",
-            "Implementation frameworks",
-            "Ongoing learning reinforcement"
+            "Educate teams on regulatory and ESG expectations",
+            "Engage through practical case-based learning",
+            "Equip participants with implementation tools",
+            "Reinforce through follow-up guidance"
+          ],
+          "valueToConsultant": [
+            "Build recurring training revenue streams",
+            "Strengthen client capability internally",
+            "Deepen advisory relationships",
+            "Position yourself as a knowledge partner"
+          ],
+          "whyUs": [
+            "Expert-led, practical training models",
+            "Industry-aligned curriculum",
+            "Structured and measurable learning outcomes",
+            "Integration with governance advisory services"
           ]
         }
       ],
       "erp-implementation-digital-transformation": [
         {
           "title": "ERP Module Review & Report Optimization",
-          "brief": "Many businesses invest in ERP systems but fail to extract full value. We enable you to help clients optimise ERP modules, improve reporting accuracy, and convert system data into decision-ready insights.",
-          "methodologyTitle": "Review → Diagnose → Optimise → Enhance",
+          "coreOfferingIntro": "We help you evaluate and optimise your clients? ERP systems to improve reporting accuracy, efficiency, and decision-making.",
+          "coreOffering": [
+            "ERP module performance review",
+            "Gap analysis between system and business needs",
+            "Report restructuring and optimisation",
+            "Control and compliance alignment",
+            "Process efficiency enhancement"
+          ],
+          "methodologyTitle": "Assess ? Analyse ? Optimise ? Align",
           "steps": [
-            "ERP module performance assessment",
-            "Gap identification in workflows and reporting",
-            "Report restructuring and automation",
-            "Continuous performance monitoring"
+            "Assess ERP configuration and utilisation",
+            "Analyse reporting inefficiencies and control gaps",
+            "Optimise modules and reporting structures",
+            "Align ERP outputs with management objectives"
+          ],
+          "valueToConsultant": [
+            "Expand into technology-led advisory",
+            "Increase high-value ERP review engagements",
+            "Improve client decision-making systems",
+            "Strengthen your positioning as a transformation partner"
+          ],
+          "whyUs": [
+            "Deep finance and governance integration",
+            "Practical ERP evaluation frameworks",
+            "Focus on measurable reporting improvement",
+            "Experience across multi-industry systems"
           ]
         },
         {
           "title": "Master Data Management",
-          "brief": "Poor master data leads to reporting errors, operational delays, and compliance risks. We help you guide clients in structuring, cleansing, and governing master data for long-term accuracy and control.",
-          "methodologyTitle": "Assess → Cleanse → Standardise → Govern",
+          "coreOfferingIntro": "We help you establish structured master data governance frameworks to ensure data accuracy, consistency, and reliability across systems.",
+          "coreOffering": [
+            "Data governance framework design",
+            "Master data standardisation",
+            "Data validation and cleansing support",
+            "Access control and approval workflows"
+          ],
+          "methodologyTitle": "Audit ? Cleanse ? Standardise ? Govern",
           "steps": [
-            "Data quality assessment",
-            "Duplicate and inconsistency removal",
-            "Standardisation framework",
-            "Ongoing governance model"
+            "Audit existing master data quality",
+            "Cleanse duplicates and inconsistencies",
+            "Standardise naming and classification structures",
+            "Implement governance and monitoring controls"
+          ],
+          "valueToConsultant": [
+            "Enhance financial and operational accuracy",
+            "Improve reporting reliability for clients",
+            "Increase recurring data governance assignments",
+            "Position yourself as a digital governance advisor"
+          ],
+          "whyUs": [
+            "Governance-driven data frameworks",
+            "Integration with compliance and ERP systems",
+            "Practical implementation support",
+            "Focus on long-term data sustainability"
           ]
         },
         {
           "title": "Department-Wise Digital Transformation",
-          "brief": "Digital transformation must go beyond technology — it must reshape how departments operate. We support you in redesigning finance, operations, HR, and supply chain processes for efficiency and scalability.",
-          "methodologyTitle": "Map → Redesign → Digitise → Monitor",
+          "coreOfferingIntro": "We support you in driving structured digital transformation across finance, HR, operations, procurement, and other departments.",
+          "coreOffering": [
+            "Process automation mapping",
+            "System integration strategy",
+            "Digital workflow implementation",
+            "Performance tracking frameworks"
+          ],
+          "methodologyTitle": "Map ? Digitise ? Integrate ? Optimise",
           "steps": [
-            "Departmental process mapping",
-            "Workflow automation design",
-            "Technology enablement",
-            "KPI tracking and performance review"
+            "Map manual and inefficient processes",
+            "Digitise workflows with appropriate tools",
+            "Integrate systems across departments",
+            "Optimise through performance measurement"
+          ],
+          "valueToConsultant": [
+            "Expand into enterprise-wide transformation advisory",
+            "Increase project-based revenue opportunities",
+            "Strengthen long-term client dependency",
+            "Deliver measurable productivity gains"
+          ],
+          "whyUs": [
+            "Finance-first transformation perspective",
+            "Governance-aligned digital integration",
+            "Cross-functional expertise",
+            "Execution-driven implementation approach"
           ]
         },
         {
           "title": "AI Integration for Process Efficiency & Insights",
-          "brief": "AI is redefining operational efficiency. We help you integrate AI-driven tools that enhance forecasting, automate repetitive tasks, detect anomalies, and generate actionable insights.",
-          "methodologyTitle": "Identify → Implement → Train → Optimise",
+          "coreOfferingIntro": "We help you integrate AI-driven solutions to automate processes, enhance analytics, and generate actionable business insights.",
+          "coreOffering": [
+            "AI opportunity assessment",
+            "Workflow automation design",
+            "Predictive analytics integration",
+            "AI governance and control framework"
+          ],
+          "methodologyTitle": "Identify ? Design ? Deploy ? Govern",
           "steps": [
-            "Process suitability analysis for AI",
-            "AI tool deployment",
-            "Team training and adaptation",
-            "Continuous optimisation and monitoring"
+            "Identify automation and AI opportunities",
+            "Design AI-enabled workflows and dashboards",
+            "Deploy solutions aligned with business goals",
+            "Govern through monitoring and compliance controls"
+          ],
+          "valueToConsultant": [
+            "Enter high-growth AI advisory space",
+            "Offer premium, innovation-driven services",
+            "Improve client operational efficiency",
+            "Position yourself as a next-generation consulting partner"
+          ],
+          "whyUs": [
+            "Governance-led AI integration approach",
+            "Risk-aware implementation framework",
+            "Practical automation strategies",
+            "Alignment with compliance and digital standards"
           ]
         }
       ],
       "gcc-operation-hub": [
         {
           "title": "Support Services",
-          "brief": "Global Capability Centers (GCCs) require structured operational, compliance, finance, and governance support. We enable you to guide clients in establishing strong backend frameworks that ensure scalability, efficiency, and regulatory alignment.",
-          "methodologyTitle": "Assess → Structure → Deploy → Strengthen",
+          "coreOfferingIntro": "We help you enable clients to establish structured operational support systems that improve efficiency, governance, and scalability.",
+          "coreOffering": [
+            "Finance & accounting support frameworks",
+            "Compliance and reporting support models",
+            "Operational control design",
+            "Process standardisation",
+            "Governance-aligned service structures"
+          ],
+          "methodologyTitle": "Assess ? Structure ? Deploy ? Optimise",
           "steps": [
-            "Operational readiness assessment",
-            "Governance and compliance structuring",
-            "Process and support deployment",
-            "Continuous monitoring and optimisation"
+            "Assess operational inefficiencies and gaps",
+            "Structure centralised support models",
+            "Deploy governance-driven processes",
+            "Optimise through performance tracking"
+          ],
+          "valueToConsultant": [
+            "Expand into long-term operational advisory",
+            "Increase recurring service-based revenue",
+            "Strengthen client process dependency",
+            "Position yourself as a strategic operations partner"
+          ],
+          "whyUs": [
+            "Governance-first operational design",
+            "Experience across multi-function service setups",
+            "Practical implementation expertise",
+            "Scalable service architecture"
           ]
         },
         {
           "title": "Captive Shared Services Center Setup & Stabilization",
-          "brief": "Setting up a captive shared services center demands strategic planning, process integration, and talent alignment. We help you support clients from initial setup to operational stabilization, ensuring cost efficiency and performance control.",
-          "methodologyTitle": "Plan → Establish → Integrate → Stabilize",
-          "steps": [
+          "coreOfferingIntro": "We assist you in helping clients establish and stabilise Captive Shared Service Centers (SSC) to centralise operations, improve control, and reduce cost.",
+          "coreOffering": [
             "Feasibility and location assessment",
-            "Process migration planning",
-            "Governance and reporting setup",
-            "Performance tracking and stabilization"
+            "Operating model design",
+            "Governance and reporting structure setup",
+            "Talent and transition planning",
+            "Stabilisation and performance optimisation"
+          ],
+          "methodologyTitle": "Evaluate ? Design ? Transition ? Stabilise",
+          "steps": [
+            "Evaluate business case and operational readiness",
+            "Design SSC structure and governance model",
+            "Transition processes and teams",
+            "Stabilise operations through performance metrics"
+          ],
+          "valueToConsultant": [
+            "Enter global operations advisory",
+            "Increase high-value transformation projects",
+            "Support clients in cost optimisation strategies",
+            "Strengthen your positioning in enterprise consulting"
+          ],
+          "whyUs": [
+            "Strong finance and governance integration",
+            "Practical SSC setup frameworks",
+            "Cross-border operational expertise",
+            "Focus on long-term stability, not just launch"
           ]
         },
         {
           "title": "Build, Operate & Transform (BOT) Model Implementation",
-          "brief": "The BOT model enables clients to enter new markets with reduced risk and structured control. We help consultants guide businesses through building operations, managing execution, and transitioning to full ownership seamlessly.",
-          "methodologyTitle": "Build → Operate → Transform → Transition",
+          "coreOfferingIntro": "We help you guide clients in setting up operations under the Build, Operate & Transform (BOT) model ? ensuring controlled expansion with structured governance.",
+          "coreOffering": [
+            "BOT strategy and feasibility planning",
+            "Operational setup and process design",
+            "Governance and compliance structuring",
+            "Transformation roadmap development",
+            "Exit or transition strategy planning"
+          ],
+          "methodologyTitle": "Build ? Operate ? Optimise ? Transform",
           "steps": [
-            "Infrastructure and team setup",
-            "Operational management framework",
-            "Performance optimization",
-            "Structured transition to client control"
+            "Build operational infrastructure and teams",
+            "Operate under structured governance models",
+            "Optimise performance and cost structures",
+            "Transform into a scalable, independent function"
+          ],
+          "valueToConsultant": [
+            "Expand into strategic global expansion advisory",
+            "Increase project-based and recurring revenue",
+            "Support clients in controlled international growth",
+            "Position yourself as a transformation leader"
+          ],
+          "whyUs": [
+            "Governance-driven BOT framework",
+            "Practical execution expertise",
+            "Integrated finance, compliance, and operations approach",
+            "Structured transformation and scalability planning"
           ]
         }
       ],
       "training-workshop": [
         {
-          "title": "Internal Audit",
-          "brief": "Strong internal audit capability strengthens governance and builds client trust. We provide structured training to enhance risk-based auditing, control evaluation, and reporting effectiveness.",
-          "methodologyTitle": "Understand → Apply → Practice → Refine",
-          "steps": [
-            "Core audit framework training",
-            "Real-case simulations",
+          "title": "Internal Audit Training",
+          "coreOfferingIntro": "Structured training programs to build expertise in internal audit frameworks, risk-based auditing, controls evaluation, and governance alignment.",
+          "coreOffering": [
+            "Risk-based audit approach",
             "Control testing techniques",
-            "Practical reporting improvement"
+            "Audit documentation standards",
+            "Reporting & stakeholder communication",
+            "Practical case simulations"
+          ],
+          "methodologyTitle": "Learn ? Apply ? Simulate ? Implement",
+          "steps": [
+            "Concept-based learning",
+            "Real-world audit case studies",
+            "Simulation-driven workshops",
+            "Implementation frameworks for client delivery"
+          ],
+          "valueToConsultant": [
+            "Increase audit engagement revenue",
+            "Deliver structured, high-quality audit assignments",
+            "Improve credibility with CFOs and Boards",
+            "Position yourself as a governance advisor"
+          ],
+          "whyUs": [
+            "Practical audit exposure",
+            "Governance-aligned frameworks",
+            "Industry-relevant case studies",
+            "Execution-focused learning"
           ]
         },
         {
-          "title": "ESG & Sustainability",
-          "brief": "ESG is becoming a strategic priority across industries. We equip professionals with practical knowledge of sustainability reporting, compliance frameworks, and ESG risk management.",
-          "methodologyTitle": "Educate → Align → Implement → Monitor",
+          "title": "ESG & Sustainability Training",
+          "coreOfferingIntro": "Comprehensive ESG workshops to help you advise clients on sustainability reporting, carbon estimation, supply chain compliance, and regulatory readiness.",
+          "coreOffering": [
+            "ESG framework fundamentals",
+            "Reporting structures",
+            "Carbon & climate risk basics",
+            "Data collection methodologies",
+            "Regulatory alignment"
+          ],
+          "methodologyTitle": "Understand ? Structure ? Measure ? Report",
           "steps": [
-            "ESG framework overview",
-            "Reporting standards guidance",
-            "Risk identification training",
-            "Implementation workshops"
+            "ESG concept clarity",
+            "Framework design guidance",
+            "Measurement tools introduction",
+            "Reporting implementation techniques"
+          ],
+          "valueToConsultant": [
+            "Enter high-growth ESG advisory",
+            "Expand service portfolio",
+            "Increase consulting ticket size",
+            "Position yourself as a future-ready advisor"
+          ],
+          "whyUs": [
+            "Regulatory-focused ESG training",
+            "Practical implementation approach",
+            "Integrated governance perspective",
+            "Market-relevant content"
           ]
         },
         {
-          "title": "Cybersecurity & Data Privacy Awareness",
-          "brief": "Cyber risks and data regulations demand organisational awareness. We conduct practical sessions to build understanding of data protection laws, privacy frameworks, and cybersecurity best practices.",
-          "methodologyTitle": "Assess → Train → Simulate → Strengthen",
+          "title": "Cybersecurity & Data Privacy Awareness Training",
+          "coreOfferingIntro": "Training programs covering cybersecurity fundamentals, DPDP, global privacy standards, and risk mitigation strategies.",
+          "coreOffering": [
+            "Data protection fundamentals",
+            "Privacy risk awareness",
+            "Compliance readiness (DPDP, GDPR basics)",
+            "Incident response basics",
+            "Governance alignment"
+          ],
+          "methodologyTitle": "Educate ? Assess ? Strengthen ? Comply",
           "steps": [
-            "Risk awareness sessions",
-            "Regulatory overview (global privacy laws)",
-            "Scenario-based learning",
-            "Policy and control reinforcement"
+            "Awareness sessions",
+            "Risk exposure assessment exercises",
+            "Control framework understanding",
+            "Compliance-oriented implementation guidance"
+          ],
+          "valueToConsultant": [
+            "Expand into compliance advisory",
+            "Increase cybersecurity-related engagements",
+            "Strengthen client trust",
+            "Address board-level concerns"
+          ],
+          "whyUs": [
+            "Governance-led cyber approach",
+            "Compliance-focused training modules",
+            "Practical business scenarios",
+            "Strategic positioning support"
           ]
         },
         {
-          "title": "AI Implementation",
-          "brief": "AI adoption must be structured and responsible. We train teams to identify AI opportunities, manage risks, and integrate AI tools into business processes effectively.",
-          "methodologyTitle": "Identify → Enable → Integrate → Optimise",
+          "title": "AI Implementation Training",
+          "coreOfferingIntro": "Hands-on workshops to help you identify AI opportunities, automate workflows, and integrate AI responsibly into client operations.",
+          "coreOffering": [
+            "AI fundamentals for consultants",
+            "Process automation use cases",
+            "AI governance basics",
+            "Risk and control considerations",
+            "ROI-driven AI adoption"
+          ],
+          "methodologyTitle": "Identify ? Design ? Deploy ? Govern",
           "steps": [
-            "AI readiness assessment",
-            "Use-case identification",
-            "Implementation guidance",
-            "Performance monitoring"
+            "Opportunity identification exercises",
+            "Workflow mapping sessions",
+            "AI integration frameworks",
+            "Governance & control awareness"
+          ],
+          "valueToConsultant": [
+            "Enter premium AI advisory market",
+            "Deliver innovation-led solutions",
+            "Increase digital transformation revenue",
+            "Differentiate from traditional consultants"
+          ],
+          "whyUs": [
+            "Governance-first AI perspective",
+            "Practical business implementation",
+            "Risk-aware adoption model",
+            "Revenue-oriented approach"
           ]
         },
         {
           "title": "Leadership & Soft Skills Development",
-          "brief": "Technical strength must be complemented by leadership capability. We provide development programs to enhance communication, decision-making, and strategic influence.",
-          "methodologyTitle": "Develop → Practice → Feedback → Improve",
+          "coreOfferingIntro": "Workshops designed to enhance leadership presence, communication, negotiation, and stakeholder management for consultants and senior professionals.",
+          "coreOffering": [
+            "Executive communication",
+            "Client relationship management",
+            "Negotiation skills",
+            "Team leadership",
+            "Strategic thinking"
+          ],
+          "methodologyTitle": "Develop ? Practice ? Refine ? Lead",
           "steps": [
-            "Leadership assessment",
-            "Communication workshops",
-            "Decision-making frameworks",
-            "Continuous development planning"
+            "Interactive learning",
+            "Role-play simulations",
+            "Scenario-based exercises",
+            "Personalised feedback"
+          ],
+          "valueToConsultant": [
+            "Increase client retention",
+            "Improve stakeholder confidence",
+            "Strengthen leadership positioning",
+            "Build long-term advisory relationships"
+          ],
+          "whyUs": [
+            "Practical, real-world scenarios",
+            "Consultant-focused curriculum",
+            "Executive-level communication frameworks",
+            "Immediate applicability"
           ]
         }
       ],
       "recruitment-manpower-services": [
         {
           "title": "Temporary Staffing",
-          "brief": "Business demands fluctuate — but talent gaps cannot slow operations. We enable you to support clients with skilled temporary professionals who maintain continuity, compliance, and performance without long-term hiring commitments.",
-          "methodologyTitle": "Understand → Source → Evaluate → Deploy",
+          "coreOfferingIntro": "We help you support clients with structured temporary staffing solutions for short-term, project-based, compliance-driven, or transition requirements.",
+          "coreOffering": [
+            "Finance & accounting professionals",
+            "Internal audit & compliance resources",
+            "ESG & sustainability support staff",
+            "IT & data privacy specialists",
+            "Project-based deployment"
+          ],
+          "methodologyTitle": "Understand ? Source ? Deploy ? Monitor",
           "steps": [
-            "Role requirement mapping",
-            "Targeted candidate sourcing",
-            "Skill and compliance screening",
-            "Quick onboarding and deployment"
+            "Understand client skill and timeline requirements",
+            "Source pre-vetted professionals",
+            "Deploy under structured engagement models",
+            "Monitor performance and ensure continuity"
+          ],
+          "valueToConsultant": [
+            "Expand into staffing-led revenue streams",
+            "Offer end-to-end advisory + execution support",
+            "Strengthen client reliance during peak workload",
+            "Increase recurring and project-based income"
+          ],
+          "whyUs": [
+            "Access to domain-specific talent pools",
+            "Governance-aligned resource deployment",
+            "Fast turnaround capability",
+            "Structured performance oversight"
           ]
         },
         {
           "title": "Permanent Recruitment",
-          "brief": "The right permanent hire defines long-term business success. We help you deliver structured recruitment solutions that align technical expertise with culture fit — reducing hiring risk and improving retention.",
-          "methodologyTitle": "Define → Attract → Assess → Onboard",
+          "coreOfferingIntro": "We assist you in helping clients identify and recruit permanent talent aligned with strategic growth, governance, and compliance requirements.",
+          "coreOffering": [
+            "CXO & senior leadership hiring",
+            "Finance & risk professionals",
+            "ESG & sustainability experts",
+            "Cybersecurity & data privacy specialists",
+            "ERP & digital transformation roles"
+          ],
+          "methodologyTitle": "Define ? Identify ? Evaluate ? Onboard",
           "steps": [
-            "Detailed role and competency definition",
-            "Multi-channel talent sourcing",
-            "Structured interviews and evaluation",
-            "Offer management and onboarding support"
+            "Define role objectives and capability framework",
+            "Identify candidates through structured sourcing",
+            "Evaluate technical and cultural fit",
+            "Support onboarding and transition alignment"
+          ],
+          "valueToConsultant": [
+            "Add executive search capability to your portfolio",
+            "Increase engagement value with hiring mandates",
+            "Strengthen long-term client relationships",
+            "Become a strategic talent partner, not just an advisor"
+          ],
+          "whyUs": [
+            "Strong industry talent network",
+            "Governance and compliance-focused hiring",
+            "Structured evaluation frameworks",
+            "Alignment with transformation and growth goals"
           ]
         }
       ]
@@ -713,13 +1779,13 @@
     "voice": "Voice",
     "typing": "Typing",
     "toggleRecording": "Toggle voice recording",
-    "listening": "Listening… speak your requirement",
+    "listening": "Listeningâ€¦ speak your requirement",
     "tapToStart": "Tap to start recording",
     "voiceHelper": "Voice is the primary option. We will convert speech to text.",
     "liveTranscript": "Live transcript",
-    "transcriptPlaceholder": "Your requirement will appear here…",
+    "transcriptPlaceholder": "Your requirement will appear hereâ€¦",
     "typeLabel": "Type your requirement",
-    "typePlaceholder": "Share roles, counts, duration, timeline, location…",
+    "typePlaceholder": "Share roles, counts, duration, timeline, locationâ€¦",
     "tip": "Tip: Include role, location, duration, and timeline.",
     "clear": "Clear",
     "send": "Send",
@@ -736,23 +1802,23 @@
     "global": "Global"
   },
   "login": {
-    "welcomeBack": "Welcome Back",
-    "subtitle": "Sign in to your BnC Global account",
+    "welcomeBack": "Lead. Scale. Dominate.",
+    "subtitle": "More Services. More Authority. More Revenue.",
     "partnerLogin": "Partner Login",
     "adminLogin": "Admin Login",
     "adminId": "Admin ID",
-    "userIdEmail": "User ID (Email)",
+    "userIdEmail": "Work Email",
     "enterAdminId": "Enter admin ID",
-    "enterEmail": "Enter your email address",
+    "enterEmail": "Enter your work email",
     "useAdminId": "Use your admin ID",
     "useRegisteredEmail": "Use the email address you registered with",
     "password": "Password",
     "enterPassword": "Enter your password",
     "signingIn": "Signing in...",
-    "partnerSignIn": "Partner Sign In",
+    "partnerSignIn": "Access Dashboard",
     "adminSignIn": "Admin Sign In",
     "newAccount": "New Account",
-    "backToRegistration": "Back to Registration",
+    "backToRegistration": "Return to Partner Application",
     "errors": {
       "adminIdRequired": "Admin ID is required",
       "emailRequired": "Email is required",
@@ -765,13 +1831,49 @@
       "partnerSuccess": "Login successful! Welcome {{name}}"
     },
     "sidePanel": {
-      "description": "Become a BnC Global Partner and expand your accounting and finance services worldwide. Access real opportunities, automate workflows, and manage partnerships efficiently.",
+      "description": "Expand your advisory services. Increase client retention. Build recurring revenue ? all in one ecosystem.",
       "secureAccess": "Global business exposure",
       "onboardingUpdates": "Smart enquiry management",
       "partnerEcosystem": "AI-powered partner ecosystem",
       "email": "Email",
       "whatsapp": "WhatsApp",
-      "call": "Call"
+      "call": "Call",
+      "benefits": [
+        "Unlock new revenue streams",
+        "Expand your service portfolio",
+        "Deliver enterprise-grade solutions",
+        "Close bigger deals with confidence",
+        "Learn. Train. Grow."
+      ]
+    },
+    "exclusiveBadge": "Strategic Partner Access",
+    "joinGrowthPartner": "Join as Growth Partner",
+    "revenueTagline": "Don?t just serve clients. Own the mandate.",
+    "trustIndicators": [
+      "Secure Partner Portal",
+      "NDA-Protected Engagements",
+      "Enterprise-Level Data Security"
+    ],
+    "socialProof": {
+      "title": "Trusted by growing partners",
+      "metrics": [
+        {
+          "value": "150+",
+          "label": "Consultants"
+        },
+        {
+          "value": "8+",
+          "label": "Service Verticals"
+        },
+        {
+          "value": "20+",
+          "label": "Industries Served"
+        },
+        {
+          "value": "98%",
+          "label": "Partner Retention"
+        }
+      ]
     }
   },
   "globalServices": {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaHandshake, FaUsers, FaCogs, FaUserTie, FaCheckCircle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
@@ -8,10 +9,10 @@ const PartnershipOpportunities = () => {
   const textAlign = isRtl ? 'text-right' : 'text-left';
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
   const opportunities = [
-    { key: 'strategic', icon: FaHandshake },
-    { key: 'channel', icon: FaUsers },
-    { key: 'technology', icon: FaCogs },
-    { key: 'service', icon: FaUserTie }
+    { key: 'strategic', icon: FaHandshake, path: '/partnerships/international' },
+    { key: 'channel', icon: FaUsers, path: '/partnerships/sales' },
+    { key: 'technology', icon: FaCogs, path: '/partnerships/technology' },
+    { key: 'service', icon: FaUserTie, path: '/partnerships/service' }
   ];
 
   return (
@@ -51,9 +52,12 @@ const PartnershipOpportunities = () => {
                   </li>
                 ))}
               </ul>
-              <button className="mt-auto w-full inline-flex items-center justify-center font-poppins text-white px-6 py-2.5 rounded-full font-semibold bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] transition-all duration-150 ease-out hover:shadow-[0_16px_32px_rgba(44,90,160,0.35)] hover:-translate-y-0.5">
+              <Link
+                to={opportunity.path}
+                className="mt-auto w-full inline-flex items-center justify-center font-poppins text-white px-6 py-2.5 rounded-full font-semibold bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] transition-all duration-150 ease-out hover:shadow-[0_16px_32px_rgba(44,90,160,0.35)] hover:-translate-y-0.5"
+              >
                 {t('partnershipOpportunities.learnMore')}
-              </button>
+              </Link>
             </div>
           ))}
         </div>

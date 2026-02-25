@@ -22,8 +22,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     phone: '',
     countryCode: '+1',
@@ -49,11 +48,20 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
     Singapore: 'Singapore',
     'Saudi Arabia': 'Saudi Arabia',
     UAE: 'UAE',
-    'United Arab Emirates': 'United Arab Emirates'
+    'United Arab Emirates': 'United Arab Emirates',
+    Philippines: 'Philippines'
   };
 
   
   const countryCodes = [
+    { code: "+91", label: "India" },
+    { code: "+966", label: "Saudi Arabia" },
+    { code: "+971", label: "UAE" },
+    { code: "+44", label: "United Kingdom" },
+    { code: "+1", label: "Canada" },
+    { code: "+1", label: "United States" },
+    { code: "+63", label: "Philippines" },
+    { code: "+61", label: "Australia" },
     { code: "+1", label: "United States/Canada" },
 
     { code: "+7", label: "Russia/Kazakhstan" },
@@ -286,8 +294,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
     switch (step) {
       case 1:
-        if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-        if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+        if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
         break;
       case 2:
         if (!formData.email.trim()) {
@@ -376,8 +383,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
     setIsSubmitting(true);
     try {
       await registerPartner({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
         countryCode: formData.countryCode,
@@ -407,8 +413,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const handleLoginRedirect = () => {
     onClose();
     setFormData({
-      firstName: '',
-      lastName: '',
+      fullName: '',
       email: '',
       phone: '',
       countryCode: '+1',
@@ -471,35 +476,19 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Personal Information</h3>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                First Name
+                Full Name
               </label>
               <input
                 type="text"
-                name="firstName"
-                value={formData.firstName}
+                name="fullName"
+                value={formData.fullName}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#254C89] focus:border-transparent ${inputAlign} ${
-                  errors.firstName ? 'border-red-500' : 'border-gray-300'
+                  errors.fullName ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="Enter your first name"
+                placeholder="Enter your full name"
               />
-              {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Last Name
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#254C89] focus:border-transparent ${inputAlign} ${
-                  errors.lastName ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="Enter your last name"
-              />
-              {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+              {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
             </div>
           </div>
         );

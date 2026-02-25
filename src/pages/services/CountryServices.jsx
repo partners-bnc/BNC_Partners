@@ -66,6 +66,15 @@ const CountryServices = ({ country, title, description }) => {
     });
   }, [searchQuery, visibleServices]);
 
+  const sortedServices = useMemo(() => (
+    [...filteredServices].sort((a, b) => {
+      const aHasVideo = Boolean(a.videoUrl);
+      const bHasVideo = Boolean(b.videoUrl);
+      if (aHasVideo === bHasVideo) return 0;
+      return bHasVideo ? 1 : -1;
+    })
+  ), [filteredServices]);
+
   const suggestions = useMemo(() => {
     const term = searchQuery.trim().toLowerCase();
     if (!term) {
@@ -289,7 +298,7 @@ const CountryServices = ({ country, title, description }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredServices.map((service) => (
+            {sortedServices.map((service) => (
               <div
                 key={service.id}
                 className="group relative bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"

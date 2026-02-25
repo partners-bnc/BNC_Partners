@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash, FaChartLine, FaBriefcase, FaHandshake, FaGraduationCap } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { fetchPartnerData, loginAdmin, loginPartner } from '../lib/supabaseData';
@@ -25,6 +25,10 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const benefitItems = t('login.sidePanel.benefits', { returnObjects: true });
+  const trustItems = t('login.trustIndicators', { returnObjects: true });
+  const socialMetrics = t('login.socialProof.metrics', { returnObjects: true });
+  const benefitIcons = [FaChartLine, FaBriefcase, FaShieldAlt, FaHandshake, FaGraduationCap];
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -106,40 +110,33 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-6"
-      style={{
-        backgroundImage:
-          'linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #204681 50%, #204681 100%)'
-      }}
-    >
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 w-1/2"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, rgba(255,255,255,0.35) 1.2px, transparent 1.2px)',
-          backgroundSize: '18px 18px',
-          backgroundPosition: 'center'
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 w-1/2"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, rgba(255,255,255,0.22) 1.1px, transparent 1.1px)',
-          backgroundSize: '20px 20px',
-          backgroundPosition: 'center'
-        }}
-      />
-
-
-      <div className={topBlobPos} />
-      <div className={bottomBlobPos} />
+    <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-6">
       <div className="w-full max-w-4xl">
         <div className={`flex flex-col md:flex-row ${isRtl ? 'md:flex-row-reverse' : ''} bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/60`}>
           {/* Left Brand Panel */}
           <div className={`relative hidden md:flex md:w-1/2 flex-col justify-between p-8 bg-gradient-to-br from-[#2C5AA0] via-[#24508f] to-[#163062] text-white ${textAlign}`}>
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] bg-[length:16px_16px]" />
+            <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:24px_24px]" />
+            <div className="pointer-events-none absolute right-6 bottom-28 opacity-60">
+              <svg viewBox="0 0 220 90" className="h-20 w-40" fill="none">
+                <path
+                  d="M5 75 C 45 20, 90 95, 140 40 C 170 10, 200 25, 215 8"
+                  stroke="rgba(255,255,255,0.7)"
+                  strokeWidth="2"
+                  strokeDasharray="6 10"
+                >
+                  <animate attributeName="stroke-dashoffset" values="0;32" dur="4.8s" repeatCount="indefinite" />
+                </path>
+                <circle cx="45" cy="28" r="3" fill="rgba(255,255,255,0.85)">
+                  <animate attributeName="r" values="2;3.5;2" dur="3s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="140" cy="40" r="3" fill="rgba(255,255,255,0.85)">
+                  <animate attributeName="r" values="3.2;2;3.2" dur="3.4s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="215" cy="8" r="3" fill="rgba(255,255,255,0.85)">
+                  <animate attributeName="r" values="2;3.8;2" dur="3.2s" repeatCount="indefinite" />
+                </circle>
+              </svg>
+            </div>
             <div className="relative">
               <div className={`inline-flex items-center gap-3 ${rowDirection}`}>
                 <div className="h-14 w-14 rounded-full flex items-center justify-center">
@@ -160,25 +157,18 @@ const Login = () => {
                 {t('login.sidePanel.description')}
               </p>
             </div>
-            <div className="relative mt-6 space-y-3 text-sm text-white/80">
-              <div className={`flex items-center gap-3 ${rowDirection}`}>
-                <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center">
-                  <FaShieldAlt />
-                </div>
-                {t('login.sidePanel.secureAccess')}
-              </div>
-              <div className={`flex items-center gap-3 ${rowDirection}`}>
-                <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center">
-                  <FaUser />
-                </div>
-                {t('login.sidePanel.onboardingUpdates')}
-              </div>
-              <div className={`flex items-center gap-3 ${rowDirection}`}>
-                <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center">
-                  <FaLock />
-                </div>
-                {t('login.sidePanel.partnerEcosystem')}
-              </div>
+            <div className="relative mt-4 space-y-3 text-sm text-white/80">
+              {(Array.isArray(benefitItems) ? benefitItems : []).map((item, index) => {
+                const Icon = benefitIcons[index] || FaShieldAlt;
+                return (
+                  <div key={item} className={`flex items-center gap-3 ${rowDirection}`}>
+                    <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center">
+                      <Icon />
+                    </div>
+                    {item}
+                  </div>
+                );
+              })}
               <div className="flex items-center justify-center pt-2">
                 <div className="grid gap-3 w-full max-w-md">
                   <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-3">
@@ -187,9 +177,6 @@ const Login = () => {
                       className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
                     >
                       <div>
-                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                          {t('login.sidePanel.email')}
-                        </p>
                         <p className="text-sm font-semibold text-white">patner@bncglobal.in</p>
                       </div>
                       <div className="h-10 w-10 rounded-xl flex items-center justify-center transition">
@@ -210,9 +197,6 @@ const Login = () => {
                       className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
                     >
                       <div>
-                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                          {t('login.sidePanel.whatsapp')}
-                        </p>
                         <p className="text-sm font-semibold text-white whitespace-nowrap">+91 99587 11796</p>
                       </div>
                       <div className={`h-10 w-10 rounded-xl flex items-center justify-center transition ${iconMargin}`}>
@@ -229,6 +213,9 @@ const Login = () => {
                   </div>
                 </div>
               </div>
+              <p className="pt-4 text-xs uppercase tracking-[0.2em] text-white/70">
+                {t('login.revenueTagline')}
+              </p>
             </div>
           </div>
 
@@ -247,20 +234,24 @@ const Login = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex mb-5 bg-gray-100 rounded-xl p-1">
+            <div className="mb-5 rounded-2xl border border-slate-200 bg-white/90 shadow-sm">
               {isAdminOnly ? (
                 <div
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg font-semibold bg-white text-[#1e3f73] shadow ${isRtl ? 'flex-row-reverse' : ''}`}
+                  className={`flex items-center justify-center gap-3 py-3 px-4 rounded-2xl font-semibold text-[#1e3f73] ${isRtl ? 'flex-row-reverse' : ''}`}
                 >
-                  <FaShieldAlt />
-                  {t('login.adminLogin')}
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                    <FaShieldAlt />
+                  </span>
+                  <span>{t('login.adminLogin')}</span>
                 </div>
               ) : (
                 <div
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg font-semibold bg-white text-[#1e3f73] shadow ${isRtl ? 'flex-row-reverse' : ''}`}
+                  className={`flex items-center justify-center gap-3 py-3 px-4 rounded-2xl font-semibold text-[#1e3f73] ${isRtl ? 'flex-row-reverse' : ''}`}
                 >
-                  <FaUser />
-                  {t('login.partnerLogin')}
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                    <FaUser />
+                  </span>
+                  <span>{t('login.partnerLogin')}</span>
                 </div>
               )}
             </div>
@@ -323,29 +314,23 @@ const Login = () => {
               </div>
 
               {/* Submit + Create */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 mt-2">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center disabled:opacity-50 shadow-lg shadow-[#2C5AA0]/20 border border-transparent"
+                  className="w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-all flex items-center justify-center disabled:opacity-50 shadow-[0_12px_30px_rgba(32,70,129,0.25)] hover:shadow-[0_18px_45px_rgba(32,70,129,0.35)] border border-transparent"
                 >
                   {isLoading
                     ? t('login.signingIn')
                     : (activeTab === 'partner' ? t('login.partnerSignIn') : t('login.adminSignIn'))}
                 </button>
-                <Link
-                  to="/?open=partner"
-                  className="w-full border border-slate-200 text-slate-700 bg-white py-2.5 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center shadow-sm hover:bg-slate-50"
-                >
-                  {t('login.newAccount')}
-                </Link>
               </div>
             </form>
 
             {/* Back Link */}
             <div className="mt-4 text-center">
               <Link 
-                to="/" 
+                to="/?open=partner" 
                 className="inline-flex items-center text-[#2C5AA0] hover:text-[#1e3f73] font-medium"
               >
                 <FaArrowLeft className={isRtl ? 'ml-2 flipInRtl' : 'mr-2'} />

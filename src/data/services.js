@@ -11,7 +11,7 @@ export const services = [
     ],
     tags: ['high-selling', 'high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/HzF-a7TzpAU',
+    videoUrl: 'https://www.youtube.com/embed/we4JmIvoELA',
     secondaryVideoUrl: '',
     description: [
       'We help leadership teams translate growth plans into disciplined financial roadmaps.',
@@ -30,21 +30,45 @@ export const services = [
     ]
   },
   {
+    id: 'personal-business-loan',
+    title: 'Personal & Business Loan',
+    summary: 'Structured funding solutions for growth, stability, and opportunity.',
+    bullets: [
+      'CGTMSE Loan',
+      'Working Capital Loan',
+      'LAP OD Limit (Loan Against Property – Overdraft)',
+      'Unsecured Business Loan',
+      'Loan Against Property (Term Loan)',
+      'Personal Loans (Car / Home / Education)',
+      'Cash Credit / Overdraft (OD) Limits'
+    ],
+    tags: ['high-demand'],
+    country: ['india', 'saudi-arabia', 'other'],
+    videoUrl: 'https://www.youtube.com/embed/DohdDIxzEKk',
+    secondaryVideoUrl: '',
+    description: [
+      'We help clients secure the right financing aligned with business or personal goals.',
+      'Loan structuring, eligibility checks, and documentation are handled end to end.',
+      'Funding options cover MSME, working capital, property-backed, and unsecured needs.',
+      'Processes are compliance-led to support faster approvals and cleaner credit trails.'
+    ],
+    manpowerDescription:
+      'We support loan documentation, eligibility structuring, and lender coordination so approvals move faster and more smoothly.'
+  },
+  {
     id: 'cybersecurity-data-privacy',
     title: 'Cybersecurity & Data Privacy',
     summary: 'Security, privacy, and compliance programs for modern businesses.',
     bullets: [
-      'ISO/IEC 27001 Certification',
+      'AI Audit',
+      'Cybersecurity Certification - ISO/IEC 27001',
+      'Global Data Privacy Compliance GDPR',
       'SOC Certification (Type 1 & Type 2)',
-      'GDPR Compliance',
-      'HIPAA Compliance',
-      'Global Data Privacy Compliance',
-      'Cybersecurity Implementation',
-      'AI Audit'
+      'HIPAA Compliance'
     ],
     tags: ['high-selling', 'high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/QVonU_i0VXc',
+    videoUrl: 'https://www.youtube.com/embed/cv2NO-3PcdU',
     secondaryVideoUrl: '',
     description: [
       'We assess your data footprint and map regulatory obligations early.',
@@ -86,7 +110,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/849G-8A8EVs',
+    videoUrl: 'https://www.youtube.com/embed/tQMstmgKhck',
     secondaryVideoUrl: '',
     description: [
       'We identify critical risks across governance, operations, and technology.',
@@ -117,7 +141,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/il2EtEBzOfg',
+    videoUrl: 'https://www.youtube.com/embed/GZPy8N9_v9U',
     secondaryVideoUrl: '',
     description: [
       'We translate ESG expectations into practical initiatives and KPIs.',
@@ -147,7 +171,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/jn0yu2af7Rk',
+    videoUrl: 'https://www.youtube.com/embed/JFlPgFF8Hys',
     secondaryVideoUrl: '',
     description: [
       'We evaluate current systems and map gaps against business goals.',
@@ -170,7 +194,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/nnR6_sf0Bs0',
+    videoUrl: 'https://www.youtube.com/embed/o0bq30Rciv0',
     secondaryVideoUrl: '',
     description: [
       'We design shared service models that balance cost and control.',
@@ -195,7 +219,7 @@ export const services = [
     ],
     tags: ['high-selling'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/JkUlon3kf8Q',
+    videoUrl: 'https://www.youtube.com/embed/6zBOime8YfM',
     secondaryVideoUrl: '',
     description: [
       'Programs are tailored to role, seniority, and industry context.',
@@ -223,7 +247,7 @@ export const services = [
     ],
     tags: ['high-demand'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: 'https://www.youtube.com/embed/4A1EuCt9ScE',
+    videoUrl: 'https://www.youtube.com/embed/blKWlqjRrrA',
     secondaryVideoUrl: '',
     description: [
       'We map role requirements and turnaround expectations upfront.',
@@ -377,18 +401,26 @@ export const services = [
   {
     id: 'physical-verification-stock-fixed-asset',
     title: 'Physical Verification - Stock & Fixed Asset',
-    summary: 'On-ground verification for inventory and fixed assets.',
-    bullets: [],
+    summary: 'Strengthen asset control, ensure compliance, and protect financial accuracy.',
+    bullets: [
+      'Fixed Asset Physical Verification',
+      'Asset Tagging & Identification',
+      'FAR Updation & Reconciliation',
+      'Componentization (IFRS / Ind AS / IAS 16 Compliance)',
+      'Stock & Inventory Verification',
+      'Condition Assessment & Asset Health Review',
+      'Regulatory & Compliance Review'
+    ],
     tags: ['specialized'],
     country: ['india', 'saudi-arabia', 'other'],
-    videoUrl: '',
+    videoUrl: 'https://www.youtube.com/embed/j_MWhKRlEgc',
     secondaryVideoUrl: '',
     description: [
-      'We plan the verification approach based on inventory profile.',
-      'On-site teams reconcile counts to system records.',
-      'We test controls over receiving, storage, and issuance.',
-      'Exceptions are documented with root-cause analysis.',
-      'Final reports support audit and insurance requirements.'
+      'Accurate asset records support statutory compliance and operational control.',
+      'Verification strengthens governance, reduces fraud exposure, and protects value on the ground.',
+      'Our approach is structured, technology-enabled, and audit-ready.',
+      'We reconcile findings with records to improve financial accuracy.',
+      'Outputs support boards, auditors, and regulators with clarity.'
     ],
     manpowerDescription:
       'We deploy field verification teams to execute counts, reconcile variances, and deliver audit-ready documentation.'

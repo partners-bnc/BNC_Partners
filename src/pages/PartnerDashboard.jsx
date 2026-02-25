@@ -183,11 +183,19 @@ const PartnerDashboard = () => {
       };
     });
     const term = searchTerm.trim().toLowerCase();
-    if (!term) return services;
-    return services.filter((service) => {
+    const filtered = !term
+      ? services
+      : services.filter((service) => {
       if (service.title.toLowerCase().includes(term)) return true;
       if (service.id.toLowerCase().includes(term)) return true;
       return (service.bullets || []).some((item) => item.toLowerCase().includes(term));
+    });
+
+    return [...filtered].sort((a, b) => {
+      const aHasVideo = Boolean(a.videoUrl);
+      const bHasVideo = Boolean(b.videoUrl);
+      if (aHasVideo === bHasVideo) return 0;
+      return bHasVideo ? 1 : -1;
     });
   }, [embeddedCountryKey, searchTerm, t, i18n.language]);
 
@@ -257,57 +265,10 @@ const PartnerDashboard = () => {
     <>
       <Header />
       <div className="min-h-screen bg-[#f7f3ee]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
           {/* Top Structure */}
           <div className="rounded-3xl bg-[#f7f3ee] px-6 py-10 sm:px-10">
-            <div className="text-center">
-              <p className="font-geist text-sm uppercase tracking-[0.28em] text-slate-500">
-                {t('partnerDashboard.title')}
-              </p>
-              <h2 className="font-poppins text-3xl sm:text-4xl font-semibold text-slate-900 mt-3">
-                {t('partnerDashboard.welcomeBack', { name: partnerData?.firstName || '' })}
-              </h2>
-              <p className="font-geist text-slate-500 mt-3">
-                {t('partnerDashboard.subtitle')}
-              </p>
-            </div>
-
-            <div className="mt-8 flex justify-center">
-              <div className="flex w-full max-w-2xl items-center">
-                <div className="flex flex-1 items-center rounded-full bg-white px-4 py-2.5 shadow-sm ring-1 ring-slate-200">
-                  <input
-                    type="text"
-                    placeholder={t('partnerDashboard.searchPlaceholder')}
-                    value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                    className={`w-full bg-transparent text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none ${inputAlign}`}
-                  />
-                  <button
-                    type="button"
-                    className={`${searchButtonMargin} inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700`}
-                    aria-label={t('partnerDashboard.searchAria')}
-                  >
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="11" cy="11" r="7" />
-                      <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
-                    </svg>
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsRequirementModalOpen(true)}
-                  className={`${voiceButtonMargin} inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50`}
-                  aria-label="Open voice requirement"
-                >
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
-                    <FaMicrophone className="h-4 w-4" />
-                  </span>
-                  Voice Requirement
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-col gap-4 rounded-2xl bg-[#efede8] px-5 py-4 text-sm text-slate-600 sm:flex-row sm:items-center">
+            <div className="mt-0 flex flex-col gap-4 rounded-2xl bg-[#efede8] px-5 py-4 text-sm text-slate-600 sm:flex-row sm:items-center">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 text-amber-700">
                   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
@@ -353,92 +314,142 @@ const PartnerDashboard = () => {
                 </div>
               </div>
             </div>
-          </div>
 
+            {(partnerData?.aiProfileCompleted || agreementSigned) && (
+              <div className={`mt-2 flex items-center gap-3 text-xs text-slate-500 ${isRtl ? 'pr-10' : 'pl-10'}`}>
+                {partnerData?.aiProfileCompleted && (
+                  <div className="flex items-center gap-1">
+                    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                      <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3">
+                        <path d="M5 12l4 4L19 6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span>{t('partnerDashboard.badges.aiComplete')}</span>
+                  </div>
+                )}
+                {agreementSigned && (
+                  <div className="flex items-center gap-1">
+                    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                      <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3">
+                        <path d="M5 12l4 4L19 6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span>{t('partnerDashboard.badges.agreementComplete')}</span>
+                  </div>
+                )}
+              </div>
+            )}
 
-          {(partnerData?.aiProfileCompleted || agreementSigned) && (
-            <div className={`-mt-4 flex items-center gap-3 text-xs text-slate-500 ${isRtl ? 'pr-10' : 'pl-10'}`}>
-              {partnerData?.aiProfileCompleted && (
-                <div className="flex items-center gap-1">
-                  <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                    <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3">
-                      <path d="M5 12l4 4L19 6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <span>{t('partnerDashboard.badges.aiComplete')}</span>
-                </div>
-              )}
-              {agreementSigned && (
-                <div className="flex items-center gap-1">
-                  <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                    <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3">
-                      <path d="M5 12l4 4L19 6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <span>{t('partnerDashboard.badges.agreementComplete')}</span>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className={`-mt-7 flex ${quickAlign}`}>
-            <div className="flex flex-wrap items-stretch gap-3">
-              {showAIProfile && (
+            <div className={`mt-2 flex ${quickAlign}`}>
+              <div className="flex flex-wrap items-stretch gap-3">
+                {showAIProfile && (
+                  <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
+                    <div className={`flex items-center gap-2 ${rowDirection}`}>
+                      <FaUser className="h-3.5 w-3.5 text-[#2C5AA0]" />
+                      <div className="flex-1">
+                        <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
+                          {t('partnerDashboard.aiProfile.title')}
+                        </h3>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        if (!partnerData?.aiProfileCompleted) {
+                          setIsAIModalOpen(true);
+                        }
+                      }}
+                      disabled={partnerData?.aiProfileCompleted}
+                      className={`mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors ${
+                        partnerData?.aiProfileCompleted
+                          ? 'bg-emerald-500 text-white cursor-not-allowed'
+                          : 'bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]'
+                      }`}
+                    >
+                      {partnerData?.aiProfileCompleted ? t('partnerDashboard.aiProfile.done') : t('partnerDashboard.aiProfile.start')}
+                    </button>
+                  </div>
+                )}
                 <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
                   <div className={`flex items-center gap-2 ${rowDirection}`}>
-                    <FaUser className="h-3.5 w-3.5 text-[#2C5AA0]" />
-                    <div className="flex-1">
-                      <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
-                        {t('partnerDashboard.aiProfile.title')}
-                      </h3>
-                    </div>
+                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-slate-700" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M7 4h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                      <path d="M14 4v4h4" />
+                      <path d="M8 12h8" />
+                      <path d="M8 16h6" />
+                    </svg>
+                    <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
+                      {t('partnerDashboard.agreement.title')}
+                    </h3>
                   </div>
                   <button
+                    type="button"
                     onClick={() => {
                       if (!partnerData?.aiProfileCompleted) {
-                        setIsAIModalOpen(true);
+                        alert(t('partnerDashboard.agreement.alertCompleteProfile'));
+                        return;
                       }
+                      setIsAgreementOpen(true);
                     }}
-                    disabled={partnerData?.aiProfileCompleted}
                     className={`mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors ${
-                      partnerData?.aiProfileCompleted
-                        ? 'bg-emerald-500 text-white cursor-not-allowed'
-                        : 'bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]'
+                      agreementSigned
+                        ? 'bg-emerald-500 text-white'
+                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                     }`}
                   >
-                    {partnerData?.aiProfileCompleted ? t('partnerDashboard.aiProfile.done') : t('partnerDashboard.aiProfile.start')}
+                    {agreementSigned ? t('partnerDashboard.agreement.signed') : t('partnerDashboard.agreement.sign')}
                   </button>
                 </div>
-              )}
-              <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
-                <div className={`flex items-center gap-2 ${rowDirection}`}>
-                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-slate-700" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M7 4h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
-                    <path d="M14 4v4h4" />
-                    <path d="M8 12h8" />
-                    <path d="M8 16h6" />
-                  </svg>
-                  <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
-                    {t('partnerDashboard.agreement.title')}
-                  </h3>
+              </div>
+            </div>
+
+            <div className="mt-6 text-center">
+              <p className="font-geist text-sm uppercase tracking-[0.28em] text-slate-500">
+                {t('partnerDashboard.title')}
+              </p>
+              <h2 className="font-poppins text-3xl sm:text-4xl font-semibold text-slate-900 mt-3">
+                {t('partnerDashboard.welcomeBack', { name: partnerData?.firstName || '' })}
+              </h2>
+              <p className="font-geist text-slate-500 mt-3">
+                Grow your revenue strengthen , client trust.
+              </p>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <div className="flex w-full max-w-3xl items-center gap-3">
+                <div className="flex-[6]">
+                  <button
+                    type="button"
+                    onClick={() => setIsRequirementModalOpen(true)}
+                    className="w-full inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
+                    aria-label="Open voice requirement"
+                  >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                      <FaMicrophone className="h-4 w-4" />
+                    </span>
+                    Record and Send Voice Requirement
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (!partnerData?.aiProfileCompleted) {
-                      alert(t('partnerDashboard.agreement.alertCompleteProfile'));
-                      return;
-                    }
-                    setIsAgreementOpen(true);
-                  }}
-                  className={`mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors ${
-                    agreementSigned
-                      ? 'bg-emerald-500 text-white'
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                  }`}
-                >
-                  {agreementSigned ? t('partnerDashboard.agreement.signed') : t('partnerDashboard.agreement.sign')}
-                </button>
+                <div className="flex-[4]">
+                  <div className="flex items-center rounded-full bg-white px-4 py-2.5 shadow-sm ring-1 ring-slate-200 w-full">
+                    <input
+                      type="text"
+                      placeholder={t('partnerDashboard.searchPlaceholder')}
+                      value={searchTerm}
+                      onChange={(event) => setSearchTerm(event.target.value)}
+                      className={`w-full bg-transparent text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none ${inputAlign}`}
+                    />
+                    <button
+                      type="button"
+                      className={`${searchButtonMargin} inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700`}
+                      aria-label={t('partnerDashboard.searchAria')}
+                    >
+                      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
