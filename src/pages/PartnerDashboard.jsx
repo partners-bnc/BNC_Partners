@@ -168,6 +168,8 @@ const PartnerDashboard = () => {
 
   const aiProfileTokens = t('partnerDashboard.aiProfileSearchTokens', { returnObjects: true });
   const showAIProfile = matchesSearch(aiProfileTokens.join(' '));
+  const referralTokens = t('partnerDashboard.referralSearchTokens', { returnObjects: true });
+  const showReferral = matchesSearch(referralTokens.join(' '));
 
   const embeddedCountryKey = selectedCountry === 'global' ? 'other' : selectedCountry;
   const embeddedServices = useMemo(() => {
@@ -369,6 +371,25 @@ const PartnerDashboard = () => {
                       }`}
                     >
                       {partnerData?.aiProfileCompleted ? t('partnerDashboard.aiProfile.done') : t('partnerDashboard.aiProfile.start')}
+                    </button>
+                  </div>
+                )}
+                {showReferral && (
+                  <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
+                    <div className={`flex items-center gap-2 ${rowDirection}`}>
+                      <FaHeadset className="h-3.5 w-3.5 text-[#2C5AA0]" />
+                      <div className="flex-1">
+                        <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
+                          {t('partnerDashboard.referral.title')}
+                        </h3>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setIsReferralModalOpen(true)}
+                      className="mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors bg-linear-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]"
+                    >
+                      {t('partnerDashboard.referral.start')}
                     </button>
                   </div>
                 )}

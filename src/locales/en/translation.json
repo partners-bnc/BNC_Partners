@@ -1,7 +1,7 @@
 {
   "language": {
     "english": "English",
-    "arabic": "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©"
+    "arabic": "العربية"
   },
   "header": {
     "home": "Home",
@@ -98,7 +98,7 @@
     "talkToExpert": "Talk to Expert"
   },
   "footer": {
-    "copyright": "Copyrights Â© 2026 BnC Global Pvt. Ltd."
+    "copyright": "Copyrights © 2026 BnC Global Pvt. Ltd."
   },
   "bncServices": {
     "title": "BnC Services",
@@ -1784,13 +1784,13 @@
     "voice": "Voice",
     "typing": "Typing",
     "toggleRecording": "Toggle voice recording",
-    "listening": "Listeningâ€¦ speak your requirement",
+    "listening": "Listening… speak your requirement",
     "tapToStart": "Tap to start recording",
     "voiceHelper": "Voice is the primary option. We will convert speech to text.",
     "liveTranscript": "Live transcript",
-    "transcriptPlaceholder": "Your requirement will appear hereâ€¦",
+    "transcriptPlaceholder": "Your requirement will appear here…",
     "typeLabel": "Type your requirement",
-    "typePlaceholder": "Share roles, counts, duration, timeline, locationâ€¦",
+    "typePlaceholder": "Share roles, counts, duration, timeline, location…",
     "tip": "Tip: Include role, location, duration, and timeline.",
     "clear": "Clear",
     "send": "Send",
