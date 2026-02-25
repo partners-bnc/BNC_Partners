@@ -728,7 +728,9 @@ const ServiceDetail = () => {
     setIsRequirementModalOpen(true);
   };
 
-  const handleRequirementSend = async (text) => {
+  const handleRequirementSend = async (payload) => {
+    const requirementText = typeof payload === 'string' ? payload : payload?.text || '';
+    const audioFile = typeof payload === 'string' ? null : payload?.audioFile || null;
     let partnerId = null;
     let partnerEmail = '';
     try {
@@ -744,7 +746,8 @@ const ServiceDetail = () => {
 
     try {
       await submitVoiceRequirement({
-        requirement: text,
+        requirement: requirementText,
+        audioFile,
         partnerId,
         partnerEmail,
         recipientEmail: 'rohanbncglobal@gmail.com',

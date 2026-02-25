@@ -175,7 +175,9 @@ const StartChattingSection = ({ embedded = false }) => {
     sendMessage(message);
   };
 
-  const handleRequirementSend = async (text) => {
+  const handleRequirementSend = async (payload) => {
+    const requirementText = typeof payload === 'string' ? payload : payload?.text || '';
+    const audioFile = typeof payload === 'string' ? null : payload?.audioFile || null;
     let partnerId = null;
     let partnerEmail = '';
     try {
@@ -191,13 +193,14 @@ const StartChattingSection = ({ embedded = false }) => {
 
     try {
       await submitVoiceRequirement({
-        requirement: text,
+        requirement: requirementText,
+        audioFile,
         partnerId,
         partnerEmail,
         recipientEmail: 'rohanbncglobal@gmail.com',
         source: 'start-chatting'
       });
-      sendMessage(text);
+      sendMessage(requirementText);
     } catch (error) {
       if (error instanceof Error && error.message === 'AUTH_REQUIRED') {
         navigate('/login');

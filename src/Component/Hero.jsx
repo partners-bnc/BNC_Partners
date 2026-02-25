@@ -7,8 +7,8 @@ import { WorldMap } from '../components/ui/world-map';
 const Hero = () => {
   const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [mapKey, setMapKey] = useState(0);
   const location = useLocation();
+  const heroAnimationVideoSrc = import.meta.env.VITE_HERO_ANIMATION_VIDEO_SRC || '';
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
@@ -54,10 +54,6 @@ const Hero = () => {
     },
     {
       start: { lat: 17.6139, lng: 77.209, label: 'New Delhi' },
-      end: { lat: 10.7136, lng: 42.6753, label: 'KSA' },
-    },
-    {
-      start: { lat: 17.6139, lng: 77.209, label: 'New Delhi' },
       end: { lat: 7.2048, lng: 55.2708, label: 'UAE' },
     },
     {
@@ -73,22 +69,6 @@ const Hero = () => {
       end: { lat: -5.8797, lng: 121.774, label: 'PHL' },
     },
   ];
-
-  useEffect(() => {
-    const drawDuration = 1.2;
-    const stagger = 0.5;
-    const loopPause = 1.8;
-    const totalCycleMs = Math.max(
-      1,
-      (mapDots.length - 1) * stagger + drawDuration + loopPause
-    ) * 1000;
-
-    const interval = setInterval(() => {
-      setMapKey((prev) => prev + 1);
-    }, totalCycleMs);
-
-    return () => clearInterval(interval);
-  }, [mapDots.length]);
 
   return (
     <>
@@ -213,13 +193,26 @@ const Hero = () => {
 
             <div className={`relative flex justify-center ${mapWrapAlign} z-10`}>
               <div className={`relative w-full max-w-[1500px] -mt-8 lg:-mt-68 ${mapShift} lg:scale-[1.55] xl:scale-[1.7] 2xl:scale-[1.85] ${mapOrigin}`}>
-                <WorldMap
-                  key={mapKey}
-                  lineColor="#2C5AA0"
-                  dots={mapDots}
-                  drawDuration={1.2}
-                  stagger={0.5}
-                />
+                {heroAnimationVideoSrc ? (
+                  <video
+                    src={heroAnimationVideoSrc}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto rounded-2xl object-contain"
+                    aria-label="Global network animation"
+                  />
+                ) : (
+                  <WorldMap
+                    lineColor="#2C5AA0"
+                    dots={mapDots}
+                    drawDuration={0.65}
+                    handoffPause={0.10}
+                    loopPause={0.9}
+                  />
+                )}
               </div>
             </div>
           </div>

@@ -37,6 +37,46 @@ import { useTranslation } from 'react-i18next';
 import './AIProfileModal.css';
 import { submitAIProfile } from '../lib/supabaseData';
 
+const createEmptyForm = () => ({
+  partnerType: '',
+  services: [],
+  otherService: '',
+  industries: [],
+  mainIndustries: [],
+  experienceIndustries: [],
+  experienceDetails: {},
+  bio: ''
+});
+
+const clampStep = (step, maxStep) => {
+  const numericStep = Number(step);
+  if (!Number.isFinite(numericStep)) return 1;
+  if (numericStep < 1) return 1;
+  if (numericStep > maxStep) return maxStep;
+  return Math.trunc(numericStep);
+};
+
+const normalizeDraft = (rawDraft) => {
+  if (!rawDraft || typeof rawDraft !== 'object') return null;
+  const base = createEmptyForm();
+  const details = rawDraft.formData?.experienceDetails;
+
+  return {
+    currentStep: rawDraft.currentStep,
+    formData: {
+      ...base,
+      partnerType: typeof rawDraft.formData?.partnerType === 'string' ? rawDraft.formData.partnerType : base.partnerType,
+      services: Array.isArray(rawDraft.formData?.services) ? rawDraft.formData.services : base.services,
+      otherService: typeof rawDraft.formData?.otherService === 'string' ? rawDraft.formData.otherService : base.otherService,
+      industries: Array.isArray(rawDraft.formData?.industries) ? rawDraft.formData.industries : base.industries,
+      mainIndustries: Array.isArray(rawDraft.formData?.mainIndustries) ? rawDraft.formData.mainIndustries : base.mainIndustries,
+      experienceIndustries: Array.isArray(rawDraft.formData?.experienceIndustries) ? rawDraft.formData.experienceIndustries : base.experienceIndustries,
+      experienceDetails: details && typeof details === 'object' ? details : base.experienceDetails,
+      bio: typeof rawDraft.formData?.bio === 'string' ? rawDraft.formData.bio : base.bio
+    }
+  };
+};
+
 const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
@@ -51,39 +91,67 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [expandedIndustries, setExpandedIndustries] = useState({});
   const otherServiceRef = useRef(null);
-  const [formData, setFormData] = useState({
-    partnerType: '',
-    services: [],
-    otherService: '',
-    industries: [],
-    mainIndustries: [],
-    experienceIndustries: [],
-    experienceDetails: {},
-    bio: ''
-  });
-  const emptyForm = {
-    partnerType: '',
-    services: [],
-    otherService: '',
-    industries: [],
-    mainIndustries: [],
-    experienceIndustries: [],
-    experienceDetails: {},
-    bio: ''
-  };
+  const [formData, setFormData] = useState(createEmptyForm());
+  const draftKey = partnerData?.id || partnerData?.email ? `aiProfileDraft:${partnerData?.id || partnerData?.email}` : null;
 
   const resetForm = () => {
     setCurrentStep(1);
     setExpandedIndustries({});
-    setFormData(emptyForm);
+    setFormData(createEmptyForm());
   };
 
   useEffect(() => {
-    if (isOpen) {
-      setIsSubmitted(false);
+    if (!isOpen) return;
+    setIsSubmitted(false);
+
+    if (partnerData?.aiProfileCompleted) {
+      resetForm();
+      if (draftKey) {
+        localStorage.removeItem(draftKey);
+      }
+      return;
+    }
+
+    if (!draftKey) {
+      resetForm();
+      return;
+    }
+
+    try {
+      const savedDraft = localStorage.getItem(draftKey);
+      if (!savedDraft) {
+        resetForm();
+        return;
+      }
+      const parsedDraft = normalizeDraft(JSON.parse(savedDraft));
+      if (!parsedDraft) {
+        resetForm();
+        return;
+      }
+
+      const safeStep = clampStep(parsedDraft.currentStep, 5);
+      const mainIndustries = parsedDraft.formData.mainIndustries;
+      const expanded = Object.fromEntries(mainIndustries.map((industry) => [industry, true]));
+
+      setCurrentStep(safeStep);
+      setExpandedIndustries(expanded);
+      setFormData(parsedDraft.formData);
+    } catch (error) {
+      console.error('Unable to restore AI profile draft:', error);
       resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, draftKey, partnerData?.aiProfileCompleted]);
+
+  useEffect(() => {
+    if (!isOpen || isSubmitted || !draftKey) return;
+
+    const draftPayload = {
+      currentStep,
+      formData,
+      updatedAt: Date.now()
+    };
+    localStorage.setItem(draftKey, JSON.stringify(draftPayload));
+  }, [isOpen, isSubmitted, draftKey, currentStep, formData]);
 
   useEffect(() => {
     if (!formData.services.includes('other')) return;
@@ -361,6 +429,9 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
       });
 
       console.log('AI Profile submitted successfully');
+      if (draftKey) {
+        localStorage.removeItem(draftKey);
+      }
       setIsSubmitted(true);
       onSubmitted?.();
       setTimeout(() => {

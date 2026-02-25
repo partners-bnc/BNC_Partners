@@ -1,24 +1,26 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
 
-export function WorldMap({ dots = [], lineColor = "#0ea5e9" }) {
-  const svgRef = useRef(null);
-  const containerRef = useRef(null);
-  const [isInView, setIsInView] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+const STATIC_SVG_MAP = new DottedMap({ height: 100, grid: "diagonal" }).getSVG({
+  radius: 0.22,
+  color: "#00000040",
+  shape: "circle",
+  backgroundColor: "transparent",
+});
 
-  const svgMap = useMemo(() => {
-    const map = new DottedMap({ height: 100, grid: "diagonal" });
-    return map.getSVG({
-      radius: 0.22,
-      color: "#00000040",
-      shape: "circle",
-      backgroundColor: "transparent",
-    });
-  }, []);
+export function WorldMap({
+  dots = [],
+  lineColor = "#0ea5e9",
+  drawDuration = 2.1,
+  handoffPause = 0.45,
+  loopPause = 1.6,
+}) {
+  const svgRef = useRef(null);
+  const [activeArcIndex, setActiveArcIndex] = useState(0);
+  const [cycleToken, setCycleToken] = useState(0);
 
   const projectPoint = (lat, lng) => {
     const x = (lng + 180) * (800 / 360);
@@ -33,42 +35,36 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }) {
   };
 
   useEffect(() => {
-    if (!containerRef.current) return undefined;
+    if (dots.length === 0) return undefined;
+    let timeoutId;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            setHasAnimated(true);
-          } else {
-            setIsInView(false);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.2 }
-    );
+    if (activeArcIndex < dots.length - 1) {
+      timeoutId = setTimeout(() => {
+        setActiveArcIndex((prev) => prev + 1);
+      }, Math.max(300, Math.round((drawDuration + handoffPause) * 1000)));
+    } else {
+      timeoutId = setTimeout(() => {
+        setActiveArcIndex(0);
+        setCycleToken((prev) => prev + 1);
+      }, Math.max(500, Math.round((drawDuration + loopPause) * 1000)));
+    }
 
-    observer.observe(containerRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  const shouldAnimate = isInView || hasAnimated;
+    return () => clearTimeout(timeoutId);
+  }, [activeArcIndex, dots.length, drawDuration, handoffPause, loopPause]);
 
   return (
     <div
-      ref={containerRef}
       className="w-full aspect-[2/1] bg-transparent rounded-2xl relative font-sans overflow-hidden"
     >
       <img
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(STATIC_SVG_MAP)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
         alt="world map"
         height={495}
         width={1056}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
         draggable={false}
       />
       <svg
@@ -77,28 +73,35 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }) {
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
         {dots.map((dot, i) => {
+          const isActive = i === activeArcIndex;
+          const isCompleted = i < activeArcIndex;
           const startPoint = projectPoint(dot.start.lat, dot.start.lng);
           const endPoint = projectPoint(dot.end.lat, dot.end.lng);
           return (
             <g key={`path-group-${i}`}>
-              <motion.path
-                d={createCurvedPath(startPoint, endPoint)}
-                fill="none"
-                stroke="url(#path-gradient)"
-                strokeWidth="1"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: shouldAnimate ? 1 : 0,
-                }}
-                transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
-                  ease: "easeOut",
-                }}
-                key={`start-upper-${i}`}
-              ></motion.path>
+              {isCompleted ? (
+                <path
+                  d={createCurvedPath(startPoint, endPoint)}
+                  fill="none"
+                  stroke="url(#path-gradient)"
+                  strokeWidth="1"
+                  opacity="1"
+                />
+              ) : (
+                <motion.path
+                  d={createCurvedPath(startPoint, endPoint)}
+                  fill="none"
+                  stroke="url(#path-gradient)"
+                  strokeWidth="1"
+                  initial={{ pathLength: 0, opacity: isActive ? 1 : 0.18 }}
+                  animate={isActive ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0.18 }}
+                  transition={{
+                    duration: isActive ? drawDuration : 0.01,
+                    ease: "easeInOut",
+                  }}
+                  key={`start-upper-${i}-${cycleToken}`}
+                />
+              )}
             </g>
           );
         })}
@@ -121,30 +124,19 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }) {
                 r="2"
                 fill={lineColor}
               />
-              <circle
+              <motion.circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
                 r="2"
                 fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
+                initial={{ r: 2, opacity: 0.16 }}
+                animate={i === activeArcIndex ? { r: [2, 6, 2], opacity: [0.16, 0.42, 0.16] } : { r: 2, opacity: i < activeArcIndex ? 0.26 : 0.16 }}
+                transition={{
+                  duration: i === activeArcIndex ? 0.7 : 0.01,
+                  ease: "easeOut",
+                }}
+                key={`start-dot-${i}-${cycleToken}`}
+              />
             </g>
             <g key={`end-${i}`}>
               <circle
@@ -153,30 +145,20 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }) {
                 r="2"
                 fill={lineColor}
               />
-              <circle
+              <motion.circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
                 r="2"
                 fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
+                initial={{ r: 2, opacity: 0.14 }}
+                animate={i === activeArcIndex ? { r: [2, 7.5, 2], opacity: [0.14, 0.45, 0.14] } : { r: 2, opacity: i < activeArcIndex ? 0.24 : 0.14 }}
+                transition={{
+                  duration: i === activeArcIndex ? 0.7 : 0.01,
+                  delay: i === activeArcIndex ? Math.max(0.2, drawDuration - 0.45) : 0,
+                  ease: "easeOut",
+                }}
+                key={`end-dot-${i}-${cycleToken}`}
+              />
             </g>
           </g>
         ))}

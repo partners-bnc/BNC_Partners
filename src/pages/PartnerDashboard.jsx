@@ -119,10 +119,13 @@ const PartnerDashboard = () => {
     navigate('/login');
   };
 
-  const handleVoiceRequirementSubmit = async (text) => {
+  const handleVoiceRequirementSubmit = async (payload) => {
+    const requirementText = typeof payload === 'string' ? payload : payload?.text || '';
+    const audioFile = typeof payload === 'string' ? null : payload?.audioFile || null;
     try {
       await submitVoiceRequirement({
-        requirement: text,
+        requirement: requirementText,
+        audioFile,
         partnerId: partnerData?.id || null,
         partnerEmail: partnerData?.email || '',
         recipientEmail: 'rohanbncglobal@gmail.com',

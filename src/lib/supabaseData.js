@@ -1,6 +1,7 @@
 import { supabase } from './supabaseClient';
 
 const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
+const VOICE_REQUIREMENT_AUDIO_BUCKET = 'voice-requirement-audio';
 const withTimeout = (promise, timeoutMs, timeoutMessage) => {
   let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
@@ -336,6 +337,7 @@ export const submitEnquiry = async ({ partnerId, country, countryLabel, service,
 
 export const submitVoiceRequirement = async ({
   requirement,
+  audioFile = null,
   partnerId = null,
   partnerEmail = '',
   recipientEmail = 'rohanbncglobal@gmail.com',
@@ -361,8 +363,52 @@ export const submitVoiceRequirement = async ({
     }
   }
 
+  const {
+    data: { user: authUser },
+    error: authError
+  } = await supabase.auth.getUser();
+
+  if (authError) {
+    throw authError;
+  }
+
+  if (!authUser) {
+    throw new Error('AUTH_REQUIRED');
+  }
+
+  resolvedPartnerId = resolvedPartnerId || authUser.id || null;
+  resolvedPartnerEmail = normalizeEmail(authUser.email) || resolvedPartnerEmail;
+
   if (!resolvedPartnerEmail) {
     throw new Error('AUTH_REQUIRED');
+  }
+
+  let audioPath = null;
+  let audioMimeType = null;
+  let audioSizeBytes = null;
+
+  if (audioFile && typeof audioFile === 'object' && typeof audioFile.size === 'number' && audioFile.size > 0) {
+    const mimeType = String(audioFile.type || 'audio/webm').trim() || 'audio/webm';
+    const name = String(audioFile.name || '').trim();
+    const extension = name.includes('.') ? name.split('.').pop().toLowerCase() : mimeType.split('/').pop() || 'webm';
+    const safeExtension = extension.replace(/[^a-z0-9]/gi, '') || 'webm';
+    const safePartnerFolder = (resolvedPartnerId || resolvedPartnerEmail || 'unknown').replace(/[^a-z0-9-_@.]/gi, '_');
+    const generatedPath = `${safePartnerFolder}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${safeExtension}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from(VOICE_REQUIREMENT_AUDIO_BUCKET)
+      .upload(generatedPath, audioFile, {
+        contentType: mimeType,
+        upsert: false
+      });
+
+    if (uploadError) {
+      throw new Error(`Failed to upload voice recording: ${uploadError.message || 'Unknown upload error'}`);
+    }
+
+    audioPath = generatedPath;
+    audioMimeType = mimeType;
+    audioSizeBytes = Number(audioFile.size) || null;
   }
 
   let error = null;
@@ -373,7 +419,11 @@ export const submitVoiceRequirement = async ({
         partner_email: resolvedPartnerEmail,
         requirement_text: trimmedRequirement,
         recipient_email: normalizeEmail(recipientEmail) || 'rohanbncglobal@gmail.com',
-        source
+        source,
+        audio_bucket: audioPath ? VOICE_REQUIREMENT_AUDIO_BUCKET : null,
+        audio_path: audioPath,
+        audio_mime_type: audioMimeType,
+        audio_size_bytes: audioSizeBytes
       }),
       12000,
       'NETWORK_TIMEOUT'
@@ -409,13 +459,17 @@ export const submitVoiceRequirement = async ({
     throw error;
   }
 
-  const { error: emailError } = await supabase.functions.invoke('notify-voice-requirement-brevo-v3', {
+  const { error: emailError } = await supabase.functions.invoke('notify-voice-requirement-brevo-v9', {
     body: {
       to: normalizeEmail(recipientEmail) || 'rohanbncglobal@gmail.com',
       partnerEmail: resolvedPartnerEmail,
       requirementText: trimmedRequirement,
       source,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      audioBucket: audioPath ? VOICE_REQUIREMENT_AUDIO_BUCKET : null,
+      audioPath,
+      audioMimeType,
+      audioFileName: audioPath ? audioPath.split('/').pop() : null
     }
   });
 
@@ -425,7 +479,9 @@ export const submitVoiceRequirement = async ({
       const context = emailError?.context;
       if (context && typeof context.json === 'function') {
         const payload = await context.json();
-        details = payload?.error || payload?.details || '';
+        const rawError = payload?.error ? String(payload.error) : '';
+        const rawDetails = payload?.details ? String(payload.details) : '';
+        details = [rawError, rawDetails].filter(Boolean).join(' - ');
       }
     } catch (parseError) {
       details = '';
