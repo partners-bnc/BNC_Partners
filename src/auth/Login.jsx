@@ -110,7 +110,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-6">
+    <div className="min-h-screen  relative overflow-hidden flex items-center justify-center px-4 py-6">
+      <div
+        className="absolute inset-0 -z-10 bg-center bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: "url('/favicon/WhatsApp%20Image%202026-02-25%20at%204.06.00%20PM.jpeg')",
+          filter: 'blur(2px)'
+        }}
+      />
       <div className="w-full max-w-4xl">
         <div className={`flex flex-col md:flex-row ${isRtl ? 'md:flex-row-reverse' : ''} bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/60`}>
           {/* Left Brand Panel */}
@@ -174,11 +181,8 @@ const Login = () => {
                   <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-3">
                     <a
                       href="mailto:info@bncglobal.in"
-                      className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
+                      className="group flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 pl-0 pr-4 py-3 transition hover:bg-white/15 hover:border-white/40"
                     >
-                      <div>
-                        <p className="text-sm font-semibold text-white">patner@bncglobal.in</p>
-                      </div>
                       <div className="h-10 w-10 rounded-xl flex items-center justify-center transition">
                         <svg
                           className="h-5 w-5 text-white"
@@ -189,16 +193,16 @@ const Login = () => {
                           <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4.236 8 4.8 8-4.8V6l-8 4.8L4 6v2.236z" />
                         </svg>
                       </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white">patner@bncglobal.in</p>
+                      </div>
                     </a>
                     <a
                       href="https://wa.me/919958711796"
                       target="_blank"
                       rel="noreferrer"
-                      className={`group flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-3 transition hover:bg-white/15 hover:border-white/40 ${rowDirection}`}
+                      className="group flex items-center gap-1 rounded-2xl border border-white/20 bg-white/10 pl-0 pr-4 py-3 transition hover:bg-white/15 hover:border-white/40"
                     >
-                      <div>
-                        <p className="text-sm font-semibold text-white whitespace-nowrap">+91 99587 11796</p>
-                      </div>
                       <div className={`h-10 w-10 rounded-xl flex items-center justify-center transition ${iconMargin}`}>
                         <svg
                           className="h-5 w-5 text-white"
@@ -208,6 +212,9 @@ const Login = () => {
                         >
                           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.149-.67.15-.198.297-.768.967-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.67-1.611-.916-2.206-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.414-.074-.124-.272-.198-.57-.347M12.057 2.347c-5.523 0-10.017 4.494-10.017 10.017 0 1.77.463 3.445 1.355 4.94L2 22l4.861-1.277c1.413.771 3.007 1.195 4.696 1.195h.001c5.523 0 10.017-4.494 10.017-10.017S17.58 2.347 12.057 2.347m0 18.138c-1.52 0-2.985-.404-4.263-1.168l-.305-.182-2.883.758.769-2.81-.199-.32a8.27 8.27 0 0 1-1.259-4.404c0-4.561 3.711-8.273 8.273-8.273 4.561 0 8.273 3.712 8.273 8.273 0 4.561-3.712 8.273-8.273 8.273" />
                         </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white whitespace-nowrap">+91 99587 11796</p>
                       </div>
                     </a>
                   </div>
@@ -237,7 +244,7 @@ const Login = () => {
             <div className="mb-5 rounded-2xl border border-slate-200 bg-white/90 shadow-sm">
               {isAdminOnly ? (
                 <div
-                  className={`flex items-center justify-center gap-3 py-3 px-4 rounded-2xl font-semibold text-[#1e3f73] ${isRtl ? 'flex-row-reverse' : ''}`}
+                  className={`flex items-center justify-center gap-3 py-3 px-4 rounded-2xl font-semibold text-[#1e3f73] text-base ${isRtl ? 'flex-row-reverse' : ''}`}
                 >
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
                     <FaShieldAlt />
@@ -337,6 +344,18 @@ const Login = () => {
                 {t('login.backToRegistration')}
               </Link>
             </div>
+            {activeTab === 'partner' && Array.isArray(trustItems) && (
+              <div className="mt-3 grid gap-2 text-xs text-slate-500">
+                {trustItems.map((item) => (
+                  <div key={item} className={`flex items-center gap-2 ${rowDirection}`}>
+                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                      <FaLock className="h-3 w-3" />
+                    </span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

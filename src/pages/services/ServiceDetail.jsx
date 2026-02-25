@@ -2074,6 +2074,13 @@ const ServiceDetail = () => {
                           <p className="font-geist text-gray-600">
                             {t('serviceDetail.voiceRequirement.description')}
                           </p>
+                          {t('serviceDetail.voiceRequirement.points', { returnObjects: true })
+                            ?.map?.((point) => (
+                              <div key={point} className={`mt-3 flex items-start gap-2 text-sm text-slate-600 ${rowDirection}`}>
+                                <span className="text-emerald-600">✔</span>
+                                <span>{point}</span>
+                              </div>
+                            ))}
                           <div className="mt-4">
                             <button
                               type="button"
@@ -2124,9 +2131,28 @@ const ServiceDetail = () => {
                               <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-geist">
                                 {t('serviceDetail.subServiceMethodologyLabel')}
                               </p>
-                              <p className="mt-2 font-geist text-sm font-semibold text-slate-800">
-                                {activeSubServiceData.methodologyTitle}
-                              </p>
+                              {(() => {
+                                const rawTitle = activeSubServiceData.methodologyTitle || '';
+                                const parts = rawTitle
+                                  .split(/\s*\?\s*/g)
+                                  .map((part) => part.trim())
+                                  .filter(Boolean);
+                                if (parts.length === 0) return null;
+                                return (
+                                  <div className={`mt-2 flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-800 ${rowDirection}`}>
+                                    {parts.map((part, index) => (
+                                      <div key={part} className={`flex items-center gap-2 ${rowDirection}`}>
+                                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                                          {part}
+                                        </span>
+                                        {index < parts.length - 1 && (
+                                          <span className="text-slate-400">→</span>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
+                                );
+                              })()}
                               {activeSubServiceData.steps?.length > 0 && (
                                 <ul className="mt-3 space-y-2 text-gray-700 list-disc list-outside font-geist leading-relaxed pl-5">
                                   {activeSubServiceData.steps.map((step) => (

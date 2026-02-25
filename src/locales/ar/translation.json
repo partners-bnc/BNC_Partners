@@ -556,9 +556,14 @@
       "bncGlobalKsa": "BNC Global (KSA)"
     },
     "voiceRequirement": {
-      "title": "Ù…ØªØ·Ù„Ø¨Ø§Øª Ø¨Ø§Ù„ØµÙˆØª",
-      "description": "Ø³Ø¬Ù‘Ù„ Ù…ØªØ·Ù„Ø¨Ø§ØªÙƒ Ø¨Ø§Ù„ØµÙˆØª ÙˆØ£Ø±Ø³Ù„Ù‡Ø§ ÙÙˆØ±Ù‹Ø§.",
-      "button": "Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªØ³Ø¬ÙŠÙ„ Ø§Ù„ØµÙˆØªÙŠ"
+      "title": "Say It. Send It. Done.",
+      "description": "Record your requirement in your own words ? quick, seamless, and hassle-free.",
+      "button": "Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªØ³Ø¬ÙŠÙ„ Ø§Ù„ØµÙˆØªÙŠ",
+      "points": [
+        "Speak your requirement",
+        "AI processes instantly",
+        "Get expert assistance"
+      ]
     },
     "subServiceMethodologyLabel": "Ù…Ù†Ù‡Ø¬ÙŠØªÙ†Ø§",
     "subServiceCoreOfferingLabel": "Ø¹Ø±Ø¶Ù†Ø§ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ",
@@ -1929,7 +1934,7 @@
     },
     "exclusiveBadge": "Strategic Partner Access",
     "joinGrowthPartner": "Join as Growth Partner",
-    "revenueTagline": "Don?t just serve clients. Own the mandate.",
+    "revenueTagline": "Don't just serve clients. Own the mandate.",
     "trustIndicators": [
       "Secure Partner Portal",
       "NDA-Protected Engagements",

@@ -264,9 +264,14 @@
       "bncGlobalKsa": "BNC Global (KSA)"
     },
     "voiceRequirement": {
-      "title": "Voice Requirement Submission",
-      "description": "Record your business or service requirement using voice and submit it instantly. Our team will review your request and connect you with the most suitable financial solution.",
-      "button": "Start Voice Recording"
+      "title": "Say It. Send It. Done.",
+      "description": "Record your requirement in your own words  quick, seamless, and hassle-free.",
+      "button": "Start Voice Recording",
+      "points": [
+        "Speak your requirement",
+        "AI processes instantly",
+        "Get expert assistance"
+      ]
     },
     "subServiceMethodologyLabel": "Our Methodology",
     "subServiceCoreOfferingLabel": "Our Core Offering",
@@ -1848,7 +1853,7 @@
     },
     "exclusiveBadge": "Strategic Partner Access",
     "joinGrowthPartner": "Join as Growth Partner",
-    "revenueTagline": "Don?t just serve clients. Own the mandate.",
+    "revenueTagline": "Don't just serve clients. Own the mandate.",
     "trustIndicators": [
       "Secure Partner Portal",
       "NDA-Protected Engagements",

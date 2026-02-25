@@ -418,8 +418,11 @@ const PartnerDashboard = () => {
             </div>
 
             <div className="mt-6 flex justify-center">
-              <div className="flex w-full max-w-3xl items-center gap-3">
+              <div className="flex w-full max-w-3xl items-start gap-3">
                 <div className="flex-[6]">
+                  <p className={`mb-2 text-[9px] font-semibold uppercase tracking-[0.1em] text-slate-400 ${textAlign} whitespace-nowrap pl-4`}>
+                    Use voice recording to share your business requirement instantly.
+                  </p>
                   <button
                     type="button"
                     onClick={() => setIsRequirementModalOpen(true)}
@@ -429,10 +432,10 @@ const PartnerDashboard = () => {
                     <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
                       <FaMicrophone className="h-4 w-4" />
                     </span>
-                    Record and Send Voice Requirement
+                    Speak your requirement — we handle the rest
                   </button>
                 </div>
-                <div className="flex-[4]">
+                <div className="flex-[4] pt-4">
                   <div className="flex items-center rounded-full bg-white px-4 py-2.5 shadow-sm ring-1 ring-slate-200 w-full">
                     <input
                       type="text"
