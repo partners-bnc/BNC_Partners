@@ -1,569 +1,1104 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-// -- LEVEL DATA --
-const LEVELS = [
-  { id: 1, letter: "A", pct: 1.20, poolShare: 40,   color: "#2C5AA0", bg: "#E8F1FF", border: "#4E7FC2", tag: "L1", labelKey: "referralProgramPage.levels.l1.label", intentKey: "referralProgramPage.levels.l1.intent" },
-  { id: 2, letter: "B", pct: 0.70, poolShare: 23.3, color: "#1E40AF", bg: "#EEF2FF", border: "#5B7EE5", tag: "L2", labelKey: "referralProgramPage.levels.l2.label", intentKey: "referralProgramPage.levels.l2.intent" },
-  { id: 3, letter: "C", pct: 0.50, poolShare: 16.7, color: "#0F766E", bg: "#ECFEFF", border: "#5BD6D0", tag: "L3", labelKey: "referralProgramPage.levels.l3.label", intentKey: "referralProgramPage.levels.l3.intent" },
-  { id: 4, letter: "D", pct: 0.40, poolShare: 13.3, color: "#1F7A5A", bg: "#E6FFFA", border: "#81E6D9", tag: "L4", labelKey: "referralProgramPage.levels.l4.label", intentKey: "referralProgramPage.levels.l4.intent" },
-  { id: 5, letter: "E", pct: 0.20, poolShare: 6.7,  color: "#B45309", bg: "#FFFBEB", border: "#F6AD55", tag: "L5", labelKey: "referralProgramPage.levels.l5.label", intentKey: "referralProgramPage.levels.l5.intent" },
-];
+// ─────────────────────────────────────────────
+//  DESIGN TOKENS (BNC THEME)
+// ─────────────────────────────────────────────
+const G = {
+  gold: "#2C5AA0",
+  goldMid: "#4E7FC2",
+  goldLight: "#7FB0F3",
+  goldBg: "#F1F6FF",
+  goldTint: "#E8F1FF",
+  cream: "#F7F2ED",
+  creamDark: "#EFE7DD",
+  white: "#FFFFFF",
+  ink: "#1E293B",
+  inkMid: "#334155",
+  muted: "#64748B",
+  border: "#E2E8F0",
+  borderLight: "#EEF2F7",
+  green: "#1F7A5A",
+  greenBg: "#EAF7F2",
+  greenBorder: "#7AD4B4",
+  blue: "#2C5AA0",
+  blueBg: "#E8F1FF",
+  blueBorder: "#4E7FC2",
+  purple: "#5B6EE1",
+  purpleBg: "#EEF2FF",
+  purpleBorder: "#7B8CF0",
+};
 
-const BRAND = "#2C5AA0";
-const BRAND_LIGHT = "#4E7FC2";
-const BRAND_BG = "#E8F1FF";
-const INK = "#1E293B";
-const MUTED = "#64748B";
-const MUTED_LIGHT = "#94A3B8";
-const SURFACE = "#FFFFFF";
-const SURFACE_ALT = "#F7F2ED";
-const BORDER = "#E2E8F0";
-const ARABIC_FONT = "'Tajawal','Segoe UI','Noto Sans Arabic','Noto Kufi Arabic',sans-serif";
+const FONT_HEAD = "'Poppins', 'Sora', 'Segoe UI', sans-serif";
+const FONT_BODY = "'Geist', 'Poppins', 'Segoe UI', sans-serif";
+const FONT_EMOJI = "'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif";
 
-
-// -- HOOK: INTERSECTION OBSERVER --
-function useInView(threshold = 0.15) {
+// ─────────────────────────────────────────────
+//  HOOK: SCROLL INTO VIEW
+// ─────────────────────────────────────────────
+function useInView(threshold = 0.12) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
+      { threshold }
+    );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, [threshold]);
   return [ref, visible];
 }
 
-// -- DONUT CHART --
-function DonutChart() {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const bodyFont = isRtl ? ARABIC_FONT : "'Geist',sans-serif";
-  const [hovered, setHovered] = useState(null);
-  const cx = 100, cy = 100, R = 78, r = 46;
-  let angle = -Math.PI / 2;
-  const segments = LEVELS.map(l => {
-    const a = (l.poolShare / 100) * 2 * Math.PI;
-    const x1 = cx + R * Math.cos(angle), y1 = cy + R * Math.sin(angle);
-    const x2 = cx + R * Math.cos(angle + a), y2 = cy + R * Math.sin(angle + a);
-    const ix1 = cx + r * Math.cos(angle + a), iy1 = cy + r * Math.sin(angle + a);
-    const ix2 = cx + r * Math.cos(angle), iy2 = cy + r * Math.sin(angle);
-    const large = a > Math.PI ? 1 : 0;
-    const d = `M${x1} ${y1} A${R} ${R} 0 ${large} 1 ${x2} ${y2} L${ix1} ${iy1} A${r} ${r} 0 ${large} 0 ${ix2} ${iy2}Z`;
-    angle += a;
-    return { ...l, d };
-  });
-
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: "2rem", flexWrap: "wrap" }}>
-      <div style={{ position: "relative", flexShrink: 0 }}>
-        <svg width="200" height="200" viewBox="0 0 200 200">
-          <circle cx="100" cy="100" r="78" fill={SURFACE_ALT} />
-          {segments.map(s => (
-            <path key={s.id} d={s.d} fill={s.border}
-              opacity={hovered === s.id ? 1 : 0.78}
-              style={{ cursor: "pointer", transition: "opacity 0.2s, transform 0.2s", transformOrigin: "100px 100px",
-                transform: hovered === s.id ? "scale(1.04)" : "scale(1)" }}
-              onMouseEnter={() => setHovered(s.id)} onMouseLeave={() => setHovered(null)} />
-          ))}
-          <circle cx="100" cy="100" r="46" fill="white" />
-        </svg>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", textAlign: "center", pointerEvents: "none" }}>
-          <div style={{ fontFamily: headingFont, fontWeight: 800, fontSize: "1.5rem", color: BRAND, lineHeight: 1 }}>3%</div>
-          <div style={{ fontSize: "0.62rem", color: MUTED_LIGHT, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 2 }}>
-            {t("referralProgramPage.donut.totalPool")}
-          </div>
-        </div>
-      </div>
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.55rem", minWidth: 180 }}>
-        {LEVELS.map(l => (
-          <div key={l.id} onMouseEnter={() => setHovered(l.id)} onMouseLeave={() => setHovered(null)}
-            style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 12px", borderRadius: 8,
-              background: hovered === l.id ? l.bg : SURFACE, border: `1px solid ${hovered === l.id ? l.border : BORDER}`,
-              transition: "all 0.2s", cursor: "pointer" }}>
-            <div style={{ width: 10, height: 10, borderRadius: 3, background: l.border, flexShrink: 0 }} />
-            <div style={{ flex: 1, fontSize: "0.82rem", color: MUTED, fontFamily: bodyFont }}>
-              L{l.id} - {t(l.labelKey)}
-            </div>
-            <div style={{ fontFamily: headingFont, fontWeight: 700, fontSize: "0.85rem", color: l.color }}>{l.poolShare}%</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// -- BAR CHART --
-function BarChart() {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const [ref, visible] = useInView(0.2);
-  return (
-    <div ref={ref}>
-      <div style={{ fontFamily: headingFont, fontWeight: 600, fontSize: "0.85rem", color: MUTED_LIGHT, marginBottom: "1.5rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-        {t("referralProgramPage.barChart.title")}
-      </div>
-      {LEVELS.map((l, i) => (
-        <div key={l.id} style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
-          <div style={{ width: 28, fontFamily: headingFont, fontWeight: 700, fontSize: "0.8rem", color: l.color, textAlign: "right", flexShrink: 0 }}>{l.tag}</div>
-          <div style={{ flex: 1, height: 36, background: SURFACE_ALT, borderRadius: 6, overflow: "hidden", position: "relative" }}>
-            <div style={{
-              height: "100%", borderRadius: 6, display: "flex", alignItems: "center", paddingLeft: 12,
-              background: `linear-gradient(90deg, ${l.border}99, ${l.border}CC)`,
-              width: visible ? `${l.poolShare}%` : "0%",
-              transition: `width 1.2s cubic-bezier(0.23,1,0.32,1) ${i * 0.12}s`,
-              fontFamily: headingFont, fontWeight: 700, fontSize: "0.82rem", color: "#fff",
-              whiteSpace: "nowrap"
-            }}>{l.pct}%</div>
-          </div>
-          <div style={{ width: 38, fontSize: "0.78rem", color: MUTED_LIGHT, flexShrink: 0 }}>{l.poolShare}%</div>
-        </div>
-      ))}
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem", paddingTop: "1rem", borderTop: `1px solid ${BORDER}`, marginTop: "0.5rem" }}>
-        <div style={{ width: 38, fontFamily: headingFont, fontWeight: 700, fontSize: "0.8rem", color: BRAND, textAlign: "right" }}>
-          {t("referralProgramPage.barChart.sumLabel")}
-        </div>
-        <div style={{ background: `linear-gradient(135deg, ${BRAND}, #4E7FC2)`, color: "#fff", padding: "6px 18px", borderRadius: 6, fontFamily: headingFont, fontWeight: 800, fontSize: "0.9rem" }}>
-          {t("referralProgramPage.barChart.totalLabel")}
-        </div>
-        <div style={{ fontSize: "0.78rem", color: MUTED_LIGHT }}>
-          {t("referralProgramPage.barChart.capLabel")}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// -- CHAIN NODE --
-function ChainNode({ level, isLast }) {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const [hov, setHov] = useState(false);
-  return (
-    <div style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 100 }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}
-        onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
-        <div style={{
-          width: 64, height: 64, borderRadius: "50%",
-          border: `2px solid ${level.border}`,
-          background: hov ? level.bg : SURFACE,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontFamily: headingFont, fontWeight: 800, fontSize: "1.2rem",
-          color: level.color, zIndex: 1, position: "relative",
-          transform: hov ? "scale(1.12)" : "scale(1)",
-          transition: "all 0.25s",
-          boxShadow: hov ? `0 6px 24px ${level.border}44` : "0 2px 8px rgba(0,0,0,0.06)"
-        }}>{level.letter}</div>
-        <div style={{ fontFamily: headingFont, fontWeight: 700, fontSize: "0.82rem", color: level.color, marginTop: 8, textAlign: "center" }}>
-          {isLast ? t("referralProgramPage.chain.clientLabel") : t("referralProgramPage.chain.partnerLabel", { letter: level.letter })}
-        </div>
-        <div style={{ fontSize: "0.72rem", color: MUTED_LIGHT, textAlign: "center", lineHeight: 1.4, marginTop: 2 }}>
-          {isLast ? t("referralProgramPage.chain.clientSubLabel") : t("referralProgramPage.chain.levelPct", { level: level.id, pct: level.pct })}
-        </div>
-      </div>
-      {!isLast && (
-        <div style={{ width: 32, height: 2, background: `linear-gradient(90deg, ${level.border}, ${LEVELS[Math.min(level.id, 4)].border})`, flexShrink: 0, margin: "0 -4px", marginBottom: 28 }} />
-      )}
-    </div>
-  );
-}
-
-// -- LEVEL CARD --
-function LevelCard({ level }) {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const [hovered, setHovered] = useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: hovered ? level.bg : SURFACE,
-        borderRadius: 14,
-        padding: "1.8rem 1.5rem",
-        border: `1px solid ${hovered ? level.border : BORDER}`,
-        borderTop: `3px solid ${level.border}`,
-        transform: hovered ? "translateY(-5px)" : "translateY(0)",
-        boxShadow: hovered ? `0 12px 32px ${level.border}22` : "0 2px 8px rgba(0,0,0,0.04)",
-        transition: "all 0.25s",
-        cursor: "default"
-      }}
-    >
-      <div style={{ display: "inline-block", padding: "3px 10px", borderRadius: 4,
-        background: `${level.border}18`, color: level.color,
-        fontSize: "0.68rem", fontFamily: headingFont, fontWeight: 700, letterSpacing: "0.08em",
-        textTransform: "uppercase", marginBottom: "1rem" }}>
-        {t("referralProgramPage.levels.levelLabel", { level: level.id })}
-      </div>
-      <div style={{ fontFamily: headingFont, fontWeight: 800, fontSize: "2.6rem", color: level.color, lineHeight: 1, marginBottom: "0.5rem" }}>
-        {level.pct}%
-      </div>
-      <div style={{ fontFamily: headingFont, fontWeight: 700, fontSize: "0.95rem", color: INK, marginBottom: 4 }}>
-        {t(level.labelKey)}
-      </div>
-      <div style={{ fontSize: "0.8rem", color: MUTED_LIGHT, lineHeight: 1.5 }}>
-        {t(level.intentKey)}
-      </div>
-    </div>
-  );
-}
-
-// -- RULE CARD --
-function RuleCard({ rule }) {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const bodyFont = isRtl ? ARABIC_FONT : "'Geist',sans-serif";
-  const [hovered, setHovered] = useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{ background: hovered ? BRAND_BG : SURFACE_ALT, borderRadius: 14, padding: "1.5rem",
-        border: `1px solid ${hovered ? BRAND_LIGHT + "66" : BORDER}`,
-        display: "flex", gap: "1rem", alignItems: "flex-start",
-        transition: "all 0.2s", cursor: "default" }}
-    >
-      <div style={{ width: 44, height: 44, borderRadius: 10, background: hovered ? `${BRAND_LIGHT}22` : SURFACE,
-        border: `1px solid ${hovered ? BRAND_LIGHT : BORDER}`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: "0.8rem", fontWeight: 700, color: BRAND, flexShrink: 0, transition: "all 0.2s" }}>
-        {t(rule.iconKey)}
-      </div>
-      <div>
-        <h4 style={{ fontFamily: headingFont, fontWeight: 700, fontSize: "0.92rem", color: INK, marginBottom: 4 }}>
-          {t(rule.titleKey)}
-        </h4>
-        <p style={{ fontFamily: bodyFont, fontSize: "0.82rem", color: MUTED, lineHeight: 1.6 }}>
-          {t(rule.descKey)}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// -- CALCULATOR --
-function Calculator() {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const bodyFont = isRtl ? ARABIC_FONT : "'Geist',sans-serif";
-  const [revenue, setRevenue] = useState(100000);
-  const fmt = n => n >= 10000000 ? "INR " + (n / 10000000).toFixed(2) + " Cr"
-    : n >= 100000 ? "INR " + (n / 100000).toFixed(2) + " L"
-    : n >= 1000 ? "INR " + (n / 1000).toFixed(1) + "K"
-    : "INR " + n.toFixed(0);
-
-  return (
-    <div style={{ background: SURFACE_ALT, border: `1px solid ${BORDER}`, borderRadius: 20, padding: "2rem 2.5rem" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "1.8rem" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          <label style={{ fontSize: "0.78rem", color: MUTED_LIGHT, textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: headingFont, fontWeight: 600 }}>
-            {t("referralProgramPage.calculator.revenueLabel")}
-          </label>
-          <input type="number" value={revenue} min={1000} step={10000}
-            onChange={e => setRevenue(Math.max(0, Number(e.target.value)))}
-            style={{ background: SURFACE, border: `1.5px solid ${BORDER}`, color: INK, padding: "10px 16px", borderRadius: 10,
-              fontFamily: headingFont, fontWeight: 700, fontSize: "1.05rem", width: 200, outline: "none" }} />
-        </div>
-        <div style={{ paddingTop: 20, fontSize: "0.88rem", color: MUTED, fontFamily: bodyFont }}>
-          {t("referralProgramPage.calculator.earningsLabel")}
-        </div>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "0.9rem" }}>
-        {LEVELS.map(l => (
-          <div key={l.id} style={{ background: l.bg, border: `1px solid ${l.border}44`, borderRadius: 12, padding: "1.2rem", textAlign: "center" }}>
-            <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em", color: l.color, fontFamily: headingFont, fontWeight: 700, marginBottom: 4 }}>
-              {t("referralProgramPage.levels.levelLabel", { level: l.id })}
-            </div>
-            <div style={{ fontFamily: headingFont, fontWeight: 800, fontSize: "1.5rem", color: l.color }}>{fmt(revenue * l.pct / 100)}</div>
-            <div style={{ fontSize: "0.75rem", color: MUTED_LIGHT, marginTop: 2 }}>
-              {t("referralProgramPage.calculator.pctOfRevenue", { pct: l.pct })}
-            </div>
-          </div>
-        ))}
-        <div style={{ background: BRAND_BG, border: `1.5px solid ${BRAND_LIGHT}`, borderRadius: 12, padding: "1.2rem", textAlign: "center" }}>
-          <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em", color: BRAND, fontFamily: headingFont, fontWeight: 700, marginBottom: 4 }}>
-            {t("referralProgramPage.calculator.totalPoolLabel")}
-          </div>
-          <div style={{ fontFamily: headingFont, fontWeight: 800, fontSize: "1.5rem", color: BRAND }}>{fmt(revenue * 0.03)}</div>
-          <div style={{ fontSize: "0.75rem", color: MUTED_LIGHT, marginTop: 2 }}>
-            {t("referralProgramPage.calculator.totalPoolPct")}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// -- SECTION WRAPPER --
-function Section({ id, bg = SURFACE, children, style = {} }) {
+// ─────────────────────────────────────────────
+//  FADE-IN WRAPPER
+// ─────────────────────────────────────────────
+function FadeIn({ children, delay = 0, style = {} }) {
   const [ref, visible] = useInView();
   return (
-    <section id={id} style={{ background: bg, padding: "5rem 1.5rem", ...style }}>
-      <div ref={ref} style={{ maxWidth: 1100, margin: "0 auto", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(28px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
-        {children}
-      </div>
-    </section>
-  );
-}
-
-function SectionLabel({ children }) {
-  const { i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  return (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: headingFont, fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.14em", textTransform: "uppercase", color: BRAND, marginBottom: "0.8rem" }}>
-      <span style={{ width: 24, height: 1.5, background: BRAND, display: "inline-block" }} />
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+        ...style,
+      }}
+    >
       {children}
     </div>
   );
 }
 
-// -- GOVERNANCE RULES --
-const RULES = [
-  { iconKey: "referralProgramPage.rules.r1.icon", titleKey: "referralProgramPage.rules.r1.title", descKey: "referralProgramPage.rules.r1.desc" },
-  { iconKey: "referralProgramPage.rules.r2.icon", titleKey: "referralProgramPage.rules.r2.title", descKey: "referralProgramPage.rules.r2.desc" },
-  { iconKey: "referralProgramPage.rules.r3.icon", titleKey: "referralProgramPage.rules.r3.title", descKey: "referralProgramPage.rules.r3.desc" },
-  { iconKey: "referralProgramPage.rules.r4.icon", titleKey: "referralProgramPage.rules.r4.title", descKey: "referralProgramPage.rules.r4.desc" },
-  { iconKey: "referralProgramPage.rules.r5.icon", titleKey: "referralProgramPage.rules.r5.title", descKey: "referralProgramPage.rules.r5.desc" },
-  { iconKey: "referralProgramPage.rules.r6.icon", titleKey: "referralProgramPage.rules.r6.title", descKey: "referralProgramPage.rules.r6.desc" },
-];
+// ─────────────────────────────────────────────
+//  SECTION LABEL
+// ─────────────────────────────────────────────
+function Label({ children, rtl = false }) {
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 10,
+        flexDirection: rtl ? "row-reverse" : "row",
+        fontFamily: FONT_BODY,
+        fontWeight: 600,
+        fontSize: "0.7rem",
+        letterSpacing: "0.16em",
+        textTransform: "uppercase",
+        color: G.goldMid,
+        marginBottom: "0.9rem",
+      }}
+    >
+      <span
+        style={{
+          width: 28,
+          height: 1.5,
+          background: G.goldMid,
+          display: "inline-block",
+        }}
+      />
+      {children}
+    </div>
+  );
+}
 
-// -- MAIN PAGE --
-export default function ReferralPage() {
-  const { t, i18n } = useTranslation();
-  const isRtl = i18n.dir() === "rtl";
-  const headingFont = isRtl ? ARABIC_FONT : "'Poppins',sans-serif";
-  const bodyFont = isRtl ? ARABIC_FONT : "'Geist',sans-serif";
-  const heroFont = isRtl ? ARABIC_FONT : "'Sora',sans-serif";
+// ─────────────────────────────────────────────
+//  SECTION WRAPPER
+// ─────────────────────────────────────────────
+function Sec({ id, bg = G.white, children, pad = "5.5rem 1.5rem", rtl = false }) {
+  return (
+    <section id={id} style={{ background: bg, padding: pad }}>
+      <div style={{ maxWidth: 1080, margin: "0 auto", textAlign: rtl ? "right" : "left" }}>{children}</div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  ANIMATED REFERRAL CHAIN
+// ─────────────────────────────────────────────
+function ReferralChain({ nodes = [], connectors = [], rtl = false }) {
+  const [activeStep, setActiveStep] = useState(0);
+  const [ref, visible] = useInView(0.1);
+
+  useEffect(() => {
+    if (!visible) return;
+    const t = setInterval(() => setActiveStep((s) => (s >= 3 ? 0 : s + 1)), 1900);
+    return () => clearInterval(t);
+  }, [visible]);
 
   return (
-    <div style={{ background: SURFACE_ALT, color: INK }} dir={isRtl ? "rtl" : "ltr"}>
-      {/* Local Animations */}
-      <style>{`
-        @keyframes heroFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes floatPulse { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
-      `}</style>
+    <div ref={ref}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 0,
+          overflowX: "auto",
+          paddingBottom: 8,
+          flexDirection: rtl ? "row-reverse" : "row",
+        }}
+      >
+        {nodes.map((n, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 120 }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+              <div
+                style={{
+                  width: 70,
+                  height: 70,
+                  borderRadius: "50%",
+                  border: `2.5px solid ${activeStep >= i ? n.border : G.border}`,
+                  background: activeStep >= i ? n.bg : G.white,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: FONT_HEAD,
+                  fontWeight: 700,
+                  fontSize: n.isClient ? "1.6rem" : "1.4rem",
+                  color: activeStep >= i ? n.color : G.muted,
+                  transform: activeStep === i ? "scale(1.13)" : "scale(1)",
+                  boxShadow:
+                    activeStep === i ? `0 8px 28px ${n.border}50` : "0 2px 10px rgba(0,0,0,0.06)",
+                  transition: "all 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+                  position: "relative",
+                }}
+              >
+                <span style={{ fontFamily: n.isClient ? FONT_EMOJI : FONT_HEAD }}>{n.letter}</span>
+                {activeStep === i && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: -8,
+                      borderRadius: "50%",
+                      border: `2px solid ${n.border}55`,
+                      animation: "ripple 1.2s ease-out infinite",
+                    }}
+                  />
+                )}
+              </div>
+              <div
+                style={{
+                  fontFamily: FONT_BODY,
+                  fontWeight: 700,
+                  fontSize: "0.84rem",
+                  color: activeStep >= i ? n.color : G.muted,
+                  marginTop: 10,
+                  transition: "color 0.4s",
+                }}
+              >
+                {n.name}
+              </div>
+              <div
+                style={{
+                  fontSize: "0.72rem",
+                  color: G.muted,
+                  textAlign: "center",
+                  maxWidth: 110,
+                  lineHeight: 1.45,
+                  marginTop: 3,
+                }}
+              >
+                {n.sub}
+              </div>
+            </div>
 
-      {/* -- HERO -- */}
-      <section style={{
-        minHeight: "96vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
-        textAlign: "center", padding: "7rem 1.5rem 5rem", position: "relative", overflow: "hidden",
-        background: "linear-gradient(135deg, #F1F6FF 0%, #F7F2ED 50%, #EEF2FF 100%)"
-      }}>
-        {/* Decorative circles */}
-        {[{ s:500, x:"-10%", y:"-20%", c:"#2C5AA018" },{ s:400, x:"80%", y:"10%", c:"#4E7FC218" },{ s:300, x:"20%", y:"75%", c:"#5B7EE518" }].map((c,i)=>(
-          <div key={i} style={{ position:"absolute", width:c.s, height:c.s, borderRadius:"50%", background:c.c, left:c.x, top:c.y, pointerEvents:"none" }} />
+            {i < nodes.length - 1 && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  flexShrink: 0,
+                  gap: 5,
+                  marginBottom: 34,
+                }}
+              >
+                <div
+                  style={{
+                    width: 44,
+                    height: 2,
+                    position: "relative",
+                    background:
+                      activeStep > i
+                        ? `linear-gradient(${rtl ? "270deg" : "90deg"}, ${n.border}, ${nodes[i + 1].border})`
+                        : G.border,
+                    transition: "background 0.5s",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: -4.5,
+                      width: 0,
+                      height: 0,
+                      borderTop: "5.5px solid transparent",
+                      borderBottom: "5.5px solid transparent",
+                      ...(rtl
+                        ? { left: -5, borderRight: `7px solid ${activeStep > i ? nodes[i + 1].border : G.border}` }
+                        : { right: -5, borderLeft: `7px solid ${activeStep > i ? nodes[i + 1].border : G.border}` }),
+                      transition: "border-color 0.5s",
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.62rem",
+                    color: activeStep > i ? G.goldMid : G.muted,
+                    fontStyle: "italic",
+                    fontFamily: FONT_BODY,
+                    transition: "color 0.4s",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {connectors[i]}
+                </div>
+              </div>
+            )}
+          </div>
         ))}
+      </div>
 
-        <div style={{ animation: "heroFadeUp 0.8s ease both", display:"inline-flex", alignItems:"center", gap:8,
-          border:`1px solid ${BRAND_LIGHT}55`, background:`${BRAND_BG}`, padding:"6px 18px", borderRadius:100,
-          fontSize:"0.72rem", letterSpacing:"0.12em", textTransform:"uppercase", color:BRAND,
-          fontFamily: headingFont, fontWeight:700, marginBottom:"1.8rem" }}>
-          <span style={{fontSize:"0.5rem"}}>*</span> {t("referralProgramPage.hero.badge")}
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: "1.5rem" }}>
+        {nodes.map((_, i) => (
+          <div
+            key={i}
+            onClick={() => setActiveStep(i)}
+            style={{
+              width: i === activeStep ? 28 : 8,
+              height: 8,
+              borderRadius: 4,
+              background: i <= activeStep ? G.goldMid : G.border,
+              transition: "all 0.35s",
+              cursor: "pointer",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  OUTCOME CARDS — what each partner earns
+// ─────────────────────────────────────────────
+function OutcomeCard({ card, delay, rtl = false }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <FadeIn delay={delay}>
+      <div
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        style={{
+          background: hov ? card.bg : G.white,
+          border: `1px solid ${hov ? card.border : G.border}`,
+          borderTop: `3px solid ${card.border}`,
+          borderRadius: 16,
+          padding: "1.8rem",
+          transform: hov ? "translateY(-5px)" : "translateY(0)",
+          boxShadow: hov ? `0 16px 40px ${card.border}28` : "0 2px 12px rgba(0,0,0,0.05)",
+          transition: "all 0.27s",
+          cursor: "default",
+          height: "100%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            marginBottom: "1.1rem",
+            flexDirection: rtl ? "row-reverse" : "row",
+            textAlign: rtl ? "right" : "left",
+          }}
+        >
+          <div
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: 12,
+              background: card.bg,
+              border: `1px solid ${card.border}55`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "1.3rem",
+              fontFamily: FONT_EMOJI,
+            }}
+          >
+            {card.emoji}
+          </div>
+          <div style={{ textAlign: rtl ? "right" : "left" }}>
+            <div
+              style={{
+                fontSize: "0.64rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                color: card.color,
+                fontFamily: FONT_BODY,
+                fontWeight: 700,
+              }}
+            >
+              {card.tag}
+            </div>
+            <div style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: "0.95rem", color: G.ink }}>
+              {card.who}
+            </div>
+          </div>
         </div>
-
-        <h1 style={{ animation:"heroFadeUp 0.8s 0.1s ease both", fontFamily: heroFont, fontWeight:800,
-          fontSize:"clamp(2.6rem,7vw,5.5rem)", letterSpacing:"-0.03em", color: INK,
-          lineHeight:1.08, maxWidth:820, marginBottom:"1.4rem" }}>
-          {t("referralProgramPage.hero.titlePrefix")}{" "}
-          <span style={{ background:`linear-gradient(135deg, ${BRAND} 0%, #4E7FC2 60%, #7FB0F3 100%)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-            {t("referralProgramPage.hero.titleHighlight")}
-          </span>{" "}{t("referralProgramPage.hero.titleSuffix")}
-        </h1>
-
-        <p style={{ animation:"heroFadeUp 0.8s 0.2s ease both", fontFamily: bodyFont, fontWeight:300,
-          fontSize:"clamp(1rem,1.8vw,1.18rem)", color: MUTED, maxWidth:560, lineHeight:1.75, marginBottom:"2.5rem" }}>
-          {t("referralProgramPage.hero.subtitle")} <strong style={{color:BRAND, fontWeight:500}}>3%</strong> {t("referralProgramPage.hero.subtitleTail")}
+        <h3
+          style={{
+            fontFamily: FONT_HEAD,
+            fontWeight: 700,
+            fontSize: "1.1rem",
+            color: card.color,
+            marginBottom: "0.6rem",
+            lineHeight: 1.3,
+          }}
+        >
+          {card.headline}
+        </h3>
+        <p style={{ fontFamily: FONT_BODY, fontSize: "0.84rem", color: G.muted, lineHeight: 1.7, textAlign: rtl ? "right" : "left" }}>
+          {card.detail}
         </p>
+      </div>
+    </FadeIn>
+  );
+}
 
-        <div style={{ animation:"heroFadeUp 0.8s 0.3s ease both", display:"flex", gap:"1rem", flexWrap:"wrap", justifyContent:"center" }}>
-          <a href="#join" style={{ background:`linear-gradient(135deg, ${BRAND}, #4E7FC2)`, color:"#fff", padding:"14px 32px", borderRadius:10,
-            fontFamily: headingFont, fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.04em",
-            textDecoration:"none", boxShadow:`0 4px 20px ${BRAND}44`, transition:"transform 0.2s" }}
-            onMouseEnter={e=>e.currentTarget.style.transform="translateY(-2px)"} onMouseLeave={e=>e.currentTarget.style.transform="translateY(0)"}>
-            {t("referralProgramPage.hero.primaryCta")}
-          </a>
-          <a href="#how-it-works" style={{ background: SURFACE, color: INK, padding:"14px 32px", borderRadius:10,
-            fontFamily: headingFont, fontWeight:700, fontSize:"0.9rem", letterSpacing:"0.04em",
-            textDecoration:"none", border:`1.5px solid ${BORDER}`, transition:"border-color 0.2s" }}
-            onMouseEnter={e=>e.currentTarget.style.borderColor=BRAND_LIGHT} onMouseLeave={e=>e.currentTarget.style.borderColor=BORDER}>
-            {t("referralProgramPage.hero.secondaryCta")}
-          </a>
+function OutcomeCards({ cards = [], rtl = false }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.2rem" }}>
+      {cards.map((c, i) => (
+        <OutcomeCard key={c.tag} card={c} delay={i * 0.1} rtl={rtl} />
+      ))}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  REVENUE FLOW DIAGRAM
+// ─────────────────────────────────────────────
+function FlowDiagram({ rows = [], rtl = false }) {
+  const [ref, visible] = useInView(0.1);
+
+  return (
+    <div ref={ref} style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "absolute",
+          left: rtl ? "auto" : 28,
+          right: rtl ? 28 : "auto",
+          top: 24,
+          bottom: 24,
+          width: 2,
+          background: `linear-gradient(180deg, ${G.goldMid}55, ${G.blueBorder}55, ${G.greenBorder}55, ${G.purpleBorder}55)`,
+          opacity: visible ? 1 : 0,
+          transition: "opacity 0.8s 0.4s",
+        }}
+      />
+
+      {rows.map((r, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            padding: rtl ? "1rem 1rem 1rem 1.2rem" : "1rem 1.2rem 1rem 1rem",
+            borderRadius: 12,
+            background: r.bg,
+            border: `1px solid ${r.border}44`,
+            marginBottom: "0.75rem",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateX(0)" : `translateX(${rtl ? "20px" : "-20px"})`,
+            transition: `opacity 0.6s ${r.delay}s, transform 0.6s ${r.delay}s`,
+            flexDirection: rtl ? "row-reverse" : "row",
+          }}
+        >
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 10,
+              background: G.white,
+              border: `2px solid ${r.border}`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: r.isClient ? FONT_EMOJI : FONT_HEAD,
+              fontWeight: 700,
+              fontSize: r.isClient ? "1.2rem" : "1rem",
+              color: r.color,
+              flexShrink: 0,
+            }}
+          >
+            {r.letter}
+          </div>
+          <div style={{ flex: 1, textAlign: rtl ? "right" : "left" }}>
+            <div style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: "0.87rem", color: G.ink }}>{r.label}</div>
+            <div style={{ fontFamily: FONT_BODY, fontSize: "0.77rem", color: G.muted, marginTop: 2, lineHeight: 1.5 }}>{r.sub}</div>
+          </div>
+          <div
+            style={{
+              fontSize: "0.65rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              fontFamily: FONT_BODY,
+              fontWeight: 700,
+              color: r.color,
+              background: G.white,
+              padding: "3px 9px",
+              borderRadius: 20,
+              border: `1px solid ${r.border}`,
+              flexShrink: 0,
+            }}
+          >
+            {r.tag}
+          </div>
         </div>
+      ))}
+    </div>
+  );
+}
 
-        {/* Scroll indicator */}
-        <div style={{ animation:"floatPulse 2s infinite", marginTop:"3.5rem", color:BRAND_LIGHT, fontSize:"1.5rem" }}>v</div>
-      </section>
+// ─────────────────────────────────────────────
+//  COMPENSATION VISUAL
+// ─────────────────────────────────────────────
+function CompensationVisual({ data, rtl = false }) {
+  const [ref, visible] = useInView(0.1);
+  const legendItems = Array.isArray(data?.legend) ? data.legend : [];
+  const bulletItems = Array.isArray(data?.bullets) ? data.bullets : [];
+  const legendColors = [G.green, G.goldMid];
 
-      {/* -- STATS STRIP -- */}
-      <div style={{ background: SURFACE, borderTop:`1px solid ${BORDER}`, borderBottom:`1px solid ${BORDER}` }}>
-        <div style={{ maxWidth:1100, margin:"0 auto", padding:"2rem 1.5rem", display:"flex", justifyContent:"space-around", flexWrap:"wrap", gap:"1.5rem" }}>
-          {[
-            ["5", t("referralProgramPage.stats.levels")],
-            ["3%", t("referralProgramPage.stats.pool")],
-            ["1.20%", t("referralProgramPage.stats.direct")],
-            ["100%", t("referralProgramPage.stats.realised")]
-          ].map(([num,lbl])=>(
-            <div key={lbl} style={{ textAlign:"center" }}>
-              <div style={{ fontFamily: headingFont, fontWeight:800, fontSize:"2rem", color:BRAND }}>{num}</div>
-              <div style={{ fontSize:"0.75rem", color: MUTED_LIGHT, textTransform:"uppercase", letterSpacing:"0.08em", marginTop:4, fontFamily: bodyFont }}>{lbl}</div>
+  return (
+    <div ref={ref}>
+      <div
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(20px)",
+          transition: "all 0.7s 0.1s",
+          marginBottom: "1.5rem",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: FONT_BODY,
+            fontWeight: 600,
+            fontSize: "0.75rem",
+            color: G.muted,
+            marginBottom: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            textAlign: rtl ? "right" : "left",
+          }}
+        >
+          {data?.allocationTitle}
+        </div>
+        <div
+          style={{
+            height: 52,
+            borderRadius: 12,
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: rtl ? "row-reverse" : "row",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+          }}
+        >
+          <div
+            style={{
+              width: visible ? "97%" : "0%",
+              background: `linear-gradient(90deg, ${G.green}, #2ECC71)`,
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: rtl ? 0 : 16,
+              paddingRight: rtl ? 16 : 0,
+              fontFamily: FONT_BODY,
+              fontWeight: 700,
+              fontSize: "0.88rem",
+              color: "white",
+              transition: "width 1.3s cubic-bezier(0.23,1,0.32,1) 0.3s",
+              whiteSpace: "nowrap",
+              textAlign: rtl ? "right" : "left",
+            }}
+          >
+            {data?.barMain}
+          </div>
+          <div
+            style={{
+              width: visible ? "3%" : "0%",
+              background: `linear-gradient(90deg, ${G.goldMid}, ${G.goldLight})`,
+              transition: "width 1.3s cubic-bezier(0.23,1,0.32,1) 0.3s",
+            }}
+          />
+        </div>
+        <div style={{ display: "flex", gap: "1.5rem", marginTop: 10, flexDirection: rtl ? "row-reverse" : "row" }}>
+          {legendItems.map((item, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 7, flexDirection: rtl ? "row-reverse" : "row" }}>
+              <div style={{ width: 10, height: 10, borderRadius: 2, background: legendColors[i] || G.muted }} />
+              <div style={{ fontFamily: FONT_BODY, fontSize: "0.78rem", color: G.muted, textAlign: rtl ? "right" : "left" }}>{item}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* -- HOW IT WORKS -- */}
-      <Section id="how-it-works" bg={SURFACE_ALT}>
-        <SectionLabel>{t("referralProgramPage.sections.system")}</SectionLabel>
-        <h2 style={{ fontFamily: headingFont, fontWeight:800, fontSize:"clamp(1.8rem,3.5vw,2.8rem)", color: INK, marginBottom:"0.8rem" }}>
-          {t("referralProgramPage.headings.chain")}
-        </h2>
-        <p style={{ fontFamily: bodyFont, color: MUTED, fontSize:"1.02rem", maxWidth:520, marginBottom:"3rem" }}>
-          {t("referralProgramPage.descriptions.chain")}
-        </p>
-
-        {/* Chain */}
-        <div style={{ display:"flex", alignItems:"center", overflowX:"auto", paddingBottom:"1rem", gap:0 }}>
-          {LEVELS.map((l) => <ChainNode key={l.id} level={l} isLast={false} />)}
-          {/* Arrow */}
-          <div style={{ width:32, height:2, background:`linear-gradient(90deg, ${LEVELS[4].border}, ${BRAND})`, flexShrink:0, margin:"0 -4px", marginBottom:28 }} />
-          {/* Client node */}
-          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", flex:1, minWidth:100 }}>
-            <div style={{ width:64, height:64, borderRadius:"50%", border:`2px solid ${BRAND}`, background:BRAND_BG,
-              display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.5rem",
-              boxShadow:`0 4px 16px ${BRAND}33` }}>{t("referralProgramPage.chain.clientBadge")}</div>
-            <div style={{ fontFamily: headingFont, fontWeight:700, fontSize:"0.82rem", color:BRAND, marginTop:8 }}>{t("referralProgramPage.chain.clientLabel")}</div>
-            <div style={{ fontSize:"0.72rem", color: MUTED_LIGHT, textAlign:"center", lineHeight:1.4, marginTop:2 }}>{t("referralProgramPage.chain.clientSubLabel")}</div>
+      <div style={{ opacity: visible ? 1 : 0, transition: "opacity 0.7s 0.4s" }}>
+        {bulletItems.map((item, i) => (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: 10,
+              padding: "0.75rem 1rem",
+              borderRadius: 9,
+              background: G.greenBg,
+              border: `1px solid ${G.greenBorder}44`,
+              marginBottom: "0.6rem",
+              fontFamily: FONT_BODY,
+              fontSize: "0.83rem",
+              color: G.inkMid,
+              lineHeight: 1.55,
+              flexDirection: rtl ? "row-reverse" : "row",
+              textAlign: rtl ? "right" : "left",
+            }}
+          >
+            <span style={{ color: G.green, flexShrink: 0, fontFamily: FONT_EMOJI }}>✅</span> {item}
           </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  CORE PRINCIPLES
+// ─────────────────────────────────────────────
+// (Principles content is provided via translations in ReferralPage.)
+
+function PrincipleCard({ principle, delay, rtl = false }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <FadeIn delay={delay}>
+      <div
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        style={{
+          background: G.white,
+          border: `1px solid ${hov ? `${G.goldMid}55` : G.border}`,
+          borderRadius: 14,
+          padding: "1.5rem",
+          display: "flex",
+          gap: "1rem",
+          alignItems: "flex-start",
+          transform: hov ? "translateY(-3px)" : "translateY(0)",
+          boxShadow: hov ? `0 8px 28px ${G.goldMid}18` : "0 1px 6px rgba(0,0,0,0.04)",
+          transition: "all 0.23s",
+          cursor: "default",
+          flexDirection: rtl ? "row-reverse" : "row",
+        }}
+      >
+        <div
+          style={{
+            width: 44,
+            height: 44,
+            borderRadius: 11,
+            background: hov ? G.goldTint : G.cream,
+            border: `1px solid ${hov ? `${G.goldMid}44` : G.borderLight}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "1.2rem",
+            flexShrink: 0,
+            transition: "all 0.23s",
+            fontFamily: FONT_EMOJI,
+          }}
+        >
+          {principle.icon}
         </div>
-
-        {/* Result box */}
-        <div style={{ marginTop:"2.5rem", background: SURFACE, border:`1px solid ${BRAND}44`, borderRadius:16, padding:"1.8rem 2rem",
-          display:"flex", alignItems:"flex-start", gap:"1.5rem", boxShadow:`0 4px 24px ${BRAND}18`, flexWrap:"wrap" }}>
-          <div style={{ fontSize:"2.5rem", lineHeight:1 }}>{t("referralProgramPage.chain.resultIcon")}</div>
-          <div>
-            <h3 style={{ fontFamily: headingFont, fontWeight:800, color:`${BRAND}`, fontSize:"1.2rem", marginBottom:6 }}>
-              {t("referralProgramPage.chain.resultTitle")}
-            </h3>
-            <p style={{ fontFamily: bodyFont, color: MUTED, fontSize:"0.92rem", lineHeight:1.7, maxWidth:680 }}>
-              {t("referralProgramPage.chain.resultDesc")}{" "}
-              <strong style={{ color: INK }}>{t("referralProgramPage.chain.resultStrong")}</strong>
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      {/* -- COMMISSION LEVELS -- */}
-      <Section id="commission" bg={SURFACE_ALT}>
-        <SectionLabel>{t("referralProgramPage.sections.distribution")}</SectionLabel>
-        <h2 style={{ fontFamily: headingFont, fontWeight:800, fontSize:"clamp(1.8rem,3.5vw,2.8rem)", color: INK, marginBottom:"0.8rem" }}>
-          {t("referralProgramPage.headings.distribution")}
-        </h2>
-        <p style={{ fontFamily: bodyFont, color: MUTED, fontSize:"1.02rem", maxWidth:520, marginBottom:"2.5rem" }}>
-          {t("referralProgramPage.descriptions.distribution")}
-        </p>
-
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))", gap:"1rem", marginBottom:"1.8rem" }}>
-          {LEVELS.map(l => <LevelCard key={l.id} level={l} />)}
-        </div>
-
-        {/* Note */}
-        <div style={{ background: SURFACE, borderLeft:`3px solid ${BRAND}`, borderRadius:"0 10px 10px 0", padding:"1rem 1.5rem", fontSize:"0.88rem", color: MUTED, lineHeight:1.7, fontFamily: bodyFont }}>
-          <strong style={{color:BRAND}}>{t("referralProgramPage.note.label")}</strong> {t("referralProgramPage.note.text")}
-        </div>
-      </Section>
-
-      {/* -- CHARTS -- */}
-      <Section id="charts" bg={SURFACE}>
-        <SectionLabel>{t("referralProgramPage.sections.visuals")}</SectionLabel>
-        <h2 style={{ fontFamily: headingFont, fontWeight:800, fontSize:"clamp(1.8rem,3.5vw,2.8rem)", color: INK, marginBottom:"2.5rem" }}>
-          {t("referralProgramPage.headings.visuals")}
-        </h2>
-
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))", gap:"1.5rem" }}>
-          <div style={{ background: SURFACE_ALT, border:`1px solid ${BORDER}`, borderRadius:20, padding:"2rem" }}>
-            <BarChart />
-          </div>
-          <div style={{ background: SURFACE_ALT, border:`1px solid ${BORDER}`, borderRadius:20, padding:"2rem" }}>
-            <div style={{ fontFamily: headingFont, fontWeight:600, fontSize:"0.85rem", color: MUTED_LIGHT, marginBottom:"1.5rem", textTransform:"uppercase", letterSpacing:"0.08em" }}>
-              {t("referralProgramPage.donut.title")}
-            </div>
-            <DonutChart />
-          </div>
-        </div>
-      </Section>
-
-      {/* -- CALCULATOR -- */}
-      <Section id="calculator" bg={SURFACE_ALT}>
-        <SectionLabel>{t("referralProgramPage.sections.calculator")}</SectionLabel>
-        <h2 style={{ fontFamily: headingFont, fontWeight:800, fontSize:"clamp(1.8rem,3.5vw,2.8rem)", color: INK, marginBottom:"0.8rem" }}>
-          {t("referralProgramPage.headings.calculator")}
-        </h2>
-        <p style={{ fontFamily: bodyFont, color: MUTED, fontSize:"1.02rem", maxWidth:520, marginBottom:"2.5rem" }}>
-          {t("referralProgramPage.descriptions.calculator")}
-        </p>
-        <Calculator />
-      </Section>
-
-      {/* -- GOVERNANCE -- */}
-      <Section id="rules" bg={SURFACE}>
-        <SectionLabel>{t("referralProgramPage.sections.governance")}</SectionLabel>
-        <h2 style={{ fontFamily: headingFont, fontWeight:800, fontSize:"clamp(1.8rem,3.5vw,2.8rem)", color: INK, marginBottom:"0.8rem" }}>
-          {t("referralProgramPage.headings.governance")}
-        </h2>
-        <p style={{ fontFamily: bodyFont, color: MUTED, fontSize:"1.02rem", maxWidth:520, marginBottom:"2.5rem" }}>
-          {t("referralProgramPage.descriptions.governance")}
-        </p>
-
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:"1rem" }}>
-          {RULES.map((rule) => <RuleCard key={rule.title} rule={rule} />)}
-        </div>
-      </Section>
-
-      {/* -- CTA -- */}
-      <section id="join" style={{ background:`linear-gradient(135deg, #F1F6FF 0%, #F7F2ED 50%, #EEF2FF 100%)`, padding:"7rem 1.5rem", textAlign:"center", position:"relative", overflow:"hidden" }}>
-        {/* Deco */}
-        <div style={{ position:"absolute", width:600, height:600, borderRadius:"50%", background:`${BRAND}08`, top:"-200px", left:"50%", transform:"translateX(-50%)", pointerEvents:"none" }} />
-        <div style={{ maxWidth:640, margin:"0 auto", position:"relative" }}>
-          <SectionLabel>{t("referralProgramPage.sections.cta")}</SectionLabel>
-          <h2 style={{ fontFamily: headingFont, fontWeight:800, fontSize:"clamp(2rem,4.5vw,3.5rem)", color: INK, lineHeight:1.1, marginBottom:"1rem" }}>
-            {t("referralProgramPage.cta.titleLine1")}<br />
-            <span style={{ background:`linear-gradient(135deg, ${BRAND}, #4E7FC2)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-              {t("referralProgramPage.cta.titleLine2")}
-            </span>
-          </h2>
-          <p style={{ fontFamily: bodyFont, color: MUTED, fontSize:"1.05rem", marginBottom:"2.5rem", lineHeight:1.7 }}>
-            {t("referralProgramPage.cta.subtitle")}
+        <div style={{ textAlign: rtl ? "right" : "left" }}>
+          <h4 style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: "0.92rem", color: G.ink, marginBottom: 5 }}>
+            {principle.title}
+          </h4>
+          <p style={{ fontFamily: FONT_BODY, fontSize: "0.82rem", color: G.muted, lineHeight: 1.65 }}>
+            {principle.desc}
           </p>
-          <div style={{ display:"flex", gap:"1rem", justifyContent:"center", flexWrap:"wrap" }}>
-            <a href="#" style={{ background:`linear-gradient(135deg, ${BRAND}, #4E7FC2)`, color:"#fff", padding:"15px 36px", borderRadius:10,
-              fontFamily: headingFont, fontWeight:700, fontSize:"0.95rem", letterSpacing:"0.04em",
-              textDecoration:"none", boxShadow:`0 6px 28px ${BRAND}44` }}>
-              {t("referralProgramPage.cta.primaryCta")}
-            </a>
-            <a href="#" style={{ background: SURFACE, color: INK, padding:"15px 36px", borderRadius:10,
-              fontFamily: headingFont, fontWeight:700, fontSize:"0.95rem", letterSpacing:"0.04em",
-              textDecoration:"none", border:`1.5px solid ${BORDER}` }}>
-              {t("referralProgramPage.cta.secondaryCta")}
-            </a>
+        </div>
+      </div>
+    </FadeIn>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  MAIN EXPORT
+// ─────────────────────────────────────────────
+export default function ReferralPage() {
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.language === "ar";
+  const hero = t("referralProgramPageSimple.hero", { returnObjects: true });
+  const chain = t("referralProgramPageSimple.chain", { returnObjects: true });
+  const chainDiagram = t("referralProgramPageSimple.chainDiagram", { returnObjects: true });
+  const outcomes = t("referralProgramPageSimple.outcomes", { returnObjects: true });
+  const flow = t("referralProgramPageSimple.flow", { returnObjects: true });
+  const compensation = t("referralProgramPageSimple.compensation", { returnObjects: true });
+  const principles = t("referralProgramPageSimple.principles", { returnObjects: true });
+  const cta = t("referralProgramPageSimple.cta", { returnObjects: true });
+
+  const statsItemsRaw = t("referralProgramPageSimple.stats", { returnObjects: true });
+  const statsItems = Array.isArray(statsItemsRaw) ? statsItemsRaw : [];
+
+  const chainNodeStyles = [
+    { color: G.gold, bg: G.goldTint, border: G.goldMid },
+    { color: G.blue, bg: G.blueBg, border: G.blueBorder },
+    { color: G.green, bg: G.greenBg, border: G.greenBorder },
+    { color: G.purple, bg: G.purpleBg, border: G.purpleBorder, isClient: true },
+  ];
+  const chainNodesText = Array.isArray(chainDiagram?.nodes) ? chainDiagram.nodes : [];
+  const chainNodes = chainNodeStyles.map((style, idx) => ({ ...style, ...(chainNodesText[idx] || {}) }));
+  const chainConnectors = Array.isArray(chainDiagram?.connectors) ? chainDiagram.connectors : [];
+
+  const outcomeStyles = [
+    { emoji: "🏆", color: G.green, bg: G.greenBg, border: G.greenBorder },
+    { emoji: "🤝", color: G.blue, bg: G.blueBg, border: G.blueBorder },
+    { emoji: "🌱", color: G.gold, bg: G.goldTint, border: G.goldMid },
+  ];
+  const outcomeCardsText = Array.isArray(outcomes?.cards) ? outcomes.cards : [];
+  const outcomeCards = outcomeStyles.map((style, idx) => ({ ...style, ...(outcomeCardsText[idx] || {}) }));
+
+  const flowStyles = [
+    { color: G.gold, bg: G.goldTint, border: G.goldMid, delay: 0.05 },
+    { color: G.blue, bg: G.blueBg, border: G.blueBorder, delay: 0.15 },
+    { color: G.green, bg: G.greenBg, border: G.greenBorder, delay: 0.25 },
+    { color: G.purple, bg: G.purpleBg, border: G.purpleBorder, delay: 0.35, isClient: true },
+  ];
+  const flowRowsText = Array.isArray(flow?.rows) ? flow.rows : [];
+  const flowRows = flowStyles.map((style, idx) => ({ ...style, ...(flowRowsText[idx] || {}) }));
+
+  const principleIcons = ["🆕", "💰", "✅", "🚫", "🛡️", "⚖️"];
+  const principleTexts = Array.isArray(principles?.items) ? principles.items : [];
+  const principleItems = principleIcons.map((icon, idx) => ({ icon, ...(principleTexts[idx] || {}) }));
+
+  return (
+    <div style={{ background: G.cream, color: G.ink }} dir={isRtl ? "rtl" : "ltr"}>
+      <style>{`
+        @keyframes heroUp { from { opacity:0;transform:translateY(28px); } to { opacity:1;transform:translateY(0); } }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes ripple { 0%{transform:scale(1);opacity:0.55} 100%{transform:scale(1.55);opacity:0} }
+      `}</style>
+
+      <section
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          padding: "4.5rem 1.5rem 3.5rem",
+          background: `linear-gradient(150deg, ${G.white} 0%, ${G.goldBg} 35%, ${G.cream} 60%, #EEF2FF 100%)`,
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {[{ w: 520, t: "-15%", l: "-8%", c: `${G.goldMid}0C` }, { w: 400, t: "5%", r: "-10%", c: `${G.blueBorder}0C` }, { w: 280, b: "0", l: "30%", c: `${G.greenBorder}0A` }].map((b, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              width: b.w,
+              height: b.w,
+              borderRadius: "50%",
+              background: b.c,
+              top: b.t || "auto",
+              left: b.l || "auto",
+              right: b.r || "auto",
+              bottom: b.b || "auto",
+              pointerEvents: "none",
+            }}
+          />
+        ))}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            backgroundImage: `radial-gradient(${G.goldMid}1E 1.5px, transparent 1.5px)`,
+            backgroundSize: "34px 34px",
+            maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%)",
+          }}
+        />
+
+        <div
+          style={{
+            animation: "heroUp 0.75s ease both",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            background: G.white,
+            border: `1.5px solid ${G.goldMid}55`,
+            padding: "7px 20px",
+            borderRadius: 100,
+            fontFamily: FONT_BODY,
+            fontWeight: 600,
+            fontSize: "0.72rem",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: G.gold,
+            marginBottom: "1.2rem",
+            boxShadow: `0 2px 16px ${G.goldMid}22`,
+          }}
+        >
+          <span style={{ fontSize: "0.5rem" }}>◆</span> {hero.badge}
+        </div>
+
+        <h1
+          style={{
+            animation: "heroUp 0.75s 0.1s ease both",
+            fontFamily: FONT_HEAD,
+            fontWeight: 900,
+            fontSize: "clamp(2.2rem,6vw,4.6rem)",
+            color: G.ink,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            maxWidth: 860,
+            marginBottom: "1rem",
+          }}
+        >
+          {hero.titlePrefix}{" "}
+          <em
+            style={{
+              fontStyle: "normal",
+              background: `linear-gradient(135deg, ${G.gold} 0%, ${G.goldLight} 50%, #A9C7FF 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            {hero.titleHighlight}
+          </em>{" "}
+          {hero.titleSuffix}
+        </h1>
+
+        <p
+          style={{
+            animation: "heroUp 0.75s 0.2s ease both",
+            fontFamily: FONT_BODY,
+            fontWeight: 300,
+            fontSize: "clamp(0.98rem,1.6vw,1.12rem)",
+            color: G.muted,
+            maxWidth: 520,
+            lineHeight: 1.7,
+            marginBottom: "2rem",
+          }}
+        >
+          {hero.subtitle}
+        </p>
+
+        <div style={{ animation: "heroUp 0.75s 0.3s ease both", display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <a
+            href="#chain"
+            style={{
+              background: `linear-gradient(135deg, ${G.gold}, ${G.goldLight})`,
+              color: G.white,
+              padding: "14px 34px",
+              borderRadius: 10,
+              fontFamily: FONT_BODY,
+              fontWeight: 700,
+              fontSize: "0.92rem",
+              textDecoration: "none",
+              boxShadow: `0 6px 28px ${G.goldMid}44`,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = `0 10px 36px ${G.goldMid}55`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = `0 6px 28px ${G.goldMid}44`;
+            }}
+          >
+            {hero.primaryCta}
+          </a>
+          <Link
+            to="/partner-form"
+            style={{
+              background: G.white,
+              color: G.inkMid,
+              padding: "14px 34px",
+              borderRadius: 10,
+              fontFamily: FONT_BODY,
+              fontWeight: 600,
+              fontSize: "0.92rem",
+              textDecoration: "none",
+              border: `1.5px solid ${G.border}`,
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = G.goldMid)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = G.border)}
+          >
+            {hero.secondaryCta}
+          </Link>
+        </div>
+
+        <div style={{ animation: "float 2.4s ease-in-out infinite", marginTop: "2rem", color: G.goldMid, fontSize: "1.35rem" }}>↓</div>
+      </section>
+
+      <div style={{ background: G.white, borderTop: `1px solid ${G.border}`, borderBottom: `1px solid ${G.border}` }}>
+        <div
+          style={{
+            maxWidth: 1080,
+            margin: "0 auto",
+            padding: "2.2rem 1.5rem",
+            display: "flex",
+            justifyContent: "space-around",
+            flexWrap: "wrap",
+            gap: "1.5rem",
+          }}
+        >
+          {statsItems.map((item, i) => (
+            <div key={`${item.label}-${item.value}-${i}`} style={{ textAlign: "center" }}>
+              <div style={{ fontFamily: FONT_HEAD, fontWeight: 700, fontSize: "1.9rem", color: G.gold, lineHeight: 1 }}>{item.value}</div>
+              <div style={{ fontFamily: FONT_BODY, fontSize: "0.72rem", color: G.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 5 }}>
+                {item.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Sec id="chain" bg={G.white} rtl={isRtl}>
+        <FadeIn>
+          <Label rtl={isRtl}>{chain.label}</Label>
+          <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: "clamp(1.7rem,3.5vw,2.8rem)", color: G.ink, marginBottom: "0.8rem" }}>
+            {chain.heading}
+          </h2>
+          <p style={{ fontFamily: FONT_BODY, color: G.muted, fontSize: "1rem", maxWidth: 600, marginBottom: "3rem", lineHeight: 1.78 }}>
+            {chain.description}
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.12}>
+          <div style={{ background: G.cream, borderRadius: 20, padding: "3.75rem ", border: `1px solid ${G.border}` }}>
+            <ReferralChain nodes={chainNodes} connectors={chainConnectors} rtl={isRtl} />
           </div>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <div
+            style={{
+              marginTop: "1.8rem",
+              background: G.white,
+              border: `1.5px solid ${G.goldMid}44`,
+              borderLeft: isRtl ? "none" : `4px solid ${G.goldMid}`,
+              borderRight: isRtl ? `4px solid ${G.goldMid}` : "none",
+              borderRadius: isRtl ? "14px 0 0 14px" : "0 14px 14px 0",
+              padding: "1.4rem 1.8rem",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "1.1rem",
+              flexDirection: isRtl ? "row-reverse" : "row",
+            }}
+          >
+            <span style={{ fontSize: "1.5rem", lineHeight: 1, fontFamily: FONT_EMOJI }}>💡</span>
+            <div>
+              <div style={{ fontFamily: FONT_BODY, fontWeight: 700, color: G.ink, marginBottom: 4, textAlign: isRtl ? "right" : "left" }}>{chain.inShortLabel}</div>
+              <p style={{ fontFamily: FONT_BODY, fontSize: "0.88rem", color: G.muted, lineHeight: 1.72 }}>
+                {chain.inShortText} <strong style={{ color: G.ink }}>{chain.inShortStrong}</strong>
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+      </Sec>
+
+      <Sec id="outcomes" bg={G.cream} rtl={isRtl}>
+        <FadeIn>
+          <Label rtl={isRtl}>{outcomes.label}</Label>
+          <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: "clamp(1.7rem,3.5vw,2.8rem)", color: G.ink, marginBottom: "0.8rem" }}>
+            {outcomes.heading}
+          </h2>
+          <p style={{ fontFamily: FONT_BODY, color: G.muted, fontSize: "1rem", maxWidth: 560, marginBottom: "2.5rem", lineHeight: 1.78 }}>
+            {outcomes.description}
+          </p>
+        </FadeIn>
+        <OutcomeCards cards={outcomeCards} rtl={isRtl} />
+      </Sec>
+
+      <Sec id="source" bg={G.white} rtl={isRtl}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: "4rem", alignItems: "start" }}>
+          <FadeIn>
+            <Label rtl={isRtl}>{flow.label}</Label>
+            <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: "clamp(1.6rem,3vw,2.3rem)", color: G.ink, marginBottom: "0.8rem" }}>
+              {flow.heading}
+            </h2>
+            <p style={{ fontFamily: FONT_BODY, color: G.muted, fontSize: "0.95rem", marginBottom: "2rem", lineHeight: 1.75 }}>
+              {flow.description}
+            </p>
+            <FlowDiagram rows={flowRows} rtl={isRtl} />
+          </FadeIn>
+
+          <FadeIn delay={0.15}>
+            <Label rtl={isRtl}>{compensation.label}</Label>
+            <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: "clamp(1.6rem,3vw,2.3rem)", color: G.ink, marginBottom: "0.8rem" }}>
+              {compensation.heading}
+            </h2>
+            <p style={{ fontFamily: FONT_BODY, color: G.muted, fontSize: "0.95rem", marginBottom: "2rem", lineHeight: 1.75 }}>
+              {compensation.description}
+            </p>
+            <CompensationVisual data={compensation} rtl={isRtl} />
+          </FadeIn>
+        </div>
+      </Sec>
+
+      <Sec id="principles" bg={G.cream} rtl={isRtl}>
+        <FadeIn>
+          <Label rtl={isRtl}>{principles.label}</Label>
+          <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: "clamp(1.7rem,3.5vw,2.8rem)", color: G.ink, marginBottom: "0.8rem" }}>
+            {principles.heading}
+          </h2>
+          <p style={{ fontFamily: FONT_BODY, color: G.muted, fontSize: "1rem", maxWidth: 540, marginBottom: "2.5rem", lineHeight: 1.78 }}>
+            {principles.description}
+          </p>
+        </FadeIn>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1rem" }}>
+          {principleItems.map((p, i) => (
+            <PrincipleCard key={p.title} principle={p} delay={i * 0.07} rtl={isRtl} />
+          ))}
+        </div>
+
+        <FadeIn delay={0.18}>
+          <div
+            style={{
+              marginTop: "2rem",
+              background: `linear-gradient(135deg, ${G.goldBg}, ${G.white})`,
+              border: `1.5px solid ${G.goldMid}44`,
+              borderRadius: 16,
+              padding: "1.6rem 2rem",
+              display: "flex",
+              gap: "1.2rem",
+              alignItems: "flex-start",
+              flexDirection: isRtl ? "row-reverse" : "row",
+            }}
+          >
+            <div
+              style={{
+                width: 46,
+                height: 46,
+                borderRadius: 12,
+                background: G.goldTint,
+                border: `1.5px solid ${G.goldMid}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.3rem",
+                flexShrink: 0,
+                fontFamily: FONT_EMOJI,
+              }}
+            >
+              ⚖️
+            </div>
+            <div style={{ textAlign: isRtl ? "right" : "left" }}>
+              <div style={{ fontFamily: FONT_BODY, fontWeight: 700, color: G.ink, marginBottom: 5, fontSize: "0.95rem" }}>
+                {principles.footerTitle}
+              </div>
+              <p style={{ fontFamily: FONT_BODY, fontSize: "0.85rem", color: G.muted, lineHeight: 1.72 }}>
+                {principles.footerText}
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+      </Sec>
+
+      <section
+        id="join"
+        style={{
+          background: `linear-gradient(150deg, ${G.white} 0%, ${G.goldBg} 40%, #EEF2FF 100%)`,
+          padding: "7rem 1.5rem",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            width: 700,
+            height: 700,
+            borderRadius: "50%",
+            background: `${G.goldMid}06`,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ maxWidth: 640, margin: "0 auto", position: "relative" }}>
+          <FadeIn>
+            <Label rtl={isRtl}>{cta.label}</Label>
+            <h2
+              style={{
+                fontFamily: FONT_HEAD,
+                fontWeight: 900,
+                fontSize: "clamp(2rem,4.5vw,3.5rem)",
+                color: G.ink,
+                lineHeight: 1.1,
+                marginBottom: "1rem",
+              }}
+            >
+              {cta.titleLine1}{" "}
+              <span
+                style={{
+                  background: `linear-gradient(135deg, ${G.gold}, ${G.goldLight})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {cta.titleLine2}
+              </span>
+            </h2>
+            <p style={{ fontFamily: FONT_BODY, color: G.muted, fontSize: "1.02rem", marginBottom: "2.5rem", lineHeight: 1.78 }}>
+              {cta.subtitle}
+            </p>
+            <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+              <a
+                href="#"
+                style={{
+                  background: `linear-gradient(135deg, ${G.gold}, ${G.goldLight})`,
+                  color: G.white,
+                  padding: "15px 38px",
+                  borderRadius: 10,
+                  fontFamily: FONT_BODY,
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                  textDecoration: "none",
+                  boxShadow: `0 6px 28px ${G.goldMid}44`,
+                }}
+              >
+                {cta.primaryCta}
+              </a>
+              <a
+                href="#"
+                style={{
+                  background: G.white,
+                  color: G.inkMid,
+                  padding: "15px 38px",
+                  borderRadius: 10,
+                  fontFamily: FONT_BODY,
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                  textDecoration: "none",
+                  border: `1.5px solid ${G.border}`,
+                }}
+              >
+                {cta.secondaryCta}
+              </a>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
