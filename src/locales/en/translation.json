@@ -90,6 +90,346 @@
       }
     }
   },
+  "partnerPages": {
+    "shared": {
+      "sectionTitle": "What this partnership delivers",
+      "sidebar": {
+        "title": "Become a Partner",
+        "stepsLabel": "4 Steps",
+        "stepPrefix": "Step",
+        "cta": "Start Application",
+        "steps": [
+          "Register as a partner.",
+          "Complete AI profiling.",
+          "E-Sign the Terminal Condition Agreement.",
+          "Submit your partner type form."
+        ]
+      }
+    },
+    "international": {
+      "label": "International Partners",
+      "title": "Lead cross-border delivery with trusted local execution.",
+      "subtitle": "We partner with firms that can deliver compliance-ready services and client success across key regions.",
+      "sectionSubtitle": "Local execution, compliance alignment, and shared delivery standards to scale global engagements.",
+      "cards": [
+        {
+          "title": "Market Entry & Localization",
+          "description": "Local market analysis, entity setup guidance, and go-to-market alignment."
+        },
+        {
+          "title": "Local Compliance & Tax",
+          "description": "Regulatory filings, tax alignment, and audit-ready documentation."
+        },
+        {
+          "title": "Cross-Border Delivery",
+          "description": "On-ground execution with shared SLAs, QA, and reporting standards."
+        },
+        {
+          "title": "Shared Services Setup",
+          "description": "Design and stabilization of shared service hubs and governance."
+        }
+      ]
+    },
+    "sales": {
+      "label": "Sales Partners",
+      "title": "Grow revenue with a clear co-selling partnership.",
+      "subtitle": "We help you win qualified opportunities and deliver outcomes with structured enablement and support.",
+      "sectionSubtitle": "Clear ownership, proposal support, and delivery alignment to improve conversion and retention.",
+      "cards": [
+        {
+          "title": "Lead Qualification",
+          "description": "Structured qualification and discovery notes for the right-fit opportunities."
+        },
+        {
+          "title": "Co-Selling & Proposals",
+          "description": "Joint proposals, pricing guidance, and scope alignment."
+        },
+        {
+          "title": "Account Expansion",
+          "description": "Cross-sell planning and account growth across services."
+        },
+        {
+          "title": "Referral Management",
+          "description": "Transparent referral tracking and revenue-share governance."
+        }
+      ]
+    },
+    "technology": {
+      "label": "Technology Partners",
+      "title": "Build technology partnerships that deliver measurable outcomes.",
+      "subtitle": "We collaborate with platforms and solution providers to integrate, automate, and scale finance and compliance workflows.",
+      "sectionSubtitle": "Clear architecture alignment, secure integrations, and joint delivery support to scale outcomes.",
+      "cards": [
+        {
+          "title": "API Integrations",
+          "description": "Secure APIs and middleware that connect finance, compliance, and ERP stacks."
+        },
+        {
+          "title": "Data & Analytics",
+          "description": "Unified data pipelines, dashboards, and KPI analytics for faster decisions."
+        },
+        {
+          "title": "AI Agents",
+          "description": "AI copilots for review, compliance checks, and operational insights."
+        },
+        {
+          "title": "RPA & Tools",
+          "description": "Automation tools that reduce manual workload and improve control."
+        }
+      ]
+    },
+    "service": {
+      "label": "Service Partners",
+      "title": "Deliver specialized services with consistent quality.",
+      "subtitle": "We align scope, reporting, and governance so your team can deliver reliably at scale.",
+      "sectionSubtitle": "Clear scopes, QA checkpoints, and audit-ready delivery documentation.",
+      "cards": [
+        {
+          "title": "IFRS & Reporting",
+          "description": "IFRS advisory, reporting alignment, and audit-ready documentation."
+        },
+        {
+          "title": "M&A Advisory Support",
+          "description": "Diligence support, valuation inputs, and transaction readiness."
+        },
+        {
+          "title": "Cross-Border Compliance",
+          "description": "Regulatory alignment, filings, and compliance controls."
+        },
+        {
+          "title": "SOPs & Controls",
+          "description": "Process documentation, control testing, and governance support."
+        }
+      ]
+    }
+  },
+  "referralProgram": {
+    "back": "Back to Dashboard",
+    "hero": {
+      "title": "5-Level Structured Referral Model",
+      "subtitle": "Integrated with the CEO Portal Dashboard",
+      "tagline": "Encourage structured partner expansion funded by a capped 3% pool without impacting core earnings."
+    },
+    "stats": [
+      {
+        "label": "Max Pool",
+        "value": "3%",
+        "subLabel": "From BnC platform fee"
+      },
+      {
+        "label": "Levels",
+        "value": "5",
+        "subLabel": "Structured partner expansion"
+      },
+      {
+        "label": "Trigger",
+        "value": "Realised Milestones",
+        "subLabel": "Paid only on revenue"
+      }
+    ],
+    "objective": {
+      "title": "Objective",
+      "items": [
+        "Encourage structured partner expansion up to 5 levels.",
+        "Funded by up to 3% deduction from BnC Global Platform Fee (10-25%).",
+        "No impact on Service / Technical / Strategic / International core earnings.",
+        "Paid only on realised client milestone revenue."
+      ]
+    },
+    "howItWorks": {
+      "title": "How It Works (Simple Example)",
+      "steps": [
+        "A refers B",
+        "B refers C",
+        "C refers D",
+        "D refers E",
+        "E closes a project"
+      ],
+      "payout": "When E generates revenue, all uplines (A-D) receive a structured override from the 3% pool."
+    },
+    "distribution": {
+      "title": "5-Level Distribution Model (From Max 3%)",
+      "columns": [
+        "Level",
+        "Position",
+        "% Allocation",
+        "Intent"
+      ],
+      "table": [
+        {
+          "level": "Level 1",
+          "position": "Direct Referrer",
+          "allocation": "1.20%",
+          "intent": "Strong reward for direct onboarding"
+        },
+        {
+          "level": "Level 2",
+          "position": "2nd Level",
+          "allocation": "0.70%",
+          "intent": "Network support incentive"
+        },
+        {
+          "level": "Level 3",
+          "position": "3rd Level",
+          "allocation": "0.50%",
+          "intent": "Growth continuity"
+        },
+        {
+          "level": "Level 4",
+          "position": "4th Level",
+          "allocation": "0.40%",
+          "intent": "Long-chain encouragement"
+        },
+        {
+          "level": "Level 5",
+          "position": "5th Level",
+          "allocation": "0.20%",
+          "intent": "Legacy incentive"
+        }
+      ],
+      "totalLabel": "Total",
+      "totalValue": "3.00% Max - Fully capped",
+      "note": "If fewer levels exist, unused % remains with the platform."
+    },
+    "governance": {
+      "title": "Governance Rules",
+      "items": [
+        "Valid only for new partner onboarding",
+        "Paid only on realised revenue",
+        "No self-referrals or circular chains",
+        "Referred partner must remain active",
+        "Platform reserves right to cap at 3%"
+      ]
+    },
+    "dashboard": {
+      "title": "Referral Dashboard (Recommended)",
+      "subtitle": "Since your model is powered by the CEO Portal, transparency is critical.",
+      "metrics": [
+        {
+          "label": "Total Referral Earnings (Lifetime)",
+          "value": "-"
+        },
+        {
+          "label": "This Month Referral Earnings",
+          "value": "-"
+        },
+        {
+          "label": "Pending Referral (Unrealised Revenue)",
+          "value": "-"
+        },
+        {
+          "label": "Active Referral Network Count",
+          "value": "-"
+        },
+        {
+          "label": "Level-wise Breakdown (L1-L5)",
+          "value": "-"
+        },
+        {
+          "label": "Project-wise Referral Source Mapping",
+          "value": "-"
+        },
+        {
+          "label": "Milestone Status Tracker",
+          "value": "-"
+        }
+      ],
+      "note": "Values update after client milestones are realised."
+    },
+    "tables": {
+      "levelBreakdown": {
+        "title": "Level-wise Breakdown",
+        "columns": [
+          "Level",
+          "Allocation",
+          "This Month",
+          "Lifetime"
+        ],
+        "rows": [
+          {
+            "level": "Level 1",
+            "allocation": "1.20%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 2",
+            "allocation": "0.70%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 3",
+            "allocation": "0.50%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 4",
+            "allocation": "0.40%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 5",
+            "allocation": "0.20%",
+            "month": "-",
+            "lifetime": "-"
+          }
+        ]
+      },
+      "projectMapping": {
+        "title": "Project-wise Referral Source Mapping",
+        "columns": [
+          "Project",
+          "Client",
+          "Referral Source",
+          "Level",
+          "Status"
+        ],
+        "rows": [
+          {
+            "project": "Project Alpha",
+            "client": "Client Omega",
+            "source": "A -> B -> C",
+            "level": "Level 3",
+            "status": "In review"
+          },
+          {
+            "project": "Project Nova",
+            "client": "Client Atlas",
+            "source": "A -> B",
+            "level": "Level 2",
+            "status": "Milestone achieved"
+          }
+        ]
+      },
+      "milestones": {
+        "title": "Milestone Status Tracker",
+        "columns": [
+          "Project",
+          "Milestone",
+          "Status",
+          "Eligible Override"
+        ],
+        "rows": [
+          {
+            "project": "Project Alpha",
+            "milestone": "Milestone 1",
+            "status": "Pending",
+            "override": "Yes"
+          },
+          {
+            "project": "Project Nova",
+            "milestone": "Milestone 2",
+            "status": "Approved",
+            "override": "Paid"
+          }
+        ]
+      },
+      "note": "Sample view - data populates from realised milestones."
+    }
+  },
   "cta": {
     "title": "Ready to Launch Your",
     "highlight": "Partnership Journey?",
@@ -98,7 +438,7 @@
     "talkToExpert": "Talk to Expert"
   },
   "footer": {
-    "copyright": "Copyrights © 2026 BnC Global Pvt. Ltd."
+    "copyright": "Copyrights © 2026 BnC Global"
   },
   "bncServices": {
     "title": "BnC Services",
@@ -173,7 +513,7 @@
       "knowMore": {
         "label": "Know more about services",
         "heading": "Know more about services",
-        "description": "Detailed overview of this service, scope, and delivery model."
+        "description": "Unlock capital. Accelerate client growth."
       },
       "manpower": {
         "label": "Looking for manpower support",
@@ -1965,7 +2305,120 @@
         "training": "Training Request Info",
         "default": "Request More Info"
       },
-      "cta": {
+      "partnerPages": {
+    "shared": {
+      "sectionTitle": "What this partnership delivers",
+      "sidebar": {
+        "title": "Become a Partner",
+        "stepsLabel": "4 Steps",
+        "stepPrefix": "Step",
+        "cta": "Start Application",
+        "steps": [
+          "Register as a partner.",
+          "Complete AI profiling.",
+          "E-Sign the Terminal Condition Agreement.",
+          "Submit your partner type form."
+        ]
+      }
+    },
+    "international": {
+      "label": "International Partners",
+      "title": "Lead cross-border delivery with trusted local execution.",
+      "subtitle": "We partner with firms that can deliver compliance-ready services and client success across key regions.",
+      "sectionSubtitle": "Local execution, compliance alignment, and shared delivery standards to scale global engagements.",
+      "cards": [
+        {
+          "title": "Market Entry & Localization",
+          "description": "Local market analysis, entity setup guidance, and go-to-market alignment."
+        },
+        {
+          "title": "Local Compliance & Tax",
+          "description": "Regulatory filings, tax alignment, and audit-ready documentation."
+        },
+        {
+          "title": "Cross-Border Delivery",
+          "description": "On-ground execution with shared SLAs, QA, and reporting standards."
+        },
+        {
+          "title": "Shared Services Setup",
+          "description": "Design and stabilization of shared service hubs and governance."
+        }
+      ]
+    },
+    "sales": {
+      "label": "Sales Partners",
+      "title": "Grow revenue with a clear co-selling partnership.",
+      "subtitle": "We help you win qualified opportunities and deliver outcomes with structured enablement and support.",
+      "sectionSubtitle": "Clear ownership, proposal support, and delivery alignment to improve conversion and retention.",
+      "cards": [
+        {
+          "title": "Lead Qualification",
+          "description": "Structured qualification and discovery notes for the right-fit opportunities."
+        },
+        {
+          "title": "Co-Selling & Proposals",
+          "description": "Joint proposals, pricing guidance, and scope alignment."
+        },
+        {
+          "title": "Account Expansion",
+          "description": "Cross-sell planning and account growth across services."
+        },
+        {
+          "title": "Referral Management",
+          "description": "Transparent referral tracking and revenue-share governance."
+        }
+      ]
+    },
+    "technology": {
+      "label": "Technology Partners",
+      "title": "Build technology partnerships that deliver measurable outcomes.",
+      "subtitle": "We collaborate with platforms and solution providers to integrate, automate, and scale finance and compliance workflows.",
+      "sectionSubtitle": "Clear architecture alignment, secure integrations, and joint delivery support to scale outcomes.",
+      "cards": [
+        {
+          "title": "API Integrations",
+          "description": "Secure APIs and middleware that connect finance, compliance, and ERP stacks."
+        },
+        {
+          "title": "Data & Analytics",
+          "description": "Unified data pipelines, dashboards, and KPI analytics for faster decisions."
+        },
+        {
+          "title": "AI Agents",
+          "description": "AI copilots for review, compliance checks, and operational insights."
+        },
+        {
+          "title": "RPA & Tools",
+          "description": "Automation tools that reduce manual workload and improve control."
+        }
+      ]
+    },
+    "service": {
+      "label": "Service Partners",
+      "title": "Deliver specialized services with consistent quality.",
+      "subtitle": "We align scope, reporting, and governance so your team can deliver reliably at scale.",
+      "sectionSubtitle": "Clear scopes, QA checkpoints, and audit-ready delivery documentation.",
+      "cards": [
+        {
+          "title": "IFRS & Reporting",
+          "description": "IFRS advisory, reporting alignment, and audit-ready documentation."
+        },
+        {
+          "title": "M&A Advisory Support",
+          "description": "Diligence support, valuation inputs, and transaction readiness."
+        },
+        {
+          "title": "Cross-Border Compliance",
+          "description": "Regulatory alignment, filings, and compliance controls."
+        },
+        {
+          "title": "SOPs & Controls",
+          "description": "Process documentation, control testing, and governance support."
+        }
+      ]
+    }
+  },
+  "cta": {
         "manpower": "Submit Manpower Request",
         "enquiry": "Submit Enquiry",
         "training": "Submit Training Request",
@@ -2014,6 +2467,10 @@
       "title": "AI Profile",
       "done": "Done",
       "start": "Start"
+    },
+    "referralProgram": {
+      "title": "Referral Model",
+      "cta": "View"
     },
     "referral": {
       "title": "Referral",
@@ -2565,7 +3022,120 @@
         }
       ]
     },
-    "cta": {
+    "partnerPages": {
+    "shared": {
+      "sectionTitle": "What this partnership delivers",
+      "sidebar": {
+        "title": "Become a Partner",
+        "stepsLabel": "4 Steps",
+        "stepPrefix": "Step",
+        "cta": "Start Application",
+        "steps": [
+          "Register as a partner.",
+          "Complete AI profiling.",
+          "E-Sign the Terminal Condition Agreement.",
+          "Submit your partner type form."
+        ]
+      }
+    },
+    "international": {
+      "label": "International Partners",
+      "title": "Lead cross-border delivery with trusted local execution.",
+      "subtitle": "We partner with firms that can deliver compliance-ready services and client success across key regions.",
+      "sectionSubtitle": "Local execution, compliance alignment, and shared delivery standards to scale global engagements.",
+      "cards": [
+        {
+          "title": "Market Entry & Localization",
+          "description": "Local market analysis, entity setup guidance, and go-to-market alignment."
+        },
+        {
+          "title": "Local Compliance & Tax",
+          "description": "Regulatory filings, tax alignment, and audit-ready documentation."
+        },
+        {
+          "title": "Cross-Border Delivery",
+          "description": "On-ground execution with shared SLAs, QA, and reporting standards."
+        },
+        {
+          "title": "Shared Services Setup",
+          "description": "Design and stabilization of shared service hubs and governance."
+        }
+      ]
+    },
+    "sales": {
+      "label": "Sales Partners",
+      "title": "Grow revenue with a clear co-selling partnership.",
+      "subtitle": "We help you win qualified opportunities and deliver outcomes with structured enablement and support.",
+      "sectionSubtitle": "Clear ownership, proposal support, and delivery alignment to improve conversion and retention.",
+      "cards": [
+        {
+          "title": "Lead Qualification",
+          "description": "Structured qualification and discovery notes for the right-fit opportunities."
+        },
+        {
+          "title": "Co-Selling & Proposals",
+          "description": "Joint proposals, pricing guidance, and scope alignment."
+        },
+        {
+          "title": "Account Expansion",
+          "description": "Cross-sell planning and account growth across services."
+        },
+        {
+          "title": "Referral Management",
+          "description": "Transparent referral tracking and revenue-share governance."
+        }
+      ]
+    },
+    "technology": {
+      "label": "Technology Partners",
+      "title": "Build technology partnerships that deliver measurable outcomes.",
+      "subtitle": "We collaborate with platforms and solution providers to integrate, automate, and scale finance and compliance workflows.",
+      "sectionSubtitle": "Clear architecture alignment, secure integrations, and joint delivery support to scale outcomes.",
+      "cards": [
+        {
+          "title": "API Integrations",
+          "description": "Secure APIs and middleware that connect finance, compliance, and ERP stacks."
+        },
+        {
+          "title": "Data & Analytics",
+          "description": "Unified data pipelines, dashboards, and KPI analytics for faster decisions."
+        },
+        {
+          "title": "AI Agents",
+          "description": "AI copilots for review, compliance checks, and operational insights."
+        },
+        {
+          "title": "RPA & Tools",
+          "description": "Automation tools that reduce manual workload and improve control."
+        }
+      ]
+    },
+    "service": {
+      "label": "Service Partners",
+      "title": "Deliver specialized services with consistent quality.",
+      "subtitle": "We align scope, reporting, and governance so your team can deliver reliably at scale.",
+      "sectionSubtitle": "Clear scopes, QA checkpoints, and audit-ready delivery documentation.",
+      "cards": [
+        {
+          "title": "IFRS & Reporting",
+          "description": "IFRS advisory, reporting alignment, and audit-ready documentation."
+        },
+        {
+          "title": "M&A Advisory Support",
+          "description": "Diligence support, valuation inputs, and transaction readiness."
+        },
+        {
+          "title": "Cross-Border Compliance",
+          "description": "Regulatory alignment, filings, and compliance controls."
+        },
+        {
+          "title": "SOPs & Controls",
+          "description": "Process documentation, control testing, and governance support."
+        }
+      ]
+    }
+  },
+  "cta": {
       "title": "Get Started with BnC",
       "subtitle": "Plan your partnership launch with an AI-guided checklist built for global partners.",
       "button": "Start Partnership Journey"
@@ -2588,5 +3158,101 @@
         }
       ]
     }
+  },
+
+  "referralProgramPage": {
+    "hero": {
+      "badge": "Partner Referral Program",
+      "titlePrefix": "Earn While You",
+      "titleHighlight": "Grow",
+      "titleSuffix": "Our Network",
+      "subtitle": "Refer partners, build a 5-level network, and earn structured commissions on every project milestone they close - up to",
+      "subtitleTail": "from the BNC Global Platform Fee.",
+      "primaryCta": "Become a Referral Partner",
+      "secondaryCta": "See How It Works"
+    },
+    "stats": {
+      "levels": "Referral Levels",
+      "pool": "Max Commission Pool",
+      "direct": "Direct Referrer Earn",
+      "realised": "On Realised Revenue"
+    },
+    "sections": {
+      "system": "The System",
+      "distribution": "Distribution Model",
+      "visuals": "Visual Breakdown",
+      "calculator": "Earnings Estimator",
+      "governance": "Governance",
+      "cta": "Ready to Start?"
+    },
+    "headings": {
+      "chain": "How the Referral Chain Works",
+      "distribution": "5-Level Commission Breakdown",
+      "visuals": "Commission Distribution at a Glance",
+      "calculator": "See What You Could Earn",
+      "governance": "Program Rules & Safeguards"
+    },
+    "descriptions": {
+      "chain": "A structured 5-level cascade - when someone at the end closes a project, every upline partner earns automatically.",
+      "distribution": "Each level receives a fixed share of the 3% pool. Unused levels remain with the platform.",
+      "calculator": "Enter a project revenue amount and instantly see how commissions distribute across all 5 levels.",
+      "governance": "Built for fairness, transparency, and long-term partner trust."
+    },
+    "note": {
+      "label": "Important:",
+      "text": "If fewer than 5 levels exist in your chain, unused percentage stays with the BNC Platform. The total commission pool is strictly capped at 3%, deducted only from the BNC Global Platform Fee (10-25%). Your Service, Technical, Strategic, and International earnings are completely untouched."
+    },
+    "donut": {
+      "title": "Share of 3% Pool per Level",
+      "totalPool": "Total Pool"
+    },
+    "barChart": {
+      "title": "Commission % by Level (from 3% pool)",
+      "sumLabel": "SUM",
+      "totalLabel": "3.00% Max",
+      "capLabel": "Fully Capped"
+    },
+    "calculator": {
+      "revenueLabel": "Project Revenue (INR)",
+      "earningsLabel": "-> Earnings across all levels:",
+      "pctOfRevenue": "{{pct}}% of revenue",
+      "totalPoolLabel": "Total Pool",
+      "totalPoolPct": "3% of revenue"
+    },
+    "levels": {
+      "levelLabel": "Level {{level}}",
+      "l1": {"label": "Direct Referrer", "intent": "Strongest reward for direct partner onboarding"},
+      "l2": {"label": "2nd Level", "intent": "Network support incentive"},
+      "l3": {"label": "3rd Level", "intent": "Growth continuity reward"},
+      "l4": {"label": "4th Level", "intent": "Long-chain encouragement"},
+      "l5": {"label": "5th Level", "intent": "Legacy network incentive"}
+    },
+    "chain": {
+      "clientBadge": "C",
+      "clientLabel": "Client",
+      "clientSubLabel": "Closes project",
+      "partnerLabel": "Partner {{letter}}",
+      "levelPct": "L{{level}} - {{pct}}%",
+      "resultIcon": "GOAL",
+      "resultTitle": "When E's Client Pays -> Everyone Earns",
+      "resultDesc": "The moment a project milestone is realised, commissions flow automatically up the chain - from Level 5 all the way to Level 1. Funded entirely from the BNC Platform Fee pool.",
+      "resultStrong": "Zero impact on your Service, Technical, Strategic, or International earnings."
+    },
+    "rules": {
+      "r1": {"icon": "NEW", "title": "New Partners Only", "desc": "Referral commissions apply exclusively to new partner onboarding. Existing partners cannot be re-referred."},
+      "r2": {"icon": "CASH", "title": "Realised Revenue Only", "desc": "Commissions are paid only after project milestone revenue is confirmed and received by BNC Global."},
+      "r3": {"icon": "NO", "title": "No Self-Referrals", "desc": "You cannot refer yourself or create circular chains. All referrals must be genuine new connections."},
+      "r4": {"icon": "LIVE", "title": "Active Partner Required", "desc": "The referred partner must remain active on the platform for commissions to continue flowing upward."},
+      "r5": {"icon": "CAP", "title": "3% Hard Cap", "desc": "Total referral pool is strictly capped at 3%, deducted only from the BNC Platform Fee."},
+      "r6": {"icon": "SAFE", "title": "Core Earnings Protected", "desc": "Service, Technical, Strategic & International earnings are 100% unaffected by the referral deduction."}
+    },
+    "cta": {
+      "titleLine1": "Build Your Network.",
+      "titleLine2": "Earn on Every Level.",
+      "subtitle": "Join BNC Global's Referral Program today. Refer a partner, grow your chain, and watch commissions flow automatically with every closed project.",
+      "primaryCta": "Register as Referral Partner",
+      "secondaryCta": "Contact Our Team"
+    }
   }
+
 }

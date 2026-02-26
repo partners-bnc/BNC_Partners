@@ -4,60 +4,39 @@ import { FaArrowRight, FaPlug, FaDatabase, FaRobot, FaCogs } from 'react-icons/f
 import { useTranslation } from 'react-i18next';
 
 const TechnologyPartners = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isArabic = i18n.language?.startsWith('ar');
-  const focusCards = [
+  const focusCardMeta = [
     {
-      title: 'API Integrations',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
-      description: 'Secure APIs and middleware that connect finance, compliance, and ERP stacks.',
       icon: FaPlug
     },
     {
-      title: 'Data & Analytics',
       image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80',
-      description: 'Unified data pipelines, dashboards, and KPI analytics for faster decisions.',
       icon: FaDatabase
     },
     {
-      title: 'AI Agents',
       image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
-      description: 'AI copilots for review, compliance checks, and operational insights.',
       icon: FaRobot
     },
     {
-      title: 'RPA & Tools',
       image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
-      description: 'Automation tools that reduce manual workload and improve control.',
       icon: FaCogs
     }
   ];
+  const focusCardsText = t('partnerPages.technology.cards', { returnObjects: true });
+  const focusCards = focusCardMeta.map((meta, index) => ({
+    ...meta,
+    ...(focusCardsText[index] || {})
+  }));
 
-  const sidebarContent = isArabic
-    ? {
-      title: 'كن شريكًا',
-      stepsLabel: '4 خطوات',
-      stepPrefix: 'الخطوة',
-      cta: 'ابدأ التقديم',
-      steps: [
-        'سجل كشريك.',
-        'أكمل الملف التعريفي بالذكاء الاصطناعي.',
-        'وقّع اتفاقية الشروط والأحكام إلكترونيًا.',
-        'أرسل نموذج نوع الشراكة الخاص بك.'
-      ]
-    }
-    : {
-      title: 'Become a Partner',
-      stepsLabel: '4 Steps',
-      stepPrefix: 'Step',
-      cta: 'Start Application',
-      steps: [
-        'Register as a partner.',
-        'Complete AI profiling.',
-        'E-Sign the Terminal Condition Agreement.',
-        'Submit your partner type form.'
-      ]
-    };
+  const sidebarContent = {
+    title: t('partnerPages.shared.sidebar.title'),
+    stepsLabel: t('partnerPages.shared.sidebar.stepsLabel'),
+    stepPrefix: t('partnerPages.shared.sidebar.stepPrefix'),
+    cta: t('partnerPages.shared.sidebar.cta'),
+    steps: t('partnerPages.shared.sidebar.steps', { returnObjects: true })
+  };
   const timelineLinePosition = isArabic ? 'before:right-[1.125rem]' : 'before:left-[1.125rem]';
 
   return (
@@ -66,12 +45,12 @@ const TechnologyPartners = () => {
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.35),transparent_55%)]" />
         <div className="container mx-auto px-4 md:px-6 lg:px-8 pl-10 md:pl-16 relative z-10">
           <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.25em] text-white/70">Technology Partners</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/70">{t('partnerPages.technology.label')}</p>
             <h1 className="mt-3 text-3xl md:text-4xl font-semibold text-white">
-              Build technology partnerships that deliver measurable outcomes.
+              {t('partnerPages.technology.title')}
             </h1>
             <p className="mt-3 text-white/80">
-              We collaborate with platforms and solution providers to integrate, automate, and scale finance and compliance workflows.
+              {t('partnerPages.technology.subtitle')}
             </p>
           </div>
         </div>
@@ -81,9 +60,9 @@ const TechnologyPartners = () => {
         <div className="grid lg:grid-cols-[1.55fr_0.75fr] gap-8">
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl font-semibold text-slate-900">What this partnership delivers</h2>
+              <h2 className="text-2xl font-semibold text-slate-900">{t('partnerPages.shared.sectionTitle')}</h2>
               <p className="mt-2 text-slate-600">
-                Clear architecture alignment, secure integrations, and joint delivery support to scale outcomes.
+                {t('partnerPages.technology.sectionSubtitle')}
               </p>
             </div>
             

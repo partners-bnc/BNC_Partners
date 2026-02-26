@@ -9,6 +9,7 @@ import TechnologyPartners from './pages/partners/TechnologyPartners';
 import ServicePartners from './pages/partners/ServicePartners';
 import Login from './auth/Login';
 import PartnerDashboard from './pages/PartnerDashboard';
+import ReferralProgram from './pages/ReferralProgram';
 import AdminDashboard from './pages/AdminDashboard';
 import IndiaServices from './pages/services/india/IndiaServices';
 import SaudiArabiaServices from './pages/services/saudi-arabia/SaudiArabiaServices';
@@ -51,6 +52,7 @@ function App() {
                   <Route path="/partnerships/technology" element={<TechnologyPartners />} />
                   <Route path="/partnerships/service" element={<ServicePartners />} />
                   <Route path="/partner-form" element={<Home />} />
+                  <Route path="/referral-program" element={<ReferralProgram />} />
                 </Routes>
               </main>
               <Footer />
