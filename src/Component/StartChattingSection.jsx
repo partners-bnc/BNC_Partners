@@ -47,10 +47,10 @@ const StartChattingSection = ({ embedded = false }) => {
   const insightCards = Array.isArray(insightCardsRaw) ? insightCardsRaw : [];
 
   const bncServiceMeta = [
-    { icon: Building2, image: '/favicon/001.jpg.jpeg' },
-    { icon: Users, image: '/favicon/002.jpg.jpeg' },
-    { icon: Sparkles, image: '/favicon/003.jpg.jpeg' },
-    { icon: Briefcase, image: '/favicon/004.jpg.jpeg' }
+    { icon: Building2, image: '/favicon/001.jpg.jpeg', route: '/partnerships/international' },
+    { icon: Users, image: '/favicon/002.jpg.jpeg', route: '/partnerships/sales' },
+    { icon: Sparkles, image: '/favicon/003.jpg.jpeg', route: '/partnerships/technology' },
+    { icon: Briefcase, image: '/favicon/004.jpg.jpeg', route: '/partnerships/service' }
   ];
 
   const bncServices = bncServiceMeta.map((meta, index) => ({
@@ -60,7 +60,7 @@ const StartChattingSection = ({ embedded = false }) => {
 
   const WEBHOOK_URL =
     import.meta.env.VITE_N8N_WEBHOOK_URL ||
-    'https://akashkrid91.app.n8n.cloud/webhook/1f7b3262-4441-4c9e-8a30-b77b33499bb7';
+    'https://akashkrid91.app.n8n.cloud/webhook/2d2351c0-7603-49bc-957e-6e7cb265389f';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -552,6 +552,7 @@ const StartChattingSection = ({ embedded = false }) => {
                     return (
                     <div
                       key={index}
+                      onClick={() => navigate(service.route)}
                       className="bg-white border border-gray-200 hover:border-[#2C5AA0] rounded-xl overflow-hidden cursor-pointer transition-all group hover:shadow-md hover:scale-[1.02] duration-200"
                     >
                       <div className="h-24 relative overflow-hidden bg-gray-100">

@@ -174,15 +174,6 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                   </>
                 ) : (
                   <>
-                    <div className="flex justify-center">
-                      <div className="h-16 w-16 rounded-full bg-white/90 shadow-[0_10px_20px_rgba(44,90,160,0.25)] border border-black/30 flex items-center justify-center transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_14px_26px_rgba(44,90,160,0.35)]">
-                        <img
-                          src="/favicon/download.png"
-                          alt="BnC Global"
-                          className="h-10 w-10 object-contain drop-shadow-[0_6px_10px_rgba(44,90,160,0.35)]"
-                        />
-                      </div>
-                    </div>
                     <Link 
                       to="/login" 
                       onClick={onClose} 

@@ -1,11 +1,10 @@
 ﻿import React, { useState, useEffect, useMemo } from 'react';
-import { FaUser, FaHeadset, FaMicrophone } from 'react-icons/fa';
+import { FaUser, FaMicrophone, FaSitemap } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../Component/Header';
 import Footer from '../Component/Footer';
 import AIProfileModal from '../Component/AIProfileModal';
-import ReferralModal from '../Component/ReferralModal';
 import TermsAgreementModal from '../Component/TermsAgreementModal';
 import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
@@ -15,7 +14,6 @@ const PartnerDashboard = () => {
   const [partnerData, setPartnerData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
-  const [isReferralModalOpen, setIsReferralModalOpen] = useState(false);
   const [isAgreementOpen, setIsAgreementOpen] = useState(false);
   const [isRequirementModalOpen, setIsRequirementModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -117,9 +115,6 @@ const PartnerDashboard = () => {
     if (open === 'ai-profile' && !partnerData?.aiProfileCompleted) {
       setIsAIModalOpen(true);
     }
-    if (open === 'referral') {
-      setIsReferralModalOpen(true);
-    }
   }, [location.search, partnerData?.aiProfileCompleted]);
 
   const handleLogout = async () => {
@@ -196,8 +191,6 @@ const PartnerDashboard = () => {
 
   const aiProfileTokens = t('partnerDashboard.aiProfileSearchTokens', { returnObjects: true });
   const showAIProfile = matchesSearch(normalizeTokensText(aiProfileTokens));
-  const referralTokens = t('partnerDashboard.referralSearchTokens', { returnObjects: true });
-  const showReferral = matchesSearch(normalizeTokensText(referralTokens));
 
   const embeddedCountryKey = selectedCountry === 'global' ? 'other' : selectedCountry;
   const embeddedServices = useMemo(() => {
@@ -402,25 +395,23 @@ const PartnerDashboard = () => {
                     </button>
                   </div>
                 )}
-                {showReferral && (
-                  <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
-                    <div className={`flex items-center gap-2 ${rowDirection}`}>
-                      <FaHeadset className="h-3.5 w-3.5 text-[#2C5AA0]" />
-                      <div className="flex-1">
-                        <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
-                          {t('partnerDashboard.referral.title')}
-                        </h3>
-                      </div>
+                <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
+                  <div className={`flex items-center gap-2 ${rowDirection}`}>
+                    <FaSitemap className="h-3.5 w-3.5 text-[#2C5AA0]" />
+                    <div className="flex-1">
+                      <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
+                        {t('partnerDashboard.referralProgram.title')}
+                      </h3>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setIsReferralModalOpen(true)}
-                      className="mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors bg-linear-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]"
-                    >
-                      {t('partnerDashboard.referral.start')}
-                    </button>
                   </div>
-                )}
+                  <button
+                    type="button"
+                    onClick={() => navigate('/referral-program')}
+                    className="mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors bg-linear-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]"
+                  >
+                    {t('partnerDashboard.referralProgram.cta')}
+                  </button>
+                </div>
                 <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
                   <div className={`flex items-center gap-2 ${rowDirection}`}>
                     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-slate-700" fill="none" stroke="currentColor" strokeWidth="2">
@@ -607,12 +598,6 @@ const PartnerDashboard = () => {
             return updated;
           });
         }}
-        partnerData={partnerData}
-      />
-      
-      <ReferralModal 
-        isOpen={isReferralModalOpen} 
-        onClose={() => setIsReferralModalOpen(false)}
         partnerData={partnerData}
       />
       

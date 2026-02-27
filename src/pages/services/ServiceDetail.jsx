@@ -7,7 +7,6 @@ import {
   FiInfo,
   FiList,
   FiMail,
-  FiMic,
   FiPhone,
   FiChevronDown,
   FiChevronUp,
@@ -2019,15 +2018,40 @@ const ServiceDetail = () => {
                             <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
                           </div>
                         </div>
-                        <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection} ${isRtl ? 'md:pr-6' : 'md:pl-6'}`}>
-                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
-                            <FiMic className="h-3.5 w-3.5" aria-hidden="true" />
-                          </span>
-                          <div>
-                            <h4 className="font-poppins text-lg font-semibold">
-                              {t('serviceDetail.voiceRequirement.title')}
-                            </h4>
-                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <style>{`
+                          .voice-bars {
+                            display: flex;
+                            align-items: center;
+                            gap: 6px;
+                            height: 28px;
+                          }
+                          .voice-bar {
+                            width: 4px;
+                            height: 12px;
+                            background: #2C5AA0;
+                            border-radius: 999px;
+                            animation: voicePulse 1.15s ease-in-out infinite;
+                            transform-origin: center;
+                            opacity: 0.8;
+                          }
+                          @keyframes voicePulse {
+                            0% { transform: scaleY(0.35); opacity: 0.6; }
+                            50% { transform: scaleY(1.7); opacity: 1; }
+                            100% { transform: scaleY(0.45); opacity: 0.7; }
+                          }
+                        `}</style>
+                        <div className={`inline-flex items-center gap-3 ${rowDirection} ${isRtl ? 'md:pr-6' : 'md:pl-6'}`}>
+                          <div className="voice-bars" aria-hidden="true">
+                            {Array.from({ length: 28 }).map((_, index) => (
+                              <span
+                                key={index}
+                                className="voice-bar"
+                                style={{
+                                  animationDelay: `${index * 0.07}s`,
+                                  animationDuration: `${0.9 + (index % 6) * 0.12}s`
+                                }}
+                              />
+                            ))}
                           </div>
                         </div>
                       </div>

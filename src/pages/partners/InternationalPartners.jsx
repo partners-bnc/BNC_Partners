@@ -4,60 +4,39 @@ import { FaArrowRight, FaGlobe, FaBalanceScale, FaBuilding, FaChartLine } from '
 import { useTranslation } from 'react-i18next';
 
 const InternationalPartners = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isArabic = i18n.language?.startsWith('ar');
-  const focusCards = [
+  const focusCardMeta = [
     {
-      title: 'Market Entry & Localization',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
-      description: 'Local market analysis, entity setup guidance, and go-to-market alignment.',
       icon: FaGlobe
     },
     {
-      title: 'Local Compliance & Tax',
       image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80',
-      description: 'Regulatory filings, tax alignment, and audit-ready documentation.',
       icon: FaBalanceScale
     },
     {
-      title: 'Cross-Border Delivery',
       image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
-      description: 'On-ground execution with shared SLAs, QA, and reporting standards.',
       icon: FaBuilding
     },
     {
-      title: 'Shared Services Setup',
       image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
-      description: 'Design and stabilization of shared service hubs and governance.',
       icon: FaChartLine
     }
   ];
+  const focusCardsText = t('partnerPages.international.cards', { returnObjects: true });
+  const focusCards = focusCardMeta.map((meta, index) => ({
+    ...meta,
+    ...(focusCardsText[index] || {})
+  }));
 
-  const sidebarContent = isArabic
-    ? {
-      title: 'كن شريكًا',
-      stepsLabel: '4 خطوات',
-      stepPrefix: 'الخطوة',
-      cta: 'ابدأ التقديم',
-      steps: [
-        'سجل كشريك.',
-        'أكمل الملف التعريفي بالذكاء الاصطناعي.',
-        'وقّع اتفاقية الشروط والأحكام إلكترونيًا.',
-        'أرسل نموذج نوع الشراكة الخاص بك.'
-      ]
-    }
-    : {
-      title: 'Become a Partner',
-      stepsLabel: '4 Steps',
-      stepPrefix: 'Step',
-      cta: 'Start Application',
-      steps: [
-        'Register as a partner.',
-        'Complete AI profiling.',
-        'E-Sign the Terminal Condition Agreement.',
-        'Submit your partner type form.'
-      ]
-    };
+  const sidebarContent = {
+    title: t('partnerPages.shared.sidebar.title'),
+    stepsLabel: t('partnerPages.shared.sidebar.stepsLabel'),
+    stepPrefix: t('partnerPages.shared.sidebar.stepPrefix'),
+    cta: t('partnerPages.shared.sidebar.cta'),
+    steps: t('partnerPages.shared.sidebar.steps', { returnObjects: true })
+  };
   const timelineLinePosition = isArabic ? 'before:right-[1.125rem]' : 'before:left-[1.125rem]';
 
   return (
@@ -66,12 +45,12 @@ const InternationalPartners = () => {
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.35),transparent_55%)]" />
         <div className="container mx-auto px-4 md:px-6 lg:px-8 pl-10 md:pl-16 relative z-10">
           <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.25em] text-white/70">International Partners</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/70">{t('partnerPages.international.label')}</p>
             <h1 className="mt-3 text-3xl md:text-4xl font-semibold text-white">
-              Lead cross-border delivery with trusted local execution.
+              {t('partnerPages.international.title')}
             </h1>
             <p className="mt-3 text-white/80">
-              We partner with firms that can deliver compliance-ready services and client success across key regions.
+              {t('partnerPages.international.subtitle')}
             </p>
           </div>
         </div>
@@ -81,9 +60,9 @@ const InternationalPartners = () => {
         <div className="grid lg:grid-cols-[1.55fr_0.75fr] gap-8">
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl font-semibold text-slate-900">What this partnership delivers</h2>
+              <h2 className="text-2xl font-semibold text-slate-900">{t('partnerPages.shared.sectionTitle')}</h2>
               <p className="mt-2 text-slate-600">
-                Local execution, compliance alignment, and shared delivery standards to scale global engagements.
+                {t('partnerPages.international.sectionSubtitle')}
               </p>
             </div>
             
