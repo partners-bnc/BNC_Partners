@@ -2,6 +2,17 @@ import { supabase } from './supabaseClient';
 
 const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
 const VOICE_REQUIREMENT_AUDIO_BUCKET = 'voice-requirement-audio';
+const isAuthSessionMissingError = (error) => {
+  const message = String(error?.message || '').toLowerCase();
+  const code = String(error?.code || '').toLowerCase();
+  return (
+    message.includes('auth session missing') ||
+    message.includes('session missing') ||
+    message.includes('jwt') ||
+    message.includes('not authenticated') ||
+    code === 'authsessionmissingerror'
+  );
+};
 const withTimeout = (promise, timeoutMs, timeoutMessage) => {
   let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
@@ -198,6 +209,9 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
     } = await supabase.auth.getUser();
 
     if (userError) {
+      if (isAuthSessionMissingError(userError)) {
+        return null;
+      }
       throw userError;
     }
 
@@ -369,6 +383,9 @@ export const submitVoiceRequirement = async ({
   } = await supabase.auth.getUser();
 
   if (authError) {
+    if (isAuthSessionMissingError(authError)) {
+      throw new Error('AUTH_REQUIRED');
+    }
     throw authError;
   }
 
@@ -498,6 +515,9 @@ export const getSessionUser = async () => {
   } = await supabase.auth.getUser();
 
   if (error) {
+    if (isAuthSessionMissingError(error)) {
+      return null;
+    }
     throw error;
   }
 
