@@ -133,15 +133,17 @@ function ReferralChain({ nodes = [], connectors = [], rtl = false }) {
   return (
     <div ref={ref}>
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 0,
-          overflowX: "auto",
-          paddingBottom: 8,
-          flexDirection: rtl ? "row-reverse" : "row",
-        }}
-      >
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 0,
+            overflowX: "auto",
+            overflowY: "visible",
+            paddingTop: 16,
+            paddingBottom: 8,
+            flexDirection: rtl ? "row-reverse" : "row",
+          }}
+        >
         {nodes.map((n, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 120 }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
@@ -880,7 +882,7 @@ export default function ReferralPage() {
         </FadeIn>
 
         <FadeIn delay={0.12}>
-          <div style={{ background: G.cream, borderRadius: 20, padding: "3.75rem ", border: `1px solid ${G.border}` }}>
+          <div style={{ background: G.cream, borderRadius: 20, padding: "4.75rem 2.5rem 3.25rem", border: `1px solid ${G.border}` }}>
             <ReferralChain nodes={chainNodes} connectors={chainConnectors} rtl={isRtl} />
           </div>
         </FadeIn>
