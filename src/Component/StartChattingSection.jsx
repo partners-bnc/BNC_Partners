@@ -13,6 +13,8 @@ import {
   ArrowRight,
   Volume2
 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import RequirementVoiceModal from './RequirementVoiceModal';
 import { submitVoiceRequirement } from '../lib/supabaseData';
 
@@ -38,6 +40,10 @@ const StartChattingSection = ({ embedded = false }) => {
   const isDraggingRef = useRef(false);
   const containerRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const chatDebug = (() => {
+    if (typeof window === 'undefined') return false;
+    return new URLSearchParams(window.location.search).get('chatDebug') === '1';
+  })();
   const quickCardsRaw = t('startChatting.quickCards', { returnObjects: true });
   const categoryItemsRaw = t('startChatting.categories.items', { returnObjects: true });
   const insightCardsRaw = t('startChatting.enablement.cards', { returnObjects: true });
@@ -154,6 +160,7 @@ const StartChattingSection = ({ embedded = false }) => {
       const botMessage = {
         type: 'bot',
         text: replyText?.trim() || t('startChatting.chat.botFallback'),
+        rawText: replyText || '',
         time: formatTime(new Date())
       };
       setMessages((prev) => [...prev, botMessage]);
@@ -242,37 +249,40 @@ const StartChattingSection = ({ embedded = false }) => {
     setSpeakingIndex(idx);
     window.speechSynthesis.speak(utterance);
   };
-
-  const formatBotText = (text) => {
+  const normalizeBotMarkdown = (text) => {
     if (!text) return '';
-    let formatted = text;
-    formatted = formatted.replace(/(^|\s)(\d+)\.\s*/g, '\n$2. ');
-    formatted = formatted.replace(/\s-\s/g, '\n- ');
-    formatted = formatted.replace(/\s•\s/g, '\n• ');
-    formatted = formatted.replace(/\s—\s/g, '\n— ');
-    formatted = formatted.replace(/(\*\*[^*]+\*\*)/g, '\n$1');
-    formatted = formatted.replace(/(^|\n)\s*(\d+)\.\s*\n+\s*/g, '$1$2. ');
-    formatted = formatted.replace(/(\d+\.\s)\n\*\*/g, '$1**');
-    formatted = formatted.replace(/\n{2,}/g, '\n');
-    return formatted.trim();
-  };
+    const normalized = text
+      .replace(/\r\n/g, '\n')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      .replace(/[\uFF03\uFE5F\u266F]/g, '#')
+      .replace(/&#92;|&#x5c;/gi, '\\')
+      .replace(/&num;|&#35;|&#x23;/gi, '#');
 
-  const renderBotText = (text) => {
-    const formatted = formatBotText(text);
-    const parts = formatted.split('**');
-    return (
-      <span className="whitespace-pre-line">
-        {parts.map((part, idx) =>
-          idx % 2 === 1 ? (
-            <strong key={`${idx}-${part}`}>{part}</strong>
-          ) : (
-            <span key={`${idx}-${part}`}>{part}</span>
-          )
-        )}
-      </span>
-    );
-  };
+    return normalized
+      .split('\n')
+      .map((line) => {
+        const trimmed = line.trim();
 
+        const wrappedHeadingMatch = trimmed.match(/^\*{1,2}\s*(#{1,6})\s+(.+?)\s*\*{1,2}$/);
+        if (wrappedHeadingMatch) {
+          return `${wrappedHeadingMatch[1]} ${wrappedHeadingMatch[2].trim()}`;
+        }
+
+        const escapedHeadingMatch = line.match(/^\s*\\+(#{1,6})[\s\u00A0]*(.+)$/);
+        if (escapedHeadingMatch) {
+          return `${escapedHeadingMatch[1]} ${escapedHeadingMatch[2].trim()}`;
+        }
+
+        const missingSpaceHeadingMatch = line.match(/^\s*(#{1,6})([^\s#].*)$/);
+        if (missingSpaceHeadingMatch) {
+          return `${missingSpaceHeadingMatch[1]} ${missingSpaceHeadingMatch[2].trim()}`;
+        }
+
+        return line;
+      })
+      .join('\n')
+      .trim();
+  };
   const handleMicClick = () => {
     if (!recognitionRef.current) {
       setMicError(t('startChatting.chat.mic.notSupported'));
@@ -412,7 +422,59 @@ const StartChattingSection = ({ embedded = false }) => {
                           } ${textAlign}`}
                           dir={isRtl ? 'rtl' : 'ltr'}
                         >
-                          {msg.type === 'bot' ? renderBotText(msg.text) : msg.text}
+                          {msg.type === 'bot' ? (
+                            <ReactMarkdown
+                              remarkPlugins={[remarkGfm]}
+                              components={{
+                                p: ({ node, children, ...props }) => {
+                                  const plainText = (Array.isArray(children) ? children : [children])
+                                    .filter((item) => typeof item === 'string')
+                                    .join('')
+                                    .trim();
+                                  const looksLikeHeading = /^\s*#{1,6}[\s\u00A0]+.+$/.test(plainText);
+                                  const isTextOnly = Array.isArray(node?.children)
+                                    && node.children.every((child) => child.type === 'text');
+
+                                  if (looksLikeHeading && isTextOnly) {
+                                    const headingMatch = plainText.match(/^\s*(#{1,6})[\s\u00A0]+(.+)$/);
+                                    if (headingMatch) {
+                                      const level = Math.min(3, headingMatch[1].length);
+                                      const headingText = headingMatch[2].trim();
+                                      if (level === 1) return <h1 className="text-base font-semibold mt-2 mb-1">{headingText}</h1>;
+                                      if (level === 2) return <h2 className="text-base font-semibold mt-2 mb-1">{headingText}</h2>;
+                                      return <h3 className="text-sm font-semibold mt-2 mb-1">{headingText}</h3>;
+                                    }
+                                  }
+
+                                  return <p className="mb-2 last:mb-0 leading-relaxed" {...props}>{children}</p>;
+                                },
+                                ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-2 space-y-1" {...props} />,
+                                ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-2 space-y-1" {...props} />,
+                                li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+                                h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mt-3 mb-2 leading-tight" {...props} />,
+                                h2: ({ node, ...props }) => <h2 className="text-xl font-bold mt-3 mb-2 leading-tight" {...props} />,
+                                h3: ({ node, ...props }) => <h3 className="text-lg font-bold mt-2.5 mb-1.5 leading-snug" {...props} />,
+                                strong: ({ node, ...props }) => <strong className="font-semibold" {...props} />
+                              }}
+                            >
+                              {normalizeBotMarkdown(msg.text)}
+                            </ReactMarkdown>
+                          ) : (
+                            msg.text
+                          )}
+                          {msg.type === 'bot' && chatDebug && (
+                            <div className="mt-2 rounded-md border border-[#2C5AA0]/20 bg-white/70 p-2 text-[11px] text-slate-700">
+                              <div className="font-semibold text-[#2C5AA0]">chatDebug</div>
+                              <div className="mt-1">
+                                <span className="font-medium">raw:</span>
+                                <pre className="mt-0.5 whitespace-pre-wrap break-words">{String(msg.rawText || '')}</pre>
+                              </div>
+                              <div className="mt-1">
+                                <span className="font-medium">normalized:</span>
+                                <pre className="mt-0.5 whitespace-pre-wrap break-words">{normalizeBotMarkdown(String(msg.rawText || msg.text || ''))}</pre>
+                              </div>
+                            </div>
+                          )}
                         </div>
                         {msg.type === 'bot' && (
                           <button
@@ -643,3 +705,5 @@ const StartChattingSection = ({ embedded = false }) => {
 };
 
 export default StartChattingSection;
+
+
