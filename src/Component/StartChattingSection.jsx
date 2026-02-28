@@ -60,7 +60,7 @@ const StartChattingSection = ({ embedded = false }) => {
 
   const WEBHOOK_URL =
     import.meta.env.VITE_N8N_WEBHOOK_URL ||
-    'https://akashkrid91.app.n8n.cloud/webhook/2d2351c0-7603-49bc-957e-6e7cb265389f';
+    'https://akashbnc91.app.n8n.cloud/webhook/9a509226-33b8-4b59-a977-9b5bdae0ba4a';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
