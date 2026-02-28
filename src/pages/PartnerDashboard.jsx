@@ -8,7 +8,7 @@ import AIProfileModal from '../Component/AIProfileModal';
 import TermsAgreementModal from '../Component/TermsAgreementModal';
 import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
-import { fetchPartnerData, getSessionUser, logout, submitVoiceRequirement } from '../lib/supabaseData';
+import { fetchPartnerData, getSessionUser, logout, submitPartnerAgreement, submitVoiceRequirement } from '../lib/supabaseData';
 
 const PartnerDashboard = () => {
   const [partnerData, setPartnerData] = useState(null);
@@ -605,7 +605,13 @@ const PartnerDashboard = () => {
         isOpen={isAgreementOpen}
         onClose={() => setIsAgreementOpen(false)}
         partnerData={partnerData}
-        onSubmitted={({ signedName, signedAt }) => {
+        onSubmitted={async ({ signedName, signedAt }) => {
+          await submitPartnerAgreement({
+            partnerId: partnerData?.id,
+            partnerEmail: partnerData?.email,
+            signedName,
+            signedAt
+          });
           setPartnerData((prev) => {
             const updated = {
               ...(prev || {}),
