@@ -8,7 +8,7 @@ import AIProfileModal from '../Component/AIProfileModal';
 import TermsAgreementModal from '../Component/TermsAgreementModal';
 import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
-import { fetchPartnerData, logout, submitVoiceRequirement } from '../lib/supabaseData';
+import { fetchPartnerData, getSessionUser, logout, submitPartnerAgreement, submitVoiceRequirement } from '../lib/supabaseData';
 
 const PartnerDashboard = () => {
   const [partnerData, setPartnerData] = useState(null);
@@ -66,6 +66,11 @@ const PartnerDashboard = () => {
               localStorage.setItem('partnerUser', JSON.stringify(merged));
               return merged;
             });
+          } else {
+            localStorage.removeItem('partnerUser');
+            if (isMounted) {
+              navigate('/login');
+            }
           }
         } catch (error) {
           const message = String(error?.message || '').toLowerCase();
@@ -96,6 +101,14 @@ const PartnerDashboard = () => {
     }
   }, [navigate]);
 
+  const ensureSessionOrRedirect = async () => {
+    const sessionUser = await getSessionUser();
+    if (sessionUser) return sessionUser;
+    localStorage.removeItem('partnerUser');
+    navigate('/login');
+    return null;
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const open = params.get('open');
@@ -117,6 +130,10 @@ const PartnerDashboard = () => {
   const handleVoiceRequirementSubmit = async (payload) => {
     const requirementText = typeof payload === 'string' ? payload : payload?.text || '';
     const audioFile = typeof payload === 'string' ? null : payload?.audioFile || null;
+    const sessionUser = await ensureSessionOrRedirect();
+    if (!sessionUser) {
+      throw new Error('Please log in to submit your requirement.');
+    }
     try {
       await submitVoiceRequirement({
         requirement: requirementText,
@@ -164,6 +181,12 @@ const PartnerDashboard = () => {
     if (Array.isArray(tokens)) return tokens.join(' ');
     if (typeof tokens === 'string') return tokens;
     return '';
+  };
+
+  const handleOpenRequirementModal = async () => {
+    const sessionUser = await ensureSessionOrRedirect();
+    if (!sessionUser) return;
+    setIsRequirementModalOpen(true);
   };
 
   const aiProfileTokens = t('partnerDashboard.aiProfileSearchTokens', { returnObjects: true });
@@ -442,7 +465,7 @@ const PartnerDashboard = () => {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setIsRequirementModalOpen(true)}
+                    onClick={handleOpenRequirementModal}
                     className="w-full inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
                     aria-label="Open voice requirement"
                   >
@@ -582,7 +605,13 @@ const PartnerDashboard = () => {
         isOpen={isAgreementOpen}
         onClose={() => setIsAgreementOpen(false)}
         partnerData={partnerData}
-        onSubmitted={({ signedName, signedAt }) => {
+        onSubmitted={async ({ signedName, signedAt }) => {
+          await submitPartnerAgreement({
+            partnerId: partnerData?.id,
+            partnerEmail: partnerData?.email,
+            signedName,
+            signedAt
+          });
           setPartnerData((prev) => {
             const updated = {
               ...(prev || {}),

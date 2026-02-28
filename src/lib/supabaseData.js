@@ -2,6 +2,17 @@ import { supabase } from './supabaseClient';
 
 const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
 const VOICE_REQUIREMENT_AUDIO_BUCKET = 'voice-requirement-audio';
+const isAuthSessionMissingError = (error) => {
+  const message = String(error?.message || '').toLowerCase();
+  const code = String(error?.code || '').toLowerCase();
+  return (
+    message.includes('auth session missing') ||
+    message.includes('session missing') ||
+    message.includes('jwt') ||
+    message.includes('not authenticated') ||
+    code === 'authsessionmissingerror'
+  );
+};
 const withTimeout = (promise, timeoutMs, timeoutMessage) => {
   let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {
@@ -26,7 +37,10 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   notes: profileRow?.notes || '',
   registrationDate: profileRow?.registered_at || profileRow?.created_at || null,
   aiProfileCompleted: Boolean(aiRow),
-  bio: aiRow?.bio || ''
+  bio: aiRow?.bio || '',
+  agreementSigned: Boolean(profileRow?.agreement_signed),
+  agreementSignedName: profileRow?.agreement_signed_name || '',
+  agreementSignedAt: profileRow?.agreement_signed_at || null
 });
 
 const getAuthEmail = (user) => normalizeEmail(user?.email);
@@ -73,11 +87,32 @@ export const checkPartnerEmailExists = async (email) => {
   return Boolean(data);
 };
 
-export const registerPartner = async ({ firstName, lastName, email, phone, countryCode, country, city, password }) => {
+const splitFullName = (fullName) => {
+  const normalized = String(fullName || '')
+    .trim()
+    .replace(/\s+/g, ' ');
+  if (!normalized) {
+    return { firstName: '', lastName: '' };
+  }
+  const parts = normalized.split(' ');
+  const firstName = parts.shift() || '';
+  const lastName = parts.join(' ');
+  return { firstName, lastName };
+};
+
+export const registerPartner = async ({ firstName, lastName, fullName, email, phone, countryCode, country, city, password }) => {
   const normalizedEmail = normalizeEmail(email);
   const exists = await checkPartnerEmailExists(normalizedEmail);
   if (exists) {
     throw new Error('EMAIL_ALREADY_EXISTS');
+  }
+
+  const parsedName = splitFullName(fullName);
+  const resolvedFirstName = String(firstName || parsedName.firstName || '').trim();
+  const resolvedLastName = String(lastName || parsedName.lastName || '').trim();
+
+  if (!resolvedFirstName) {
+    throw new Error('First name is required.');
   }
 
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
@@ -85,8 +120,9 @@ export const registerPartner = async ({ firstName, lastName, email, phone, count
     password,
     options: {
       data: {
-        first_name: firstName,
-        last_name: lastName,
+        first_name: resolvedFirstName,
+        last_name: resolvedLastName || null,
+        full_name: [resolvedFirstName, resolvedLastName].filter(Boolean).join(' '),
         phone,
         country_code: countryCode,
         country,
@@ -198,6 +234,9 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
     } = await supabase.auth.getUser();
 
     if (userError) {
+      if (isAuthSessionMissingError(userError)) {
+        return null;
+      }
       throw userError;
     }
 
@@ -316,6 +355,76 @@ export const submitAIProfile = async ({ partnerEmail, partnerId, partnerType, se
   }
 };
 
+export const saveOnboardingProgress = async ({
+  partnerId,
+  partnerEmail,
+  aiCurrentStep = 0,
+  aiStartedAt = null,
+  aiLastActivityAt = null,
+  aiCompletedAt = null,
+  agreementCompletedAt = null
+}) => {
+  const resolvedPartnerId = String(partnerId || '').trim();
+  const normalizedEmail = normalizeEmail(partnerEmail);
+  if (!resolvedPartnerId || !normalizedEmail) return;
+
+  const row = {
+    partner_id: resolvedPartnerId,
+    partner_email: normalizedEmail,
+    ai_current_step: Number(aiCurrentStep) || 0,
+    ai_started_at: aiStartedAt || null,
+    ai_last_activity_at: aiLastActivityAt || null,
+    ai_completed_at: aiCompletedAt || null,
+    agreement_completed_at: agreementCompletedAt || null
+  };
+
+  const { error } = await supabase
+    .from('partner_onboarding_progress')
+    .upsert(row, { onConflict: 'partner_id' });
+
+  if (error) {
+    throw error;
+  }
+};
+
+export const submitPartnerAgreement = async ({ partnerId, partnerEmail, signedName, signedAt }) => {
+  const resolvedPartnerId = String(partnerId || '').trim();
+  const normalizedEmail = normalizeEmail(partnerEmail);
+  const trimmedName = String(signedName || '').trim();
+  if (!resolvedPartnerId) {
+    throw new Error('Partner ID is required.');
+  }
+  if (!trimmedName) {
+    throw new Error('Signature name is required.');
+  }
+
+  const signedTimestamp = signedAt || new Date().toISOString();
+  const { error: profileError } = await supabase
+    .from('partner_profiles')
+    .update({
+      agreement_signed: true,
+      agreement_signed_name: trimmedName,
+      agreement_signed_at: signedTimestamp
+    })
+    .eq('id', resolvedPartnerId);
+
+  if (profileError) {
+    throw profileError;
+  }
+
+  const { error: progressError } = await supabase
+    .from('partner_onboarding_progress')
+    .upsert({
+      partner_id: resolvedPartnerId,
+      partner_email: normalizedEmail || null,
+      agreement_completed_at: signedTimestamp
+    }, { onConflict: 'partner_id' });
+
+  if (progressError) {
+    throw progressError;
+  }
+};
+
 export const submitEnquiry = async ({ partnerId, country, countryLabel, service, formType, name, email, phone, company, message }) => {
   const { error } = await supabase.from('service_enquiries').insert({
     partner_id: partnerId || null,
@@ -369,6 +478,9 @@ export const submitVoiceRequirement = async ({
   } = await supabase.auth.getUser();
 
   if (authError) {
+    if (isAuthSessionMissingError(authError)) {
+      throw new Error('AUTH_REQUIRED');
+    }
     throw authError;
   }
 
@@ -483,7 +595,7 @@ export const submitVoiceRequirement = async ({
         const rawDetails = payload?.details ? String(payload.details) : '';
         details = [rawError, rawDetails].filter(Boolean).join(' - ');
       }
-    } catch (parseError) {
+    } catch {
       details = '';
     }
     const suffix = details ? ` (${details})` : '';
@@ -498,6 +610,9 @@ export const getSessionUser = async () => {
   } = await supabase.auth.getUser();
 
   if (error) {
+    if (isAuthSessionMissingError(error)) {
+      return null;
+    }
     throw error;
   }
 

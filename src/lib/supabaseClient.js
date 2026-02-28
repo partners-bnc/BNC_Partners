@@ -7,10 +7,4 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
 }
 
-const nonBlockingLock = async (_name, _acquireTimeout, fn) => fn();
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    lock: nonBlockingLock
-  }
-});
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

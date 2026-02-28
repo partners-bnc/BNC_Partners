@@ -35,7 +35,7 @@ import {
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import './AIProfileModal.css';
-import { submitAIProfile } from '../lib/supabaseData';
+import { saveOnboardingProgress, submitAIProfile } from '../lib/supabaseData';
 
 const createEmptyForm = () => ({
   partnerType: '',
@@ -152,6 +152,25 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
     };
     localStorage.setItem(draftKey, JSON.stringify(draftPayload));
   }, [isOpen, isSubmitted, draftKey, currentStep, formData]);
+
+  useEffect(() => {
+    if (!isOpen || isSubmitted) return;
+    if (!partnerData?.id || !partnerData?.email) return;
+
+    const timeoutId = setTimeout(() => {
+      saveOnboardingProgress({
+        partnerId: partnerData.id,
+        partnerEmail: partnerData.email,
+        aiCurrentStep: currentStep,
+        aiStartedAt: new Date().toISOString(),
+        aiLastActivityAt: new Date().toISOString()
+      }).catch((error) => {
+        console.error('Could not save onboarding progress:', error);
+      });
+    }, 400);
+
+    return () => clearTimeout(timeoutId);
+  }, [isOpen, isSubmitted, partnerData?.id, partnerData?.email, currentStep, formData]);
 
   useEffect(() => {
     if (!formData.services.includes('other')) return;
@@ -426,6 +445,15 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
         experienceIndustries: formData.experienceIndustries.join(', '),
         experienceDetails: formData.experienceDetails,
         bio: formData.bio
+      });
+
+      await saveOnboardingProgress({
+        partnerId: partnerData?.id,
+        partnerEmail: partnerData?.email,
+        aiCurrentStep: 5,
+        aiStartedAt: new Date().toISOString(),
+        aiLastActivityAt: new Date().toISOString(),
+        aiCompletedAt: new Date().toISOString()
       });
 
       console.log('AI Profile submitted successfully');

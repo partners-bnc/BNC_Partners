@@ -8,6 +8,7 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   const [accepted, setAccepted] = useState(false);
   const [error, setError] = useState('');
   const [isAtEnd, setIsAtEnd] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fullName = useMemo(() => {
     const first = partnerData?.firstName || '';
@@ -33,7 +34,7 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
     onClose();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const trimmed = signatureName.trim();
     if (!trimmed) {
@@ -45,8 +46,16 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
       return;
     }
     setError('');
-    onSubmitted({ signedName: trimmed, signedAt: new Date().toISOString() });
-    handleClose();
+    try {
+      setIsSubmitting(true);
+      await onSubmitted({ signedName: trimmed, signedAt: new Date().toISOString() });
+      handleClose();
+    } catch (submitError) {
+      const message = String(submitError?.message || 'Could not submit agreement.');
+      setError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -137,10 +146,10 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
                 </button>
                 <button
                   type="submit"
-                  disabled={!isAtEnd || !accepted || !signatureName.trim()}
+                  disabled={!isAtEnd || !accepted || !signatureName.trim() || isSubmitting}
                   className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] text-white font-semibold shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {t('termsAgreement.submit')}
+                  {isSubmitting ? 'Submitting...' : t('termsAgreement.submit')}
                 </button>
               </div>
             </form>
