@@ -30,6 +30,7 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   firstName: profileRow?.first_name || '',
   lastName: profileRow?.last_name || '',
   email: profileRow?.email || '',
+  countryCode: profileRow?.country_code || '',
   phone: profileRow?.phone || '',
   country: profileRow?.country || '',
   city: profileRow?.city || '',
@@ -42,6 +43,16 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   agreementSignedName: profileRow?.agreement_signed_name || '',
   agreementSignedAt: profileRow?.agreement_signed_at || null
 });
+
+const isFilled = (value) => String(value || '').trim().length > 0;
+
+export const isPartnerProfileComplete = (partner) =>
+  Boolean(
+    partner &&
+    isFilled(partner.phone) &&
+    isFilled(partner.country) &&
+    isFilled(partner.city)
+  );
 
 const getAuthEmail = (user) => normalizeEmail(user?.email);
 
@@ -288,6 +299,36 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
   }
 
   return mapPartnerProfile(profileRow, aiRow);
+};
+
+export const updatePartnerContactDetails = async ({ partnerId, phone, countryCode, country, city }) => {
+  const resolvedPartnerId = String(partnerId || '').trim();
+  if (!resolvedPartnerId) {
+    throw new Error('Partner ID is required.');
+  }
+
+  const payload = {
+    phone: String(phone || '').trim(),
+    country_code: String(countryCode || '').trim(),
+    country: String(country || '').trim(),
+    city: String(city || '').trim(),
+    updated_at: new Date().toISOString()
+  };
+
+  if (!payload.phone || !payload.country_code || !payload.country || !payload.city) {
+    throw new Error('Phone, country code, country and city are required.');
+  }
+
+  const { error } = await supabase
+    .from('partner_profiles')
+    .update(payload)
+    .eq('id', resolvedPartnerId);
+
+  if (error) {
+    throw error;
+  }
+
+  return fetchPartnerData('', resolvedPartnerId);
 };
 
 export const fetchAdminDashboardData = async () => {

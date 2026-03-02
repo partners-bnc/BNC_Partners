@@ -8,7 +8,7 @@ import AIProfileModal from '../Component/AIProfileModal';
 import TermsAgreementModal from '../Component/TermsAgreementModal';
 import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
-import { fetchPartnerData, getSessionUser, logout, submitPartnerAgreement, submitVoiceRequirement } from '../lib/supabaseData';
+import { fetchPartnerData, getSessionUser, isPartnerProfileComplete, logout, submitPartnerAgreement, submitVoiceRequirement } from '../lib/supabaseData';
 
 const PartnerDashboard = () => {
   const [partnerData, setPartnerData] = useState(null);
@@ -32,73 +32,64 @@ const PartnerDashboard = () => {
   const cardButtonPos = isRtl ? 'left-6' : 'right-6';
 
   useEffect(() => {
-    const userData = localStorage.getItem('partnerUser');
-    if (!userData) {
-      navigate('/login');
-      return;
-    }
+    let isRefreshing = false;
+    let isMounted = true;
+    let interval = null;
 
-    try {
-      const user = JSON.parse(userData);
-      setPartnerData(user);
-      setLoading(false);
-      let isRefreshing = false;
-      let isMounted = true;
-      
-      const refreshData = async () => {
-        if (isRefreshing) return;
-        isRefreshing = true;
-        try {
-          const freshData = await fetchPartnerData(user.email, user.id);
-          if (freshData) {
-            setPartnerData((prev) => {
-              const merged = {
-                ...freshData,
-                agreementSigned: prev?.agreementSigned || freshData.agreementSigned,
-                agreementSignedName: prev?.agreementSignedName || freshData.agreementSignedName,
-                agreementSignedAt: prev?.agreementSignedAt || freshData.agreementSignedAt
-              };
-              const prevSnapshot = JSON.stringify(prev || {});
-              const nextSnapshot = JSON.stringify(merged || {});
-              if (prevSnapshot === nextSnapshot) {
-                return prev;
-              }
-              localStorage.setItem('partnerUser', JSON.stringify(merged));
-              return merged;
-            });
-          } else {
-            localStorage.removeItem('partnerUser');
-            if (isMounted) {
-              navigate('/login');
-            }
-          }
-        } catch (error) {
-          const message = String(error?.message || '').toLowerCase();
-          if (message.includes('lockmanager') || message.includes('lock') || message.includes('timeout')) {
-            console.warn('Skipping refresh due to temporary auth lock timeout:', error);
-            return;
-          }
+    const validateAndLoad = async () => {
+      const sessionUser = await getSessionUser();
+      if (!sessionUser) {
+        localStorage.removeItem('partnerUser');
+        navigate('/login');
+        return;
+      }
+
+      const freshData = await fetchPartnerData(sessionUser.email, sessionUser.id);
+      if (!freshData) {
+        localStorage.removeItem('partnerUser');
+        navigate('/login');
+        return;
+      }
+
+      localStorage.setItem('partnerUser', JSON.stringify(freshData));
+      if (!isPartnerProfileComplete(freshData)) {
+        navigate('/complete-profile');
+        return;
+      }
+
+      if (isMounted) {
+        setPartnerData(freshData);
+        setLoading(false);
+      }
+    };
+
+    const refreshData = async () => {
+      if (isRefreshing) return;
+      isRefreshing = true;
+      try {
+        await validateAndLoad();
+      } catch (error) {
+        const message = String(error?.message || '').toLowerCase();
+        if (message.includes('lockmanager') || message.includes('lock') || message.includes('timeout')) {
+          console.warn('Skipping refresh due to temporary auth lock timeout:', error);
+        } else {
           console.error('Failed to refresh partner data:', error);
-        } finally {
-          isRefreshing = false;
         }
-      };
-      
-      refreshData().catch((error) => {
-        console.error('Initial partner refresh failed:', error);
-      });
-      
-      // Keep profile in sync without excessive auth-lock churn.
-      const interval = setInterval(refreshData, 15000);
-      
-      return () => {
-        isMounted = false;
-        clearInterval(interval);
-      };
-    } catch (error) {
-      console.error('Error parsing user data:', error);
-      navigate('/login');
-    }
+      } finally {
+        isRefreshing = false;
+      }
+    };
+
+    refreshData().catch((error) => {
+      console.error('Initial partner refresh failed:', error);
+    });
+
+    interval = setInterval(refreshData, 15000);
+
+    return () => {
+      isMounted = false;
+      if (interval) clearInterval(interval);
+    };
   }, [navigate]);
 
   const ensureSessionOrRedirect = async () => {

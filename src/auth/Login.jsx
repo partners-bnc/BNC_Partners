@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash, FaChartLine, FaBriefcase, FaHandshake, FaGraduationCap } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { fetchPartnerData, loginAdmin, loginPartner, loginPartnerWithGoogle } from '../lib/supabaseData';
+import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner, loginPartnerWithGoogle } from '../lib/supabaseData';
 import { supabase } from '../lib/supabaseClient';
 
 const Login = () => {
@@ -53,6 +53,7 @@ const Login = () => {
         return;
       }
 
+      localStorage.removeItem('partnerUser');
       setIsGoogleLoading(true);
       setErrors((prev) => ({ ...prev, general: '' }));
 
@@ -86,7 +87,7 @@ const Login = () => {
         }
 
         localStorage.setItem('partnerUser', JSON.stringify(partner));
-        window.location.href = '/dashboard';
+        window.location.href = isPartnerProfileComplete(partner) ? '/dashboard' : '/complete-profile';
       } catch (error) {
         if (!isMounted) {
           return;
@@ -169,7 +170,7 @@ const Login = () => {
 
       localStorage.setItem('partnerUser', JSON.stringify(partner));
       alert(t('login.alerts.partnerSuccess', { name: partner.firstName }));
-      window.location.href = '/dashboard';
+      window.location.href = isPartnerProfileComplete(partner) ? '/dashboard' : '/complete-profile';
     } catch (error) {
       console.error('Login error:', error);
       setErrors({ general: error?.message || t('login.errors.loginFailed') });
@@ -179,6 +180,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
+    localStorage.removeItem('partnerUser');
     setErrors((prev) => ({ ...prev, general: '' }));
     setIsGoogleLoading(true);
 

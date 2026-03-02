@@ -9,6 +9,7 @@ import TechnologyPartners from './pages/partners/TechnologyPartners';
 import ServicePartners from './pages/partners/ServicePartners';
 import Login from './auth/Login';
 import PartnerDashboard from './pages/PartnerDashboard';
+import CompleteProfile from './pages/CompleteProfile';
 import ReferralProgram from './pages/ReferralProgram';
 import AdminDashboard from './pages/AdminDashboard';
 import IndiaServices from './pages/services/india/IndiaServices';
@@ -34,6 +35,7 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/complete-profile" element={<CompleteProfile />} />
           <Route path="/dashboard" element={<PartnerDashboard />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/services/india" element={<IndiaServices />} />
