@@ -159,6 +159,21 @@ export const loginPartner = async (email, password) => {
   return data;
 };
 
+export const loginPartnerWithGoogle = async (redirectTo) => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo
+    }
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
 export const loginAdmin = async (adminIdOrEmail, password) => {
   const input = String(adminIdOrEmail || '').trim();
   if (!input) {
