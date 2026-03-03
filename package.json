@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "locale:check": "node scripts/locale-parity-check.cjs"
+    "locale:check": "node scripts/locale-parity-check.cjs",
+    "i18n:expert-form-check": "node scripts/expert-form-i18n-check.cjs",
+    "locale:ar-integrity-check": "node scripts/ar-locale-integrity-check.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.97.0",

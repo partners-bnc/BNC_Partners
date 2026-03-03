@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import bncLogo from '../assets/bnc.svg';
 import { getSessionUser, submitExpertRequest } from '../lib/supabaseData';
 
 const ExpertFormModal = ({ isOpen, onClose }) => {
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.language === 'ar';
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -94,7 +97,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
       }));
     } catch (error) {
       console.error('Failed to submit expert request:', error);
-      setSubmitError(error?.message || 'Could not submit form. Please try again.');
+      setSubmitError(error?.message || t('expertFormModal.submitErrorFallback'));
     } finally {
       setIsSubmitting(false);
     }
@@ -110,6 +113,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
+            aria-label={t('expertFormModal.closeAria')}
             className="text-gray-400 hover:text-gray-600 transition-colors"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -120,29 +124,31 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
 
         <div className="p-8 sm:p-12 flex-1">
           {isSubmitted ? (
-            <div className="max-w-md mx-auto text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Request submitted</h2>
+            <div className={`max-w-md mx-auto ${isRtl ? 'text-right' : 'text-center'}`}>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">{t('expertFormModal.success.title')}</h2>
               <p className="text-gray-500 mb-8">
-                Your request was saved successfully. Our team will contact you soon.
+                {t('expertFormModal.success.description')}
               </p>
               <button
                 type="button"
                 onClick={onClose}
                 className="px-8 py-3 bg-[#224491] text-white font-medium rounded-lg hover:bg-[#142c64] transition-colors"
               >
-                Close
+                {t('expertFormModal.success.close')}
               </button>
             </div>
           ) : (
             <div className="max-w-md mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center sm:text-left">Book a Consultation</h2>
-              <p className="text-gray-500 mb-8 text-center sm:text-left">
-                Fill in your details below. It will only take a minute.
+              <h2 className={`text-3xl font-bold text-gray-900 mb-2 text-center ${isRtl ? 'sm:text-right' : 'sm:text-left'}`}>
+                {t('expertFormModal.title')}
+              </h2>
+              <p className={`text-gray-500 mb-8 text-center ${isRtl ? 'sm:text-right' : 'sm:text-left'}`}>
+                {t('expertFormModal.subtitle')}
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="p-6 border border-gray-100 rounded-xl bg-gray-50/50 space-y-4">
-                  <h3 className="font-semibold text-gray-900 mb-4">Personal Details</h3>
+                  <h3 className={`font-semibold text-gray-900 mb-4 ${isRtl ? 'text-right' : ''}`}>{t('expertFormModal.sections.personal')}</h3>
 
                   <div>
                     <input
@@ -150,7 +156,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Full Name"
+                      placeholder={t('expertFormModal.placeholders.fullName')}
                       className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
                       required
                     />
@@ -161,14 +167,14 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      placeholder="Company Name"
+                      placeholder={t('expertFormModal.placeholders.companyName')}
                       className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="p-6 border border-gray-100 rounded-xl bg-gray-50/50 space-y-4">
-                  <h3 className="font-semibold text-gray-900 mb-4">Contacts</h3>
+                  <h3 className={`font-semibold text-gray-900 mb-4 ${isRtl ? 'text-right' : ''}`}>{t('expertFormModal.sections.contacts')}</h3>
 
                   <div className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -179,7 +185,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="Email Address"
+                      placeholder={t('expertFormModal.placeholders.emailAddress')}
                       className="flex-1 bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
                       required
                       readOnly={isSessionUser}
@@ -194,7 +200,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleChange}
-                      placeholder="Mobile Number"
+                      placeholder={t('expertFormModal.placeholders.mobileNumber')}
                       className="flex-1 bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
                       required
                     />
@@ -202,7 +208,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="p-6 border border-gray-100 rounded-xl bg-gray-50/50 space-y-4">
-                  <h3 className="font-semibold text-gray-900 mb-4">Requirement Details</h3>
+                  <h3 className={`font-semibold text-gray-900 mb-4 ${isRtl ? 'text-right' : ''}`}>{t('expertFormModal.sections.requirement')}</h3>
 
                   <div>
                     <input
@@ -210,7 +216,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       name="framework"
                       value={formData.framework}
                       onChange={handleChange}
-                      placeholder="Preferred Framework"
+                      placeholder={t('expertFormModal.placeholders.preferredFramework')}
                       className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
                     />
                   </div>
@@ -219,7 +225,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       name="requirement"
                       value={formData.requirement}
                       onChange={handleChange}
-                      placeholder="Tell us about your requirement..."
+                      placeholder={t('expertFormModal.placeholders.requirement')}
                       rows={3}
                       className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors resize-none"
                       required
@@ -237,7 +243,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                     disabled={isSubmitting}
                     className="px-8 py-3 bg-[#224491] text-white font-medium rounded-lg hover:bg-[#142c64] transition-colors flex items-center gap-2 disabled:opacity-60"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Details'}
+                    {isSubmitting ? t('expertFormModal.actions.submitting') : t('expertFormModal.actions.submit')}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>

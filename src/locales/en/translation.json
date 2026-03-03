@@ -3471,5 +3471,33 @@
       "primaryCta": "Register as Referral Partner",
       "secondaryCta": "Contact Our Team"
     }
+  },
+  "expertFormModal": {
+    "title": "Book a Consultation",
+    "subtitle": "Fill in your details below. It will only take a minute.",
+    "closeAria": "Close consultation form",
+    "submitErrorFallback": "Could not submit form. Please try again.",
+    "success": {
+      "title": "Request submitted",
+      "description": "Your request was saved successfully. Our team will contact you soon.",
+      "close": "Close"
+    },
+    "sections": {
+      "personal": "Personal Details",
+      "contacts": "Contacts",
+      "requirement": "Requirement Details"
+    },
+    "placeholders": {
+      "fullName": "Full Name",
+      "companyName": "Company Name",
+      "emailAddress": "Email Address",
+      "mobileNumber": "Mobile Number",
+      "preferredFramework": "Preferred Framework",
+      "requirement": "Tell us about your requirement..."
+    },
+    "actions": {
+      "submit": "Submit Details",
+      "submitting": "Submitting..."
+    }
   }
 }

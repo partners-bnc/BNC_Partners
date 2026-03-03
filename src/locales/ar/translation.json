@@ -1,6 +1,6 @@
 {
   "language": {
-    "english": "English",
+    "english": "إنجليزي",
     "arabic": "العربية"
   },
   "header": {
@@ -65,7 +65,7 @@
           "برامج الموزعين",
           "شبكة توزيع",
           "دعم المبيعات",
-          "????? ????? ?????"
+          "تمكين القناة"
         ]
       },
       "technology": {
@@ -75,7 +75,7 @@
           "تكاملات واجهات برمجة التطبيقات",
           "أتمتة الذكاء الاصطناعي",
           "هندسة البيانات",
-          "??????? ???????? ????????? (RPA)"
+          "الأدوات وتقنية RPA"
         ]
       },
       "service": {
@@ -85,7 +85,7 @@
           "المحاسبة والتمويل",
           "التدقيق الداخلي",
           "الأمن السيبراني وخصوصية البيانات",
-          "????????"
+          "الامتثال"
         ]
       }
     }
@@ -668,17 +668,17 @@
     "loginRequired": "يرجى تسجيل الدخول حتى نتمكن من تعبئة بياناتك قبل الإرسال.",
     "submitFailed": "فشل الإرسال. يرجى المحاولة مرة أخرى.",
     "documentsLabels": {
-      "bncGlobal": "BNC Global",
-      "bncGlobalKsa": "BNC Global (KSA)"
+      "bncGlobal": "بي ان سي العالمية",
+      "bncGlobalKsa": "بي ان سي جلوبال (المملكة العربية السعودية)"
     },
     "voiceRequirement": {
-      "title": "Say It. Send It. Done.",
-      "description": "Record your requirement in your own words ? quick, seamless, and hassle-free.",
-      "button": "????. ??????. ??",
+      "title": "قلها. أرسلها. منتهي.",
+      "description": "قم بتسجيل متطلباتك بكلماتك الخاصة بسرعة وسلاسة وخالية من المتاعب.",
+      "button": "قلها. أرسلها. منتهي",
       "points": [
-        "Speak your requirement",
-        "AI processes instantly",
-        "Get expert assistance"
+        "التحدث الشرط الخاص بك",
+        "يعالج الذكاء الاصطناعي على الفور",
+        "احصل على مساعدة الخبراء"
       ]
     },
     "subServiceMethodologyLabel": "منهجيتنا",
@@ -688,1498 +688,1498 @@
     "subServices": {
       "personal-business-loan": [
         {
-          "title": "CGTMSE Loan",
-          "coreOfferingIntro": "Collateral-free loans under the CGTMSE scheme to support MSME growth and expansion.",
+          "title": "قرض CGTMSE",
+          "coreOfferingIntro": "قروض بدون ضمانات بموجب مخطط CGTMSE لدعم نمو وتوسع المشروعات الصغيرة والمتوسطة.",
           "coreOffering": [
-            "MSME eligibility structuring",
-            "Loan documentation support",
-            "Bank coordination",
-            "Compliance guidance",
-            "Credit guarantee alignment"
+            "هيكلة أهلية المشروعات الصغيرة والمتوسطة",
+            "دعم وثائق القرض",
+            "التنسيق البنكي",
+            "توجيهات الامتثال",
+            "محاذاة ضمان الائتمان"
           ],
-          "methodologyTitle": "Assess ? Structure ? Apply ? Facilitate",
+          "methodologyTitle": "يٌقيِّم ؟ بناء ؟ يتقدم ؟ يسهل",
           "steps": [
-            "Assess eligibility and credit profile",
-            "Structure loan application strategically",
-            "Facilitate documentation and submission",
-            "Coordinate with lenders for approval"
+            "تقييم الأهلية والملف الائتماني",
+            "هيكلة طلب القرض بشكل استراتيجي",
+            "تسهيل التوثيق والتقديم",
+            "التنسيق مع المقرضين للحصول على الموافقة"
           ],
           "valueToConsultant": [
-            "Expand into MSME funding advisory",
-            "Increase client retention",
-            "Offer end-to-end growth support",
-            "Strengthen long-term client dependency"
+            "التوسع في استشارات تمويل المشروعات الصغيرة والمتوسطة",
+            "زيادة الاحتفاظ بالعملاء",
+            "تقديم دعم النمو الشامل",
+            "تعزيز الاعتماد على العميل على المدى الطويل"
           ],
           "whyUs": [
-            "Deep MSME funding understanding",
-            "Structured documentation approach",
-            "Strong lender network coordination",
-            "Faster, smoother processing"
+            "فهم عميق لتمويل المشاريع الصغيرة والمتوسطة الحجم",
+            "نهج التوثيق المنظم",
+            "تنسيق قوي لشبكة المقرضين",
+            "معالجة أسرع وأكثر سلاسة"
           ]
         },
         {
-          "title": "Working Capital Loan",
-          "coreOfferingIntro": "Short-term financing solutions to support operational cash flow needs.",
+          "title": "قرض رأس المال العامل",
+          "coreOfferingIntro": "حلول تمويلية قصيرة الأجل لدعم احتياجات التدفق النقدي التشغيلي.",
           "coreOffering": [
-            "Inventory funding",
-            "Receivable financing",
-            "Business cycle support",
-            "Structured working capital assessment"
+            "تمويل المخزون",
+            "التمويل المستحق",
+            "دعم دورة الأعمال",
+            "تقييم رأس المال العامل المنظم"
           ],
-          "methodologyTitle": "Evaluate ? Calculate ? Structure ? Secure",
+          "methodologyTitle": "يقيم ؟ احسب ؟ بناء ؟ يؤمن",
           "steps": [
-            "Evaluate cash flow cycle",
-            "Calculate funding requirement",
-            "Structure appropriate facility",
-            "Secure bank approval"
+            "تقييم دورة التدفق النقدي",
+            "حساب متطلبات التمويل",
+            "هيكل المنشأة المناسبة",
+            "تأمين موافقة البنك"
           ],
           "valueToConsultant": [
-            "Strengthen operational advisory",
-            "Improve client liquidity management",
-            "Increase recurring engagement",
-            "Become a financial growth partner"
+            "تعزيز الاستشارات التشغيلية",
+            "تحسين إدارة سيولة العميل",
+            "زيادة المشاركة المتكررة",
+            "كن شريكًا للنمو المالي"
           ],
           "whyUs": [
-            "Cash-flow focused assessment",
-            "Practical lender negotiation support",
-            "Governance-aligned financial structuring",
-            "Fast documentation turnaround"
+            "تقييم يركز على التدفق النقدي",
+            "الدعم العملي للتفاوض مع المقرض",
+            "الهيكلة المالية المتوافقة مع الحوكمة",
+            "تحول سريع في التوثيق"
           ]
         },
         {
-          "title": "LAP OD Limit (Loan Against Property ? Overdraft)",
-          "coreOfferingIntro": "Overdraft facility backed by property to enable flexible fund usage.",
+          "title": "حد LAP OD (القرض مقابل العقار؟ السحب على المكشوف)",
+          "coreOfferingIntro": "تسهيلات السحب على المكشوف المدعومة بالعقارات لتمكين الاستخدام المرن للأموال.",
           "coreOffering": [
-            "Property valuation coordination",
-            "OD structuring",
-            "Flexible withdrawal options",
-            "Interest optimisation support"
+            "تنسيق تقييم الممتلكات",
+            "هيكلة التطوير التنظيمي",
+            "خيارات سحب مرنة",
+            "دعم تحسين الفائدة"
           ],
-          "methodologyTitle": "Value ? Structure ? Negotiate ? Activate",
+          "methodologyTitle": "قيمة ؟ بناء ؟ التفاوض ؟ فعل",
           "steps": [
-            "Assess property valuation",
-            "Structure OD limit",
-            "Negotiate competitive rates",
-            "Activate and monitor utilisation"
+            "تقييم تقييم الممتلكات",
+            "هيكل OD الحد",
+            "التفاوض على أسعار تنافسية",
+            "تفعيل ومراقبة الاستخدام"
           ],
           "valueToConsultant": [
-            "Offer flexible funding solutions",
-            "Increase advisory revenue",
-            "Support expansion and liquidity management",
-            "Strengthen client trust"
+            "تقديم حلول تمويلية مرنة",
+            "زيادة الإيرادات الاستشارية",
+            "دعم التوسع وإدارة السيولة",
+            "تعزيز ثقة العملاء"
           ],
           "whyUs": [
-            "Competitive structuring approach",
-            "Bank coordination expertise",
-            "Transparent advisory process",
-            "Quick approval assistance"
+            "نهج الهيكلة التنافسية",
+            "خبرة في التنسيق البنكي",
+            "عملية استشارية شفافة",
+            "مساعدة الموافقة السريعة"
           ]
         },
         {
-          "title": "Unsecured Business Loan",
-          "coreOfferingIntro": "Collateral-free business loans based on financial strength and credit profile.",
+          "title": "قرض تجاري غير مضمون",
+          "coreOfferingIntro": "قروض تجارية خالية من الضمانات بناءً على القوة المالية والملف الائتماني.",
           "coreOffering": [
-            "Credit assessment support",
-            "Financial documentation preparation",
-            "Fast-track processing",
-            "Short-term and growth financing"
+            "دعم تقييم الائتمان",
+            "إعداد الوثائق المالية",
+            "معالجة سريعة",
+            "التمويل قصير الأجل والنمو"
           ],
-          "methodologyTitle": "Review ? Strengthen ? Apply ? Disburse",
+          "methodologyTitle": "مراجعة ؟ تعزيز ؟ يتقدم ؟ صرف",
           "steps": [
-            "Review financial eligibility",
-            "Strengthen documentation",
-            "Apply with suitable lenders",
-            "Support smooth disbursement"
+            "مراجعة الأهلية المالية",
+            "تعزيز الوثائق",
+            "تقدم بطلبك مع المقرضين المناسبين",
+            "دعم الصرف السلس"
           ],
           "valueToConsultant": [
-            "Offer quick funding solutions",
-            "Increase client dependency",
-            "Strengthen growth advisory",
-            "Improve service portfolio depth"
+            "تقديم حلول تمويلية سريعة",
+            "زيادة الاعتماد على العميل",
+            "تعزيز استشارات النمو",
+            "تحسين عمق محفظة الخدمة"
           ],
           "whyUs": [
-            "Strong lender network",
-            "Quick processing frameworks",
-            "Practical credit profiling",
-            "Transparent advisory"
+            "شبكة إقراض قوية",
+            "أطر المعالجة السريعة",
+            "التنميط الائتماني العملي",
+            "استشارة شفافة"
           ]
         },
         {
-          "title": "Loan Against Property (Term Loan)",
-          "coreOfferingIntro": "Structured term loans secured against residential or commercial property.",
+          "title": "قرض مقابل العقار (قرض لأجل)",
+          "coreOfferingIntro": "القروض لأجل المهيكلة المضمونة مقابل العقارات السكنية أو التجارية.",
           "coreOffering": [
-            "Property-backed funding",
-            "Long-tenure structuring",
-            "Competitive interest negotiation",
-            "Capital expansion support"
+            "التمويل المدعوم بالملكية",
+            "هيكلة طويلة الأمد",
+            "التفاوض على المصالح التنافسية",
+            "دعم التوسع في رأس المال"
           ],
-          "methodologyTitle": "Assess ? Structure ? Negotiate ? Close",
+          "methodologyTitle": "يٌقيِّم ؟ بناء ؟ التفاوض ؟ يغلق",
           "steps": [
-            "Assess valuation and funding capacity",
-            "Structure repayment plan",
-            "Negotiate best lending terms",
-            "Close and support documentation"
+            "تقييم القدرة على التقييم والتمويل",
+            "خطة سداد الهيكل",
+            "التفاوض على أفضل شروط الإقراض",
+            "إغلاق ودعم الوثائق"
           ],
           "valueToConsultant": [
-            "Support large capital expansion",
-            "Increase high-ticket engagements",
-            "Deepen financial advisory positioning",
-            "Build long-term relationships"
+            "دعم التوسع الكبير في رأس المال",
+            "زيادة المشاركات ذات التذاكر العالية",
+            "تعميق وضع الاستشارات المالية",
+            "بناء علاقات طويلة الأمد"
           ],
           "whyUs": [
-            "Structured funding advisory",
-            "Strong bank coordination",
-            "Transparent cost breakdown",
-            "End-to-end documentation support"
+            "استشارات التمويل المنظم",
+            "التنسيق البنكي القوي",
+            "توزيع التكلفة بشكل شفاف",
+            "دعم التوثيق الشامل"
           ]
         },
         {
-          "title": "Personal Loans (Car / Home / Education)",
-          "coreOfferingIntro": "Quick and structured personal financing solutions tailored to individual needs.",
+          "title": "القروض الشخصية (السيارة / المنزل / التعليم)",
+          "coreOfferingIntro": "حلول تمويل شخصي سريعة ومنظمة مصممة خصيصًا لتلبية الاحتياجات الفردية.",
           "coreOffering": [
-            "Car loans",
-            "Home loans",
-            "Education loans",
-            "Eligibility structuring",
-            "EMI planning support"
+            "قروض السيارات",
+            "قروض المنزل",
+            "قروض التعليم",
+            "هيكلة الأهلية",
+            "دعم تخطيط EMI"
           ],
-          "methodologyTitle": "Evaluate ? Compare ? Apply ? Secure",
+          "methodologyTitle": "يقيم ؟ يقارن ؟ يتقدم ؟ يؤمن",
           "steps": [
-            "Evaluate eligibility",
-            "Compare lender options",
-            "Apply with optimal structuring",
-            "Secure approval and disbursement"
+            "تقييم الأهلية",
+            "قارن خيارات المُقرض",
+            "تنطبق مع الهيكلة الأمثل",
+            "تأمين الموافقة والصرف"
           ],
           "valueToConsultant": [
-            "Expand into retail financial advisory",
-            "Strengthen client lifetime value",
-            "Increase cross-selling opportunities",
-            "Build trust beyond business advisory"
+            "التوسع في الاستشارات المالية للأفراد",
+            "تعزيز قيمة عمر العميل",
+            "زيادة فرص البيع المتبادل",
+            "بناء الثقة بما يتجاوز استشارات الأعمال"
           ],
           "whyUs": [
-            "Multi-lender comparison support",
-            "Competitive rate negotiation",
-            "Smooth documentation handling",
-            "Transparent advisory"
+            "دعم المقارنة بين المقرضين المتعددين",
+            "التفاوض على أسعار تنافسية",
+            "التعامل السلس مع الوثائق",
+            "استشارة شفافة"
           ]
         },
         {
-          "title": "Cash Credit / Overdraft (OD) Limits",
-          "coreOfferingIntro": "Flexible revolving credit facilities to manage daily operational requirements.",
+          "title": "حدود الائتمان النقدي/السحب على المكشوف (OD).",
+          "coreOfferingIntro": "تسهيلات ائتمانية متجددة مرنة لإدارة متطلبات التشغيل اليومية.",
           "coreOffering": [
-            "Working capital assessment",
-            "Limit structuring",
-            "Renewal and enhancement support",
-            "Bank compliance coordination"
+            "تقييم رأس المال العامل",
+            "هيكلة الحد",
+            "دعم التجديد والتحسين",
+            "تنسيق الامتثال البنكي"
           ],
-          "methodologyTitle": "Assess ? Structure ? Approve ? Monitor",
+          "methodologyTitle": "يٌقيِّم ؟ بناء ؟ يعتمد ؟ شاشة",
           "steps": [
-            "Assess cash flow cycle",
-            "Structure suitable limit",
-            "Support sanction process",
-            "Assist in renewals and enhancements"
+            "تقييم دورة التدفق النقدي",
+            "هيكل مناسب الحد",
+            "دعم عملية العقوبات",
+            "المساعدة في التجديدات والتحسينات"
           ],
           "valueToConsultant": [
-            "Strengthen client liquidity management",
-            "Increase recurring advisory",
-            "Position yourself as a financial growth enabler",
-            "Improve client operational continuity"
+            "تعزيز إدارة سيولة العملاء",
+            "زيادة الاستشارة المتكررة",
+            "ضع نفسك كعامل تمكين للنمو المالي",
+            "تحسين الاستمرارية التشغيلية للعميل"
           ],
           "whyUs": [
-            "Cash-flow centric structuring",
-            "Strong financial analysis support",
-            "End-to-end sanction assistance",
-            "Long-term renewal guidance"
+            "الهيكلة المتمحورة حول التدفق النقدي",
+            "دعم قوي للتحليل المالي",
+            "المساعدة في فرض العقوبات من البداية إلى النهاية",
+            "إرشادات التجديد طويلة المدى"
           ]
         }
       ],
       "financial-advisory": [
         {
-          "title": "Virtual CFO Services",
-          "coreOfferingIntro": "We enable you to deliver structured Virtual CFO support, including:",
+          "title": "خدمات المدير المالي الافتراضية",
+          "coreOfferingIntro": "نحن نمكنك من تقديم دعم منظم للمدير المالي الافتراضي، بما في ذلك:",
           "coreOffering": [
-            "Strategic financial planning & forecasting",
-            "Cash flow and working capital management",
-            "Profitability and margin optimisation",
-            "Board-level reporting & investor readiness",
-            "Financial structuring and growth strategy support"
+            "التخطيط المالي الاستراتيجي والتنبؤ",
+            "التدفق النقدي وإدارة رأس المال العامل",
+            "الربحية وتحسين الهامش",
+            "إعداد التقارير على مستوى مجلس الإدارة واستعداد المستثمرين",
+            "الهيكلة المالية ودعم استراتيجية النمو"
           ],
-          "methodologyTitle": "Assess ? Architect ? Implement ? Optimise",
+          "methodologyTitle": "يٌقيِّم ؟ مهندس معماري ؟ ينفذ ؟ تحسين",
           "steps": [
-            "Assess financial health and operational stability",
-            "Architect a strategic finance roadmap",
-            "Implement governance-driven reporting systems",
-            "Optimise performance through continuous review"
+            "تقييم الصحة المالية والاستقرار التشغيلي",
+            "تصميم خارطة طريق التمويل الاستراتيجي",
+            "تنفيذ أنظمة إعداد التقارير القائمة على الحوكمة",
+            "تحسين الأداء من خلال المراجعة المستمرة"
           ],
           "valueToConsultant": [
-            "Build high-value recurring retainers",
-            "Participate in strategic decision-making",
-            "Increase engagement size per client",
-            "Transition from compliance provider to growth advisor"
+            "بناء الخدم المتكررة ذات القيمة العالية",
+            "المشاركة في اتخاذ القرارات الاستراتيجية",
+            "زيادة حجم المشاركة لكل عميل",
+            "الانتقال من مزود الامتثال إلى مستشار النمو"
           ],
           "whyUs": [
-            "Practical CFO-led frameworks",
-            "Real implementation experience across industries",
-            "Structured advisory models you can replicate confidently",
-            "Strategic depth without operational complexity"
+            "الأطر العملية التي يقودها المدير المالي",
+            "تجربة تنفيذ حقيقية عبر الصناعات",
+            "نماذج استشارية منظمة يمكنك تكرارها بثقة",
+            "عمق استراتيجي دون تعقيد العمليات"
           ]
         },
         {
-          "title": "Budget & Cost Management",
-          "coreOfferingIntro": "We help you implement disciplined financial control systems for your clients:",
+          "title": "إدارة الميزانية والتكلفة",
+          "coreOfferingIntro": "نساعدك على تنفيذ أنظمة رقابة مالية منضبطة لعملائك:",
           "coreOffering": [
-            "Annual and rolling budgeting frameworks",
-            "Cost allocation and monitoring systems",
-            "Variance tracking & performance dashboards",
-            "Margin improvement strategies"
+            "أطر الموازنة السنوية والمتجددة",
+            "أنظمة توزيع التكاليف ومراقبتها",
+            "تتبع التباين ولوحات معلومات الأداء",
+            "استراتيجيات تحسين الهامش"
           ],
-          "methodologyTitle": "Plan ? Control ? Analyse ? Improve",
+          "methodologyTitle": "يخطط ؟ يتحكم ؟ تحليل ؟ يحسن",
           "steps": [
-            "Design structured budget architecture",
-            "Establish tracking and accountability mechanisms",
-            "Analyse deviations and financial leakages",
-            "Improve cost efficiency and profitability"
+            "تصميم بنية الميزانية المنظمة",
+            "إنشاء آليات التتبع والمساءلة",
+            "تحليل الانحرافات والتسربات المالية",
+            "تحسين كفاءة التكلفة والربحية"
           ],
           "valueToConsultant": [
-            "Deliver measurable bottom-line impact",
-            "Strengthen client profitability narratives",
-            "Increase repeat and cross-service opportunities",
-            "Position yourself as a performance-focused advisor"
+            "تحقيق تأثير ملموس على المحصلة النهائية",
+            "تعزيز روايات ربحية العميل",
+            "زيادة فرص التكرار والخدمات المشتركة",
+            "ضع نفسك كمستشار يركز على الأداء"
           ],
           "whyUs": [
-            "Data-driven cost optimisation frameworks",
-            "Experience across multi-sector financial structures",
-            "Scalable models adaptable to SMEs and enterprises",
-            "Execution-oriented approach, not theoretical advice"
+            "أطر تحسين التكلفة المستندة إلى البيانات",
+            "خبرة عبر الهياكل المالية متعددة القطاعات",
+            "نماذج قابلة للتطوير وقابلة للتكيف مع الشركات الصغيرة والمتوسطة والمؤسسات",
+            "النهج الموجه نحو التنفيذ، وليس المشورة النظرية"
           ]
         },
         {
-          "title": "Financial Planning & Analysis (FP&A)",
-          "coreOfferingIntro": "We support you in delivering forward-looking financial intelligence:",
+          "title": "التخطيط والتحليل المالي (FP&A)",
+          "coreOfferingIntro": "نحن ندعمك في تقديم معلومات مالية تطلعية:",
           "coreOffering": [
-            "Revenue and growth forecasting models",
-            "Scenario planning and sensitivity analysis",
-            "Capital allocation advisory",
-            "Business performance evaluation frameworks"
+            "نماذج التنبؤ بالإيرادات والنمو",
+            "تخطيط السيناريوهات وتحليل الحساسية",
+            "استشارات تخصيص رأس المال",
+            "أطر تقييم أداء الأعمال"
           ],
-          "methodologyTitle": "Model ? Evaluate ? Forecast ? Advise",
+          "methodologyTitle": "نموذج ؟ يقيم ؟ تنبؤ بالمناخ ؟ ينصح",
           "steps": [
-            "Develop customised financial models",
-            "Evaluate revenue and cost drivers",
-            "Forecast under multiple strategic scenarios",
-            "Provide board-ready strategic recommendations"
+            "تطوير نماذج مالية مخصصة",
+            "تقييم محركات الإيرادات والتكلفة",
+            "التنبؤ في ظل سيناريوهات استراتيجية متعددة",
+            "تقديم توصيات استراتيجية جاهزة لمجلس الإدارة"
           ],
           "valueToConsultant": [
-            "Offer premium, insight-led advisory services",
-            "Influence investment and expansion decisions",
-            "Strengthen your positioning as a transformation partner",
-            "Increase long-term client dependency"
+            "تقديم خدمات استشارية متميزة تعتمد على الرؤية الثاقبة",
+            "التأثير على قرارات الاستثمار والتوسع",
+            "تعزيز مكانتك كشريك التحول",
+            "زيادة الاعتماد على العميل على المدى الطويل"
           ],
           "whyUs": [
-            "Structured modelling templates and frameworks",
-            "Strong analytical and governance expertise",
-            "Practical advisory integration support",
-            "Clear, executive-level communication tools"
+            "قوالب وأطر النمذجة المنظمة",
+            "خبرة تحليلية وحوكمة قوية",
+            "دعم التكامل الاستشاري العملي",
+            "أدوات اتصال واضحة على المستوى التنفيذي"
           ]
         },
         {
-          "title": "Reporting & MIS",
-          "coreOfferingIntro": "We help you establish clarity through structured reporting systems:",
+          "title": "التقارير ونظم المعلومات الإدارية",
+          "coreOfferingIntro": "نحن نساعدك على تحقيق الوضوح من خلال أنظمة إعداد التقارير المنظمة:",
           "coreOffering": [
-            "KPI-based performance dashboards",
-            "Integrated financial and operational MIS",
-            "Executive-level summary reporting",
-            "Real-time financial visibility frameworks"
+            "لوحات معلومات الأداء المبنية على مؤشرات الأداء الرئيسية",
+            "نظام المعلومات الإدارية المالي والتشغيلي المتكامل",
+            "التقارير الموجزة على المستوى التنفيذي",
+            "أطر الرؤية المالية في الوقت الحقيقي"
           ],
-          "methodologyTitle": "Structure ? Integrate ? Visualise ? Optimise",
+          "methodologyTitle": "بناء ؟ دمج ؟ تصور؟ تحسين",
           "steps": [
-            "Define measurable KPIs aligned with strategy",
-            "Integrate financial and operational datasets",
-            "Visualise insights for leadership clarity",
-            "Optimise reporting cycles and accuracy"
+            "تحديد مؤشرات الأداء الرئيسية القابلة للقياس والمتوافقة مع الإستراتيجية",
+            "دمج مجموعات البيانات المالية والتشغيلية",
+            "تصور رؤى لوضوح القيادة",
+            "تحسين دورات إعداد التقارير ودقتها"
           ],
           "valueToConsultant": [
-            "Build executive trust through clarity",
-            "Improve decision-making speed for clients",
-            "Position yourself as the interpreter of business intelligence",
-            "Strengthen advisory stickiness and retention"
+            "بناء الثقة التنفيذية من خلال الوضوح",
+            "تحسين سرعة اتخاذ القرار للعملاء",
+            "ضع نفسك كمترجم لذكاء الأعمال",
+            "تعزيز الالتصاق الاستشاري والاحتفاظ به"
           ],
           "whyUs": [
-            "Proven MIS structuring experience",
-            "Governance-aligned reporting frameworks",
-            "Scalable systems for growing organisations",
-            "Focus on clarity, usability, and impact"
+            "أثبتت تجربة هيكلة MIS",
+            "أطر إعداد التقارير المتوافقة مع الحوكمة",
+            "أنظمة قابلة للتطوير للمؤسسات المتنامية",
+            "ركز على الوضوح وسهولة الاستخدام والتأثير"
           ]
         }
       ],
       "cybersecurity-data-privacy": [
         {
-          "title": "AI Audit",
-          "coreOfferingIntro": "As AI adoption grows, governance gaps increase. We help you guide clients in evaluating AI systems for risk, bias, data integrity, compliance exposure, and operational reliability.",
+          "title": "تدقيق الذكاء الاصطناعي",
+          "coreOfferingIntro": "ومع تزايد اعتماد الذكاء الاصطناعي، تتزايد فجوات الحوكمة. نحن نساعدك على توجيه العملاء في تقييم أنظمة الذكاء الاصطناعي فيما يتعلق بالمخاطر والتحيز وسلامة البيانات والتعرض للامتثال والموثوقية التشغيلية.",
           "coreOffering": [
-            "AI governance framework assessment",
-            "Model risk and bias evaluation",
-            "Data integrity and usage review",
-            "Regulatory exposure mapping",
-            "AI control and documentation readiness"
+            "تقييم إطار حوكمة الذكاء الاصطناعي",
+            "نموذج تقييم المخاطر والتحيز",
+            "مراجعة سلامة البيانات واستخدامها",
+            "رسم خرائط التعرض التنظيمي",
+            "التحكم بالذكاء الاصطناعي والاستعداد للتوثيق"
           ],
-          "methodologyTitle": "Discover ? Evaluate ? Strengthen ? Govern",
+          "methodologyTitle": "يكتشف ؟ يقيم ؟ تعزيز ؟ يحكم",
           "steps": [
-            "Identify AI usage across business functions",
-            "Evaluate algorithmic risks and compliance gaps",
-            "Strengthen governance and control mechanisms",
-            "Implement monitoring and documentation frameworks"
+            "تحديد استخدام الذكاء الاصطناعي عبر وظائف العمل",
+            "تقييم المخاطر الخوارزمية وفجوات الامتثال",
+            "تعزيز آليات الحوكمة والرقابة",
+            "تنفيذ أطر الرصد والتوثيق"
           ],
           "valueToConsultant": [
-            "Enter a high-growth, emerging advisory domain",
-            "Position yourself as a future-ready advisor",
-            "Increase premium advisory billing",
-            "Become indispensable in tech-enabled organisations"
+            "أدخل مجالًا استشاريًا ناشئًا وعالي النمو",
+            "ضع نفسك كمستشار جاهز للمستقبل",
+            "زيادة الفواتير الاستشارية المتميزة",
+            "أصبح لا غنى عنه في المنظمات التي تدعم التكنولوجيا"
           ],
           "whyUs": [
-            "Governance-driven AI audit frameworks",
-            "Risk and compliance integration expertise",
-            "Practical, implementation-focused approach",
-            "Designed for evolving regulatory landscapes"
+            "أطر تدقيق الذكاء الاصطناعي المبنية على الحوكمة",
+            "خبرة في تكامل المخاطر والامتثال",
+            "نهج عملي يركز على التنفيذ",
+            "مصممة للمناظر الطبيعية التنظيمية المتطورة"
           ]
         },
         {
-          "title": "Cybersecurity Certification ? ISO 27001",
-          "coreOfferingIntro": "We enable you to support clients in achieving and maintaining ISO 27001 certification by building structured Information Security Management Systems (ISMS).",
+          "title": "شهادة الأمن السيبراني؟ ايزو 27001",
+          "coreOfferingIntro": "نحن نمكنك من دعم العملاء في الحصول على شهادة ISO 27001 والحفاظ عليها من خلال بناء أنظمة إدارة أمن المعلومات (ISMS) المنظمة.",
           "coreOffering": [
-            "ISMS framework development",
-            "Risk assessment and gap analysis",
-            "Policy and control documentation",
-            "Implementation support",
-            "Pre-certification audit readiness"
+            "تطوير إطار ISMS",
+            "تقييم المخاطر وتحليل الفجوات",
+            "وثائق السياسة والتحكم",
+            "دعم التنفيذ",
+            "الاستعداد للتدقيق قبل التصديق"
           ],
-          "methodologyTitle": "Assess ? Design ? Implement ? Certify",
+          "methodologyTitle": "يٌقيِّم ؟ تصميم ؟ ينفذ ؟ التصديق",
           "steps": [
-            "Conduct security posture assessment",
-            "Design compliant ISMS architecture",
-            "Implement security controls and policies",
-            "Prepare for certification audit"
+            "إجراء تقييم الوضع الأمني",
+            "تصميم بنية متوافقة مع ISMS",
+            "تنفيذ الضوابط والسياسات الأمنية",
+            "الاستعداد لتدقيق الشهادات"
           ],
           "valueToConsultant": [
-            "Add globally recognised certification advisory",
-            "Strengthen client credibility in global markets",
-            "Increase project-based and recurring revenue",
-            "Build long-term compliance engagements"
+            "إضافة شهادة استشارية معترف بها عالميًا",
+            "تعزيز مصداقية العملاء في الأسواق العالمية",
+            "زيادة الإيرادات القائمة على المشروع والمتكررة",
+            "بناء ارتباطات الامتثال طويلة الأجل"
           ],
           "whyUs": [
-            "Structured certification roadmap",
-            "Experienced compliance and audit specialists",
-            "Clear documentation and control frameworks",
-            "End-to-end implementation support"
+            "خريطة طريق منظمة لإصدار الشهادات",
+            "متخصصون في الامتثال والتدقيق من ذوي الخبرة",
+            "أطر التوثيق والتحكم الواضحة",
+            "دعم التنفيذ الشامل"
           ]
         },
         {
-          "title": "Global Data Privacy Compliance ? GDPR",
-          "coreOfferingIntro": "With increasing global data regulations, businesses must align with GDPR standards. We support you in guiding clients through structured data protection and privacy governance frameworks.",
+          "title": "الامتثال العالمي لخصوصية البيانات؟ اللائحة العامة لحماية البيانات",
+          "coreOfferingIntro": "مع زيادة اللوائح العالمية المتعلقة بالبيانات، يجب على الشركات أن تتوافق مع معايير القانون العام لحماية البيانات (GDPR). نحن ندعمك في توجيه العملاء من خلال أطر حماية البيانات المنظمة وحوكمة الخصوصية.",
           "coreOffering": [
-            "Data mapping and privacy impact assessment",
-            "Consent and data processing framework design",
-            "Cross-border data compliance alignment",
-            "Data subject rights implementation",
-            "Privacy policy and documentation structuring"
+            "رسم خرائط البيانات وتقييم تأثير الخصوصية",
+            "تصميم إطار الموافقة ومعالجة البيانات",
+            "محاذاة الامتثال للبيانات عبر الحدود",
+            "تنفيذ حقوق موضوع البيانات",
+            "سياسة الخصوصية وهيكلة الوثائق"
           ],
-          "methodologyTitle": "Map ? Assess ? Align ? Monitor",
+          "methodologyTitle": "الخريطة؟ يٌقيِّم ؟ محاذاة ؟ شاشة",
           "steps": [
-            "Map personal data flows",
-            "Assess regulatory exposure and risk",
-            "Align processes with GDPR standards",
-            "Establish monitoring and review mechanisms"
+            "خريطة تدفقات البيانات الشخصية",
+            "تقييم التعرض التنظيمي والمخاطر",
+            "مواءمة العمليات مع معايير القانون العام لحماية البيانات (GDPR).",
+            "إنشاء آليات المراقبة والمراجعة"
           ],
           "valueToConsultant": [
-            "Offer cross-border compliance expertise",
-            "Increase advisory credibility in global markets",
-            "Strengthen trust-driven client relationships",
-            "Expand into recurring governance services"
+            "تقديم خبرة الامتثال عبر الحدود",
+            "زيادة المصداقية الاستشارية في الأسواق العالمية",
+            "تعزيز العلاقات مع العملاء المبنية على الثقة",
+            "التوسع في خدمات الحوكمة المتكررة"
           ],
           "whyUs": [
-            "Strong regulatory and governance foundation",
-            "Practical privacy control implementation",
-            "Alignment with evolving global data laws",
-            "Focus on operational feasibility"
+            "أساس تنظيمي وحوكمة قوي",
+            "التنفيذ العملي للتحكم في الخصوصية",
+            "التوافق مع قوانين البيانات العالمية المتطورة",
+            "التركيز على الجدوى التشغيلية"
           ]
         },
         {
-          "title": "SOC Certification (Type 1 & Type 2)",
-          "coreOfferingIntro": "We assist you in enabling clients to achieve SOC 1 / SOC 2 readiness and certification, strengthening trust with global customers and partners.",
+          "title": "شهادة SOC (النوع 1 والنوع 2)",
+          "coreOfferingIntro": "نحن نساعدك في تمكين العملاء من تحقيق جاهزية واعتماد SOC 1 / SOC 2، وتعزيز الثقة مع العملاء والشركاء العالميين.",
           "coreOffering": [
-            "Control framework design",
-            "Risk assessment and gap analysis",
-            "Documentation and evidence preparation",
-            "Internal readiness review",
-            "Audit coordination support"
+            "تصميم إطار التحكم",
+            "تقييم المخاطر وتحليل الفجوات",
+            "إعداد الوثائق والأدلة",
+            "مراجعة الجاهزية الداخلية",
+            "دعم تنسيق التدقيق"
           ],
-          "methodologyTitle": "Evaluate ? Control ? Document ? Certify",
+          "methodologyTitle": "يقيم ؟ يتحكم ؟ وثيقة ؟ التصديق",
           "steps": [
-            "Evaluate internal controls environment",
-            "Implement trust service criteria controls",
-            "Document policies and operational evidence",
-            "Support audit and certification process"
+            "تقييم بيئة الضوابط الداخلية",
+            "تنفيذ ضوابط معايير خدمة الثقة",
+            "توثيق السياسات والأدلة التشغيلية",
+            "دعم عملية التدقيق وإصدار الشهادات"
           ],
           "valueToConsultant": [
-            "Unlock high-value compliance projects",
-            "Strengthen client trust in technology environments",
-            "Increase international business readiness",
-            "Create recurring audit support revenue"
+            "أطلق العنان لمشاريع الامتثال ذات القيمة العالية",
+            "تعزيز ثقة العملاء في بيئات التكنولوجيا",
+            "زيادة جاهزية الأعمال التجارية الدولية",
+            "إنشاء إيرادات دعم التدقيق المتكررة"
           ],
           "whyUs": [
-            "Structured SOC readiness programs",
-            "Strong internal control expertise",
-            "Clear evidence-based documentation processes",
-            "Practical execution support"
+            "برامج الاستعداد SOC المنظمة",
+            "خبرة قوية في الرقابة الداخلية",
+            "عمليات التوثيق الواضحة القائمة على الأدلة",
+            "دعم التنفيذ العملي"
           ]
         },
         {
-          "title": "HIPAA Compliance",
-          "coreOfferingIntro": "Healthcare data protection requires strict regulatory compliance. We support consultants in guiding healthcare and health-tech clients through HIPAA compliance frameworks.",
+          "title": "الامتثال لـ HIPAA",
+          "coreOfferingIntro": "تتطلب حماية بيانات الرعاية الصحية الامتثال التنظيمي الصارم. نحن ندعم الاستشاريين في توجيه عملاء الرعاية الصحية والتكنولوجيا الصحية من خلال أطر الامتثال لقانون HIPAA.",
           "coreOffering": [
-            "HIPAA gap assessment",
-            "Security and privacy rule alignment",
-            "Data safeguard implementation",
-            "Risk management planning",
-            "Compliance documentation support"
+            "تقييم الفجوة HIPAA",
+            "محاذاة قواعد الأمان والخصوصية",
+            "تنفيذ حماية البيانات",
+            "تخطيط إدارة المخاطر",
+            "دعم وثائق الامتثال"
           ],
-          "methodologyTitle": "Assess ? Secure ? Document ? Maintain",
+          "methodologyTitle": "يٌقيِّم ؟ يؤمن ؟ وثيقة ؟ يحافظ على",
           "steps": [
-            "Assess protected health information (PHI) handling",
-            "Secure technical and administrative safeguards",
-            "Document compliance controls",
-            "Establish continuous monitoring mechanisms"
+            "تقييم التعامل مع المعلومات الصحية المحمية (PHI).",
+            "تأمين الضمانات الفنية والإدارية",
+            "ضوابط الامتثال للوثيقة",
+            "إنشاء آليات المراقبة المستمرة"
           ],
           "valueToConsultant": [
-            "Expand into specialised healthcare compliance advisory",
-            "Increase high-ticket compliance engagements",
-            "Build authority in regulated industries",
-            "Strengthen long-term governance partnerships"
+            "التوسع في استشارات الامتثال المتخصصة للرعاية الصحية",
+            "زيادة مشاركات الامتثال ذات التذكرة العالية",
+            "بناء السلطة في الصناعات المنظمة",
+            "تعزيز شراكات الحوكمة طويلة المدى"
           ],
           "whyUs": [
-            "Strong governance and control background",
-            "Integrated cybersecurity and compliance expertise",
-            "Clear implementation-driven frameworks",
-            "Designed for complex regulatory environments"
+            "خلفية قوية للحوكمة والسيطرة",
+            "خبرة متكاملة في مجال الأمن السيبراني والامتثال",
+            "أطر واضحة تعتمد على التنفيذ",
+            "مصممة للبيئات التنظيمية المعقدة"
           ]
         }
       ],
       "risk-advisory": [
         {
-          "title": "Corporate Governance & Compliance",
-          "coreOfferingIntro": "We help you establish structured governance frameworks that enhance transparency, accountability, and regulatory compliance.",
+          "title": "حوكمة الشركات والامتثال",
+          "coreOfferingIntro": "نحن نساعدك على إنشاء أطر حوكمة منظمة تعزز الشفافية والمساءلة والامتثال التنظيمي.",
           "coreOffering": [
-            "Governance structure design",
-            "Regulatory compliance mapping",
-            "Board reporting frameworks",
-            "Compliance monitoring systems",
-            "Policy alignment with legal requirements"
+            "تصميم هيكل الحوكمة",
+            "رسم خرائط الامتثال التنظيمي",
+            "أطر إعداد التقارير لمجلس الإدارة",
+            "أنظمة مراقبة الامتثال",
+            "مواءمة السياسات مع المتطلبات القانونية"
           ],
-          "methodologyTitle": "Assess ? Align ? Implement ? Monitor",
+          "methodologyTitle": "يٌقيِّم ؟ محاذاة ؟ ينفذ ؟ شاشة",
           "steps": [
-            "Assess governance gaps and regulatory exposure",
-            "Align policies with applicable laws and standards",
-            "Implement structured governance controls",
-            "Monitor compliance through review mechanisms"
+            "تقييم فجوات الحوكمة والتعرض التنظيمي",
+            "مواءمة السياسات مع القوانين والمعايير المعمول بها",
+            "تنفيذ ضوابط الحوكمة المنظمة",
+            "مراقبة الامتثال من خلال آليات المراجعة"
           ],
           "valueToConsultant": [
-            "Strengthen client credibility and investor confidence",
-            "Expand into board-level advisory",
-            "Increase long-term governance retainers",
-            "Become a trusted strategic partner"
+            "تعزيز مصداقية العملاء وثقة المستثمرين",
+            "التوسع في الاستشارات على مستوى مجلس الإدارة",
+            "زيادة المحتفظين بالحوكمة على المدى الطويل",
+            "كن شريكًا استراتيجيًا موثوقًا به"
           ],
           "whyUs": [
-            "Strong regulatory and governance expertise",
-            "Practical, execution-oriented frameworks",
-            "Scalable models for SMEs and enterprises",
-            "Focus on sustainable compliance, not just documentation"
+            "خبرة تنظيمية وحوكمة قوية",
+            "أطر عملية وموجهة نحو التنفيذ",
+            "نماذج قابلة للتطوير للشركات الصغيرة والمتوسطة والشركات",
+            "التركيز على الامتثال المستدام، وليس فقط التوثيق"
           ]
         },
         {
-          "title": "Internal Audit & Controls",
-          "coreOfferingIntro": "We support you in delivering risk-based internal audit and control evaluations that protect financial and operational integrity.",
+          "title": "التدقيق الداخلي والضوابط",
+          "coreOfferingIntro": "نحن ندعمك في تقديم تقييمات التدقيق والرقابة الداخلية القائمة على المخاطر والتي تحمي النزاهة المالية والتشغيلية.",
           "coreOffering": [
-            "Risk-based audit planning",
-            "Control testing and assessment",
-            "Process risk identification",
-            "Governance and compliance reporting"
+            "تخطيط التدقيق على أساس المخاطر",
+            "اختبار التحكم والتقييم",
+            "تحديد مخاطر العملية",
+            "تقارير الحوكمة والامتثال"
           ],
-          "methodologyTitle": "Identify ? Evaluate ? Strengthen ? Report",
+          "methodologyTitle": "تعريف ؟ يقيم ؟ تعزيز ؟ تقرير",
           "steps": [
-            "Identify key operational and financial risks",
-            "Evaluate control effectiveness",
-            "Strengthen weak areas through corrective measures",
-            "Deliver clear, actionable reports"
+            "تحديد المخاطر التشغيلية والمالية الرئيسية",
+            "تقييم فعالية الرقابة",
+            "تعزيز المناطق الضعيفة من خلال التدابير التصحيحية",
+            "تقديم تقارير واضحة وقابلة للتنفيذ"
           ],
           "valueToConsultant": [
-            "Offer structured assurance services",
-            "Increase recurring audit assignments",
-            "Improve client risk resilience",
-            "Build authority in governance advisory"
+            "تقديم خدمات ضمان منظمة",
+            "زيادة مهام التدقيق المتكررة",
+            "تحسين مرونة العميل تجاه المخاطر",
+            "بناء السلطة في مجال استشارات الحوكمة"
           ],
           "whyUs": [
-            "Risk-driven audit frameworks",
-            "Deep control environment expertise",
-            "Practical recommendations, not theoretical insights",
-            "Strong reporting clarity"
+            "أطر التدقيق المبنية على المخاطر",
+            "خبرة في بيئة التحكم العميق",
+            "توصيات عملية وليست رؤى نظرية",
+            "وضوح قوي في التقارير"
           ]
         },
         {
-          "title": "Policies, SOPs & Process Reengineering",
-          "coreOfferingIntro": "We help you structure and redesign client processes to improve efficiency, accountability, and scalability.",
+          "title": "السياسات وإجراءات التشغيل الموحدة وإعادة هندسة العمليات",
+          "coreOfferingIntro": "نحن نساعدك على هيكلة عمليات العميل وإعادة تصميمها لتحسين الكفاءة والمساءلة وقابلية التوسع.",
           "coreOffering": [
-            "SOP drafting and documentation",
-            "Policy framework development",
-            "Process gap and bottleneck analysis",
-            "Operational workflow redesign"
+            "صياغة وتوثيق إجراءات التشغيل المعيارية (SOP).",
+            "تطوير إطار السياسات",
+            "تحليل فجوة العملية والاختناقات",
+            "إعادة تصميم سير العمل التشغيلي"
           ],
-          "methodologyTitle": "Map ? Diagnose ? Redesign ? Standardise",
+          "methodologyTitle": "الخريطة؟ تشخيص ؟ إعادة التصميم؟ توحيد",
           "steps": [
-            "Map existing workflows",
-            "Diagnose inefficiencies and risks",
-            "Redesign processes for optimisation",
-            "Standardise through documented SOPs"
+            "رسم خريطة لسير العمل الحالي",
+            "تشخيص أوجه القصور والمخاطر",
+            "إعادة تصميم العمليات لتحقيق التحسين",
+            "توحيد المعايير من خلال إجراءات التشغيل القياسية الموثقة"
           ],
           "valueToConsultant": [
-            "Deliver operational transformation",
-            "Increase cross-functional advisory scope",
-            "Improve client productivity and clarity",
-            "Create long-term advisory dependency"
+            "تحقيق التحول التشغيلي",
+            "زيادة النطاق الاستشاري متعدد الوظائف",
+            "تحسين إنتاجية العميل والوضوح",
+            "إنشاء تبعية استشارية طويلة المدى"
           ],
           "whyUs": [
-            "Structured process engineering approach",
-            "Governance-aligned documentation standards",
-            "Industry-wide implementation experience",
-            "Focus on measurable operational impact"
+            "نهج هندسة العمليات المنظم",
+            "معايير التوثيق المتوافقة مع الحوكمة",
+            "خبرة في التنفيذ على مستوى الصناعة",
+            "التركيز على التأثير التشغيلي القابل للقياس"
           ]
         },
         {
-          "title": "Business Intelligence & Continuous Improvement",
-          "coreOfferingIntro": "We help you enable data-driven performance management systems that drive informed decision-making.",
+          "title": "ذكاء الأعمال والتحسين المستمر",
+          "coreOfferingIntro": "نحن نساعدك على تمكين أنظمة إدارة الأداء المبنية على البيانات والتي تقود إلى اتخاذ قرارات مستنيرة.",
           "coreOffering": [
-            "KPI identification frameworks",
-            "Performance dashboards",
-            "Financial and operational analytics",
-            "Continuous improvement systems"
+            "أطر تعريف مؤشرات الأداء الرئيسية",
+            "لوحات قياس الأداء",
+            "التحليلات المالية والتشغيلية",
+            "أنظمة التحسين المستمر"
           ],
-          "methodologyTitle": "Collect ? Analyse ? Visualise ? Optimise",
+          "methodologyTitle": "يجمع ؟ تحليل ؟ تصور؟ تحسين",
           "steps": [
-            "Collect relevant business data",
-            "Analyse performance drivers",
-            "Visualise insights through dashboards",
-            "Optimise through ongoing monitoring"
+            "جمع البيانات التجارية ذات الصلة",
+            "تحليل محركات الأداء",
+            "تصور الرؤى من خلال لوحات المعلومات",
+            "التحسين من خلال المراقبة المستمرة"
           ],
           "valueToConsultant": [
-            "Deliver insight-led advisory services",
-            "Strengthen executive trust",
-            "Expand into performance consulting",
-            "Increase advisory premium"
+            "تقديم خدمات استشارية مبنية على المعرفة",
+            "تعزيز الثقة التنفيذية",
+            "التوسع في استشارات الأداء",
+            "زيادة علاوة الاستشارة"
           ],
           "whyUs": [
-            "Structured analytics frameworks",
-            "Integration of financial and operational data",
-            "Clear visual reporting systems",
-            "Practical implementation support"
+            "أطر التحليلات المنظمة",
+            "تكامل البيانات المالية والتشغيلية",
+            "أنظمة إعداد التقارير المرئية الواضحة",
+            "دعم التنفيذ العملي"
           ]
         },
         {
-          "title": "IT, Systems & Fraud Risk Audits",
-          "coreOfferingIntro": "We support you in assessing technology controls and fraud vulnerabilities to protect client systems and reputation.",
+          "title": "عمليات تدقيق مخاطر تكنولوجيا المعلومات والأنظمة والاحتيال",
+          "coreOfferingIntro": "نحن ندعمك في تقييم ضوابط التكنولوجيا ونقاط الضعف في الاحتيال لحماية أنظمة العميل وسمعته.",
           "coreOffering": [
-            "IT control assessment",
-            "Fraud risk analysis",
-            "System security reviews",
-            "Control enhancement recommendations"
+            "تقييم التحكم في تكنولوجيا المعلومات",
+            "تحليل مخاطر الاحتيال",
+            "مراجعات أمن النظام",
+            "توصيات تعزيز التحكم"
           ],
-          "methodologyTitle": "Review ? Test ? Detect ? Secure",
+          "methodologyTitle": "مراجعة ؟ امتحان ؟ يكشف ؟ يؤمن",
           "steps": [
-            "Review system architecture and access controls",
-            "Test vulnerabilities and control weaknesses",
-            "Detect fraud exposure points",
-            "Secure systems with corrective strategies"
+            "مراجعة بنية النظام وضوابط الوصول",
+            "اختبار نقاط الضعف ونقاط الضعف في السيطرة",
+            "كشف نقاط التعرض للاحتيال",
+            "تأمين الأنظمة باستراتيجيات تصحيحية"
           ],
           "valueToConsultant": [
-            "Enter technology risk advisory",
-            "Increase governance-focused engagements",
-            "Strengthen client protection frameworks",
-            "Enhance long-term compliance relationships"
+            "أدخل استشارات مخاطر التكنولوجيا",
+            "زيادة المشاركات التي تركز على الحوكمة",
+            "تعزيز أطر حماية العملاء",
+            "تعزيز علاقات الامتثال طويلة الأمد"
           ],
           "whyUs": [
-            "Integrated IT and governance expertise",
-            "Practical fraud risk detection frameworks",
-            "Strong internal control background",
-            "Execution-focused remediation support"
+            "خبرة متكاملة في مجال تكنولوجيا المعلومات والحوكمة",
+            "الأطر العملية للكشف عن مخاطر الاحتيال",
+            "خلفية قوية للرقابة الداخلية",
+            "دعم المعالجة التي تركز على التنفيذ"
           ]
         },
         {
-          "title": "Stock & Fixed Asset Verification",
-          "coreOfferingIntro": "We assist in verifying inventory and fixed assets to ensure financial accuracy and prevent loss or misstatement.",
+          "title": "التحقق من المخزون والأصول الثابتة",
+          "coreOfferingIntro": "نحن نساعد في التحقق من المخزون والأصول الثابتة لضمان الدقة المالية ومنع الخسارة أو الأخطاء.",
           "coreOffering": [
-            "Physical verification planning",
-            "Asset tagging review",
-            "Inventory reconciliation",
-            "Exception and discrepancy reporting"
+            "تخطيط التحقق المادي",
+            "مراجعة علامات الأصول",
+            "تسوية المخزون",
+            "الإبلاغ عن الاستثناءات والتناقضات"
           ],
-          "methodologyTitle": "Plan ? Verify ? Reconcile ? Report",
+          "methodologyTitle": "يخطط ؟ يؤكد ؟ تصالح ؟ تقرير",
           "steps": [
-            "Plan structured verification exercises",
-            "Conduct physical validation",
-            "Reconcile with financial records",
-            "Report discrepancies and corrective actions"
+            "خطط لتمارين التحقق المنظمة",
+            "إجراء التحقق الجسدي",
+            "التوفيق مع السجلات المالية",
+            "الإبلاغ عن التناقضات والإجراءات التصحيحية"
           ],
           "valueToConsultant": [
-            "Strengthen financial statement reliability",
-            "Provide tangible operational assurance",
-            "Increase recurring compliance engagements",
-            "Improve client cost control"
+            "تعزيز موثوقية البيانات المالية",
+            "توفير ضمان تشغيلي ملموس",
+            "زيادة ارتباطات الامتثال المتكررة",
+            "تحسين التحكم في تكلفة العميل"
           ],
           "whyUs": [
-            "Structured verification processes",
-            "Strong reconciliation expertise",
-            "Clear documentation and reporting",
-            "Reliable execution support"
+            "عمليات التحقق المنظمة",
+            "خبرة مصالحة قوية",
+            "توثيق واضح وإعداد التقارير",
+            "دعم تنفيذ موثوق"
           ]
         },
         {
-          "title": "SAR Reconciliation & Process Review",
-          "coreOfferingIntro": "We support consultants in reviewing reconciliation frameworks to reduce reporting errors and improve control reliability.",
+          "title": "تسوية SAR ومراجعة العملية",
+          "coreOfferingIntro": "نحن ندعم الاستشاريين في مراجعة أطر التسوية لتقليل أخطاء الإبلاغ وتحسين موثوقية التحكم.",
           "coreOffering": [
-            "SAR and financial reconciliation review",
-            "Process accuracy testing",
-            "Control gap identification",
-            "Improvement framework design"
+            "SAR ومراجعة التسوية المالية",
+            "اختبار دقة العملية",
+            "تحديد فجوة التحكم",
+            "تحسين تصميم الإطار"
           ],
-          "methodologyTitle": "Examine ? Reconcile ? Rectify ? Control",
+          "methodologyTitle": "يفحص ؟ تصالح ؟ تصحيح ؟ يتحكم",
           "steps": [
-            "Examine reconciliation procedures",
-            "Reconcile system and financial records",
-            "Rectify process inefficiencies",
-            "Strengthen control checkpoints"
+            "دراسة إجراءات المصالحة",
+            "التوفيق بين النظام والسجلات المالية",
+            "تصحيح أوجه القصور في العملية",
+            "تعزيز نقاط التفتيش الرقابية"
           ],
           "valueToConsultant": [
-            "Improve financial reporting integrity",
-            "Increase operational confidence",
-            "Expand into system-level advisory",
-            "Build stronger compliance credibility"
+            "تحسين سلامة التقارير المالية",
+            "زيادة الثقة التشغيلية",
+            "التوسع في الاستشارات على مستوى النظام",
+            "بناء مصداقية امتثال أقوى"
           ],
           "whyUs": [
-            "Structured reconciliation frameworks",
-            "Strong financial control expertise",
-            "Process-driven correction strategies",
-            "Focus on long-term reliability"
+            "أطر المصالحة المنظمة",
+            "خبرة قوية في الرقابة المالية",
+            "استراتيجيات التصحيح القائمة على العمليات",
+            "التركيز على الموثوقية على المدى الطويل"
           ]
         },
         {
-          "title": "Third-Party Risk Management",
-          "coreOfferingIntro": "We help you enable clients to assess and manage vendor and partner risks proactively.",
+          "title": "إدارة مخاطر الطرف الثالث",
+          "coreOfferingIntro": "نحن نساعدك على تمكين العملاء من تقييم وإدارة مخاطر البائعين والشركاء بشكل استباقي.",
           "coreOffering": [
-            "Vendor risk profiling",
-            "Due diligence frameworks",
-            "Contract risk evaluation",
-            "Ongoing third-party monitoring systems"
+            "تحديد مخاطر البائع",
+            "أطر العناية الواجبة",
+            "تقييم مخاطر العقود",
+            "أنظمة المراقبة المستمرة من طرف ثالث"
           ],
-          "methodologyTitle": "Screen ? Assess ? Monitor ? Mitigate",
+          "methodologyTitle": "شاشة ؟ يٌقيِّم ؟ شاشة ؟ يخفف من",
           "steps": [
-            "Screen vendors for risk exposure",
-            "Assess compliance and financial stability",
-            "Monitor performance and risk indicators",
-            "Mitigate through structured risk plans"
+            "شاشة البائعين للتعرض للمخاطر",
+            "تقييم الامتثال والاستقرار المالي",
+            "مراقبة الأداء ومؤشرات المخاطر",
+            "التخفيف من خلال خطط المخاطر المنظمة"
           ],
           "valueToConsultant": [
-            "Expand into vendor governance advisory",
-            "Strengthen client supply chain security",
-            "Increase compliance-driven engagements",
-            "Build long-term governance partnerships"
+            "التوسع في استشارات حوكمة البائعين",
+            "تعزيز أمن سلسلة التوريد للعملاء",
+            "زيادة المشاركات القائمة على الامتثال",
+            "بناء شراكات حوكمة طويلة الأمد"
           ],
           "whyUs": [
-            "Risk-based third-party frameworks",
-            "Integrated compliance and governance expertise",
-            "Practical monitoring systems",
-            "Scalable advisory models"
+            "أطر عمل الطرف الثالث القائمة على المخاطر",
+            "خبرة متكاملة في مجال الامتثال والحوكمة",
+            "أنظمة المراقبة العملية",
+            "نماذج استشارية قابلة للتطوير"
           ]
         }
       ],
       "esg-advisory": [
         {
-          "title": "ESG & Sustainability Reporting",
-          "coreOfferingIntro": "We help you enable clients to build structured ESG frameworks and credible sustainability reports aligned with global standards.",
+          "title": "تقارير الحوكمة البيئية والاجتماعية والحوكمة والاستدامة",
+          "coreOfferingIntro": "نحن نساعدك على تمكين العملاء من بناء أطر عمل منظمة تتعلق بالجوانب البيئية والاجتماعية والحوكمة وتقارير استدامة موثوقة تتماشى مع المعايير العالمية.",
           "coreOffering": [
-            "ESG materiality assessment",
-            "Sustainability reporting frameworks",
-            "Governance and disclosure alignment",
-            "Investor-ready ESG documentation",
-            "Performance tracking systems"
+            "تقييم الأهمية البيئية والاجتماعية والحوكمة",
+            "أطر إعداد تقارير الاستدامة",
+            "الحوكمة ومواءمة الإفصاح",
+            "وثائق ESG جاهزة للمستثمرين",
+            "أنظمة تتبع الأداء"
           ],
-          "methodologyTitle": "Assess ? Structure ? Report ? Improve",
+          "methodologyTitle": "يٌقيِّم ؟ بناء ؟ تقرير ؟ يحسن",
           "steps": [
-            "Assess ESG impact areas and regulatory exposure",
-            "Structure reporting aligned to global frameworks",
-            "Prepare transparent, defensible disclosures",
-            "Improve through measurable ESG KPIs"
+            "تقييم مجالات تأثير ESG والتعرض التنظيمي",
+            "هيكل التقارير المتوافقة مع الأطر العالمية",
+            "قم بإعداد إفصاحات شفافة ويمكن الدفاع عنها",
+            "التحسين من خلال مؤشرات الأداء الرئيسية البيئية والاجتماعية والحوكمة القابلة للقياس"
           ],
           "valueToConsultant": [
-            "Unlock high-demand sustainability advisory revenue",
-            "Strengthen client investor readiness",
-            "Expand into board-level ESG discussions",
-            "Position yourself as a future-ready advisory partner"
+            "إطلاق العنان للإيرادات الاستشارية المتعلقة بالاستدامة ذات الطلب المرتفع",
+            "تعزيز استعداد العميل للمستثمرين",
+            "التوسع في المناقشات البيئية والاجتماعية والحوكمة (ESG) على مستوى مجلس الإدارة",
+            "ضع نفسك كشريك استشاري جاهز للمستقبل"
           ],
           "whyUs": [
-            "Governance-led ESG approach",
-            "Alignment with global reporting standards",
-            "Practical implementation expertise",
-            "Focus on measurable, reportable outcomes"
+            "نهج ESG الذي تقوده الحوكمة",
+            "التوافق مع معايير إعداد التقارير العالمية",
+            "خبرة في التنفيذ العملي",
+            "التركيز على النتائج القابلة للقياس والإبلاغ عنها"
           ]
         },
         {
-          "title": "Supply Chain Audit & Data Gathering",
-          "coreOfferingIntro": "We support you in evaluating supplier practices and collecting ESG-related operational data across the value chain.",
+          "title": "تدقيق سلسلة التوريد وجمع البيانات",
+          "coreOfferingIntro": "نحن ندعمك في تقييم ممارسات الموردين وجمع البيانات التشغيلية المتعلقة بالحوكمة البيئية والاجتماعية والحوكمة عبر سلسلة القيمة.",
           "coreOffering": [
-            "Supplier ESG due diligence",
-            "Risk-based vendor assessments",
-            "Data collection frameworks",
-            "Compliance verification processes"
+            "العناية الواجبة للمورد، البيئية والاجتماعية والحوكمة (ESG).",
+            "تقييمات البائعين على أساس المخاطر",
+            "أطر جمع البيانات",
+            "عمليات التحقق من الامتثال"
           ],
-          "methodologyTitle": "Map ? Audit ? Validate ? Monitor",
+          "methodologyTitle": "الخريطة؟ مراجعة ؟ التحقق من صحة؟ شاشة",
           "steps": [
-            "Map supply chain exposure",
-            "Audit supplier ESG practices",
-            "Validate operational data",
-            "Monitor through structured reporting systems"
+            "خريطة التعرض لسلسلة التوريد",
+            "تدقيق الممارسات البيئية والاجتماعية والحوكمة للموردين",
+            "التحقق من صحة البيانات التشغيلية",
+            "المراقبة من خلال أنظمة التقارير المنظمة"
           ],
           "valueToConsultant": [
-            "Expand into supply chain governance advisory",
-            "Increase cross-border compliance opportunities",
-            "Strengthen client operational resilience",
-            "Create recurring vendor risk engagements"
+            "التوسع في استشارات حوكمة سلسلة التوريد",
+            "زيادة فرص الامتثال عبر الحدود",
+            "تعزيز المرونة التشغيلية للعميل",
+            "إنشاء ارتباطات مخاطر البائع المتكررة"
           ],
           "whyUs": [
-            "Risk-based audit frameworks",
-            "Structured supplier evaluation tools",
-            "Strong governance integration",
-            "Scalable monitoring systems"
+            "أطر التدقيق المبنية على المخاطر",
+            "أدوات تقييم الموردين المنظمة",
+            "تكامل قوي في الإدارة",
+            "أنظمة مراقبة قابلة للتطوير"
           ]
         },
         {
-          "title": "Carbon Emissions Estimation",
-          "coreOfferingIntro": "We assist you in helping clients quantify and manage their carbon footprint across Scope 1, 2, and 3 emissions.",
+          "title": "تقدير انبعاثات الكربون",
+          "coreOfferingIntro": "نحن نساعدك في مساعدة العملاء على قياس وإدارة البصمة الكربونية الخاصة بهم عبر النطاق 1 و2 و3 من الانبعاثات.",
           "coreOffering": [
-            "Emissions data identification",
-            "Carbon footprint calculations",
-            "Reduction strategy planning",
-            "Reporting alignment with global standards"
+            "تحديد بيانات الانبعاثات",
+            "حسابات البصمة الكربونية",
+            "تخطيط استراتيجية التخفيض",
+            "مواءمة التقارير مع المعايير العالمية"
           ],
-          "methodologyTitle": "Identify ? Measure ? Analyse ? Reduce",
+          "methodologyTitle": "تعريف ؟ يقيس ؟ تحليل ؟ يقلل",
           "steps": [
-            "Identify emission sources across operations",
-            "Measure carbon footprint accurately",
-            "Analyse emission hotspots",
-            "Recommend reduction and optimisation strategies"
+            "تحديد مصادر الانبعاثات عبر العمليات",
+            "قياس البصمة الكربونية بدقة",
+            "تحليل النقاط الساخنة للانبعاثات",
+            "يوصي باستراتيجيات التخفيض والتحسين"
           ],
           "valueToConsultant": [
-            "Enter climate-focused advisory markets",
-            "Increase ESG reporting revenue",
-            "Support clients in meeting investor expectations",
-            "Position yourself as a sustainability transformation partner"
+            "دخول الأسواق الاستشارية التي تركز على المناخ",
+            "زيادة إيرادات التقارير البيئية والاجتماعية والحوكمة",
+            "دعم العملاء في تلبية توقعات المستثمرين",
+            "ضع نفسك كشريك في التحول المستدام"
           ],
           "whyUs": [
-            "Structured carbon accounting frameworks",
-            "Regulatory-aware measurement approach",
-            "Practical reduction strategy integration",
-            "Alignment with international reporting norms"
+            "أطر محاسبة الكربون المنظمة",
+            "نهج القياس التنظيمي",
+            "التكامل العملي لاستراتيجية التخفيض",
+            "التوافق مع معايير إعداد التقارير الدولية"
           ]
         },
         {
-          "title": "Climate Risk Assessment",
-          "coreOfferingIntro": "We help you guide clients in assessing physical and transition climate risks affecting business continuity and financial performance.",
+          "title": "تقييم مخاطر المناخ",
+          "coreOfferingIntro": "نحن نساعدك على توجيه العملاء في تقييم المخاطر المناخية المادية والانتقالية التي تؤثر على استمرارية الأعمال والأداء المالي.",
           "coreOffering": [
-            "Physical climate exposure analysis",
-            "Regulatory and transition risk mapping",
-            "Financial impact assessment",
-            "Scenario planning frameworks"
+            "تحليل التعرض للمناخ المادي",
+            "رسم خرائط المخاطر التنظيمية والانتقالية",
+            "تقييم الأثر المالي",
+            "أطر تخطيط السيناريو"
           ],
-          "methodologyTitle": "Evaluate ? Model ? Quantify ? Mitigate",
+          "methodologyTitle": "يقيم ؟ نموذج ؟ تحديد الكمية ؟ يخفف من",
           "steps": [
-            "Evaluate climate exposure across operations",
-            "Model risk under different scenarios",
-            "Quantify financial and operational impact",
-            "Develop mitigation and adaptation strategies"
+            "تقييم التعرض للمناخ عبر العمليات",
+            "نموذج المخاطر في ظل سيناريوهات مختلفة",
+            "قياس الأثر المالي والتشغيلي",
+            "تطوير استراتيجيات التخفيف والتكيف"
           ],
           "valueToConsultant": [
-            "Provide forward-looking risk advisory",
-            "Strengthen long-term resilience frameworks",
-            "Increase strategic engagement at leadership level",
-            "Expand into climate governance consulting"
+            "تقديم استشارات المخاطر التطلعية",
+            "تعزيز أطر المرونة طويلة المدى",
+            "زيادة المشاركة الإستراتيجية على مستوى القيادة",
+            "التوسع في استشارات إدارة المناخ"
           ],
           "whyUs": [
-            "Integrated risk and sustainability expertise",
-            "Financial impact-focused analysis",
-            "Scenario-based advisory models",
-            "Practical, decision-ready insights"
+            "الخبرة المتكاملة في مجال المخاطر والاستدامة",
+            "التحليل الذي يركز على التأثير المالي",
+            "النماذج الاستشارية المبنية على السيناريوهات",
+            "رؤى عملية وجاهزة لاتخاذ القرار"
           ]
         },
         {
-          "title": "Compliance Trainings",
-          "coreOfferingIntro": "We support you in delivering structured ESG, governance, and regulatory training programs to client leadership and teams.",
+          "title": "التدريب على الامتثال",
+          "coreOfferingIntro": "نحن ندعمك في تقديم برامج تدريب منظمة تتعلق بالحوكمة البيئية والاجتماعية والحوكمة والتنظيمية لقيادة العملاء وفرقهم.",
           "coreOffering": [
-            "ESG awareness workshops",
-            "Governance and compliance training modules",
-            "Climate and sustainability education sessions",
-            "Leadership sensitisation programs"
+            "ورش عمل للتوعية البيئية والاجتماعية والحوكمة",
+            "وحدات التدريب على الحوكمة والامتثال",
+            "جلسات التثقيف بشأن المناخ والاستدامة",
+            "برامج التوعية القيادية"
           ],
-          "methodologyTitle": "Educate ? Engage ? Equip ? Reinforce",
+          "methodologyTitle": "تثقيف ؟ يخطب ؟ تجهيز ؟ تعزز",
           "steps": [
-            "Educate teams on regulatory and ESG expectations",
-            "Engage through practical case-based learning",
-            "Equip participants with implementation tools",
-            "Reinforce through follow-up guidance"
+            "تثقيف الفرق حول التوقعات التنظيمية والمعايير البيئية والاجتماعية والحوكمة",
+            "الانخراط من خلال التعلم العملي القائم على الحالة",
+            "تزويد المشاركين بأدوات التنفيذ",
+            "التعزيز من خلال إرشادات المتابعة"
           ],
           "valueToConsultant": [
-            "Build recurring training revenue streams",
-            "Strengthen client capability internally",
-            "Deepen advisory relationships",
-            "Position yourself as a knowledge partner"
+            "بناء تدفقات إيرادات التدريب المتكررة",
+            "تعزيز قدرة العميل داخليا",
+            "تعميق العلاقات الاستشارية",
+            "ضع نفسك كشريك المعرفة"
           ],
           "whyUs": [
-            "Expert-led, practical training models",
-            "Industry-aligned curriculum",
-            "Structured and measurable learning outcomes",
-            "Integration with governance advisory services"
+            "نماذج التدريب العملي التي يقودها الخبراء",
+            "المناهج المتوافقة مع الصناعة",
+            "نتائج تعليمية منظمة وقابلة للقياس",
+            "التكامل مع الخدمات الاستشارية للحوكمة"
           ]
         }
       ],
       "erp-implementation-digital-transformation": [
         {
-          "title": "ERP Module Review & Report Optimization",
-          "coreOfferingIntro": "We help you evaluate and optimise your clients? ERP systems to improve reporting accuracy, efficiency, and decision-making.",
+          "title": "مراجعة وحدة تخطيط موارد المؤسسات وتحسين التقارير",
+          "coreOfferingIntro": "نحن نساعدك على تقييم وتحسين عملائك؟ أنظمة تخطيط موارد المؤسسات (ERP) لتحسين دقة التقارير وكفاءتها وصنع القرار.",
           "coreOffering": [
-            "ERP module performance review",
-            "Gap analysis between system and business needs",
-            "Report restructuring and optimisation",
-            "Control and compliance alignment",
-            "Process efficiency enhancement"
+            "مراجعة أداء وحدة تخطيط موارد المؤسسات (ERP).",
+            "تحليل الفجوة بين احتياجات النظام والعمل",
+            "تقرير إعادة الهيكلة والتحسين",
+            "محاذاة التحكم والامتثال",
+            "تعزيز كفاءة العمليات"
           ],
-          "methodologyTitle": "Assess ? Analyse ? Optimise ? Align",
+          "methodologyTitle": "يٌقيِّم ؟ تحليل ؟ تحسين ؟ محاذاة",
           "steps": [
-            "Assess ERP configuration and utilisation",
-            "Analyse reporting inefficiencies and control gaps",
-            "Optimise modules and reporting structures",
-            "Align ERP outputs with management objectives"
+            "تقييم تكوين تخطيط موارد المؤسسات (ERP) واستخدامه",
+            "تحليل أوجه القصور في إعداد التقارير والفجوات الرقابية",
+            "تحسين الوحدات وهياكل إعداد التقارير",
+            "مواءمة مخرجات تخطيط موارد المؤسسات (ERP) مع أهداف الإدارة"
           ],
           "valueToConsultant": [
-            "Expand into technology-led advisory",
-            "Increase high-value ERP review engagements",
-            "Improve client decision-making systems",
-            "Strengthen your positioning as a transformation partner"
+            "التوسع في الاستشارات التي تقودها التكنولوجيا",
+            "زيادة مشاركات مراجعة تخطيط موارد المؤسسات (ERP) ذات القيمة العالية",
+            "تحسين أنظمة اتخاذ القرار لدى العملاء",
+            "تعزيز مكانتك كشريك التحول"
           ],
           "whyUs": [
-            "Deep finance and governance integration",
-            "Practical ERP evaluation frameworks",
-            "Focus on measurable reporting improvement",
-            "Experience across multi-industry systems"
+            "التكامل العميق بين التمويل والحوكمة",
+            "الأطر العملية لتقييم تخطيط موارد المؤسسات (ERP).",
+            "التركيز على تحسين التقارير القابلة للقياس",
+            "خبرة عبر أنظمة متعددة الصناعات"
           ]
         },
         {
-          "title": "Master Data Management",
-          "coreOfferingIntro": "We help you establish structured master data governance frameworks to ensure data accuracy, consistency, and reliability across systems.",
+          "title": "إدارة البيانات الرئيسية",
+          "coreOfferingIntro": "نحن نساعدك على إنشاء أطر عمل منظمة لإدارة البيانات الرئيسية لضمان دقة البيانات واتساقها وموثوقيتها عبر الأنظمة.",
           "coreOffering": [
-            "Data governance framework design",
-            "Master data standardisation",
-            "Data validation and cleansing support",
-            "Access control and approval workflows"
+            "تصميم إطار حوكمة البيانات",
+            "توحيد البيانات الرئيسية",
+            "التحقق من صحة البيانات ودعم التطهير",
+            "التحكم في الوصول وسير عمل الموافقة"
           ],
-          "methodologyTitle": "Audit ? Cleanse ? Standardise ? Govern",
+          "methodologyTitle": "مراجعة ؟ تطهير ؟ توحيد؟ يحكم",
           "steps": [
-            "Audit existing master data quality",
-            "Cleanse duplicates and inconsistencies",
-            "Standardise naming and classification structures",
-            "Implement governance and monitoring controls"
+            "تدقيق جودة البيانات الرئيسية الحالية",
+            "تطهير التكرارات والتناقضات",
+            "توحيد هياكل التسمية والتصنيف",
+            "تنفيذ ضوابط الحوكمة والمراقبة"
           ],
           "valueToConsultant": [
-            "Enhance financial and operational accuracy",
-            "Improve reporting reliability for clients",
-            "Increase recurring data governance assignments",
-            "Position yourself as a digital governance advisor"
+            "تعزيز الدقة المالية والتشغيلية",
+            "تحسين موثوقية التقارير للعملاء",
+            "زيادة مهام إدارة البيانات المتكررة",
+            "ضع نفسك كمستشار للحوكمة الرقمية"
           ],
           "whyUs": [
-            "Governance-driven data frameworks",
-            "Integration with compliance and ERP systems",
-            "Practical implementation support",
-            "Focus on long-term data sustainability"
+            "أطر البيانات القائمة على الحوكمة",
+            "التكامل مع أنظمة الامتثال وتخطيط موارد المؤسسات (ERP).",
+            "دعم التنفيذ العملي",
+            "التركيز على استدامة البيانات على المدى الطويل"
           ]
         },
         {
-          "title": "Department-Wise Digital Transformation",
-          "coreOfferingIntro": "We support you in driving structured digital transformation across finance, HR, operations, procurement, and other departments.",
+          "title": "التحول الرقمي على مستوى القسم",
+          "coreOfferingIntro": "نحن ندعمك في قيادة التحول الرقمي المنظم عبر أقسام المالية والموارد البشرية والعمليات والمشتريات والإدارات الأخرى.",
           "coreOffering": [
-            "Process automation mapping",
-            "System integration strategy",
-            "Digital workflow implementation",
-            "Performance tracking frameworks"
+            "رسم خرائط أتمتة العمليات",
+            "استراتيجية تكامل النظام",
+            "تنفيذ سير العمل الرقمي",
+            "أطر تتبع الأداء"
           ],
-          "methodologyTitle": "Map ? Digitise ? Integrate ? Optimise",
+          "methodologyTitle": "الخريطة؟ رقمنة ؟ دمج ؟ تحسين",
           "steps": [
-            "Map manual and inefficient processes",
-            "Digitise workflows with appropriate tools",
-            "Integrate systems across departments",
-            "Optimise through performance measurement"
+            "رسم خريطة للعمليات اليدوية وغير الفعالة",
+            "رقمنة سير العمل باستخدام الأدوات المناسبة",
+            "دمج الأنظمة عبر الإدارات",
+            "التحسين من خلال قياس الأداء"
           ],
           "valueToConsultant": [
-            "Expand into enterprise-wide transformation advisory",
-            "Increase project-based revenue opportunities",
-            "Strengthen long-term client dependency",
-            "Deliver measurable productivity gains"
+            "التوسع في استشارات التحول على مستوى المؤسسة",
+            "زيادة فرص الإيرادات القائمة على المشروع",
+            "تعزيز الاعتماد على العميل على المدى الطويل",
+            "تحقيق مكاسب إنتاجية قابلة للقياس"
           ],
           "whyUs": [
-            "Finance-first transformation perspective",
-            "Governance-aligned digital integration",
-            "Cross-functional expertise",
-            "Execution-driven implementation approach"
+            "منظور التحول المالي أولا",
+            "التكامل الرقمي المتوافق مع الحوكمة",
+            "الخبرة متعددة الوظائف",
+            "نهج التنفيذ القائم على التنفيذ"
           ]
         },
         {
-          "title": "AI Integration for Process Efficiency & Insights",
-          "coreOfferingIntro": "We help you integrate AI-driven solutions to automate processes, enhance analytics, and generate actionable business insights.",
+          "title": "تكامل الذكاء الاصطناعي من أجل كفاءة العمليات والرؤى",
+          "coreOfferingIntro": "نحن نساعدك على دمج الحلول المستندة إلى الذكاء الاصطناعي لأتمتة العمليات وتحسين التحليلات وإنشاء رؤى أعمال قابلة للتنفيذ.",
           "coreOffering": [
-            "AI opportunity assessment",
-            "Workflow automation design",
-            "Predictive analytics integration",
-            "AI governance and control framework"
+            "تقييم فرص الذكاء الاصطناعي",
+            "تصميم أتمتة سير العمل",
+            "التكامل التحليلي التنبؤي",
+            "إطار حوكمة ومراقبة الذكاء الاصطناعي"
           ],
-          "methodologyTitle": "Identify ? Design ? Deploy ? Govern",
+          "methodologyTitle": "تعريف ؟ تصميم ؟ نشر؟ يحكم",
           "steps": [
-            "Identify automation and AI opportunities",
-            "Design AI-enabled workflows and dashboards",
-            "Deploy solutions aligned with business goals",
-            "Govern through monitoring and compliance controls"
+            "تحديد فرص الأتمتة والذكاء الاصطناعي",
+            "تصميم سير العمل ولوحات المعلومات المدعمة بالذكاء الاصطناعي",
+            "نشر الحلول المتوافقة مع أهداف العمل",
+            "تحكم من خلال ضوابط المراقبة والامتثال"
           ],
           "valueToConsultant": [
-            "Enter high-growth AI advisory space",
-            "Offer premium, innovation-driven services",
-            "Improve client operational efficiency",
-            "Position yourself as a next-generation consulting partner"
+            "أدخل المجال الاستشاري للذكاء الاصطناعي عالي النمو",
+            "تقديم خدمات متميزة قائمة على الابتكار",
+            "تحسين الكفاءة التشغيلية للعميل",
+            "ضع نفسك كشريك استشاري من الجيل التالي"
           ],
           "whyUs": [
-            "Governance-led AI integration approach",
-            "Risk-aware implementation framework",
-            "Practical automation strategies",
-            "Alignment with compliance and digital standards"
+            "نهج تكامل الذكاء الاصطناعي الذي تقوده الحوكمة",
+            "إطار التنفيذ المدرك للمخاطر",
+            "استراتيجيات الأتمتة العملية",
+            "التوافق مع الامتثال والمعايير الرقمية"
           ]
         }
       ],
       "gcc-operation-hub": [
         {
-          "title": "Support Services",
-          "coreOfferingIntro": "We help you enable clients to establish structured operational support systems that improve efficiency, governance, and scalability.",
+          "title": "خدمات الدعم",
+          "coreOfferingIntro": "نحن نساعدك على تمكين العملاء من إنشاء أنظمة دعم تشغيلية منظمة تعمل على تحسين الكفاءة والحوكمة وقابلية التوسع.",
           "coreOffering": [
-            "Finance & accounting support frameworks",
-            "Compliance and reporting support models",
-            "Operational control design",
-            "Process standardisation",
-            "Governance-aligned service structures"
+            "أطر الدعم المالي والمحاسبي",
+            "نماذج دعم الامتثال وإعداد التقارير",
+            "تصميم التحكم التشغيلي",
+            "توحيد العملية",
+            "هياكل الخدمات المتوافقة مع الحوكمة"
           ],
-          "methodologyTitle": "Assess ? Structure ? Deploy ? Optimise",
+          "methodologyTitle": "يٌقيِّم ؟ بناء ؟ نشر؟ تحسين",
           "steps": [
-            "Assess operational inefficiencies and gaps",
-            "Structure centralised support models",
-            "Deploy governance-driven processes",
-            "Optimise through performance tracking"
+            "تقييم أوجه القصور والفجوات التشغيلية",
+            "هيكلة نماذج الدعم المركزية",
+            "نشر العمليات التي تعتمد على الحوكمة",
+            "التحسين من خلال تتبع الأداء"
           ],
           "valueToConsultant": [
-            "Expand into long-term operational advisory",
-            "Increase recurring service-based revenue",
-            "Strengthen client process dependency",
-            "Position yourself as a strategic operations partner"
+            "التوسع في الاستشارات التشغيلية طويلة المدى",
+            "زيادة الإيرادات المتكررة القائمة على الخدمة",
+            "تعزيز تبعية عملية العميل",
+            "ضع نفسك كشريك عمليات استراتيجي"
           ],
           "whyUs": [
-            "Governance-first operational design",
-            "Experience across multi-function service setups",
-            "Practical implementation expertise",
-            "Scalable service architecture"
+            "الحوكمة – التصميم التشغيلي أولاً",
+            "خبرة عبر إعدادات الخدمة متعددة الوظائف",
+            "خبرة في التنفيذ العملي",
+            "بنية خدمة قابلة للتطوير"
           ]
         },
         {
-          "title": "Captive Shared Services Center Setup & Stabilization",
-          "coreOfferingIntro": "We assist you in helping clients establish and stabilise Captive Shared Service Centers (SSC) to centralise operations, improve control, and reduce cost.",
+          "title": "إعداد مركز الخدمات المشتركة الأسير وتحقيق الاستقرار",
+          "coreOfferingIntro": "نحن نساعدك في مساعدة العملاء على إنشاء واستقرار مراكز الخدمة المشتركة المقيدة (SSC) لمركزية العمليات وتحسين التحكم وخفض التكلفة.",
           "coreOffering": [
-            "Feasibility and location assessment",
-            "Operating model design",
-            "Governance and reporting structure setup",
-            "Talent and transition planning",
-            "Stabilisation and performance optimisation"
+            "الجدوى وتقييم الموقع",
+            "تصميم نموذج التشغيل",
+            "إعداد هيكل الحوكمة وإعداد التقارير",
+            "المواهب والتخطيط الانتقالي",
+            "الاستقرار وتحسين الأداء"
           ],
-          "methodologyTitle": "Evaluate ? Design ? Transition ? Stabilise",
+          "methodologyTitle": "يقيم ؟ تصميم ؟ انتقال ؟ استقرار",
           "steps": [
-            "Evaluate business case and operational readiness",
-            "Design SSC structure and governance model",
-            "Transition processes and teams",
-            "Stabilise operations through performance metrics"
+            "تقييم حالة العمل والاستعداد التشغيلي",
+            "تصميم هيكل SSC ونموذج الإدارة",
+            "العمليات الانتقالية والفرق",
+            "تحقيق الاستقرار في العمليات من خلال مقاييس الأداء"
           ],
           "valueToConsultant": [
-            "Enter global operations advisory",
-            "Increase high-value transformation projects",
-            "Support clients in cost optimisation strategies",
-            "Strengthen your positioning in enterprise consulting"
+            "أدخل استشارات العمليات العالمية",
+            "زيادة مشاريع التحول ذات القيمة العالية",
+            "دعم العملاء في استراتيجيات تحسين التكلفة",
+            "تعزيز مكانتك في استشارات المؤسسات"
           ],
           "whyUs": [
-            "Strong finance and governance integration",
-            "Practical SSC setup frameworks",
-            "Cross-border operational expertise",
-            "Focus on long-term stability, not just launch"
+            "تكامل قوي في التمويل والحوكمة",
+            "أطر إعداد SSC العملية",
+            "الخبرة التشغيلية عبر الحدود",
+            "التركيز على الاستقرار على المدى الطويل، وليس مجرد الإطلاق"
           ]
         },
         {
-          "title": "Build, Operate & Transform (BOT) Model Implementation",
-          "coreOfferingIntro": "We help you guide clients in setting up operations under the Build, Operate & Transform (BOT) model ? ensuring controlled expansion with structured governance.",
+          "title": "تنفيذ نموذج البناء والتشغيل والتحويل (BOT).",
+          "coreOfferingIntro": "نحن نساعدك على توجيه العملاء في إعداد العمليات ضمن نموذج البناء والتشغيل والتحويل (BOT)؟ ضمان التوسع الخاضع للرقابة مع الحوكمة المنظمة.",
           "coreOffering": [
-            "BOT strategy and feasibility planning",
-            "Operational setup and process design",
-            "Governance and compliance structuring",
-            "Transformation roadmap development",
-            "Exit or transition strategy planning"
+            "استراتيجية BOT وتخطيط الجدوى",
+            "الإعداد التشغيلي وتصميم العمليات",
+            "هيكلة الحوكمة والامتثال",
+            "تطوير خارطة طريق التحول",
+            "التخطيط لاستراتيجية الخروج أو الانتقال"
           ],
-          "methodologyTitle": "Build ? Operate ? Optimise ? Transform",
+          "methodologyTitle": "يبني ؟ تعمل ؟ تحسين ؟ تحويل",
           "steps": [
-            "Build operational infrastructure and teams",
-            "Operate under structured governance models",
-            "Optimise performance and cost structures",
-            "Transform into a scalable, independent function"
+            "بناء البنية التحتية التشغيلية والفرق",
+            "العمل في ظل نماذج حوكمة منظمة",
+            "تحسين الأداء وهياكل التكلفة",
+            "التحول إلى وظيفة مستقلة وقابلة للتطوير"
           ],
           "valueToConsultant": [
-            "Expand into strategic global expansion advisory",
-            "Increase project-based and recurring revenue",
-            "Support clients in controlled international growth",
-            "Position yourself as a transformation leader"
+            "التوسع في استشارات التوسع العالمي الاستراتيجي",
+            "زيادة الإيرادات القائمة على المشروع والمتكررة",
+            "دعم العملاء في النمو الدولي الخاضع للرقابة",
+            "ضع نفسك كقائد للتحول"
           ],
           "whyUs": [
-            "Governance-driven BOT framework",
-            "Practical execution expertise",
-            "Integrated finance, compliance, and operations approach",
-            "Structured transformation and scalability planning"
+            "إطار BOT القائم على الحوكمة",
+            "خبرة في التنفيذ العملي",
+            "نهج متكامل للتمويل والامتثال والعمليات",
+            "التحول المنظم وتخطيط قابلية التوسع"
           ]
         }
       ],
       "training-workshop": [
         {
-          "title": "Internal Audit Training",
-          "coreOfferingIntro": "Structured training programs to build expertise in internal audit frameworks, risk-based auditing, controls evaluation, and governance alignment.",
+          "title": "التدريب على التدقيق الداخلي",
+          "coreOfferingIntro": "برامج تدريبية منظمة لبناء الخبرة في أطر التدقيق الداخلي، والتدقيق على أساس المخاطر، وتقييم الضوابط، ومواءمة الحوكمة.",
           "coreOffering": [
-            "Risk-based audit approach",
-            "Control testing techniques",
-            "Audit documentation standards",
-            "Reporting & stakeholder communication",
-            "Practical case simulations"
+            "نهج التدقيق على أساس المخاطر",
+            "تقنيات اختبار التحكم",
+            "معايير توثيق المراجعة",
+            "إعداد التقارير والتواصل مع أصحاب المصلحة",
+            "محاكاة الحالة العملية"
           ],
-          "methodologyTitle": "Learn ? Apply ? Simulate ? Implement",
+          "methodologyTitle": "يتعلم ؟ يتقدم ؟ محاكاة ؟ ينفذ",
           "steps": [
-            "Concept-based learning",
-            "Real-world audit case studies",
-            "Simulation-driven workshops",
-            "Implementation frameworks for client delivery"
+            "التعلم المبني على المفهوم",
+            "دراسات حالة التدقيق في العالم الحقيقي",
+            "ورش عمل تعتمد على المحاكاة",
+            "أطر التنفيذ لتسليم العميل"
           ],
           "valueToConsultant": [
-            "Increase audit engagement revenue",
-            "Deliver structured, high-quality audit assignments",
-            "Improve credibility with CFOs and Boards",
-            "Position yourself as a governance advisor"
+            "زيادة إيرادات مشاركة التدقيق",
+            "تقديم مهام تدقيق منظمة وعالية الجودة",
+            "تحسين المصداقية مع المديرين الماليين ومجالس الإدارة",
+            "ضع نفسك كمستشار للحوكمة"
           ],
           "whyUs": [
-            "Practical audit exposure",
-            "Governance-aligned frameworks",
-            "Industry-relevant case studies",
-            "Execution-focused learning"
+            "التعرض للتدقيق العملي",
+            "الأطر المتوافقة مع الحوكمة",
+            "دراسات الحالة ذات الصلة بالصناعة",
+            "التعلم الذي يركز على التنفيذ"
           ]
         },
         {
-          "title": "ESG & Sustainability Training",
-          "coreOfferingIntro": "Comprehensive ESG workshops to help you advise clients on sustainability reporting, carbon estimation, supply chain compliance, and regulatory readiness.",
+          "title": "التدريب البيئي والاجتماعي والحوكمة والاستدامة",
+          "coreOfferingIntro": "ورش عمل شاملة تتعلق بالحوكمة البيئية والاجتماعية والحوكمة لمساعدتك في تقديم المشورة للعملاء بشأن تقارير الاستدامة، وتقدير الكربون، والامتثال لسلسلة التوريد، والاستعداد التنظيمي.",
           "coreOffering": [
-            "ESG framework fundamentals",
-            "Reporting structures",
-            "Carbon & climate risk basics",
-            "Data collection methodologies",
-            "Regulatory alignment"
+            "أساسيات إطار ESG",
+            "هياكل التقارير",
+            "أساسيات مخاطر الكربون والمناخ",
+            "منهجيات جمع البيانات",
+            "المحاذاة التنظيمية"
           ],
-          "methodologyTitle": "Understand ? Structure ? Measure ? Report",
+          "methodologyTitle": "يفهم ؟ بناء ؟ يقيس ؟ تقرير",
           "steps": [
-            "ESG concept clarity",
-            "Framework design guidance",
-            "Measurement tools introduction",
-            "Reporting implementation techniques"
+            "وضوح مفهوم الحوكمة البيئية والاجتماعية وحوكمة الشركات",
+            "توجيهات تصميم الإطار",
+            "مقدمة أدوات القياس",
+            "تقنيات تنفيذ التقارير"
           ],
           "valueToConsultant": [
-            "Enter high-growth ESG advisory",
-            "Expand service portfolio",
-            "Increase consulting ticket size",
-            "Position yourself as a future-ready advisor"
+            "أدخل الاستشارات البيئية والاجتماعية والحوكمة عالية النمو",
+            "توسيع محفظة الخدمة",
+            "زيادة حجم تذكرة الاستشارة",
+            "ضع نفسك كمستشار جاهز للمستقبل"
           ],
           "whyUs": [
-            "Regulatory-focused ESG training",
-            "Practical implementation approach",
-            "Integrated governance perspective",
-            "Market-relevant content"
+            "تدريب يركز على الجوانب التنظيمية والاجتماعية والحوكمة",
+            "نهج التنفيذ العملي",
+            "منظور الحوكمة المتكاملة",
+            "المحتوى ذو الصلة بالسوق"
           ]
         },
         {
-          "title": "Cybersecurity & Data Privacy Awareness Training",
-          "coreOfferingIntro": "Training programs covering cybersecurity fundamentals, DPDP, global privacy standards, and risk mitigation strategies.",
+          "title": "التدريب على التوعية بالأمن السيبراني وخصوصية البيانات",
+          "coreOfferingIntro": "برامج تدريبية تغطي أساسيات الأمن السيبراني، وDPDP، ومعايير الخصوصية العالمية، واستراتيجيات تخفيف المخاطر.",
           "coreOffering": [
-            "Data protection fundamentals",
-            "Privacy risk awareness",
-            "Compliance readiness (DPDP, GDPR basics)",
-            "Incident response basics",
-            "Governance alignment"
+            "أساسيات حماية البيانات",
+            "الوعي بمخاطر الخصوصية",
+            "الاستعداد للامتثال (DPDP، أساسيات القانون العام لحماية البيانات)",
+            "أساسيات الاستجابة للحوادث",
+            "مواءمة الحوكمة"
           ],
-          "methodologyTitle": "Educate ? Assess ? Strengthen ? Comply",
+          "methodologyTitle": "تثقيف ؟ يٌقيِّم ؟ تعزيز ؟ يمتثل",
           "steps": [
-            "Awareness sessions",
-            "Risk exposure assessment exercises",
-            "Control framework understanding",
-            "Compliance-oriented implementation guidance"
+            "جلسات توعية",
+            "تمارين تقييم التعرض للمخاطر",
+            "فهم إطار التحكم",
+            "إرشادات التنفيذ الموجهة نحو الامتثال"
           ],
           "valueToConsultant": [
-            "Expand into compliance advisory",
-            "Increase cybersecurity-related engagements",
-            "Strengthen client trust",
-            "Address board-level concerns"
+            "التوسع في استشارات الامتثال",
+            "زيادة المشاركات المتعلقة بالأمن السيبراني",
+            "تعزيز ثقة العملاء",
+            "معالجة المخاوف على مستوى مجلس الإدارة"
           ],
           "whyUs": [
-            "Governance-led cyber approach",
-            "Compliance-focused training modules",
-            "Practical business scenarios",
-            "Strategic positioning support"
+            "النهج السيبراني الذي تقوده الحوكمة",
+            "وحدات التدريب التي تركز على الامتثال",
+            "سيناريوهات الأعمال العملية",
+            "دعم تحديد المواقع الاستراتيجية"
           ]
         },
         {
-          "title": "AI Implementation Training",
-          "coreOfferingIntro": "Hands-on workshops to help you identify AI opportunities, automate workflows, and integrate AI responsibly into client operations.",
+          "title": "التدريب على تنفيذ الذكاء الاصطناعي",
+          "coreOfferingIntro": "ورش عمل عملية لمساعدتك على تحديد فرص الذكاء الاصطناعي، وأتمتة سير العمل، ودمج الذكاء الاصطناعي بشكل مسؤول في عمليات العميل.",
           "coreOffering": [
-            "AI fundamentals for consultants",
-            "Process automation use cases",
-            "AI governance basics",
-            "Risk and control considerations",
-            "ROI-driven AI adoption"
+            "أساسيات الذكاء الاصطناعي للاستشاريين",
+            "حالات استخدام أتمتة العمليات",
+            "أساسيات حوكمة الذكاء الاصطناعي",
+            "اعتبارات المخاطر والسيطرة",
+            "اعتماد الذكاء الاصطناعي القائم على عائد الاستثمار"
           ],
-          "methodologyTitle": "Identify ? Design ? Deploy ? Govern",
+          "methodologyTitle": "تعريف ؟ تصميم ؟ نشر؟ يحكم",
           "steps": [
-            "Opportunity identification exercises",
-            "Workflow mapping sessions",
-            "AI integration frameworks",
-            "Governance & control awareness"
+            "تمارين تحديد الفرص",
+            "جلسات رسم خرائط سير العمل",
+            "أطر تكامل الذكاء الاصطناعي",
+            "الوعي بالحوكمة والرقابة"
           ],
           "valueToConsultant": [
-            "Enter premium AI advisory market",
-            "Deliver innovation-led solutions",
-            "Increase digital transformation revenue",
-            "Differentiate from traditional consultants"
+            "أدخل السوق الاستشارية المتميزة للذكاء الاصطناعي",
+            "تقديم حلول يقودها الابتكار",
+            "زيادة إيرادات التحول الرقمي",
+            "تميز عن المستشارين التقليديين"
           ],
           "whyUs": [
-            "Governance-first AI perspective",
-            "Practical business implementation",
-            "Risk-aware adoption model",
-            "Revenue-oriented approach"
+            "منظور الحوكمة أولاً للذكاء الاصطناعي",
+            "التنفيذ العملي للأعمال",
+            "نموذج اعتماد واعي بالمخاطر",
+            "النهج الموجه نحو الإيرادات"
           ]
         },
         {
-          "title": "Leadership & Soft Skills Development",
-          "coreOfferingIntro": "Workshops designed to enhance leadership presence, communication, negotiation, and stakeholder management for consultants and senior professionals.",
+          "title": "القيادة وتنمية المهارات الشخصية",
+          "coreOfferingIntro": "ورش عمل مصممة لتعزيز الحضور القيادي والتواصل والتفاوض وإدارة أصحاب المصلحة للاستشاريين وكبار المهنيين.",
           "coreOffering": [
-            "Executive communication",
-            "Client relationship management",
-            "Negotiation skills",
-            "Team leadership",
-            "Strategic thinking"
+            "التواصل التنفيذي",
+            "إدارة علاقات العملاء",
+            "مهارات التفاوض",
+            "قيادة الفريق",
+            "التفكير الاستراتيجي"
           ],
-          "methodologyTitle": "Develop ? Practice ? Refine ? Lead",
+          "methodologyTitle": "يطور ؟ يمارس ؟ صقل ؟ يقود",
           "steps": [
-            "Interactive learning",
-            "Role-play simulations",
-            "Scenario-based exercises",
-            "Personalised feedback"
+            "التعلم التفاعلي",
+            "محاكاة لعب الأدوار",
+            "تمارين مبنية على السيناريو",
+            "ردود فعل شخصية"
           ],
           "valueToConsultant": [
-            "Increase client retention",
-            "Improve stakeholder confidence",
-            "Strengthen leadership positioning",
-            "Build long-term advisory relationships"
+            "زيادة الاحتفاظ بالعملاء",
+            "تحسين ثقة أصحاب المصلحة",
+            "تعزيز المواقع القيادية",
+            "بناء علاقات استشارية طويلة الأمد"
           ],
           "whyUs": [
-            "Practical, real-world scenarios",
-            "Consultant-focused curriculum",
-            "Executive-level communication frameworks",
-            "Immediate applicability"
+            "سيناريوهات عملية وواقعية",
+            "المناهج الدراسية التي تركز على المستشارين",
+            "أطر الاتصال على المستوى التنفيذي",
+            "قابلية التطبيق الفوري"
           ]
         }
       ],
       "recruitment-manpower-services": [
         {
-          "title": "Temporary Staffing",
-          "coreOfferingIntro": "We help you support clients with structured temporary staffing solutions for short-term, project-based, compliance-driven, or transition requirements.",
+          "title": "التوظيف المؤقت",
+          "coreOfferingIntro": "نحن نساعدك على دعم العملاء بحلول التوظيف المؤقتة المنظمة للمتطلبات قصيرة المدى أو القائمة على المشاريع أو القائمة على الامتثال أو الانتقال.",
           "coreOffering": [
-            "Finance & accounting professionals",
-            "Internal audit & compliance resources",
-            "ESG & sustainability support staff",
-            "IT & data privacy specialists",
-            "Project-based deployment"
+            "المتخصصين في المالية والمحاسبة",
+            "موارد التدقيق الداخلي والامتثال",
+            "موظفو دعم الحوكمة البيئية والاجتماعية والحوكمة والاستدامة",
+            "متخصصون في تكنولوجيا المعلومات وخصوصية البيانات",
+            "النشر على أساس المشروع"
           ],
-          "methodologyTitle": "Understand ? Source ? Deploy ? Monitor",
+          "methodologyTitle": "يفهم ؟ مصدر ؟ نشر؟ شاشة",
           "steps": [
-            "Understand client skill and timeline requirements",
-            "Source pre-vetted professionals",
-            "Deploy under structured engagement models",
-            "Monitor performance and ensure continuity"
+            "فهم مهارات العميل ومتطلبات الجدول الزمني",
+            "مصدر المهنيين الذين تم فحصهم مسبقا",
+            "النشر ضمن نماذج المشاركة المنظمة",
+            "مراقبة الأداء والتأكد من الاستمرارية"
           ],
           "valueToConsultant": [
-            "Expand into staffing-led revenue streams",
-            "Offer end-to-end advisory + execution support",
-            "Strengthen client reliance during peak workload",
-            "Increase recurring and project-based income"
+            "التوسع في تدفقات الإيرادات التي يقودها التوظيف",
+            "تقديم استشارات شاملة + دعم التنفيذ",
+            "تعزيز الاعتماد على العميل أثناء ذروة عبء العمل",
+            "زيادة الدخل المتكرر والمعتمد على المشاريع"
           ],
           "whyUs": [
-            "Access to domain-specific talent pools",
-            "Governance-aligned resource deployment",
-            "Fast turnaround capability",
-            "Structured performance oversight"
+            "الوصول إلى مجموعات المواهب الخاصة بالمجال",
+            "نشر الموارد المتوافقة مع الحوكمة",
+            "القدرة على التحول السريع",
+            "مراقبة الأداء المنظم"
           ]
         },
         {
-          "title": "Permanent Recruitment",
-          "coreOfferingIntro": "We assist you in helping clients identify and recruit permanent talent aligned with strategic growth, governance, and compliance requirements.",
+          "title": "التوظيف الدائم",
+          "coreOfferingIntro": "نحن نساعدك في مساعدة العملاء على تحديد وتوظيف المواهب الدائمة المتوافقة مع متطلبات النمو الاستراتيجي والحوكمة والامتثال.",
           "coreOffering": [
-            "CXO & senior leadership hiring",
-            "Finance & risk professionals",
-            "ESG & sustainability experts",
-            "Cybersecurity & data privacy specialists",
-            "ERP & digital transformation roles"
+            "توظيف CXO والقيادة العليا",
+            "المتخصصين في التمويل والمخاطر",
+            "خبراء الحوكمة البيئية والاجتماعية والحوكمة والاستدامة",
+            "متخصصون في الأمن السيبراني وخصوصية البيانات",
+            "أدوار تخطيط موارد المؤسسات والتحول الرقمي"
           ],
-          "methodologyTitle": "Define ? Identify ? Evaluate ? Onboard",
+          "methodologyTitle": "يُعرِّف ؟ تعريف ؟ يقيم ؟ صعد على متنها",
           "steps": [
-            "Define role objectives and capability framework",
-            "Identify candidates through structured sourcing",
-            "Evaluate technical and cultural fit",
-            "Support onboarding and transition alignment"
+            "تحديد أهداف الدور وإطار القدرات",
+            "تحديد المرشحين من خلال المصادر المنظمة",
+            "تقييم الملاءمة الفنية والثقافية",
+            "دعم الإعداد ومحاذاة الانتقال"
           ],
           "valueToConsultant": [
-            "Add executive search capability to your portfolio",
-            "Increase engagement value with hiring mandates",
-            "Strengthen long-term client relationships",
-            "Become a strategic talent partner, not just an advisor"
+            "أضف إمكانية البحث التنفيذي إلى محفظتك",
+            "زيادة قيمة المشاركة من خلال ولايات التوظيف",
+            "تعزيز العلاقات طويلة الأمد مع العملاء",
+            "كن شريكًا استراتيجيًا للمواهب، وليس مجرد مستشار"
           ],
           "whyUs": [
-            "Strong industry talent network",
-            "Governance and compliance-focused hiring",
-            "Structured evaluation frameworks",
-            "Alignment with transformation and growth goals"
+            "شبكة المواهب الصناعية القوية",
+            "التوظيف الذي يركز على الحوكمة والامتثال",
+            "أطر التقييم المنظمة",
+            "التوافق مع أهداف التحول والنمو"
           ]
         }
       ],
       "physical-verification-stock-fixed-asset": [
         {
-          "title": "Fixed Asset Physical Verification",
-          "coreOfferingIntro": "Comprehensive, line-by-line on-site verification of fixed assets across locations to validate existence, location, and operational condition.",
+          "title": "التحقق المادي من الأصول الثابتة",
+          "coreOfferingIntro": "التحقق الشامل والموقعي من الأصول الثابتة عبر المواقع للتحقق من الوجود والموقع والحالة التشغيلية.",
           "coreOffering": [
-            "Physical existence check",
-            "Location & custodian validation",
-            "Missing/obsolete asset identification",
-            "FAR reconciliation",
-            "Exception reporting"
+            "التحقق من الوجود المادي",
+            "التحقق من صحة الموقع والوصي",
+            "تحديد الأصول المفقودة/المتقادمة",
+            "المصالحة البعيدة",
+            "الإبلاغ عن الاستثناء"
           ],
-          "methodologyTitle": "Plan ? Verify ? Reconcile ? Report",
+          "methodologyTitle": "يخطط ؟ يؤكد ؟ تصالح ؟ تقرير",
           "steps": [
-            "Plan verification scope and asset universe",
-            "Conduct structured on-site inspection",
-            "Reconcile findings with FAR",
-            "Deliver discrepancy and risk report"
+            "نطاق التحقق من الخطة وعالم الأصول",
+            "إجراء تفتيش منظم في الموقع",
+            "التوفيق بين النتائج مع FAR",
+            "تقديم تقرير التناقض والمخاطر"
           ],
           "valueToConsultant": [
-            "Expand into audit-support and compliance assignments",
-            "Increase recurring annual verification mandates",
-            "Strengthen financial reporting credibility",
-            "Deliver measurable governance impact"
+            "التوسع في مهام دعم التدقيق والامتثال",
+            "زيادة ولايات التحقق السنوية المتكررة",
+            "تعزيز مصداقية التقارير المالية",
+            "تحقيق تأثير حوكمة قابل للقياس"
           ],
           "whyUs": [
-            "Technology-enabled verification process",
-            "Multi-location execution capability",
-            "Strong accounting and compliance expertise",
-            "Detailed, audit-ready documentation"
+            "عملية التحقق المدعومة بالتكنولوجيا",
+            "القدرة على التنفيذ متعدد المواقع",
+            "خبرة قوية في المحاسبة والامتثال",
+            "وثائق مفصلة وجاهزة للتدقيق"
           ]
         },
         {
-          "title": "Asset Tagging & Identification",
-          "coreOfferingIntro": "Structured tagging solutions using barcodes, QR codes, RFID, metal, polyester, or vinyl tags to enable traceability and future audit efficiency.",
+          "title": "وضع علامات على الأصول وتحديد هويتها",
+          "coreOfferingIntro": "حلول وضع العلامات المنظمة باستخدام الرموز الشريطية أو رموز QR أو RFID أو العلامات المعدنية أو البوليستر أو الفينيل لتمكين إمكانية التتبع وكفاءة التدقيق في المستقبل.",
           "coreOffering": [
-            "Unique ID allocation",
-            "Durable tagging solutions",
-            "Custodian & location mapping",
-            "ERP-integrated tagging"
+            "تخصيص معرف فريد",
+            "حلول وضع العلامات الدائمة",
+            "الوصي ورسم خرائط الموقع",
+            "وضع العلامات المتكامل لتخطيط موارد المؤسسات (ERP)."
           ],
-          "methodologyTitle": "Identify ? Tag ? Capture ? Integrate",
+          "methodologyTitle": "تعريف ؟ علامة ؟ يأسر ؟ دمج",
           "steps": [
-            "Identify all taggable assets",
-            "Deploy appropriate tagging solution",
-            "Capture asset data digitally",
-            "Integrate tagging data with FAR"
+            "تحديد جميع الأصول القابلة للتمييز",
+            "نشر الحل المناسب لوضع العلامات",
+            "التقاط بيانات الأصول رقميا",
+            "دمج بيانات وضع العلامات مع FAR"
           ],
           "valueToConsultant": [
-            "Offer long-term asset control frameworks",
-            "Improve future audit efficiency for clients",
-            "Create repeat engagement opportunities",
-            "Position yourself as a technology-driven advisor"
+            "تقديم أطر مراقبة الأصول طويلة الأجل",
+            "تحسين كفاءة التدقيق المستقبلية للعملاء",
+            "إنشاء فرص مشاركة متكررة",
+            "ضع نفسك كمستشار يعتمد على التكنولوجيا"
           ],
           "whyUs": [
-            "Durable, industry-specific tagging materials",
-            "Digital asset capture tools",
-            "Scalable tagging deployment",
-            "Compliance-aligned tracking systems"
+            "مواد وضع علامات متينة خاصة بالصناعة",
+            "أدوات التقاط الأصول الرقمية",
+            "نشر علامات قابلة للتطوير",
+            "أنظمة التتبع المتوافقة مع الامتثال"
           ]
         },
         {
-          "title": "FAR (Fixed Asset Register) Updation & Reconciliation",
-          "coreOfferingIntro": "Complete review, correction, and restructuring of the Fixed Asset Register to ensure accuracy and regulatory compliance.",
+          "title": "تحديث وتسوية FAR (سجل الأصول الثابتة).",
+          "coreOfferingIntro": "استكمال المراجعة والتصحيح وإعادة الهيكلة لسجل الأصول الثابتة لضمان الدقة والامتثال التنظيمي.",
           "coreOffering": [
-            "Additions, disposals & transfers update",
-            "Depreciation alignment (SLM/WDV)",
-            "CWIP adjustments",
-            "ERP-compatible digital FAR",
-            "Audit trail documentation"
+            "تحديث الإضافات والتصرفات والتحويلات",
+            "محاذاة الإهلاك (SLM/WDV)",
+            "تعديلات CWIP",
+            "FAR الرقمي المتوافق مع ERP",
+            "وثائق مسار التدقيق"
           ],
-          "methodologyTitle": "Review ? Correct ? Align ? Document",
+          "methodologyTitle": "مراجعة ؟ صحيح ؟ محاذاة ؟ وثيقة",
           "steps": [
-            "Review existing FAR accuracy",
-            "Correct discrepancies",
-            "Align depreciation & accounting treatment",
-            "Document for audit readiness"
+            "مراجعة دقة FAR الحالية",
+            "التناقضات الصحيحة",
+            "محاذاة الاستهلاك والمعالجة المحاسبية",
+            "وثيقة للاستعداد للتدقيق"
           ],
           "valueToConsultant": [
-            "Strengthen financial statement reliability",
-            "Expand into accounting compliance advisory",
-            "Increase audit-support revenue",
-            "Build long-term governance credibility"
+            "تعزيز موثوقية البيانات المالية",
+            "التوسع في استشارات الامتثال المحاسبي",
+            "زيادة إيرادات دعم التدقيق",
+            "بناء مصداقية الحوكمة على المدى الطويل"
           ],
           "whyUs": [
-            "Deep accounting standard expertise",
-            "Strong reconciliation frameworks",
-            "ERP compatibility support",
-            "Audit-focused documentation precision"
+            "خبرة عميقة في المعايير المحاسبية",
+            "أطر المصالحة القوية",
+            "دعم توافق تخطيط موارد المؤسسات (ERP).",
+            "دقة التوثيق التي تركز على التدقيق"
           ]
         },
         {
-          "title": "Componentization (IFRS / Ind AS / IAS 16 Compliance)",
-          "coreOfferingIntro": "Identification and segregation of significant asset components for separate depreciation and regulatory compliance.",
+          "title": "المكونات (الامتثال للمعايير الدولية لإعداد التقارير المالية / Ind AS / IAS 16)",
+          "coreOfferingIntro": "تحديد وفصل مكونات الأصول الهامة من أجل الإهلاك المنفصل والامتثال التنظيمي.",
           "coreOffering": [
-            "Component breakdown analysis",
-            "Useful life assessment",
-            "Separate depreciation calculation",
-            "Register restructuring",
-            "Replacement accounting support"
+            "تحليل انهيار المكونات",
+            "تقييم مفيد للحياة",
+            "حساب الاستهلاك منفصلة",
+            "تسجيل إعادة الهيكلة",
+            "استبدال الدعم المحاسبي"
           ],
-          "methodologyTitle": "Analyse ? Segregate ? Calculate ? Update",
+          "methodologyTitle": "تحليل ؟ فصل ؟ احسب ؟ تحديث",
           "steps": [
-            "Analyse major asset categories",
-            "Segregate components with varying useful lives",
-            "Calculate revised depreciation schedules",
-            "Update FAR accordingly"
+            "تحليل فئات الأصول الرئيسية",
+            "فصل المكونات ذات الأعمار المفيدة المتفاوتة",
+            "حساب جداول الاستهلاك المنقحة",
+            "قم بتحديث FAR وفقًا لذلك"
           ],
           "valueToConsultant": [
-            "Enter IFRS/Ind AS advisory domain",
-            "Increase technical compliance engagements",
-            "Strengthen board-level advisory credibility",
-            "Expand into international reporting mandates"
+            "أدخل المجال الاستشاري للمعايير الدولية لإعداد التقارير المالية/Ind AS",
+            "زيادة مشاركات الامتثال الفني",
+            "تعزيز المصداقية الاستشارية على مستوى مجلس الإدارة",
+            "التوسع في ولايات إعداد التقارير الدولية"
           ],
           "whyUs": [
-            "Strong IFRS/Ind AS knowledge base",
-            "Practical implementation expertise",
-            "Compliance-driven documentation approach",
-            "Experience across industries"
+            "قاعدة معرفية قوية للمعايير الدولية لإعداد التقارير المالية/Ind AS",
+            "خبرة في التنفيذ العملي",
+            "نهج التوثيق القائم على الامتثال",
+            "الخبرة عبر الصناعات"
           ]
         },
         {
-          "title": "Stock & Inventory Verification",
-          "coreOfferingIntro": "Structured physical verification and reconciliation of stock to ensure accuracy and prevent shrinkage or misstatement.",
+          "title": "التحقق من المخزون والمخزون",
+          "coreOfferingIntro": "التحقق المادي المنظم وتسوية المخزون لضمان الدقة ومنع الانكماش أو الأخطاء.",
           "coreOffering": [
-            "Physical inventory count",
-            "ERP reconciliation",
-            "Slow-moving/obsolete stock identification",
-            "Warehouse process review",
-            "Exception reporting"
+            "عدد المخزون المادي",
+            "تسوية تخطيط موارد المؤسسات (ERP).",
+            "تحديد المخزون البطيء/المتقادم",
+            "مراجعة عملية المستودع",
+            "الإبلاغ عن الاستثناء"
           ],
-          "methodologyTitle": "Count ? Reconcile ? Analyse ? Recommend",
+          "methodologyTitle": "عدد ؟ تصالح ؟ تحليل ؟ يوصي",
           "steps": [
-            "Conduct physical count",
-            "Reconcile with system records",
-            "Analyse discrepancies",
-            "Recommend control improvements"
+            "إجراء العد البدني",
+            "التوفيق مع سجلات النظام",
+            "تحليل التناقضات",
+            "يوصي تحسينات التحكم"
           ],
           "valueToConsultant": [
-            "Expand into operational assurance",
-            "Increase recurring verification mandates",
-            "Strengthen working capital governance",
-            "Improve client cost control"
+            "التوسع في الضمان التشغيلي",
+            "زيادة ولايات التحقق المتكررة",
+            "تعزيز حوكمة رأس المال العامل",
+            "تحسين التحكم في تكلفة العميل"
           ],
           "whyUs": [
-            "Structured count procedures",
-            "Technology-assisted reconciliation",
-            "Strong control-focused reporting",
-            "Multi-location execution capability"
+            "إجراءات العد المنظمة",
+            "المصالحة بمساعدة التكنولوجيا",
+            "تقارير قوية تركز على السيطرة",
+            "القدرة على التنفيذ متعدد المواقع"
           ]
         },
         {
-          "title": "Condition Assessment & Asset Health Review",
-          "coreOfferingIntro": "Evaluation of asset condition, operational efficiency, and impairment indicators to support financial and strategic decisions.",
+          "title": "تقييم الحالة ومراجعة صحة الأصول",
+          "coreOfferingIntro": "تقييم حالة الأصول والكفاءة التشغيلية ومؤشرات انخفاض القيمة لدعم القرارات المالية والاستراتيجية.",
           "coreOffering": [
-            "Operational status check",
-            "Impairment indicators",
-            "Maintenance review inputs",
-            "Replacement planning guidance",
-            "Insurance adequacy inputs"
+            "فحص الحالة التشغيلية",
+            "مؤشرات انخفاض القيمة",
+            "مدخلات مراجعة الصيانة",
+            "إرشادات تخطيط الاستبدال",
+            "مدخلات كفاية التأمين"
           ],
-          "methodologyTitle": "Inspect ? Evaluate ? Quantify ? Advise",
+          "methodologyTitle": "فحص ؟ يقيم ؟ تحديد الكمية ؟ ينصح",
           "steps": [
-            "Inspect physical and operational state",
-            "Evaluate impairment or risk exposure",
-            "Quantify potential financial impact",
-            "Advise on maintenance or replacement strategy"
+            "فحص الحالة المادية والتشغيلية",
+            "تقييم ضعف أو التعرض للمخاطر",
+            "تحديد الأثر المالي المحتمل",
+            "تقديم المشورة بشأن استراتيجية الصيانة أو الاستبدال"
           ],
           "valueToConsultant": [
-            "Enter strategic asset advisory",
-            "Support capex decision-making",
-            "Increase board-level engagement",
-            "Strengthen long-term advisory positioning"
+            "أدخل استشارات الأصول الاستراتيجية",
+            "دعم اتخاذ القرارات الرأسمالية",
+            "زيادة المشاركة على مستوى مجلس الإدارة",
+            "تعزيز المواقع الاستشارية على المدى الطويل"
           ],
           "whyUs": [
-            "Risk-focused evaluation framework",
-            "Financial and operational integration",
-            "Governance-aligned advisory",
-            "Practical, decision-ready insights"
+            "إطار التقييم الذي يركز على المخاطر",
+            "التكامل المالي والتشغيلي",
+            "الاستشارات المتوافقة مع الحوكمة",
+            "رؤى عملية وجاهزة لاتخاذ القرار"
           ]
         },
         {
-          "title": "Regulatory & Compliance Review",
-          "coreOfferingIntro": "Comprehensive review to ensure asset-related compliance with Companies Act, CARO, IFRS/Ind AS, and internal control frameworks.",
+          "title": "المراجعة التنظيمية والامتثال",
+          "coreOfferingIntro": "مراجعة شاملة لضمان الامتثال المتعلق بالأصول لقانون الشركات، وCARO، والمعايير الدولية لإعداد التقارير المالية/Ind AS، وأطر الرقابة الداخلية.",
           "coreOffering": [
-            "Compliance checklist mapping",
-            "Control environment assessment",
-            "Documentation review",
-            "Audit readiness support",
-            "Management action plan"
+            "رسم خرائط قائمة التحقق من الامتثال",
+            "تقييم بيئة التحكم",
+            "مراجعة التوثيق",
+            "دعم جاهزية التدقيق",
+            "خطة عمل الإدارة"
           ],
-          "methodologyTitle": "Map ? Evaluate ? Align ? Certify Readiness",
+          "methodologyTitle": "الخريطة؟ يقيم ؟ محاذاة ؟ التصديق على الاستعداد",
           "steps": [
-            "Map applicable regulatory requirements",
-            "Evaluate compliance gaps",
-            "Align processes and documentation",
-            "Prepare for audit and statutory review"
+            "خريطة المتطلبات التنظيمية المعمول بها",
+            "تقييم فجوات الامتثال",
+            "محاذاة العمليات والوثائق",
+            "الاستعداد للتدقيق والمراجعة القانونية"
           ],
           "valueToConsultant": [
-            "Expand into regulatory advisory",
-            "Increase high-value compliance engagements",
-            "Strengthen client governance reputation",
-            "Position yourself as a risk and compliance partner"
+            "التوسع في الاستشارات التنظيمية",
+            "زيادة مشاركات الامتثال ذات القيمة العالية",
+            "تعزيز سمعة حوكمة العملاء",
+            "ضع نفسك كشريك في المخاطر والامتثال"
           ],
           "whyUs": [
-            "Strong regulatory interpretation expertise",
-            "Governance-driven approach",
-            "Structured documentation standards",
-            "End-to-end compliance readiness support"
+            "خبرة قوية في التفسير التنظيمي",
+            "النهج القائم على الحوكمة",
+            "معايير التوثيق المنظم",
+            "دعم الاستعداد للامتثال الشامل"
           ]
         }
       ]
@@ -2215,23 +2215,23 @@
     "global": "العالم"
   },
   "login": {
-    "welcomeBack": "Lead. Scale. Dominate.",
-    "subtitle": "More Services. More Authority. More Revenue.",
+    "welcomeBack": "يقود. حجم. تهيمن.",
+    "subtitle": "المزيد من الخدمات. المزيد من السلطة. المزيد من الإيرادات.",
     "partnerLogin": "دخول الشريك",
     "adminLogin": "دخول المسؤول",
     "adminId": "معرّف المسؤول",
-    "userIdEmail": "Work Email",
+    "userIdEmail": "البريد الإلكتروني للعمل",
     "enterAdminId": "أدخل معرّف المسؤول",
-    "enterEmail": "Enter your work email",
+    "enterEmail": "أدخل البريد الإلكتروني الخاص بالعمل",
     "useAdminId": "استخدم معرّف المسؤول",
     "useRegisteredEmail": "استخدم البريد الإلكتروني الذي سجلت به",
     "password": "كلمة المرور",
     "enterPassword": "أدخل كلمة المرور",
     "signingIn": "جارٍ تسجيل الدخول...",
-    "partnerSignIn": "Access Dashboard",
+    "partnerSignIn": "لوحة الوصول",
     "adminSignIn": "تسجيل دخول المسؤول",
     "newAccount": "حساب جديد",
-    "backToRegistration": "Return to Partner Application",
+    "backToRegistration": "العودة إلى تطبيق الشريك",
     "errors": {
       "adminIdRequired": "معرّف المسؤول مطلوب",
       "emailRequired": "البريد الإلكتروني مطلوب",
@@ -2244,7 +2244,7 @@
       "partnerSuccess": "تم تسجيل الدخول بنجاح! مرحباً {{name}}"
     },
     "sidePanel": {
-      "description": "Expand your advisory services. Increase client retention. Build recurring revenue ? all in one ecosystem.",
+      "description": "قم بتوسيع خدماتك الاستشارية. زيادة الاحتفاظ بالعملاء. بناء الإيرادات المتكررة؟ الكل في نظام بيئي واحد.",
       "secureAccess": "انتشار أعمال عالمي",
       "onboardingUpdates": "إدارة ذكية للاستفسارات",
       "partnerEcosystem": "منظومة شركاء مدعومة بالذكاء الاصطناعي",
@@ -2252,39 +2252,39 @@
       "whatsapp": "واتساب",
       "call": "اتصال",
       "benefits": [
-        "Unlock new revenue streams",
-        "Expand your service portfolio",
-        "Deliver enterprise-grade solutions",
-        "Close bigger deals with confidence",
-        "Learn. Train. Grow."
+        "فتح مصادر إيرادات جديدة",
+        "قم بتوسيع محفظة الخدمات الخاصة بك",
+        "تقديم حلول على مستوى المؤسسات",
+        "أغلق الصفقات الأكبر بثقة",
+        "يتعلم. يدرب. ينمو."
       ]
     },
-    "exclusiveBadge": "Strategic Partner Access",
-    "joinGrowthPartner": "Join as Growth Partner",
-    "revenueTagline": "Don't just serve clients. Own the mandate.",
+    "exclusiveBadge": "الوصول إلى الشركاء الاستراتيجيين",
+    "joinGrowthPartner": "انضم كشريك النمو",
+    "revenueTagline": "لا تخدم العملاء فقط. تملك الولاية.",
     "trustIndicators": [
-      "Secure Partner Portal",
-      "NDA-Protected Engagements",
-      "Enterprise-Level Data Security"
+      "بوابة الشريك الآمن",
+      "الارتباطات المحمية بـ NDA",
+      "أمن البيانات على مستوى المؤسسة"
     ],
     "socialProof": {
-      "title": "Trusted by growing partners",
+      "title": "موثوق به من قبل الشركاء المتناميين",
       "metrics": [
         {
           "value": "150+",
-          "label": "Consultants"
+          "label": "استشاريين"
         },
         {
           "value": "8+",
-          "label": "Service Verticals"
+          "label": "قطاعات الخدمة"
         },
         {
           "value": "20+",
-          "label": "Industries Served"
+          "label": "الصناعات المخدومة"
         },
         {
           "value": "98%",
-          "label": "Partner Retention"
+          "label": "الاحتفاظ بالشريك"
         }
       ]
     }
@@ -2378,113 +2378,113 @@
       },
       "partnerPages": {
         "shared": {
-          "sectionTitle": "?? ???? ????? ??? ???????",
+          "sectionTitle": "ما تقدمه هذه الشراكة",
           "sidebar": {
-            "title": "?? ??????",
-            "stepsLabel": "4 ?????",
-            "stepPrefix": "??????",
-            "cta": "???? ???????",
+            "title": "كن شريكا",
+            "stepsLabel": "4 خطوات",
+            "stepPrefix": "خطوة",
+            "cta": "بدء التطبيق",
             "steps": [
-              "???? ?????.",
-              "???? ????? ???????? ??????? ?????????.",
-              "???? ??????? ?????? ???????? ??????????.",
-              "???? ????? ??? ??????? ????? ??."
+              "سجل كشريك.",
+              "استكمال ملف تعريف الذكاء الاصطناعي.",
+              "التوقيع الإلكتروني على اتفاقية الشروط الطرفية.",
+              "أرسل نموذج نوع الشريك الخاص بك."
             ]
           }
         },
         "international": {
-          "label": "??????? ????????",
-          "title": "?? ??????? ?????? ?????? ?????? ???? ?????.",
-          "subtitle": "?????? ?? ????? ????? ??? ????? ????? ??????? ?????? ???? ?????? ??? ????? ??????.",
-          "sectionSubtitle": "????? ????? ?????? ????????? ??????? ????? ?????? ?????? ?????????? ????????.",
+          "label": "الشركاء الدوليون",
+          "title": "قيادة التسليم عبر الحدود من خلال التنفيذ المحلي الموثوق به.",
+          "subtitle": "نحن نتشارك مع الشركات التي يمكنها تقديم خدمات جاهزة للامتثال ونجاح العملاء عبر المناطق الرئيسية.",
+          "sectionSubtitle": "التنفيذ المحلي ومواءمة الامتثال ومعايير التسليم المشتركة لتوسيع نطاق المشاركات العالمية.",
           "cards": [
             {
-              "title": "???? ????? ????????",
-              "description": "????? ????? ??????? ??????? ????? ??????? ??????? ??? ?????? ??? ?????."
+              "title": "دخول السوق والتوطين",
+              "description": "تحليل السوق المحلي، وإرشادات إعداد الكيان، ومواءمة الذهاب إلى السوق."
             },
             {
-              "title": "???????? ?????? ????????",
-              "description": "???????? ?????????? ?????? ???????? ?????? ????? ???????."
+              "title": "الامتثال المحلي والضرائب",
+              "description": "الملفات التنظيمية، والمواءمة الضريبية، والوثائق الجاهزة للتدقيق."
             },
             {
-              "title": "????? ??? ??????",
-              "description": "????? ?????? ?? ???????? ????? ???? ??????? ????? ??????? ??????? ????????."
+              "title": "التسليم عبر الحدود",
+              "description": "التنفيذ على أرض الواقع باستخدام اتفاقيات مستوى الخدمة المشتركة وضمان الجودة ومعايير إعداد التقارير."
             },
             {
-              "title": "????? ??????? ????????",
-              "description": "????? ???????? ????? ??????? ???????? ????????."
+              "title": "إعداد الخدمات المشتركة",
+              "description": "تصميم واستقرار مراكز الخدمة المشتركة والحوكمة."
             }
           ]
         },
         "sales": {
-          "label": "????? ????????",
-          "title": "??? ????????? ?? ???? ????? ??? ????? ?????.",
-          "subtitle": "?????? ??? ????? ???? ????? ?????? ????? ??? ????? ???? ????.",
-          "sectionSubtitle": "????? ?????? ??? ?????????? ??????? ??????? ?????? ??????? ?????????.",
+          "label": "شركاء المبيعات",
+          "title": "قم بزيادة الإيرادات من خلال شراكة بيع مشترك واضحة.",
+          "subtitle": "نحن نساعدك على الفوز بالفرص المؤهلة وتحقيق النتائج من خلال التمكين والدعم المنظمين.",
+          "sectionSubtitle": "مسح الملكية ودعم الاقتراح ومواءمة التسليم لتحسين التحويل والاحتفاظ.",
           "cards": [
             {
-              "title": "????? ?????",
-              "description": "????? ???? ???????? ?????? ????? ????????."
+              "title": "تأهيل الرصاص",
+              "description": "مذكرات التأهيل والاكتشاف المنظمة للفرص المناسبة."
             },
             {
-              "title": "????? ??????? ??????????",
-              "description": "??????? ??????? ??????? ?????? ??????? ???? ?????."
+              "title": "البيع المشترك والمقترحات",
+              "description": "المقترحات المشتركة وتوجيهات التسعير ومواءمة النطاق."
             },
             {
-              "title": "????? ????????",
-              "description": "????? ????? ???????? ???? ?????? ??? ???????."
+              "title": "توسيع الحساب",
+              "description": "تخطيط البيع المتبادل ونمو الحساب عبر الخدمات."
             },
             {
-              "title": "????? ????????",
-              "description": "????? ???? ???????? ?????? ?????? ?????????."
+              "title": "إدارة الإحالة",
+              "description": "تتبع الإحالة الشفاف وإدارة حصة الإيرادات."
             }
           ]
         },
         "technology": {
-          "label": "????? ???????????",
-          "title": "???? ?????? ????? ???? ????? ????? ??????.",
-          "subtitle": "?????? ?? ????? ?????? ???? ???? ?????? ?????? ????? ??????? ?????????.",
-          "sectionSubtitle": "?????? ????? ?????????? ??????? ????? ???? ????? ????? ?????? ???????.",
+          "label": "شركاء التكنولوجيا",
+          "title": "بناء شراكات تكنولوجية تحقق نتائج قابلة للقياس.",
+          "subtitle": "نحن نتعاون مع المنصات وموفري الحلول لدمج سير عمل التمويل والامتثال وأتمتته وتوسيع نطاقه.",
+          "sectionSubtitle": "محاذاة واضحة للبنية، وعمليات تكامل آمنة، ودعم التسليم المشترك لتوسيع نطاق النتائج.",
           "cards": [
             {
-              "title": "??????? ?????? ???????",
-              "description": "?????? ????? ???? ????? ???? ????? ??????? ????????? ?ERP."
+              "title": "تكامل واجهة برمجة التطبيقات",
+              "description": "واجهات برمجة التطبيقات والبرامج الوسيطة الآمنة التي تربط مجموعات التمويل والامتثال وتخطيط موارد المؤسسات (ERP)."
             },
             {
-              "title": "???????? ??????????",
-              "description": "?????? ?????? ?????? ????? ???????? ???????? ?????? ?????? ??????? ????."
+              "title": "البيانات والتحليلات",
+              "description": "مسارات البيانات الموحدة ولوحات المعلومات وتحليلات مؤشرات الأداء الرئيسية لاتخاذ قرارات أسرع."
             },
             {
-              "title": "????? ?????? ?????????",
-              "description": "??????? ?????? ????????? ????????? ????? ????????? ?????? ?????????."
+              "title": "وكلاء الذكاء الاصطناعي",
+              "description": "مساعدو الذكاء الاصطناعي للمراجعة وفحوصات الامتثال والرؤى التشغيلية."
             },
             {
-              "title": "??????? ????????",
-              "description": "????? ????? ???? ????? ?????? ????? ??????."
+              "title": "تقنية RPA والأدوات",
+              "description": "أدوات التشغيل الآلي التي تقلل من عبء العمل اليدوي وتحسن التحكم."
             }
           ]
         },
         "service": {
-          "label": "????? ???????",
-          "title": "???? ????? ?????? ????? ?????.",
-          "subtitle": "???? ??????? ????????? ???????? ??? ????? ????? ?? ??????? ???? ???? ???? ????.",
-          "sectionSubtitle": "?????? ?????? ???? ???? ??????? ?????? ????? ????? ???????.",
+          "label": "شركاء الخدمة",
+          "title": "تقديم خدمات متخصصة بجودة متسقة.",
+          "subtitle": "نحن نقوم بمواءمة النطاق وإعداد التقارير والحوكمة حتى يتمكن فريقك من تقديم الخدمات بشكل موثوق على نطاق واسع.",
+          "sectionSubtitle": "نطاقات واضحة ونقاط فحص ضمان الجودة ووثائق تسليم جاهزة للتدقيق.",
           "cards": [
             {
-              "title": "?????? IFRS ?????????",
-              "description": "???????? IFRS? ?????? ????????? ?????? ????? ???????."
+              "title": "المعايير الدولية لإعداد التقارير المالية وإعداد التقارير",
+              "description": "استشارات المعايير الدولية لإعداد التقارير المالية، ومواءمة التقارير، والوثائق الجاهزة للتدقيق."
             },
             {
-              "title": "??? ???????? ???????? ??????????",
-              "description": "??? ??????? ???????? ?????? ???????? ?????????? ??????."
+              "title": "الدعم الاستشاري لعمليات الاندماج والاستحواذ",
+              "description": "دعم الاجتهاد ومدخلات التقييم والاستعداد للمعاملات."
             },
             {
-              "title": "???????? ??? ??????",
-              "description": "?????? ???????? ???????? ?????? ??????."
+              "title": "الامتثال عبر الحدود",
+              "description": "المواءمة التنظيمية والإيداعات وضوابط الامتثال."
             },
             {
-              "title": "??????? ????? ????????",
-              "description": "????? ????????? ?????? ???????? ???? ???????."
+              "title": "إجراءات التشغيل القياسية والضوابط",
+              "description": "توثيق العمليات واختبار التحكم ودعم الحوكمة."
             }
           ]
         }
@@ -2653,100 +2653,100 @@
     ],
     "sections": [
       {
-        "title": "1. Parties and Purpose",
+        "title": "1. الأطراف والغرض",
         "paragraphs": [
-          "This Partner Agreement (\"Agreement\") is entered into between BnC Global Pvt. Ltd. (\"BnC Global\") and the undersigned partner (\"Partner\"). The purpose of this Agreement is to define the terms under which the Partner may collaborate with BnC Global to deliver services, generate qualified enquiries, and participate in joint opportunities.",
-          "By signing, the Partner confirms authority to enter this Agreement on behalf of its organization and agrees to operate in alignment with BnC Global standards and brand values."
+          "تم إبرام اتفاقية الشريك هذه (\"الاتفاقية\") بين شركة BnC Global Pvt. المحدودة (\"BnC Global\") والشريك الموقع أدناه (\"الشريك\"). الغرض من هذه الاتفاقية هو تحديد الشروط التي بموجبها يجوز للشريك التعاون مع BnC Global لتقديم الخدمات، وإنشاء استفسارات مؤهلة، والمشاركة في الفرص المشتركة.",
+          "من خلال التوقيع، يؤكد الشريك سلطة الدخول في هذه الاتفاقية نيابة عن مؤسسته ويوافق على العمل بما يتماشى مع معايير BnC Global وقيم العلامة التجارية."
         ]
       },
       {
-        "title": "2. Scope of Collaboration",
+        "title": "2. نطاق التعاون",
         "paragraphs": [
-          "BnC Global may refer opportunities, share leads, or invite the Partner to deliver defined services. The Partner may also introduce client requirements or opportunities to BnC Global for joint delivery.",
-          "Specific project scope, pricing, and timelines will be documented separately for each engagement and will form part of this Agreement once accepted by both parties."
+          "يجوز لشركة BnC Global إحالة الفرص أو مشاركة العملاء المحتملين أو دعوة الشريك لتقديم خدمات محددة. يجوز للشريك أيضًا تقديم متطلبات العميل أو الفرص إلى BnC Global للتسليم المشترك.",
+          "سيتم توثيق نطاق المشروع المحدد والأسعار والجداول الزمنية بشكل منفصل لكل مشاركة وستشكل جزءًا من هذه الاتفاقية بمجرد قبولها من قبل الطرفين."
         ],
         "bullets": [
-          "Service delivery is subject to country, sector, and regulatory requirements.",
-          "All work must be performed by qualified professionals or approved subcontractors.",
-          "Any deviation from agreed scope requires written approval."
+          "يخضع تقديم الخدمة للمتطلبات التنظيمية والقطاعية والبلدية.",
+          "يجب أن يتم تنفيذ جميع الأعمال من قبل محترفين مؤهلين أو مقاولين من الباطن معتمدين.",
+          "أي انحراف عن النطاق المتفق عليه يتطلب موافقة كتابية."
         ]
       },
       {
-        "title": "3. Term and Onboarding",
+        "title": "3. المدة والتأهيل",
         "paragraphs": [
-          "This Agreement becomes effective on the signature date and remains active unless terminated in accordance with Section 12.",
-          "The Partner agrees to complete onboarding steps, including profile completion, compliance declarations, and any required documentation before commencing delivery."
+          "تصبح هذه الاتفاقية سارية المفعول اعتبارًا من تاريخ التوقيع وتظل سارية ما لم يتم إنهاؤها وفقًا للمادة 12.",
+          "يوافق الشريك على إكمال خطوات الإعداد، بما في ذلك إكمال الملف الشخصي وإعلانات الامتثال وأي وثائق مطلوبة قبل بدء التسليم."
         ]
       },
       {
-        "title": "4. Roles and Responsibilities",
+        "title": "4. الأدوار والمسؤوليات",
         "paragraphs": [
-          "The Partner is responsible for timely delivery, professional conduct, and maintaining accurate records related to work performed.",
-          "BnC Global will provide engagement details, agreed commercial terms, and collaboration support as required."
+          "الشريك مسؤول عن التسليم في الوقت المناسب، والسلوك المهني، والاحتفاظ بسجلات دقيقة تتعلق بالعمل المنجز.",
+          "ستوفر BnC Global تفاصيل المشاركة والشروط التجارية المتفق عليها ودعم التعاون حسب الحاجة."
         ],
         "bullets": [
-          "Maintain confidentiality of all client and platform information.",
-          "Provide status updates, reports, and documentation on request.",
-          "Comply with applicable laws, including data protection obligations."
+          "الحفاظ على سرية جميع معلومات العميل والمنصة.",
+          "توفير تحديثات الحالة والتقارير والوثائق عند الطلب.",
+          "الامتثال للقوانين المعمول بها، بما في ذلك التزامات حماية البيانات."
         ]
       },
       {
-        "title": "5. Quality Standards",
+        "title": "5. معايير الجودة",
         "paragraphs": [
-          "All deliverables must meet BnC Global quality benchmarks. Where required, BnC Global may conduct quality reviews, audits, or request corrective actions.",
-          "Repeated quality issues or material non-compliance may lead to suspension or termination."
+          "يجب أن تستوفي جميع التسليمات معايير الجودة العالمية الخاصة بشركة BnC. عند الاقتضاء، قد تقوم BnC Global بإجراء مراجعات الجودة، أو عمليات التدقيق، أو طلب إجراءات تصحيحية.",
+          "قد تؤدي مشكلات الجودة المتكررة أو عدم امتثال المواد إلى التعليق أو الإنهاء."
         ]
       },
       {
-        "title": "6. Commercial Terms",
+        "title": "6. الشروط التجارية",
         "paragraphs": [
-          "Commercial terms, including pricing, revenue share, or referral fees, will be specified per engagement. Payments are subject to successful delivery and acceptance of work.",
-          "The Partner is responsible for taxes, statutory obligations, and invoices in accordance with local law."
+          "سيتم تحديد المصطلحات التجارية، بما في ذلك التسعير أو حصة الإيرادات أو رسوم الإحالة، لكل مشاركة. تخضع المدفوعات للتسليم الناجح وقبول العمل.",
+          "يكون الشريك مسؤولاً عن الضرائب والالتزامات القانونية والفواتير وفقًا للقانون المحلي."
         ]
       },
       {
-        "title": "7. Confidentiality and Data Protection",
+        "title": "7. السرية وحماية البيانات",
         "paragraphs": [
-          "Both parties agree to keep confidential all non-public information, including client data, pricing, processes, and technical documentation.",
-          "Data must be handled securely and only for the purposes of fulfilling the engagement."
+          "يوافق الطرفان على الحفاظ على سرية جميع المعلومات غير العامة، بما في ذلك بيانات العميل والتسعير والعمليات والوثائق الفنية.",
+          "يجب التعامل مع البيانات بشكل آمن ولأغراض الوفاء بالمهمة فقط."
         ],
         "bullets": [
-          "No disclosure to third parties without written consent.",
-          "Maintain reasonable administrative, technical, and physical safeguards.",
-          "Promptly notify BnC Global of any suspected breach."
+          "عدم الكشف لأطراف ثالثة دون موافقة كتابية.",
+          "الحفاظ على الضمانات الإدارية والفنية والمادية المعقولة.",
+          "قم بإخطار BnC Global على الفور بأي خرق مشتبه به."
         ]
       },
       {
-        "title": "8. Intellectual Property",
+        "title": "8. الملكية الفكرية",
         "paragraphs": [
-          "Pre-existing intellectual property remains with the originating party. Work products created specifically for an engagement will be owned as agreed in the project scope.",
-          "The Partner may not use BnC Global trademarks or brand assets without prior written approval."
+          "تظل الملكية الفكرية الموجودة مسبقًا لدى الطرف الأصلي. سيتم ملكية منتجات العمل التي تم إنشاؤها خصيصًا للمشاركة على النحو المتفق عليه في نطاق المشروع.",
+          "لا يجوز للشريك استخدام العلامات التجارية أو أصول العلامة التجارية لشركة BnC Global دون الحصول على موافقة كتابية مسبقة."
         ]
       },
       {
-        "title": "9. Non-Solicitation",
+        "title": "9. عدم الالتماس",
         "paragraphs": [
-          "During the term of this Agreement and for twelve (12) months thereafter, the Partner shall not directly solicit BnC Global clients, prospects, or employees for competing services without written consent."
+          "خلال مدة هذه الاتفاقية ولمدة اثني عشر (12) شهرًا بعد ذلك، لا يجوز للشريك أن يطلب بشكل مباشر من عملاء BnC Global أو العملاء المحتملين أو الموظفين الحصول على خدمات منافسة دون موافقة كتابية."
         ]
       },
       {
-        "title": "10. Liability and Indemnity",
+        "title": "10. المسؤولية والتعويض",
         "paragraphs": [
-          "Each party is responsible for its own acts and omissions. The Partner agrees to indemnify BnC Global against claims arising from Partner negligence, misconduct, or breach of this Agreement.",
-          "Neither party shall be liable for indirect, incidental, or consequential damages, except where prohibited by law."
+          "كل طرف مسؤول عن أفعاله وإغفالاته. يوافق الشريك على تعويض BnC Global ضد المطالبات الناشئة عن إهمال الشريك أو سوء سلوكه أو خرقه لهذه الاتفاقية.",
+          "لن يكون أي من الطرفين مسؤولاً عن الأضرار غير المباشرة أو العرضية أو التبعية، باستثناء الحالات التي يحظرها القانون."
         ]
       },
       {
-        "title": "11. Termination",
+        "title": "11. الإنهاء",
         "paragraphs": [
-          "Either party may terminate this Agreement with written notice. BnC Global may terminate immediately in the event of material breach, fraud, or compliance violations.",
-          "Upon termination, the Partner must return or securely destroy confidential materials and cease use of BnC Global brand assets."
+          "يجوز لأي من الطرفين إنهاء هذه الاتفاقية بإشعار كتابي. يجوز لشركة BnC Global الإنهاء فورًا في حالة حدوث خرق مادي أو احتيال أو انتهاكات للامتثال.",
+          "عند الإنهاء، يجب على الشريك إعادة المواد السرية أو تدميرها بشكل آمن والتوقف عن استخدام أصول العلامة التجارية BnC Global."
         ]
       },
       {
-        "title": "12. Dispute Resolution and Governing Law",
+        "title": "12. حل النزاعات والقانون الحاكم",
         "paragraphs": [
-          "The parties will attempt to resolve disputes in good faith through senior management discussions. If unresolved, disputes will be subject to applicable laws and competent jurisdiction as defined in engagement documentation."
+          "سيحاول الطرفان حل النزاعات بحسن نية من خلال مناقشات الإدارة العليا. إذا لم يتم حل النزاعات، فستخضع للقوانين المعمول بها والولاية القضائية المختصة كما هو محدد في وثائق الارتباط."
         ]
       }
     ],
@@ -3053,7 +3053,7 @@
         "subtitle": "تحدّث إلى فريقنا للحصول على الإرشاد"
       }
     ],
-    "quickCardMessage": "{{title}} - {{subtitle}}",
+    "quickCardMessage": "{{عنوان}} - {{عنوان فرعي}}",
     "chat": {
       "placeholder": "اسأل أي شيء...",
       "assistantDisclaimer": "قد يرتكب BnC Global AI أخطاء. تحقّق من المعلومات المهمة.",
@@ -3095,113 +3095,113 @@
     },
     "partnerPages": {
       "shared": {
-        "sectionTitle": "?? ???? ????? ??? ???????",
+        "sectionTitle": "ما تقدمه هذه الشراكة",
         "sidebar": {
-          "title": "?? ??????",
-          "stepsLabel": "4 ?????",
-          "stepPrefix": "??????",
-          "cta": "???? ???????",
+          "title": "كن شريكا",
+          "stepsLabel": "4 خطوات",
+          "stepPrefix": "خطوة",
+          "cta": "بدء التطبيق",
           "steps": [
-            "???? ?????.",
-            "???? ????? ???????? ??????? ?????????.",
-            "???? ??????? ?????? ???????? ??????????.",
-            "???? ????? ??? ??????? ????? ??."
+            "سجل كشريك.",
+            "استكمال ملف تعريف الذكاء الاصطناعي.",
+            "التوقيع الإلكتروني على اتفاقية الشروط الطرفية.",
+            "أرسل نموذج نوع الشريك الخاص بك."
           ]
         }
       },
       "international": {
-        "label": "??????? ????????",
-        "title": "?? ??????? ?????? ?????? ?????? ???? ?????.",
-        "subtitle": "?????? ?? ????? ????? ??? ????? ????? ??????? ?????? ???? ?????? ??? ????? ??????.",
-        "sectionSubtitle": "????? ????? ?????? ????????? ??????? ????? ?????? ?????? ?????????? ????????.",
+        "label": "الشركاء الدوليون",
+        "title": "قيادة التسليم عبر الحدود من خلال التنفيذ المحلي الموثوق به.",
+        "subtitle": "نحن نتشارك مع الشركات التي يمكنها تقديم خدمات جاهزة للامتثال ونجاح العملاء عبر المناطق الرئيسية.",
+        "sectionSubtitle": "التنفيذ المحلي ومواءمة الامتثال ومعايير التسليم المشتركة لتوسيع نطاق المشاركات العالمية.",
         "cards": [
           {
-            "title": "???? ????? ????????",
-            "description": "????? ????? ??????? ??????? ????? ??????? ??????? ??? ?????? ??? ?????."
+            "title": "دخول السوق والتوطين",
+            "description": "تحليل السوق المحلي، وإرشادات إعداد الكيان، ومواءمة الذهاب إلى السوق."
           },
           {
-            "title": "???????? ?????? ????????",
-            "description": "???????? ?????????? ?????? ???????? ?????? ????? ???????."
+            "title": "الامتثال المحلي والضرائب",
+            "description": "الملفات التنظيمية، والمواءمة الضريبية، والوثائق الجاهزة للتدقيق."
           },
           {
-            "title": "????? ??? ??????",
-            "description": "????? ?????? ?? ???????? ????? ???? ??????? ????? ??????? ??????? ????????."
+            "title": "التسليم عبر الحدود",
+            "description": "التنفيذ على أرض الواقع باستخدام اتفاقيات مستوى الخدمة المشتركة وضمان الجودة ومعايير إعداد التقارير."
           },
           {
-            "title": "????? ??????? ????????",
-            "description": "????? ???????? ????? ??????? ???????? ????????."
+            "title": "إعداد الخدمات المشتركة",
+            "description": "تصميم واستقرار مراكز الخدمة المشتركة والحوكمة."
           }
         ]
       },
       "sales": {
-        "label": "????? ????????",
-        "title": "??? ????????? ?? ???? ????? ??? ????? ?????.",
-        "subtitle": "?????? ??? ????? ???? ????? ?????? ????? ??? ????? ???? ????.",
-        "sectionSubtitle": "????? ?????? ??? ?????????? ??????? ??????? ?????? ??????? ?????????.",
+        "label": "شركاء المبيعات",
+        "title": "قم بزيادة الإيرادات من خلال شراكة بيع مشترك واضحة.",
+        "subtitle": "نحن نساعدك على الفوز بالفرص المؤهلة وتحقيق النتائج من خلال التمكين والدعم المنظمين.",
+        "sectionSubtitle": "مسح الملكية ودعم الاقتراح ومواءمة التسليم لتحسين التحويل والاحتفاظ.",
         "cards": [
           {
-            "title": "????? ?????",
-            "description": "????? ???? ???????? ?????? ????? ????????."
+            "title": "تأهيل الرصاص",
+            "description": "مذكرات التأهيل والاكتشاف المنظمة للفرص المناسبة."
           },
           {
-            "title": "????? ??????? ??????????",
-            "description": "??????? ??????? ??????? ?????? ??????? ???? ?????."
+            "title": "البيع المشترك والمقترحات",
+            "description": "المقترحات المشتركة وتوجيهات التسعير ومواءمة النطاق."
           },
           {
-            "title": "????? ????????",
-            "description": "????? ????? ???????? ???? ?????? ??? ???????."
+            "title": "توسيع الحساب",
+            "description": "تخطيط البيع المتبادل ونمو الحساب عبر الخدمات."
           },
           {
-            "title": "????? ????????",
-            "description": "????? ???? ???????? ?????? ?????? ?????????."
+            "title": "إدارة الإحالة",
+            "description": "تتبع الإحالة الشفاف وإدارة حصة الإيرادات."
           }
         ]
       },
       "technology": {
-        "label": "????? ???????????",
-        "title": "???? ?????? ????? ???? ????? ????? ??????.",
-        "subtitle": "?????? ?? ????? ?????? ???? ???? ?????? ?????? ????? ??????? ?????????.",
-        "sectionSubtitle": "?????? ????? ?????????? ??????? ????? ???? ????? ????? ?????? ???????.",
+        "label": "شركاء التكنولوجيا",
+        "title": "بناء شراكات تكنولوجية تحقق نتائج قابلة للقياس.",
+        "subtitle": "نحن نتعاون مع المنصات وموفري الحلول لدمج سير عمل التمويل والامتثال وأتمتته وتوسيع نطاقه.",
+        "sectionSubtitle": "محاذاة واضحة للبنية، وعمليات تكامل آمنة، ودعم التسليم المشترك لتوسيع نطاق النتائج.",
         "cards": [
           {
-            "title": "??????? ?????? ???????",
-            "description": "?????? ????? ???? ????? ???? ????? ??????? ????????? ?ERP."
+            "title": "تكامل واجهة برمجة التطبيقات",
+            "description": "واجهات برمجة التطبيقات والبرامج الوسيطة الآمنة التي تربط مجموعات التمويل والامتثال وتخطيط موارد المؤسسات (ERP)."
           },
           {
-            "title": "???????? ??????????",
-            "description": "?????? ?????? ?????? ????? ???????? ???????? ?????? ?????? ??????? ????."
+            "title": "البيانات والتحليلات",
+            "description": "مسارات البيانات الموحدة ولوحات المعلومات وتحليلات مؤشرات الأداء الرئيسية لاتخاذ قرارات أسرع."
           },
           {
-            "title": "????? ?????? ?????????",
-            "description": "??????? ?????? ????????? ????????? ????? ????????? ?????? ?????????."
+            "title": "وكلاء الذكاء الاصطناعي",
+            "description": "مساعدو الذكاء الاصطناعي للمراجعة وفحوصات الامتثال والرؤى التشغيلية."
           },
           {
-            "title": "??????? ????????",
-            "description": "????? ????? ???? ????? ?????? ????? ??????."
+            "title": "تقنية RPA والأدوات",
+            "description": "أدوات التشغيل الآلي التي تقلل من عبء العمل اليدوي وتحسن التحكم."
           }
         ]
       },
       "service": {
-        "label": "????? ???????",
-        "title": "???? ????? ?????? ????? ?????.",
-        "subtitle": "???? ??????? ????????? ???????? ??? ????? ????? ?? ??????? ???? ???? ???? ????.",
-        "sectionSubtitle": "?????? ?????? ???? ???? ??????? ?????? ????? ????? ???????.",
+        "label": "شركاء الخدمة",
+        "title": "تقديم خدمات متخصصة بجودة متسقة.",
+        "subtitle": "نحن نقوم بمواءمة النطاق وإعداد التقارير والحوكمة حتى يتمكن فريقك من تقديم الخدمات بشكل موثوق على نطاق واسع.",
+        "sectionSubtitle": "نطاقات واضحة ونقاط فحص ضمان الجودة ووثائق تسليم جاهزة للتدقيق.",
         "cards": [
           {
-            "title": "?????? IFRS ?????????",
-            "description": "???????? IFRS? ?????? ????????? ?????? ????? ???????."
+            "title": "المعايير الدولية لإعداد التقارير المالية وإعداد التقارير",
+            "description": "استشارات المعايير الدولية لإعداد التقارير المالية، ومواءمة التقارير، والوثائق الجاهزة للتدقيق."
           },
           {
-            "title": "??? ???????? ???????? ??????????",
-            "description": "??? ??????? ???????? ?????? ???????? ?????????? ??????."
+            "title": "الدعم الاستشاري لعمليات الاندماج والاستحواذ",
+            "description": "دعم الاجتهاد ومدخلات التقييم والاستعداد للمعاملات."
           },
           {
-            "title": "???????? ??? ??????",
-            "description": "?????? ???????? ???????? ?????? ??????."
+            "title": "الامتثال عبر الحدود",
+            "description": "المواءمة التنظيمية والإيداعات وضوابط الامتثال."
           },
           {
-            "title": "??????? ????? ????????",
-            "description": "????? ????????? ?????? ???????? ???? ???????."
+            "title": "إجراءات التشغيل القياسية والضوابط",
+            "description": "توثيق العمليات واختبار التحكم ودعم الحوكمة."
           }
         ]
       }
@@ -3317,7 +3317,7 @@
       "clientLabel": "العميل",
       "clientSubLabel": "يغلق المشروع",
       "partnerLabel": "شريك {{letter}}",
-      "levelPct": "L{{level}} - {{pct}}%",
+      "levelPct": "L{{المستوى}} - {{pct}}%",
       "resultIcon": "هدف",
       "resultTitle": "عندما يدفع عميل E -> الجميع يكسب",
       "resultDesc": "في لحظة تحقق مرحلة المشروع، تُوزَّع العمولات تلقائياً على السلسلة - من المستوى الخامس حتى الأول. مموّلة بالكامل من مجمّع رسوم المنصة.",
@@ -3368,7 +3368,7 @@
       "badge": "نموذج شريك الإحالة",
       "titlePrefix": "كيف تنمو",
       "titleHighlight": "شبكة الإحالات",
-      "titleSuffix": "",
+      "titleSuffix": "ينمو",
       "subtitle": "يقوم الشريك بتعريف الشريك A1. ويقوم A1 بتعريف الشريك A1.1. وتستمر الشبكة في التوسع. وعند إغلاق أي شريك لصفقة عميل، يتم توزيع مبلغ إحالة على كل المستويات الأعلى.",
       "primaryCta": "شاهد نموذج الإحالة",
       "secondaryCta": "أصبح شريكًا"
@@ -3402,22 +3402,22 @@
     "chainDiagram": {
       "nodes": [
         {
-          "letter": "A",
+          "letter": "أ",
           "name": "الشريك A",
           "sub": "يعرّف الشريك A1"
         },
         {
-          "letter": "A1",
+          "letter": "أ1",
           "name": "الشريك A1",
           "sub": "يعرّف الشريك A1.1"
         },
         {
-          "letter": "A1.1",
+          "letter": "أ1.1",
           "name": "الشريك A1.1",
           "sub": "يغلق صفقة العميل"
         },
         {
-          "letter": "C",
+          "letter": "ج",
           "name": "العميل",
           "sub": "تم إغلاق الصفقة"
         }
@@ -3459,25 +3459,25 @@
       "description": "تُفعِّل الصفقة مبلغ إحالة يصعد عبر تسلسل الشركاء.",
       "rows": [
         {
-          "letter": "A",
+          "letter": "أ",
           "label": "الشريك A - أصل الشبكة",
           "sub": "يعرّف الشريك A1 ويبدأ السلسلة.",
           "tag": "الخط الأعلى"
         },
         {
-          "letter": "A1",
+          "letter": "أ1",
           "label": "الشريك A1 - إحالة مباشرة",
           "sub": "يعرّف الشريك A1.1 وينمّي الشبكة.",
           "tag": "الخط الأعلى"
         },
         {
-          "letter": "A1.1",
+          "letter": "أ1.1",
           "label": "الشريك A1.1 - مغلق الصفقة",
           "sub": "يغلق صفقة العميل ويُفعِّل مشاركة الإحالة.",
           "tag": "المستفيد"
         },
         {
-          "letter": "C",
+          "letter": "ج",
           "label": "العميل - الصفقة أُغلقت",
           "sub": "تم تأكيد صفقة العميل. تبدأ مشاركة الإحالة.",
           "tag": "المحفّز"
@@ -3544,174 +3544,174 @@
     }
   },
   "referralProgram": {
-    "back": "Back to Dashboard",
+    "back": "العودة إلى لوحة القيادة",
     "hero": {
-      "title": "5-Level Structured Referral Model",
-      "subtitle": "Integrated with the CEO Portal Dashboard",
-      "tagline": "Encourage structured partner expansion funded by a capped 3% pool without impacting core earnings."
+      "title": "نموذج إحالة منظم من 5 مستويات",
+      "subtitle": "متكامل مع لوحة معلومات بوابة الرئيس التنفيذي",
+      "tagline": "تشجيع التوسع المنظم للشركاء بتمويل من مجموع بحد أقصى 3% دون التأثير على الأرباح الأساسية."
     },
     "stats": [
       {
-        "label": "Max Pool",
+        "label": "ماكس بول",
         "value": "3%",
-        "subLabel": "From BnC platform fee"
+        "subLabel": "من رسوم منصة BnC"
       },
       {
-        "label": "Levels",
+        "label": "المستويات",
         "value": "5",
-        "subLabel": "Structured partner expansion"
+        "subLabel": "توسيع الشريك المنظم"
       },
       {
-        "label": "Trigger",
-        "value": "Realised Milestones",
-        "subLabel": "Paid only on revenue"
+        "label": "مشغل",
+        "value": "المعالم المحققة",
+        "subLabel": "تدفع فقط على الإيرادات"
       }
     ],
     "objective": {
-      "title": "Objective",
+      "title": "موضوعي",
       "items": [
-        "Encourage structured partner expansion up to 5 levels.",
-        "Funded by up to 3% deduction from BnC Global Platform Fee (10-25%).",
-        "No impact on Service / Technical / Strategic / International core earnings.",
-        "Paid only on realised client milestone revenue."
+        "تشجيع التوسع المنظم للشركاء حتى 5 مستويات.",
+        "يتم التمويل بخصم يصل إلى 3% من رسوم منصة BnC العالمية (10-25%).",
+        "لا يوجد تأثير على الأرباح الأساسية الخدمية / الفنية / الإستراتيجية / الدولية.",
+        "يتم الدفع فقط على الإيرادات المحققة للعميل."
       ]
     },
     "howItWorks": {
-      "title": "How It Works (Simple Example)",
+      "title": "كيف يعمل (مثال بسيط)",
       "steps": [
-        "A refers B",
-        "B refers C",
-        "C refers D",
-        "D refers E",
-        "E closes a project"
+        "أ يشير ب",
+        "ب يشير ج",
+        "يشير ج د",
+        "د يشير ه",
+        "E يغلق المشروع"
       ],
-      "payout": "When E generates revenue, all uplines (A-D) receive a structured override from the 3% pool."
+      "payout": "عندما يولّد E إيرادات، يتلقى جميع القادة (A-D) تجاوزًا منظمًا من المجموعة البالغة 3%."
     },
     "distribution": {
-      "title": "5-Level Distribution Model (From Max 3%)",
+      "title": "نموذج التوزيع ذو 5 مستويات (من الحد الأقصى 3%)",
       "columns": [
-        "Level",
-        "Position",
-        "% Allocation",
-        "Intent"
+        "مستوى",
+        "موضع",
+        "التخصيص٪",
+        "نية"
       ],
       "table": [
         {
-          "level": "Level 1",
-          "position": "Direct Referrer",
+          "level": "المستوى 1",
+          "position": "المرجع المباشر",
           "allocation": "1.20%",
-          "intent": "Strong reward for direct onboarding"
+          "intent": "مكافأة قوية للتأهيل المباشر"
         },
         {
-          "level": "Level 2",
-          "position": "2nd Level",
+          "level": "المستوى 2",
+          "position": "المستوى الثاني",
           "allocation": "0.70%",
-          "intent": "Network support incentive"
+          "intent": "حافز دعم الشبكة"
         },
         {
-          "level": "Level 3",
-          "position": "3rd Level",
+          "level": "المستوى 3",
+          "position": "المستوى الثالث",
           "allocation": "0.50%",
-          "intent": "Growth continuity"
+          "intent": "استمرارية النمو"
         },
         {
-          "level": "Level 4",
-          "position": "4th Level",
+          "level": "المستوى 4",
+          "position": "المستوى الرابع",
           "allocation": "0.40%",
-          "intent": "Long-chain encouragement"
+          "intent": "سلسلة طويلة من التشجيع"
         },
         {
-          "level": "Level 5",
-          "position": "5th Level",
+          "level": "المستوى 5",
+          "position": "المستوى الخامس",
           "allocation": "0.20%",
-          "intent": "Legacy incentive"
+          "intent": "الحافز التراثي"
         }
       ],
-      "totalLabel": "Total",
-      "totalValue": "3.00% Max - Fully capped",
-      "note": "If fewer levels exist, unused % remains with the platform."
+      "totalLabel": "المجموع",
+      "totalValue": "3.00% كحد أقصى - مغطى بالكامل",
+      "note": "في حالة وجود مستويات أقل، تظل النسبة المئوية غير المستخدمة في النظام الأساسي."
     },
     "governance": {
-      "title": "Governance Rules",
+      "title": "قواعد الحوكمة",
       "items": [
-        "Valid only for new partner onboarding",
-        "Paid only on realised revenue",
-        "No self-referrals or circular chains",
-        "Referred partner must remain active",
-        "Platform reserves right to cap at 3%"
+        "صالح فقط لتأهيل الشريك الجديد",
+        "تدفع فقط على الإيرادات المحققة",
+        "لا توجد إحالات ذاتية أو سلاسل دائرية",
+        "يجب أن يظل الشريك المُحال نشطًا",
+        "تحتفظ المنصة بالحق في تحديد سقف بنسبة 3%"
       ]
     },
     "dashboard": {
-      "title": "Referral Dashboard (Recommended)",
-      "subtitle": "Since your model is powered by the CEO Portal, transparency is critical.",
+      "title": "لوحة تحكم الإحالة (مستحسن)",
+      "subtitle": "نظرًا لأن النموذج الخاص بك مدعوم من CEO Portal، فإن الشفافية أمر بالغ الأهمية.",
       "metrics": [
         {
-          "label": "Total Referral Earnings (Lifetime)",
+          "label": "إجمالي أرباح الإحالة (مدى الحياة)",
           "value": "-"
         },
         {
-          "label": "This Month Referral Earnings",
+          "label": "أرباح الإحالة هذا الشهر",
           "value": "-"
         },
         {
-          "label": "Pending Referral (Unrealised Revenue)",
+          "label": "الإحالة المعلقة (الإيرادات غير المحققة)",
           "value": "-"
         },
         {
-          "label": "Active Referral Network Count",
+          "label": "عدد شبكات الإحالة النشطة",
           "value": "-"
         },
         {
-          "label": "Level-wise Breakdown (L1-L5)",
+          "label": "توزيع المستوى (L1-L5)",
           "value": "-"
         },
         {
-          "label": "Project-wise Referral Source Mapping",
+          "label": "رسم خرائط مصدر الإحالة حسب المشروع",
           "value": "-"
         },
         {
-          "label": "Milestone Status Tracker",
+          "label": "متتبع حالة الحدث الرئيسي",
           "value": "-"
         }
       ],
-      "note": "Values update after client milestones are realised."
+      "note": "يتم تحديث القيم بعد تحقيق معالم العميل."
     },
     "tables": {
       "levelBreakdown": {
-        "title": "Level-wise Breakdown",
+        "title": "انهيار المستوى الحكيم",
         "columns": [
-          "Level",
-          "Allocation",
-          "This Month",
-          "Lifetime"
+          "مستوى",
+          "توزيع",
+          "هذا الشهر",
+          "حياة"
         ],
         "rows": [
           {
-            "level": "Level 1",
+            "level": "المستوى 1",
             "allocation": "1.20%",
             "month": "-",
             "lifetime": "-"
           },
           {
-            "level": "Level 2",
+            "level": "المستوى 2",
             "allocation": "0.70%",
             "month": "-",
             "lifetime": "-"
           },
           {
-            "level": "Level 3",
+            "level": "المستوى 3",
             "allocation": "0.50%",
             "month": "-",
             "lifetime": "-"
           },
           {
-            "level": "Level 4",
+            "level": "المستوى 4",
             "allocation": "0.40%",
             "month": "-",
             "lifetime": "-"
           },
           {
-            "level": "Level 5",
+            "level": "المستوى 5",
             "allocation": "0.20%",
             "month": "-",
             "lifetime": "-"
@@ -3719,55 +3719,83 @@
         ]
       },
       "projectMapping": {
-        "title": "Project-wise Referral Source Mapping",
+        "title": "رسم خرائط مصدر الإحالة حسب المشروع",
         "columns": [
-          "Project",
-          "Client",
-          "Referral Source",
-          "Level",
-          "Status"
+          "مشروع",
+          "عميل",
+          "مصدر الإحالة",
+          "مستوى",
+          "حالة"
         ],
         "rows": [
           {
-            "project": "Project Alpha",
-            "client": "Client Omega",
-            "source": "A -> B -> C",
-            "level": "Level 3",
-            "status": "In review"
+            "project": "مشروع ألفا",
+            "client": "العميل أوميغا",
+            "source": "أ -> ب -> ج",
+            "level": "المستوى 3",
+            "status": "قيد المراجعة"
           },
           {
-            "project": "Project Nova",
-            "client": "Client Atlas",
-            "source": "A -> B",
-            "level": "Level 2",
-            "status": "Milestone achieved"
+            "project": "مشروع نوفا",
+            "client": "أطلس العميل",
+            "source": "أ-> ب",
+            "level": "المستوى 2",
+            "status": "تم تحقيق الإنجاز"
           }
         ]
       },
       "milestones": {
-        "title": "Milestone Status Tracker",
+        "title": "متتبع حالة الحدث الرئيسي",
         "columns": [
-          "Project",
-          "Milestone",
-          "Status",
-          "Eligible Override"
+          "مشروع",
+          "منعطف",
+          "حالة",
+          "التجاوز المؤهل"
         ],
         "rows": [
           {
-            "project": "Project Alpha",
-            "milestone": "Milestone 1",
-            "status": "Pending",
-            "override": "Yes"
+            "project": "مشروع ألفا",
+            "milestone": "الحدث الرئيسي 1",
+            "status": "قيد الانتظار",
+            "override": "نعم"
           },
           {
-            "project": "Project Nova",
-            "milestone": "Milestone 2",
-            "status": "Approved",
-            "override": "Paid"
+            "project": "مشروع نوفا",
+            "milestone": "المعلم 2",
+            "status": "موافقة",
+            "override": "مدفوع"
           }
         ]
       },
-      "note": "Sample view - data populates from realised milestones."
+      "note": "عرض العينة - يتم تعبئة البيانات من المعالم الرئيسية التي تم تحقيقها."
+    }
+  },
+  "expertFormModal": {
+    "title": "احجز استشارة",
+    "subtitle": "املأ التفاصيل الخاصة بك أدناه. سوف يستغرق الأمر دقيقة واحدة فقط.",
+    "closeAria": "إغلاق نموذج التشاور",
+    "submitErrorFallback": "لا يمكن تقديم النموذج. يرجى المحاولة مرة أخرى.",
+    "success": {
+      "title": "تم تقديم الطلب",
+      "description": "تم حفظ طلبك بنجاح. سيقوم فريقنا بالتواصل معك قريبًا.",
+      "close": "يغلق"
+    },
+    "sections": {
+      "personal": "التفاصيل الشخصية",
+      "contacts": "اتصالات",
+      "requirement": "تفاصيل المتطلبات"
+    },
+    "placeholders": {
+      "fullName": "الاسم الكامل",
+      "companyName": "اسم الشركة",
+      "emailAddress": "عنوان البريد الإلكتروني",
+      "mobileNumber": "رقم الهاتف المحمول",
+      "preferredFramework": "الإطار المفضل",
+      "requirement": "أخبرنا عن متطلباتك..."
+    },
+    "actions": {
+      "submit": "إرسال التفاصيل",
+      "submitting": "تقديم..."
     }
   }
 }
