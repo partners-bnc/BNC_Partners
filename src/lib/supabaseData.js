@@ -500,6 +500,62 @@ export const submitEnquiry = async ({ partnerId, country, countryLabel, service,
   }
 };
 
+export const submitExpertRequest = async ({
+  name,
+  company,
+  email,
+  mobile,
+  requirement,
+  framework
+}) => {
+  const {
+    data: { user },
+    error: authError
+  } = await supabase.auth.getUser();
+
+  if (authError) {
+    if (!isAuthSessionMissingError(authError)) {
+      throw authError;
+    }
+  }
+
+  const jwtEmail = normalizeEmail(user?.email);
+  const requestedEmail = normalizeEmail(email);
+  const resolvedEmail = jwtEmail || requestedEmail;
+  if (!resolvedEmail) {
+    throw new Error('Email is required.');
+  }
+
+  const { error } = await supabase.from('expert_requests').insert({
+    partner_id: user?.id || null,
+    partner_email: jwtEmail || null,
+    full_name: String(name || '').trim(),
+    company: String(company || '').trim() || null,
+    email: resolvedEmail,
+    mobile: String(mobile || '').trim(),
+    requirement: String(requirement || '').trim(),
+    framework: String(framework || '').trim() || null,
+    source: 'cta_talk_to_expert'
+  });
+
+  if (error) {
+    const status = Number(error?.status || 0);
+    const message = String(error?.message || '').toLowerCase();
+    const code = String(error?.code || '').toLowerCase();
+    if (
+      status === 401 ||
+      status === 403 ||
+      code === '42501' ||
+      message.includes('jwt') ||
+      message.includes('not authenticated') ||
+      message.includes('row-level security')
+    ) {
+      throw new Error('Could not submit request due to access policy. Please refresh and try again.');
+    }
+    throw error;
+  }
+};
+
 export const submitVoiceRequirement = async ({
   requirement,
   audioFile = null,
