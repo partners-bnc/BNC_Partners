@@ -3294,180 +3294,180 @@
   },
   "referralProgramPageSimple": {
     "hero": {
-      "badge": "BNC Global Partner Referral Program",
-      "titlePrefix": "How Revenue",
-      "titleHighlight": "Multiplies",
-      "titleSuffix": "Through the Referral Network",
-      "subtitle": "When one partner introduces another, and a client deal is closed, the benefit flows upward — rewarding everyone who helped build the network, funded entirely by BNC Global.",
-      "primaryCta": "See How It Works",
+      "badge": "Referral Partner Model",
+      "titlePrefix": "How the",
+      "titleHighlight": "Referral Network",
+      "titleSuffix": "Grows",
+      "subtitle": "A partner introduces Partner A1. A1 introduces Partner A1.1. The network keeps expanding. When any partner closes a client deal, a referral amount is shared with every upline level.",
+      "primaryCta": "See the Referral Model",
       "secondaryCta": "Become a Partner"
     },
     "stats": [
       {
-        "value": "3%",
-        "label": "Max Platform Allocation"
+        "value": "Multi-Level",
+        "label": "Partner Growth"
       },
       {
-        "value": "100%",
-        "label": "Partner Share Protected"
+        "value": "Upline Share",
+        "label": "Small rewards to all above levels"
       },
       {
-        "value": "3 Partners",
-        "label": "Referral Chain Depth"
+        "value": "Triggered",
+        "label": "On client deal closure"
       },
       {
-        "value": "On Payment",
-        "label": "Realised Revenue Only"
+        "value": "Ongoing",
+        "label": "Network keeps expanding"
       }
     ],
     "chain": {
-      "label": "The Referral Chain in Action",
-      "heading": "A Simple Structure, Powerful Results",
-      "description": "Partner A introduces B. Partner B introduces C. When C closes a client engagement with BNC Global — benefits flow upward through the entire chain.",
+      "label": "The Referral Model in Action",
+      "heading": "Partners Invite Partners. Rewards Flow Up.",
+      "description": "Partner A introduces Partner A1. Partner A1 introduces Partner A1.1. When any partner closes a client deal, a referral amount is distributed to every upline above.",
       "inShortLabel": "In Short",
-      "inShortText": "When revenue is generated, the benefit flows upward through the referral chain — rewarding those who helped build the network.",
-      "inShortStrong": "Partner C keeps 100% of their earnings. No one loses anything."
+      "inShortText": "Each new partner can introduce the next. When a deal closes, the referral amount flows upward through the hierarchy.",
+      "inShortStrong": "The deal closer keeps the main earnings; uplines receive a smaller share."
     },
     "chainDiagram": {
       "nodes": [
         {
           "letter": "A",
           "name": "Partner A",
-          "sub": "Introduces platform to B"
+          "sub": "Introduces Partner A1"
         },
         {
-          "letter": "B",
-          "name": "Partner B",
-          "sub": "Introduces platform to C"
+          "letter": "A1",
+          "name": "Partner A1",
+          "sub": "Introduces Partner A1.1"
+        },
+        {
+          "letter": "A1.1",
+          "name": "Partner A1.1",
+          "sub": "Closes the client deal"
         },
         {
           "letter": "C",
-          "name": "Partner C",
-          "sub": "Closes client engagement"
-        },
-        {
-          "letter": "💼",
           "name": "Client",
-          "sub": "Revenue realised"
+          "sub": "Deal closed"
         }
       ],
       "connectors": [
-        "introduces ↓",
-        "introduces ↓",
-        "closes deal"
+        "introduces",
+        "introduces",
+        "deal closes"
       ]
     },
     "outcomes": {
-      "label": "What Happens Next",
-      "heading": "Every Partner Wins When Revenue Is Realised",
-      "description": "The moment a client payment is confirmed, the benefit flows upward — rewarding those who built the network that made it possible.",
+      "label": "What Happens When a Deal Closes",
+      "heading": "Referral Amounts Move Up the Chain",
+      "description": "When a client deal is confirmed, the deal closer earns the main share and a referral amount is shared with all upline partners.",
       "cards": [
         {
-          "who": "Partner C",
-          "tag": "Deal Closer",
-          "headline": "Earns Full Revenue Share",
-          "detail": "Receives their complete earnings as per their category — International, Sales, Technology, or Service Partner. No deductions whatsoever."
+          "who": "Deal Closer",
+          "tag": "Primary Earner",
+          "headline": "Keeps Main Earnings",
+          "detail": "Receives the main earnings from the client deal."
         },
         {
-          "who": "Partner B",
-          "tag": "Direct Referrer",
-          "headline": "Earns Referral Benefit",
-          "detail": "Receives a referral benefit for directly introducing Partner C to BNC Global and enabling the client engagement."
+          "who": "Direct Referrer",
+          "tag": "Upline Level 1",
+          "headline": "Gets Referral Amount",
+          "detail": "Receives a referral amount for directly introducing the partner who closed the deal."
         },
         {
-          "who": "Partner A",
-          "tag": "Network Builder",
-          "headline": "May Earn Referral Benefit",
-          "detail": "May also receive a referral benefit for having introduced Partner B, growing the network that ultimately generated the revenue."
+          "who": "All Uplines",
+          "tag": "Higher Levels",
+          "headline": "Share a Smaller Amount",
+          "detail": "Every partner above in the hierarchy receives a smaller referral amount."
         }
       ]
     },
     "flow": {
-      "label": "Referral Flow Diagram",
-      "heading": "See Who Earns What, and When",
-      "description": "Benefits are triggered only on realised client payments. Each position earns according to their role and proximity to the deal.",
+      "label": "Referral Flow",
+      "heading": "Who Earns When a Deal Closes",
+      "description": "The deal triggers a referral amount that moves upward through the partner hierarchy.",
       "rows": [
         {
           "letter": "A",
-          "label": "Partner A — Network Origin",
-          "sub": "Introduced the platform to Partner B. May earn referral benefit when downstream revenue is realised.",
+          "label": "Partner A - Network Origin",
+          "sub": "Introduces Partner A1 and starts the chain.",
           "tag": "Upline"
         },
         {
-          "letter": "B",
-          "label": "Partner B — Direct Referrer",
-          "sub": "Directly introduced Partner C. Earns referral benefit from BNC Global's own platform margin.",
-          "tag": "Referrer"
+          "letter": "A1",
+          "label": "Partner A1 - Direct Referral",
+          "sub": "Introduces Partner A1.1 and grows the network.",
+          "tag": "Upline"
         },
         {
-          "letter": "C",
-          "label": "Partner C — Deal Closer",
-          "sub": "Closed the client engagement. Earns their full partner revenue share — nothing deducted.",
+          "letter": "A1.1",
+          "label": "Partner A1.1 - Deal Closer",
+          "sub": "Closes the client deal and triggers referral sharing.",
           "tag": "Earner"
         },
         {
-          "letter": "💼",
-          "label": "Client — Revenue Realised",
-          "sub": "Project milestone payment confirmed. All referral benefits triggered upstream automatically.",
+          "letter": "C",
+          "label": "Client - Deal Closed",
+          "sub": "Client deal confirmed. Referral sharing is triggered.",
           "tag": "Trigger"
         }
       ]
     },
     "compensation": {
-      "label": "Source of Compensation",
-      "heading": "BNC Funds It. Partners Keep Everything.",
-      "description": "BNC Global may allocate up to 3% from its own platform margin to compensate eligible referral partners. Your earnings are never touched.",
-      "allocationTitle": "Revenue Allocation — Who Gets What",
-      "barMain": "97%+ Partner Earnings",
+      "label": "Referral Distribution",
+      "heading": "Small Referral Amounts Go Up the Chain",
+      "description": "A referral amount is distributed to all upline levels when a deal closes. The deal closer keeps the main earnings.",
+      "allocationTitle": "How the Referral Amount Moves",
+      "barMain": "Main Earnings - Deal Closer (60%)",
       "legend": [
-        "97%+ — Partner earnings (fully protected)",
-        "Up to 3% — BNC referral pool"
+        "60% - main earnings (deal closer)",
+        "40% - referral amount (uplines)"
       ],
       "bullets": [
-        "No deduction from the partner who closes the deal",
-        "No reduction in Service or Technology delivery earnings",
-        "No impact on pre-defined partner revenue shares",
-        "Referral payout adjusted only from BNC Global's platform portion"
+        "60% goes to the deal closer as main earnings",
+        "40% is shared across all upline levels",
+        "Triggered only when a client deal is confirmed",
+        "Applies to every level above the deal closer"
       ]
     },
     "principles": {
-      "label": "Core Principles of the Model",
-      "heading": "Built on Fairness & Transparency",
-      "description": "The program is designed to reward genuine network building — with clear guardrails to ensure integrity across every referral.",
+      "label": "Core Rules of the Model",
+      "heading": "Simple, Transparent, and Partner-Driven",
+      "description": "The referral model rewards partners who build the network and support deal creation.",
       "items": [
         {
-          "title": "New Partners Only",
-          "desc": "Applicable only for new partner onboarding. Existing partners cannot be re-entered into the referral chain."
+          "title": "Partner-to-Partner Growth",
+          "desc": "Each partner can introduce the next partner in the hierarchy."
         },
         {
-          "title": "Realised Payments Only",
-          "desc": "Referral benefit is paid only when actual client payments are confirmed and received by BNC Global."
+          "title": "Deal-Triggered Rewards",
+          "desc": "Referral amounts are paid only when a client deal is confirmed."
         },
         {
-          "title": "Active & Compliant Partner",
-          "desc": "The referred partner must remain active and compliant on the platform for benefits to continue upstream."
+          "title": "Upline Sharing",
+          "desc": "Every upline level receives a smaller referral amount."
+        },
+        {
+          "title": "Clear Hierarchy",
+          "desc": "Referral amounts follow the chain above the deal closer."
         },
         {
           "title": "No Self-Referrals",
-          "desc": "Self-referrals and circular referral structures are strictly not permitted under any circumstance."
+          "desc": "Self-referrals and circular structures are not allowed."
         },
         {
-          "title": "3% Maximum Cap",
-          "desc": "Total platform margin adjustment for referral compensation is strictly capped at a maximum of 3%."
-        },
-        {
-          "title": "BNC Determines Distribution",
-          "desc": "The exact internal split across referral levels is determined by BNC Global based on project scope and contribution."
+          "title": "BNC Sets the Split",
+          "desc": "The exact split across levels is defined by BNC Global based on the deal."
         }
       ],
-      "footerTitle": "BNC Global Determines the Distribution",
-      "footerText": "The exact internal distribution across referral levels is determined by BNC Global at the time of structuring, based on project scope and the degree of contribution from each referral partner — ensuring fair, contextual allocation every time."
+      "footerTitle": "BNC Global Defines the Split",
+      "footerText": "The exact referral split across levels is set by BNC Global based on the deal scope and contribution."
     },
     "cta": {
-      "label": "Ready to Start?",
-      "titleLine1": "Build Your Network.",
-      "titleLine2": "Earn on Every Level.",
-      "subtitle": "Join BNC Global's Referral Program today. Introduce the right partners, grow your network, and watch benefits flow automatically when revenue is realised.",
+      "label": "Ready to Build Your Referral Network?",
+      "titleLine1": "Invite Partners.",
+      "titleLine2": "Earn Across Levels.",
+      "subtitle": "Grow your partner chain. When a client deal closes, referral amounts flow upward through the hierarchy.",
       "primaryCta": "Register as Referral Partner",
       "secondaryCta": "Contact Our Team"
     }

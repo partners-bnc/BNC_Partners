@@ -28,10 +28,13 @@ const G = {
   purple: "#5B6EE1",
   purpleBg: "#EEF2FF",
   purpleBorder: "#7B8CF0",
+  client: "#B45309",
+  clientBg: "#FFF7ED",
+  clientBorder: "#FDBA74",
 };
 
-const FONT_HEAD = "'Poppins', 'Sora', 'Segoe UI', sans-serif";
-const FONT_BODY = "'Geist', 'Poppins', 'Segoe UI', sans-serif";
+const FONT_HEAD = "var(--font-head)";
+const FONT_BODY = "var(--font-body)";
 const FONT_EMOJI = "'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif";
 
 // ─────────────────────────────────────────────
@@ -284,6 +287,169 @@ function ReferralChain({ nodes = [], connectors = [], rtl = false }) {
 }
 
 // ─────────────────────────────────────────────
+//  NETWORK MARKETING DIAGRAM
+// ─────────────────────────────────────────────
+function NetworkDiagram({ rtl = false }) {
+  const root = {
+    code: "A",
+    title: "You (Partner A)",
+    subtitle: "Founder of your referral network",
+    level: "Level 0",
+    color: G.ink,
+    bg: G.cream,
+    border: G.inkMid,
+  };
+
+  const level1 = [
+    {
+      code: "A1",
+      title: "Partner A1",
+      subtitle: "Directly referred by you",
+      level: "Level 1",
+      color: G.blue,
+      bg: G.blueBg,
+      border: G.blueBorder,
+    },
+    {
+      code: "A2",
+      title: "Partner A2",
+      subtitle: "Directly referred by you",
+      level: "Level 1",
+      color: G.green,
+      bg: G.greenBg,
+      border: G.greenBorder,
+    },
+  ];
+
+  const level2 = [
+    {
+      code: "A1.1",
+      title: "A1's Referral",
+      subtitle: "Referred by A1",
+      level: "Level 2",
+      color: G.blue,
+      bg: G.blueBg,
+      border: G.blueBorder,
+    },
+    {
+      code: "A1.2",
+      title: "A1's Referral",
+      subtitle: "Referred by A1",
+      level: "Level 2",
+      color: G.blue,
+      bg: G.blueBg,
+      border: G.blueBorder,
+    },
+    {
+      code: "A2.1",
+      title: "A2's Referral",
+      subtitle: "Referred by A2",
+      level: "Level 2",
+      color: G.green,
+      bg: G.greenBg,
+      border: G.greenBorder,
+    },
+    {
+      code: "A2.2",
+      title: "A2's Referral",
+      subtitle: "Referred by A2",
+      level: "Level 2",
+      color: G.green,
+      bg: G.greenBg,
+      border: G.greenBorder,
+    },
+  ];
+
+  const clients = [
+    {
+      code: "💼",
+      title: "Client",
+      subtitle: "Closes deal. Revenue realised",
+      level: "Revenue Trigger",
+      color: G.client,
+      bg: G.clientBg,
+      border: G.clientBorder,
+      isClient: true,
+    },
+    {
+      code: "💼",
+      title: "Client",
+      subtitle: "Closes deal. Revenue realised",
+      level: "Revenue Trigger",
+      color: G.client,
+      bg: G.clientBg,
+      border: G.clientBorder,
+      isClient: true,
+    },
+  ];
+
+  const Node = ({ data, className }) => (
+    <div className={`network-node ${className}`} style={{ color: data.color }}>
+      <div className="network-node-level" style={{ borderColor: data.border, color: data.color, background: `${data.bg}` }}>
+        {data.level}
+      </div>
+      <div
+        className="network-node-circle"
+        style={{
+          borderColor: data.border,
+          background: data.bg,
+          color: data.color,
+          fontFamily: data.isClient ? FONT_EMOJI : FONT_HEAD,
+        }}
+      >
+        {data.code}
+      </div>
+      <div className="network-node-title" style={{ color: data.color }}>
+        {data.title}
+      </div>
+      <div className="network-node-sub">{data.subtitle}</div>
+    </div>
+  );
+
+  return (
+    <div className={`network-diagram ${rtl ? "rtl" : ""}`}>
+      <svg className="network-lines" viewBox="0 0 1000 700" preserveAspectRatio="none">
+        <defs>
+          <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill={G.goldMid} />
+          </marker>
+          <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill={G.blueBorder} />
+          </marker>
+          <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill={G.greenBorder} />
+          </marker>
+          <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill={G.purpleBorder} />
+          </marker>
+        </defs>
+
+        <line className="line-root" x1="500" y1="95" x2="300" y2="165" stroke={G.goldMid} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGold)" />
+        <line className="line-root" x1="500" y1="95" x2="700" y2="165" stroke={G.goldMid} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGold)" />
+
+        <line className="line-l1" x1="300" y1="245" x2="210" y2="345" stroke={G.blueBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowBlue)" />
+        <line className="line-l1" x1="300" y1="245" x2="390" y2="345" stroke={G.blueBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowBlue)" />
+        <line className="line-l1" x1="700" y1="245" x2="610" y2="345" stroke={G.greenBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGreen)" />
+        <line className="line-l1" x1="700" y1="245" x2="790" y2="345" stroke={G.greenBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGreen)" />
+
+        <line className="line-l2" x1="210" y1="420" x2="210" y2="520" stroke={G.blueBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowBlue)" />
+        <line className="line-l2" x1="610" y1="420" x2="610" y2="520" stroke={G.greenBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGreen)" />
+      </svg>
+
+      <Node data={root} className="node-root pulse-l0" />
+      <Node data={level1[0]} className="node-a1 pulse-l1" />
+      <Node data={level1[1]} className="node-a2 pulse-l1" />
+      <Node data={level2[0]} className="node-a11 pulse-l2" />
+      <Node data={level2[1]} className="node-a12 pulse-l2" />
+      <Node data={level2[2]} className="node-a21 pulse-l2" />
+      <Node data={level2[3]} className="node-a22 pulse-l2" />
+      <Node data={clients[0]} className="node-client-left pulse-client" />
+      <Node data={clients[1]} className="node-client-right pulse-client" />
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
 //  OUTCOME CARDS — what each partner earns
 // ─────────────────────────────────────────────
 function OutcomeCard({ card, delay, rtl = false }) {
@@ -511,7 +677,7 @@ function CompensationVisual({ data, rtl = false }) {
         >
           <div
             style={{
-              width: visible ? "97%" : "0%",
+              width: visible ? "60%" : "0%",
               background: `linear-gradient(90deg, ${G.green}, #2ECC71)`,
               display: "flex",
               alignItems: "center",
@@ -530,7 +696,7 @@ function CompensationVisual({ data, rtl = false }) {
           </div>
           <div
             style={{
-              width: visible ? "3%" : "0%",
+              width: visible ? "40%" : "0%",
               background: `linear-gradient(90deg, ${G.goldMid}, ${G.goldLight})`,
               transition: "width 1.3s cubic-bezier(0.23,1,0.32,1) 0.3s",
             }}
@@ -641,7 +807,6 @@ export default function ReferralPage() {
   const isRtl = i18n.language === "ar";
   const hero = t("referralProgramPageSimple.hero", { returnObjects: true });
   const chain = t("referralProgramPageSimple.chain", { returnObjects: true });
-  const chainDiagram = t("referralProgramPageSimple.chainDiagram", { returnObjects: true });
   const outcomes = t("referralProgramPageSimple.outcomes", { returnObjects: true });
   const flow = t("referralProgramPageSimple.flow", { returnObjects: true });
   const compensation = t("referralProgramPageSimple.compensation", { returnObjects: true });
@@ -650,16 +815,6 @@ export default function ReferralPage() {
 
   const statsItemsRaw = t("referralProgramPageSimple.stats", { returnObjects: true });
   const statsItems = Array.isArray(statsItemsRaw) ? statsItemsRaw : [];
-
-  const chainNodeStyles = [
-    { color: G.gold, bg: G.goldTint, border: G.goldMid },
-    { color: G.blue, bg: G.blueBg, border: G.blueBorder },
-    { color: G.green, bg: G.greenBg, border: G.greenBorder },
-    { color: G.purple, bg: G.purpleBg, border: G.purpleBorder, isClient: true },
-  ];
-  const chainNodesText = Array.isArray(chainDiagram?.nodes) ? chainDiagram.nodes : [];
-  const chainNodes = chainNodeStyles.map((style, idx) => ({ ...style, ...(chainNodesText[idx] || {}) }));
-  const chainConnectors = Array.isArray(chainDiagram?.connectors) ? chainDiagram.connectors : [];
 
   const outcomeStyles = [
     { emoji: "🏆", color: G.green, bg: G.greenBg, border: G.greenBorder },
@@ -683,11 +838,122 @@ export default function ReferralPage() {
   const principleItems = principleIcons.map((icon, idx) => ({ icon, ...(principleTexts[idx] || {}) }));
 
   return (
-    <div style={{ background: G.cream, color: G.ink }} dir={isRtl ? "rtl" : "ltr"}>
+    <div
+      style={{
+        background: G.cream,
+        color: G.ink,
+        ["--font-head"]: isRtl
+          ? "'Tajawal', 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Tahoma', 'Segoe UI', sans-serif"
+          : "'Poppins', 'Sora', 'Segoe UI', sans-serif",
+        ["--font-body"]: isRtl
+          ? "'Tajawal', 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Tahoma', 'Segoe UI', sans-serif"
+          : "'Geist', 'Poppins', 'Segoe UI', sans-serif",
+      }}
+      dir={isRtl ? "rtl" : "ltr"}
+    >
       <style>{`
         @keyframes heroUp { from { opacity:0;transform:translateY(28px); } to { opacity:1;transform:translateY(0); } }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
         @keyframes ripple { 0%{transform:scale(1);opacity:0.55} 100%{transform:scale(1.55);opacity:0} }
+        @keyframes nodePulse { 0%{transform:translate(-50%,-50%) scale(1);} 35%{transform:translate(-50%,-50%) scale(1.08);} 60%{transform:translate(-50%,-50%) scale(1);} }
+        @keyframes dashMove { 0%{stroke-dashoffset:24;opacity:0.4;} 50%{opacity:1;} 100%{stroke-dashoffset:0;opacity:0.75;} }
+        .network-diagram {
+          position: relative;
+          min-height: 720px;
+          background: #FCF7EE;
+          border-radius: 18px;
+          border: 1px solid ${G.border};
+          overflow: hidden;
+          padding: 3.5rem 1.75rem 2.75rem;
+        }
+        .network-lines {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 1;
+        }
+        .network-node {
+          position: absolute;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.2rem;
+          font-family: ${FONT_BODY};
+          z-index: 2;
+        }
+        .pulse-l0 { animation: nodePulse 6s ease-in-out 0s infinite; }
+        .pulse-l1 { animation: nodePulse 6s ease-in-out 0.9s infinite; }
+        .pulse-l2 { animation: nodePulse 6s ease-in-out 1.8s infinite; }
+        .pulse-client { animation: nodePulse 6s ease-in-out 2.7s infinite; }
+        .line-root { animation: dashMove 6s ease-in-out 0.3s infinite; }
+        .line-l1 { animation: dashMove 6s ease-in-out 1.2s infinite; }
+        .line-l2 { animation: dashMove 6s ease-in-out 2.1s infinite; }
+        .network-node-circle {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          border: 2px solid;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.1rem;
+          font-weight: 700;
+          box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+          margin-bottom: 0.35rem;
+        }
+        .network-node-title {
+          font-weight: 700;
+          font-size: 0.86rem;
+        }
+        .network-node-sub {
+          color: ${G.muted};
+          font-size: 0.62rem;
+          max-width: 120px;
+          line-height: 1.45;
+        }
+        .network-node-level {
+          margin-bottom: 0.35rem;
+          padding: 0.18rem 0.5rem;
+          border-radius: 999px;
+          border: 1px solid;
+          font-size: 0.6rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        }
+        .node-root { left: 50%; top: 14%; }
+        .node-a1 { left: 30%; top: 35%; }
+        .node-a2 { left: 70%; top: 35%; }
+        .node-a11 { left: 21%; top: 60%; }
+        .node-a12 { left: 39%; top: 60%; }
+        .node-a21 { left: 61%; top: 60%; }
+        .node-a22 { left: 79%; top: 60%; }
+        .node-client-left { left: 21%; top: 86%; }
+        .node-client-right { left: 61%; top: 86%; }
+        @media (max-width: 980px) {
+          .network-diagram { min-height: 560px; }
+          .network-node-circle { width: 56px; height: 56px; font-size: 1rem; }
+        }
+        @media (max-width: 820px) {
+          .network-diagram {
+            min-height: auto;
+            padding: 2.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.1rem;
+          }
+          .network-lines { display: none; }
+          .network-node {
+            position: static;
+            transform: none;
+          }
+        }
       `}</style>
 
       <section
@@ -882,9 +1148,7 @@ export default function ReferralPage() {
         </FadeIn>
 
         <FadeIn delay={0.12}>
-          <div style={{ background: G.cream, borderRadius: 20, padding: "4.75rem 2.5rem 3.25rem", border: `1px solid ${G.border}` }}>
-            <ReferralChain nodes={chainNodes} connectors={chainConnectors} rtl={isRtl} />
-          </div>
+          <NetworkDiagram rtl={isRtl} />
         </FadeIn>
 
         <FadeIn delay={0.2}>
