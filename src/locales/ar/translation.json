@@ -64,7 +64,8 @@
         "features": [
           "برامج الموزعين",
           "شبكة توزيع",
-          "دعم المبيعات"
+          "دعم المبيعات",
+          "????? ????? ?????"
         ]
       },
       "technology": {
@@ -73,7 +74,8 @@
         "features": [
           "تكاملات واجهات برمجة التطبيقات",
           "أتمتة الذكاء الاصطناعي",
-          "هندسة البيانات"
+          "هندسة البيانات",
+          "??????? ???????? ????????? (RPA)"
         ]
       },
       "service": {
@@ -82,7 +84,8 @@
         "features": [
           "المحاسبة والتمويل",
           "التدقيق الداخلي",
-          "الأمن السيبراني وخصوصية البيانات"
+          "الأمن السيبراني وخصوصية البيانات",
+          "????????"
         ]
       }
     }
@@ -1968,6 +1971,217 @@
             "Alignment with transformation and growth goals"
           ]
         }
+      ],
+      "physical-verification-stock-fixed-asset": [
+        {
+          "title": "Fixed Asset Physical Verification",
+          "coreOfferingIntro": "Comprehensive, line-by-line on-site verification of fixed assets across locations to validate existence, location, and operational condition.",
+          "coreOffering": [
+            "Physical existence check",
+            "Location & custodian validation",
+            "Missing/obsolete asset identification",
+            "FAR reconciliation",
+            "Exception reporting"
+          ],
+          "methodologyTitle": "Plan ? Verify ? Reconcile ? Report",
+          "steps": [
+            "Plan verification scope and asset universe",
+            "Conduct structured on-site inspection",
+            "Reconcile findings with FAR",
+            "Deliver discrepancy and risk report"
+          ],
+          "valueToConsultant": [
+            "Expand into audit-support and compliance assignments",
+            "Increase recurring annual verification mandates",
+            "Strengthen financial reporting credibility",
+            "Deliver measurable governance impact"
+          ],
+          "whyUs": [
+            "Technology-enabled verification process",
+            "Multi-location execution capability",
+            "Strong accounting and compliance expertise",
+            "Detailed, audit-ready documentation"
+          ]
+        },
+        {
+          "title": "Asset Tagging & Identification",
+          "coreOfferingIntro": "Structured tagging solutions using barcodes, QR codes, RFID, metal, polyester, or vinyl tags to enable traceability and future audit efficiency.",
+          "coreOffering": [
+            "Unique ID allocation",
+            "Durable tagging solutions",
+            "Custodian & location mapping",
+            "ERP-integrated tagging"
+          ],
+          "methodologyTitle": "Identify ? Tag ? Capture ? Integrate",
+          "steps": [
+            "Identify all taggable assets",
+            "Deploy appropriate tagging solution",
+            "Capture asset data digitally",
+            "Integrate tagging data with FAR"
+          ],
+          "valueToConsultant": [
+            "Offer long-term asset control frameworks",
+            "Improve future audit efficiency for clients",
+            "Create repeat engagement opportunities",
+            "Position yourself as a technology-driven advisor"
+          ],
+          "whyUs": [
+            "Durable, industry-specific tagging materials",
+            "Digital asset capture tools",
+            "Scalable tagging deployment",
+            "Compliance-aligned tracking systems"
+          ]
+        },
+        {
+          "title": "FAR (Fixed Asset Register) Updation & Reconciliation",
+          "coreOfferingIntro": "Complete review, correction, and restructuring of the Fixed Asset Register to ensure accuracy and regulatory compliance.",
+          "coreOffering": [
+            "Additions, disposals & transfers update",
+            "Depreciation alignment (SLM/WDV)",
+            "CWIP adjustments",
+            "ERP-compatible digital FAR",
+            "Audit trail documentation"
+          ],
+          "methodologyTitle": "Review ? Correct ? Align ? Document",
+          "steps": [
+            "Review existing FAR accuracy",
+            "Correct discrepancies",
+            "Align depreciation & accounting treatment",
+            "Document for audit readiness"
+          ],
+          "valueToConsultant": [
+            "Strengthen financial statement reliability",
+            "Expand into accounting compliance advisory",
+            "Increase audit-support revenue",
+            "Build long-term governance credibility"
+          ],
+          "whyUs": [
+            "Deep accounting standard expertise",
+            "Strong reconciliation frameworks",
+            "ERP compatibility support",
+            "Audit-focused documentation precision"
+          ]
+        },
+        {
+          "title": "Componentization (IFRS / Ind AS / IAS 16 Compliance)",
+          "coreOfferingIntro": "Identification and segregation of significant asset components for separate depreciation and regulatory compliance.",
+          "coreOffering": [
+            "Component breakdown analysis",
+            "Useful life assessment",
+            "Separate depreciation calculation",
+            "Register restructuring",
+            "Replacement accounting support"
+          ],
+          "methodologyTitle": "Analyse ? Segregate ? Calculate ? Update",
+          "steps": [
+            "Analyse major asset categories",
+            "Segregate components with varying useful lives",
+            "Calculate revised depreciation schedules",
+            "Update FAR accordingly"
+          ],
+          "valueToConsultant": [
+            "Enter IFRS/Ind AS advisory domain",
+            "Increase technical compliance engagements",
+            "Strengthen board-level advisory credibility",
+            "Expand into international reporting mandates"
+          ],
+          "whyUs": [
+            "Strong IFRS/Ind AS knowledge base",
+            "Practical implementation expertise",
+            "Compliance-driven documentation approach",
+            "Experience across industries"
+          ]
+        },
+        {
+          "title": "Stock & Inventory Verification",
+          "coreOfferingIntro": "Structured physical verification and reconciliation of stock to ensure accuracy and prevent shrinkage or misstatement.",
+          "coreOffering": [
+            "Physical inventory count",
+            "ERP reconciliation",
+            "Slow-moving/obsolete stock identification",
+            "Warehouse process review",
+            "Exception reporting"
+          ],
+          "methodologyTitle": "Count ? Reconcile ? Analyse ? Recommend",
+          "steps": [
+            "Conduct physical count",
+            "Reconcile with system records",
+            "Analyse discrepancies",
+            "Recommend control improvements"
+          ],
+          "valueToConsultant": [
+            "Expand into operational assurance",
+            "Increase recurring verification mandates",
+            "Strengthen working capital governance",
+            "Improve client cost control"
+          ],
+          "whyUs": [
+            "Structured count procedures",
+            "Technology-assisted reconciliation",
+            "Strong control-focused reporting",
+            "Multi-location execution capability"
+          ]
+        },
+        {
+          "title": "Condition Assessment & Asset Health Review",
+          "coreOfferingIntro": "Evaluation of asset condition, operational efficiency, and impairment indicators to support financial and strategic decisions.",
+          "coreOffering": [
+            "Operational status check",
+            "Impairment indicators",
+            "Maintenance review inputs",
+            "Replacement planning guidance",
+            "Insurance adequacy inputs"
+          ],
+          "methodologyTitle": "Inspect ? Evaluate ? Quantify ? Advise",
+          "steps": [
+            "Inspect physical and operational state",
+            "Evaluate impairment or risk exposure",
+            "Quantify potential financial impact",
+            "Advise on maintenance or replacement strategy"
+          ],
+          "valueToConsultant": [
+            "Enter strategic asset advisory",
+            "Support capex decision-making",
+            "Increase board-level engagement",
+            "Strengthen long-term advisory positioning"
+          ],
+          "whyUs": [
+            "Risk-focused evaluation framework",
+            "Financial and operational integration",
+            "Governance-aligned advisory",
+            "Practical, decision-ready insights"
+          ]
+        },
+        {
+          "title": "Regulatory & Compliance Review",
+          "coreOfferingIntro": "Comprehensive review to ensure asset-related compliance with Companies Act, CARO, IFRS/Ind AS, and internal control frameworks.",
+          "coreOffering": [
+            "Compliance checklist mapping",
+            "Control environment assessment",
+            "Documentation review",
+            "Audit readiness support",
+            "Management action plan"
+          ],
+          "methodologyTitle": "Map ? Evaluate ? Align ? Certify Readiness",
+          "steps": [
+            "Map applicable regulatory requirements",
+            "Evaluate compliance gaps",
+            "Align processes and documentation",
+            "Prepare for audit and statutory review"
+          ],
+          "valueToConsultant": [
+            "Expand into regulatory advisory",
+            "Increase high-value compliance engagements",
+            "Strengthen client governance reputation",
+            "Position yourself as a risk and compliance partner"
+          ],
+          "whyUs": [
+            "Strong regulatory interpretation expertise",
+            "Governance-driven approach",
+            "Structured documentation standards",
+            "End-to-end compliance readiness support"
+          ]
+        }
       ]
     }
   },
@@ -3327,6 +3541,233 @@
       "subtitle": "نمِّ سلسلة الشركاء. عند إغلاق صفقة عميل، تتدفق مبالغ الإحالة للأعلى عبر التسلسل.",
       "primaryCta": "سجّل كشريك إحالة",
       "secondaryCta": "تواصل مع فريقنا"
+    }
+  },
+  "referralProgram": {
+    "back": "Back to Dashboard",
+    "hero": {
+      "title": "5-Level Structured Referral Model",
+      "subtitle": "Integrated with the CEO Portal Dashboard",
+      "tagline": "Encourage structured partner expansion funded by a capped 3% pool without impacting core earnings."
+    },
+    "stats": [
+      {
+        "label": "Max Pool",
+        "value": "3%",
+        "subLabel": "From BnC platform fee"
+      },
+      {
+        "label": "Levels",
+        "value": "5",
+        "subLabel": "Structured partner expansion"
+      },
+      {
+        "label": "Trigger",
+        "value": "Realised Milestones",
+        "subLabel": "Paid only on revenue"
+      }
+    ],
+    "objective": {
+      "title": "Objective",
+      "items": [
+        "Encourage structured partner expansion up to 5 levels.",
+        "Funded by up to 3% deduction from BnC Global Platform Fee (10-25%).",
+        "No impact on Service / Technical / Strategic / International core earnings.",
+        "Paid only on realised client milestone revenue."
+      ]
+    },
+    "howItWorks": {
+      "title": "How It Works (Simple Example)",
+      "steps": [
+        "A refers B",
+        "B refers C",
+        "C refers D",
+        "D refers E",
+        "E closes a project"
+      ],
+      "payout": "When E generates revenue, all uplines (A-D) receive a structured override from the 3% pool."
+    },
+    "distribution": {
+      "title": "5-Level Distribution Model (From Max 3%)",
+      "columns": [
+        "Level",
+        "Position",
+        "% Allocation",
+        "Intent"
+      ],
+      "table": [
+        {
+          "level": "Level 1",
+          "position": "Direct Referrer",
+          "allocation": "1.20%",
+          "intent": "Strong reward for direct onboarding"
+        },
+        {
+          "level": "Level 2",
+          "position": "2nd Level",
+          "allocation": "0.70%",
+          "intent": "Network support incentive"
+        },
+        {
+          "level": "Level 3",
+          "position": "3rd Level",
+          "allocation": "0.50%",
+          "intent": "Growth continuity"
+        },
+        {
+          "level": "Level 4",
+          "position": "4th Level",
+          "allocation": "0.40%",
+          "intent": "Long-chain encouragement"
+        },
+        {
+          "level": "Level 5",
+          "position": "5th Level",
+          "allocation": "0.20%",
+          "intent": "Legacy incentive"
+        }
+      ],
+      "totalLabel": "Total",
+      "totalValue": "3.00% Max - Fully capped",
+      "note": "If fewer levels exist, unused % remains with the platform."
+    },
+    "governance": {
+      "title": "Governance Rules",
+      "items": [
+        "Valid only for new partner onboarding",
+        "Paid only on realised revenue",
+        "No self-referrals or circular chains",
+        "Referred partner must remain active",
+        "Platform reserves right to cap at 3%"
+      ]
+    },
+    "dashboard": {
+      "title": "Referral Dashboard (Recommended)",
+      "subtitle": "Since your model is powered by the CEO Portal, transparency is critical.",
+      "metrics": [
+        {
+          "label": "Total Referral Earnings (Lifetime)",
+          "value": "-"
+        },
+        {
+          "label": "This Month Referral Earnings",
+          "value": "-"
+        },
+        {
+          "label": "Pending Referral (Unrealised Revenue)",
+          "value": "-"
+        },
+        {
+          "label": "Active Referral Network Count",
+          "value": "-"
+        },
+        {
+          "label": "Level-wise Breakdown (L1-L5)",
+          "value": "-"
+        },
+        {
+          "label": "Project-wise Referral Source Mapping",
+          "value": "-"
+        },
+        {
+          "label": "Milestone Status Tracker",
+          "value": "-"
+        }
+      ],
+      "note": "Values update after client milestones are realised."
+    },
+    "tables": {
+      "levelBreakdown": {
+        "title": "Level-wise Breakdown",
+        "columns": [
+          "Level",
+          "Allocation",
+          "This Month",
+          "Lifetime"
+        ],
+        "rows": [
+          {
+            "level": "Level 1",
+            "allocation": "1.20%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 2",
+            "allocation": "0.70%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 3",
+            "allocation": "0.50%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 4",
+            "allocation": "0.40%",
+            "month": "-",
+            "lifetime": "-"
+          },
+          {
+            "level": "Level 5",
+            "allocation": "0.20%",
+            "month": "-",
+            "lifetime": "-"
+          }
+        ]
+      },
+      "projectMapping": {
+        "title": "Project-wise Referral Source Mapping",
+        "columns": [
+          "Project",
+          "Client",
+          "Referral Source",
+          "Level",
+          "Status"
+        ],
+        "rows": [
+          {
+            "project": "Project Alpha",
+            "client": "Client Omega",
+            "source": "A -> B -> C",
+            "level": "Level 3",
+            "status": "In review"
+          },
+          {
+            "project": "Project Nova",
+            "client": "Client Atlas",
+            "source": "A -> B",
+            "level": "Level 2",
+            "status": "Milestone achieved"
+          }
+        ]
+      },
+      "milestones": {
+        "title": "Milestone Status Tracker",
+        "columns": [
+          "Project",
+          "Milestone",
+          "Status",
+          "Eligible Override"
+        ],
+        "rows": [
+          {
+            "project": "Project Alpha",
+            "milestone": "Milestone 1",
+            "status": "Pending",
+            "override": "Yes"
+          },
+          {
+            "project": "Project Nova",
+            "milestone": "Milestone 2",
+            "status": "Approved",
+            "override": "Paid"
+          }
+        ]
+      },
+      "note": "Sample view - data populates from realised milestones."
     }
   }
 }
