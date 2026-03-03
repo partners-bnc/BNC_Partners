@@ -8,6 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "locale:auto-translate": "node scripts/auto-translate.cjs",
+    "locale:sync": "npm run locale:auto-translate && npm run locale:check && npm run locale:ar-integrity-check",
     "locale:check": "node scripts/locale-parity-check.cjs",
     "i18n:expert-form-check": "node scripts/expert-form-i18n-check.cjs",
     "locale:ar-integrity-check": "node scripts/ar-locale-integrity-check.cjs"
