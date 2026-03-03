@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PartnerFormModal from './PartnerFormModal';
+import ExpertFormModal from './ExpertFormModal';
 
 const CTA = () => {
   const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
   const isRtl = i18n.language === 'ar';
   const buttonDirection = isRtl ? 'sm:flex-row-reverse' : 'sm:flex-row';
 
@@ -30,7 +32,7 @@ const CTA = () => {
               {t('cta.becomePartner')}
             </button>
             <button 
-              onClick={() => window.location.href = 'tel:+919958711796'}
+              onClick={() => setIsExpertModalOpen(true)}
               className="bg-white text-[#2C3544] px-8 py-3 rounded-full font-semibold transition-colors hover:bg-gray-100 flex items-center justify-center gap-2"
             >
               {t('cta.talkToExpert')}
@@ -88,6 +90,7 @@ const CTA = () => {
       </section>
       
       <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ExpertFormModal isOpen={isExpertModalOpen} onClose={() => setIsExpertModalOpen(false)} />
     </>
   );
 };

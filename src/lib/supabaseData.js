@@ -30,6 +30,7 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   firstName: profileRow?.first_name || '',
   lastName: profileRow?.last_name || '',
   email: profileRow?.email || '',
+  countryCode: profileRow?.country_code || '',
   phone: profileRow?.phone || '',
   country: profileRow?.country || '',
   city: profileRow?.city || '',
@@ -42,6 +43,16 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   agreementSignedName: profileRow?.agreement_signed_name || '',
   agreementSignedAt: profileRow?.agreement_signed_at || null
 });
+
+const isFilled = (value) => String(value || '').trim().length > 0;
+
+export const isPartnerProfileComplete = (partner) =>
+  Boolean(
+    partner &&
+    isFilled(partner.phone) &&
+    isFilled(partner.country) &&
+    isFilled(partner.city)
+  );
 
 const getAuthEmail = (user) => normalizeEmail(user?.email);
 
@@ -150,6 +161,21 @@ export const loginPartner = async (email, password) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: normalizedEmail,
     password
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const loginPartnerWithGoogle = async (redirectTo) => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo
+    }
   });
 
   if (error) {
@@ -273,6 +299,36 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
   }
 
   return mapPartnerProfile(profileRow, aiRow);
+};
+
+export const updatePartnerContactDetails = async ({ partnerId, phone, countryCode, country, city }) => {
+  const resolvedPartnerId = String(partnerId || '').trim();
+  if (!resolvedPartnerId) {
+    throw new Error('Partner ID is required.');
+  }
+
+  const payload = {
+    phone: String(phone || '').trim(),
+    country_code: String(countryCode || '').trim(),
+    country: String(country || '').trim(),
+    city: String(city || '').trim(),
+    updated_at: new Date().toISOString()
+  };
+
+  if (!payload.phone || !payload.country_code || !payload.country || !payload.city) {
+    throw new Error('Phone, country code, country and city are required.');
+  }
+
+  const { error } = await supabase
+    .from('partner_profiles')
+    .update(payload)
+    .eq('id', resolvedPartnerId);
+
+  if (error) {
+    throw error;
+  }
+
+  return fetchPartnerData('', resolvedPartnerId);
 };
 
 export const fetchAdminDashboardData = async () => {
@@ -440,6 +496,62 @@ export const submitEnquiry = async ({ partnerId, country, countryLabel, service,
   });
 
   if (error) {
+    throw error;
+  }
+};
+
+export const submitExpertRequest = async ({
+  name,
+  company,
+  email,
+  mobile,
+  requirement,
+  framework
+}) => {
+  const {
+    data: { user },
+    error: authError
+  } = await supabase.auth.getUser();
+
+  if (authError) {
+    if (!isAuthSessionMissingError(authError)) {
+      throw authError;
+    }
+  }
+
+  const jwtEmail = normalizeEmail(user?.email);
+  const requestedEmail = normalizeEmail(email);
+  const resolvedEmail = jwtEmail || requestedEmail;
+  if (!resolvedEmail) {
+    throw new Error('Email is required.');
+  }
+
+  const { error } = await supabase.from('expert_requests').insert({
+    partner_id: user?.id || null,
+    partner_email: jwtEmail || null,
+    full_name: String(name || '').trim(),
+    company: String(company || '').trim() || null,
+    email: resolvedEmail,
+    mobile: String(mobile || '').trim(),
+    requirement: String(requirement || '').trim(),
+    framework: String(framework || '').trim() || null,
+    source: 'cta_talk_to_expert'
+  });
+
+  if (error) {
+    const status = Number(error?.status || 0);
+    const message = String(error?.message || '').toLowerCase();
+    const code = String(error?.code || '').toLowerCase();
+    if (
+      status === 401 ||
+      status === 403 ||
+      code === '42501' ||
+      message.includes('jwt') ||
+      message.includes('not authenticated') ||
+      message.includes('row-level security')
+    ) {
+      throw new Error('Could not submit request due to access policy. Please refresh and try again.');
+    }
     throw error;
   }
 };
