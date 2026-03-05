@@ -4,7 +4,8 @@ import { Search } from "lucide-react";
 const statusStyles = {
   Complete: { color: "#5e81f4", bg: "rgba(94,129,244,0.10)" },
   Pending: { color: "#f4be5e", bg: "rgba(244,190,94,0.12)" },
-  Active: { color: "#7ce7ac", bg: "rgba(124,231,172,0.12)" }
+  Active: { color: "#7ce7ac", bg: "rgba(124,231,172,0.12)" },
+  Signed: { color: "#7ce7ac", bg: "rgba(124,231,172,0.12)" }
 };
 
 function StatusBadge({ value }) {
@@ -27,7 +28,7 @@ function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
     if (!query) return partners;
 
     return partners.filter((p) =>
-      [p.name, p.email, p.phone, p.country, p.city, p.aiProfileStatus, p.onboardingStatus]
+      [p.name, p.email, p.phone, p.country, p.city, p.aiProfileStatus, p.agreementStatus, p.onboardingStatus]
         .map((v) => String(v || "").toLowerCase())
         .some((v) => v.includes(query))
     );
@@ -72,6 +73,7 @@ function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">City</th>
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Registration Date</th>
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">AI Profile Status</th>
+                <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Agreement Status</th>
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Onboarding Status</th>
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Last Activity</th>
               </tr>
@@ -92,6 +94,9 @@ function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
                   <td className="px-4 py-3 whitespace-nowrap text-[#8181a5] text-[12px]">{partner.registrationDateLabel || "-"}</td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     <StatusBadge value={partner.aiProfileStatus || "Pending"} />
+                  </td>
+                  <td className="px-4 py-3 whitespace-nowrap">
+                    <StatusBadge value={partner.agreementStatus || "Pending"} />
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     <StatusBadge value={partner.onboardingStatus || "Pending"} />
