@@ -341,15 +341,53 @@ export const fetchAdminDashboardData = async () => {
     throw error;
   }
 
-  const partners = (data || []).map((row) => ({
-    name: `${row.first_name || ''} ${row.last_name || ''}`.trim(),
-    email: row.email,
-    phone: row.phone,
-    country: row.country,
-    city: row.city,
-    status: row.ai_profile_completed ? 'Complete' : 'Pending',
-    registrationDate: row.registered_at
-  }));
+  const rows = data || [];
+  const partnerIds = rows
+    .map((row) => row.partner_id || row.id)
+    .filter(Boolean);
+
+  let onboardingProgressByPartnerId = new Map();
+  let agreementByProfileId = new Map();
+
+  if (partnerIds.length > 0) {
+    const { data: onboardingRows } = await supabase
+      .from('partner_onboarding_progress')
+      .select('partner_id, agreement_completed_at')
+      .in('partner_id', partnerIds);
+
+    onboardingProgressByPartnerId = new Map(
+      (onboardingRows || []).map((row) => [row.partner_id, Boolean(row.agreement_completed_at)])
+    );
+
+    const { data: profileRows } = await supabase
+      .from('partner_profiles')
+      .select('id, agreement_signed')
+      .in('id', partnerIds);
+
+    agreementByProfileId = new Map(
+      (profileRows || []).map((row) => [row.id, Boolean(row.agreement_signed)])
+    );
+  }
+
+  const partners = rows.map((row) => {
+    const partnerId = row.partner_id || row.id || null;
+    const agreementSigned =
+      typeof row.agreement_signed === 'boolean'
+        ? row.agreement_signed
+        : Boolean(onboardingProgressByPartnerId.get(partnerId) || agreementByProfileId.get(partnerId));
+
+    return {
+      partnerId,
+      name: `${row.first_name || ''} ${row.last_name || ''}`.trim(),
+      email: row.email,
+      phone: row.phone,
+      country: row.country,
+      city: row.city,
+      status: row.ai_profile_completed ? 'Complete' : 'Pending',
+      agreementSigned,
+      registrationDate: row.registered_at
+    };
+  });
 
   const now = new Date();
   const currentMonth = now.getUTCMonth();

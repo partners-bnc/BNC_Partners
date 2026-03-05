@@ -193,7 +193,7 @@ const AdminDashboard = () => {
     const partners = dashboardData?.partners || [];
 
     return partners.map((partner, idx) => ({
-      id: `${partner.email || 'partner'}-${idx}`,
+      id: partner.partnerId || `${partner.email || 'partner'}-${idx}`,
       name: partner.name || '-',
       email: partner.email || '-',
       phone: partner.phone || '-',
@@ -202,7 +202,8 @@ const AdminDashboard = () => {
       registrationDate: partner.registrationDate,
       registrationDateLabel: formatDateLabel(partner.registrationDate),
       aiProfileStatus: partner.status === 'Complete' ? 'Complete' : 'Pending',
-      onboardingStatus: partner.status === 'Complete' ? 'Active' : 'Pending',
+      agreementStatus: partner.agreementSigned ? 'Signed' : 'Pending',
+      onboardingStatus: partner.status === 'Complete' && partner.agreementSigned ? 'Active' : 'Pending',
       lastUpdatedLabel: formatRelativeLabel(partner.registrationDate)
     }));
   }, [dashboardData]);
