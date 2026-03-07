@@ -154,6 +154,25 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   }, [isOpen, isSubmitted, draftKey, currentStep, formData]);
 
   useEffect(() => {
+    if (!isOpen) return;
+
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = documentElement.style.overflow;
+    const previousBodyOverscrollBehavior = body.style.overscrollBehavior;
+
+    body.style.overflow = 'hidden';
+    documentElement.style.overflow = 'hidden';
+    body.style.overscrollBehavior = 'contain';
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+      body.style.overscrollBehavior = previousBodyOverscrollBehavior;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     if (!isOpen || isSubmitted) return;
     if (!partnerData?.id || !partnerData?.email) return;
 
@@ -498,8 +517,8 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-slate-900/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className={`ai-profile-modal ai-modal-shell max-w-6xl w-full max-h-[90vh] overflow-y-auto ${textAlign}`}>
+    <div className="ai-modal-overlay fixed inset-0 bg-slate-900/30 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className={`ai-profile-modal ai-modal-shell max-w-6xl w-full ${textAlign}`}>
         <div className={`ai-modal-header flex flex-wrap items-start justify-between gap-4 ${rowDirection}`}>
           <div>
             <h2 className="text-2xl font-bold text-slate-900">{t('aiProfile.title')}</h2>
@@ -599,7 +618,7 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
             <div className="mb-6">
               <h3 className="text-xl font-semibold mb-2">{t('aiProfile.questions.services')}</h3>
               <p className="text-sm text-gray-600 mb-4">{t('aiProfile.multiSelectHint')}</p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {serviceOptions.map((service) => {
                   const Icon = serviceIcons[service.id] || FaBriefcase;
                   return (
@@ -774,7 +793,7 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
         {!isSubmitted && (
         <div className="ai-modal-footer">
           <div className="ai-footer-hint">{t('aiProfile.footerHint')}</div>
-          <div className="flex space-x-3">
+          <div className="flex flex-wrap gap-3">
             {currentStep > 1 && (
               <button
                 onClick={previousQuestion}
