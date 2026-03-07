@@ -111,7 +111,7 @@ const Hero = () => {
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-10 sm:py-12 lg:py-20">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-            <div className={`text-center ${lgTextAlign} lg:-mt-10 mt-0 sm:mt-10 relative z-20`}>
+            <div className={`${textAlign} ${lgTextAlign} lg:-mt-10 mt-0 sm:mt-10 relative z-20`}>
               <div className={`relative inline-flex items-center gap-2 rounded-full border border-slate-900/60 bg-[#e8f1ff] px-4 py-1.5 text-xs font-semibold mb-4 sm:mb-6 -mt-1 backdrop-blur-sm text-slate-900 overflow-hidden shadow-[0_10px_26px_rgba(15,23,42,0.12)] ${rowDirection}`}>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#2C5AA0]/20 via-[#7ea5ff]/20 to-transparent blur-md" />
                 <span className={`relative flex items-center gap-2 ${rowDirection}`}>
@@ -199,7 +199,7 @@ const Hero = () => {
               <div className={`mt-5 sm:mt-7 max-w-md mx-auto ${lgContainerAlign}`} style={{ perspective: '1400px' }}>
                 <div className={`relative cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-b from-white/95 via-white/80 to-slate-100/80 px-5 py-3 shadow-[0_26px_60px_rgba(15,23,42,0.18)] backdrop-blur transform-gpu ${isRtl ? '[transform:rotateX(6deg)_rotateY(6deg)]' : '[transform:rotateX(6deg)_rotateY(-6deg)]'} transition duration-300 hover:[transform:rotateX(0deg)_rotateY(0deg)_translateY(-8px)_scale(1.01)] hover:shadow-[0_44px_96px_rgba(15,23,42,0.24)] hover:ring-1 hover:ring-[#2C5AA0]/30`}>
                   <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.9),transparent_55%)] pointer-events-none" />
-                  <div className="relative grid grid-cols-3 gap-2 text-center">
+                  <div className={`relative grid grid-cols-3 gap-2 ${textAlign} sm:text-center`}>
                     <div>
                       <p className="font-poppins text-lg sm:text-xl font-semibold text-slate-900">50+</p>
                       <p className="text-[11px] sm:text-xs text-slate-600">{t('hero.stats.global')}</p>

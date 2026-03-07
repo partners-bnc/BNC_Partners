@@ -290,6 +290,9 @@ function ReferralChain({ nodes = [], connectors = [], rtl = false }) {
 //  NETWORK MARKETING DIAGRAM
 // ─────────────────────────────────────────────
 function NetworkDiagram({ rtl = false }) {
+  const BASE_WIDTH = 1000;
+  const BASE_HEIGHT = 720;
+
   const root = {
     code: "A",
     title: "You (Partner A)",
@@ -383,6 +386,40 @@ function NetworkDiagram({ rtl = false }) {
     },
   ];
 
+  const shellRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const shell = shellRef.current;
+    if (!shell) return undefined;
+
+    const updateScale = () => {
+      const nextScale = Math.min(1, shell.clientWidth / BASE_WIDTH);
+      if (!Number.isFinite(nextScale) || nextScale <= 0) return;
+      setScale((prev) => (Math.abs(prev - nextScale) < 0.001 ? prev : nextScale));
+    };
+
+    updateScale();
+
+    let ro;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(updateScale);
+      ro.observe(shell);
+    } else if (typeof window !== "undefined") {
+      window.addEventListener("resize", updateScale);
+    }
+
+    return () => {
+      if (ro) {
+        ro.disconnect();
+      } else if (typeof window !== "undefined") {
+        window.removeEventListener("resize", updateScale);
+      }
+    };
+  }, [BASE_WIDTH]);
+
+  const scaledHeight = BASE_HEIGHT * scale;
+
   const Node = ({ data, className }) => (
     <div className={`network-node ${className}`} style={{ color: data.color }}>
       <div className="network-node-level" style={{ borderColor: data.border, color: data.color, background: `${data.bg}` }}>
@@ -407,7 +444,12 @@ function NetworkDiagram({ rtl = false }) {
   );
 
   return (
-    <div className={`network-diagram ${rtl ? "rtl" : ""}`}>
+    <div className={`network-diagram-shell ${rtl ? "rtl" : ""}`} ref={shellRef}>
+      <div className="network-diagram-stage" style={{ height: `${scaledHeight}px` }}>
+        <div
+          className={`network-diagram ${rtl ? "rtl" : ""}`}
+          style={{ transform: `translateX(-50%) scale(${scale})` }}
+        >
       <svg className="network-lines" viewBox="0 0 1000 700" preserveAspectRatio="none">
         <defs>
           <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -445,6 +487,8 @@ function NetworkDiagram({ rtl = false }) {
       <Node data={level2[3]} className="node-a22 pulse-l2" />
       <Node data={clients[0]} className="node-client-left pulse-client" />
       <Node data={clients[1]} className="node-client-right pulse-client" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -857,9 +901,26 @@ export default function ReferralPage() {
         @keyframes ripple { 0%{transform:scale(1);opacity:0.55} 100%{transform:scale(1.55);opacity:0} }
         @keyframes nodePulse { 0%{transform:translate(-50%,-50%) scale(1);} 35%{transform:translate(-50%,-50%) scale(1.08);} 60%{transform:translate(-50%,-50%) scale(1);} }
         @keyframes dashMove { 0%{stroke-dashoffset:24;opacity:0.4;} 50%{opacity:1;} 100%{stroke-dashoffset:0;opacity:0.75;} }
-        .network-diagram {
+        .network-diagram-shell {
+          width: 100%;
+          overflow: hidden;
+          padding-bottom: 0.25rem;
+        }
+        .network-diagram-shell.rtl {
+          direction: rtl;
+        }
+        .network-diagram-stage {
+          width: 100%;
           position: relative;
-          min-height: 720px;
+        }
+        .network-diagram {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          transform-origin: top center;
+          width: 1000px;
+          height: 720px;
+          box-sizing: border-box;
           background: #FCF7EE;
           border-radius: 18px;
           border: 1px solid ${G.border};
@@ -935,25 +996,6 @@ export default function ReferralPage() {
         .node-a22 { left: 79%; top: 60%; }
         .node-client-left { left: 21%; top: 86%; }
         .node-client-right { left: 61%; top: 86%; }
-        @media (max-width: 980px) {
-          .network-diagram { min-height: 560px; }
-          .network-node-circle { width: 56px; height: 56px; font-size: 1rem; }
-        }
-        @media (max-width: 820px) {
-          .network-diagram {
-            min-height: auto;
-            padding: 2.5rem 1.25rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.1rem;
-          }
-          .network-lines { display: none; }
-          .network-node {
-            position: static;
-            transform: none;
-          }
-        }
       `}</style>
 
       <section
