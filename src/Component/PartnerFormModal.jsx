@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaTimes, FaArrowRight, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { checkPartnerEmailExists, registerPartner } from '../lib/supabaseData';
 
@@ -12,8 +13,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const passPadding = isRtl ? 'pl-12' : 'pr-12';
   const eyePosition = isRtl ? 'left-3' : 'right-3';
   const closePosition = isRtl ? 'left-4' : 'right-4';
-  const dropdownPosition = isRtl ? 'right-0' : 'left-0';
-  const borderSide = isRtl ? 'border-l' : 'border-r';
+  const phoneSelectorBorder = isRtl ? 'border-b sm:border-b-0 sm:border-l' : 'border-b sm:border-b-0 sm:border-r';
   const autoMargin = isRtl ? 'mr-auto' : 'ml-auto';
   const [currentStep, setCurrentStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +33,9 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const [errors, setErrors] = useState({});
   const [countryCodeQuery, setCountryCodeQuery] = useState('+1 United States/Canada');
   const [showCountryCodeList, setShowCountryCodeList] = useState(false);
+  const [dropdownStyle, setDropdownStyle] = useState(null);
+  const countryCodeFieldRef = useRef(null);
+  const countryCodeDropdownRef = useRef(null);
 
   const countryCodeToCountryLabel = {
     'United States/Canada': 'United States/Canada',
@@ -362,6 +365,45 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
     }
   };
 
+  useEffect(() => {
+    if (!showCountryCodeList) return undefined;
+
+    const updateDropdownPosition = () => {
+      const trigger = countryCodeFieldRef.current;
+      if (!trigger) return;
+
+      const rect = trigger.getBoundingClientRect();
+      const mobileWidth = window.innerWidth < 640 ? rect.width : 260;
+      const left = isRtl ? rect.right - mobileWidth : rect.left;
+
+      setDropdownStyle({
+        position: 'fixed',
+        top: rect.bottom + 8,
+        left: Math.max(12, Math.min(left, window.innerWidth - mobileWidth - 12)),
+        width: mobileWidth,
+        maxHeight: window.innerWidth < 640 ? 280 : 400,
+        zIndex: 10050,
+      });
+    };
+
+    const handlePointerDown = (event) => {
+      if (countryCodeFieldRef.current?.contains(event.target)) return;
+      if (countryCodeDropdownRef.current?.contains(event.target)) return;
+      setShowCountryCodeList(false);
+    };
+
+    updateDropdownPosition();
+    window.addEventListener('resize', updateDropdownPosition);
+    window.addEventListener('scroll', updateDropdownPosition, true);
+    document.addEventListener('mousedown', handlePointerDown);
+
+    return () => {
+      window.removeEventListener('resize', updateDropdownPosition);
+      window.removeEventListener('scroll', updateDropdownPosition, true);
+      document.removeEventListener('mousedown', handlePointerDown);
+    };
+  }, [isRtl, showCountryCodeList]);
+
   const handleNext = () => {
     if (currentStep === 2 && emailExists) {
       return;
@@ -434,17 +476,18 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   if (isSubmitted) {
     return (
       <div className="fixed inset-0 z-[9999] overflow-y-auto">
-        <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center">
+        <div className="flex min-h-screen items-start justify-center px-3 pt-3 pb-6 text-center sm:items-center sm:px-4 sm:pt-4 sm:pb-20">
           <div className="fixed inset-0 bg-black/50"></div>
 
-          <div className={`relative inline-block w-full max-w-md p-0 my-8 overflow-hidden ${textAlign} align-middle bg-white shadow-xl rounded-2xl z-10`}>
+          <div className={`relative inline-block w-full max-w-md my-3 overflow-visible ${textAlign} align-middle z-10 sm:my-8`}>
+            <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
             <button
               onClick={handleLoginRedirect}
               className={`absolute top-4 ${closePosition} text-gray-400 hover:text-gray-600 transition-colors z-10`}
             >
               <FaTimes size={18} />
             </button>
-            <div className="p-8 text-center">
+            <div className="overflow-visible p-5 text-center sm:p-8">
               <div className="mx-auto mb-6 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                 <svg className="w-8 h-8 text-green-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -461,6 +504,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
               >
                 Go to Login
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -518,10 +562,13 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Phone Number
               </label>
-              <div className={`relative flex w-full items-stretch border rounded-lg overflow-visible focus-within:ring-2 focus-within:ring-[#254C89] focus-within:border-transparent ${
+              <div className={`relative flex w-full flex-col items-stretch overflow-visible rounded-lg border focus-within:border-transparent focus-within:ring-2 focus-within:ring-[#254C89] sm:flex-row ${
                 errors.phone || errors.countryCode ? 'border-red-500' : 'border-gray-300'
               }`}>
-                <div className={`relative w-[190px] ${borderSide} border-gray-200 bg-gray-50`}>
+                <div
+                  ref={countryCodeFieldRef}
+                  className={`relative w-full shrink-0 ${phoneSelectorBorder} border-gray-200 bg-gray-50 sm:w-[190px]`}
+                >
                   <input
                     type="text"
                     name="countryCodeQuery"
@@ -538,26 +585,31 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`flex-1 px-4 py-3 focus:outline-none ${inputAlign}`}
+                  className={`min-w-0 flex-1 px-4 py-3 focus:outline-none ${inputAlign}`}
                   placeholder="Enter phone number"
                   maxLength="15"
                 />
-                {showCountryCodeList && (
-                  <div className={`absolute ${dropdownPosition} bottom-full z-50 mb-2 w-[260px] max-h-[400px] overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl`}>
-                    {countryCodes.map((code) => (
-                      <button
-                        key={`${code.code}-${code.label}`}
-                        type="button"
-                        onMouseDown={(e) => e.preventDefault()}
-                        onClick={() => handleSelectCountryCode(code.code, code.label)}
-                        className={`w-full ${textAlign} px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-100`}
-                      >
-                        {code.code} {code.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
+              {showCountryCodeList && dropdownStyle && createPortal(
+                <div
+                  ref={countryCodeDropdownRef}
+                  className="overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl"
+                  style={dropdownStyle}
+                >
+                  {countryCodes.map((code) => (
+                    <button
+                      key={`${code.code}-${code.label}`}
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => handleSelectCountryCode(code.code, code.label)}
+                      className={`w-full ${textAlign} border-b border-gray-100 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50`}
+                    >
+                      {code.code} {code.label}
+                    </button>
+                  ))}
+                </div>,
+                document.body
+              )}
               {errors.countryCode && <p className="text-red-500 text-sm mt-1">{errors.countryCode}</p>}
               {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
               <p className="text-gray-500 text-sm mt-1">Phone number should be 6 to 15 digits</p>
@@ -646,20 +698,21 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[9999] overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center">
+      <div className="flex min-h-screen items-start justify-center px-3 pt-3 pb-6 text-center sm:items-center sm:px-4 sm:pt-4 sm:pb-20">
         <div className="fixed inset-0 bg-black/50" onClick={onClose}></div>
 
-        <div className={`relative inline-block w-full max-w-xl p-0 my-8 overflow-visible ${textAlign} align-middle bg-white shadow-xl rounded-2xl z-10`}>
-          <div className="bg-gradient-to-r from-[#254C89] to-[#1e3f73] px-6 py-4 text-white relative">
+        <div className={`relative inline-block w-full max-w-xl my-3 overflow-visible ${textAlign} align-middle z-10 sm:my-8`}>
+          <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div className="relative bg-gradient-to-r from-[#254C89] to-[#1e3f73] px-4 py-4 text-white sm:px-6">
             <button
               onClick={onClose}
               className={`absolute top-4 ${closePosition} text-white hover:text-gray-200 transition-colors`}
             >
               <FaTimes size={18} />
             </button>
-            <h2 className="text-xl font-bold mb-1">Partner Application</h2>
+            <h2 className="mb-1 pr-8 text-lg font-bold sm:text-xl">Partner Application</h2>
             <p className="text-blue-100 text-sm">Join our growing network of partners</p>
-            <div className={`mt-3 flex items-center justify-between ${rowDirection}`}>
+            <div className={`mt-3 flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm ${rowDirection}`}>
               <span className="text-sm">Step {currentStep} of 4</span>
               <span className="text-sm">{Math.round((currentStep / 4) * 100)}% complete</span>
             </div>
@@ -671,15 +724,15 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          <div className="p-8">
+          <div className="overflow-visible p-4 sm:p-8">
             {renderStep()}
 
-            <div className={`flex justify-between mt-6 ${rowDirection}`}>
+            <div className={`mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between ${rowDirection}`}>
               {currentStep > 1 && (
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="flex w-full items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors sm:w-auto"
                 >
                   <FaArrowLeft className={isRtl ? 'ml-2 flipInRtl' : 'mr-2'} size={14} />
                   Back
@@ -691,7 +744,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                   type="button"
                   onClick={handleNext}
                   disabled={currentStep === 2 && emailExists}
-                  className={`flex items-center ${autoMargin} px-6 py-2 rounded-lg font-semibold transition-colors ${
+                  className={`flex w-full items-center justify-center px-6 py-2 rounded-lg font-semibold transition-colors sm:w-auto ${autoMargin} ${
                     currentStep === 2 && emailExists
                       ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
                       : 'bg-[#254C89] hover:bg-[#1e3f73] text-white'
@@ -705,12 +758,13 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className={`${autoMargin} bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50`}
+                  className={`w-full bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 sm:w-auto ${autoMargin}`}
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Application'}
                 </button>
               )}
             </div>
+          </div>
           </div>
         </div>
       </div>
