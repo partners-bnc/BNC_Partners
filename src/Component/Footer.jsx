@@ -24,7 +24,17 @@ const Footer = () => {
         
         {/* Copyright */}
         <div className="text-gray-600">
-          <p className="font-geist">{t('footer.copyright')}</p>
+          <p className="font-geist">
+            Copyrights © 2026{' '}
+            <a
+              href="https://www.bncglobal.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              BnC Global
+            </a>
+          </p>
         </div>
       </div>
     </footer>
