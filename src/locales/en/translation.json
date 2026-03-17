@@ -2487,6 +2487,40 @@
       "saudi": "Saudi Arabia",
       "global": "Global"
     },
+    "walkthrough": {
+      "label": "New user guide",
+      "intro": "Here is a quick dashboard walkthrough to help you complete the onboarding flow in the right order.",
+      "stepCounter": "{{current}} of {{total}}",
+      "actions": {
+        "skip": "Skip",
+        "back": "Back",
+        "next": "Next",
+        "finish": "Finish"
+      },
+      "steps": {
+        "aiProfile": {
+          "title": "AI profiling",
+          "description": "Start here and complete your AI profile so we can understand your capabilities and match you to the right opportunities."
+        },
+        "referralModel": {
+          "title": "Referral model",
+          "description": "Review how the referral model works, how your network grows, and where referral earnings can come from."
+        },
+        "agreement": {
+          "title": "Agreement sign in",
+          "description": "Once your AI profile is complete, sign the agreement to complete this onboarding stage and unlock the full partner flow.",
+          "lockedDescription": "This agreement step comes after AI profiling. Complete your AI profile first, then return here to sign the agreement."
+        },
+        "requirement": {
+          "title": "Speak your requirement",
+          "description": "Use this voice requirement button to quickly tell us what your client or business needs, and the team will take it forward."
+        },
+        "services": {
+          "title": "Explore services with video modules",
+          "description": "Browse the service cards below, watch the video modules, and open any service to learn more before making enquiries."
+        }
+      }
+    },
     "aiProfileSearchTokens": [
       "ai",
       "profile",
