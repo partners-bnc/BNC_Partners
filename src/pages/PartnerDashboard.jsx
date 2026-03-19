@@ -10,9 +10,51 @@ import RequirementVoiceModal from '../Component/RequirementVoiceModal';
 import { getServicesByCountry } from '../data/services';
 import { fetchPartnerData, getSessionUser, isPartnerProfileComplete, logout, submitPartnerAgreement, submitVoiceRequirement } from '../lib/supabaseData';
 
-const WALKTHROUGH_COACHMARK_HEIGHT = 220;
-const WALKTHROUGH_COACHMARK_WIDTH = 360;
-const WALKTHROUGH_SPACING = 18;
+const LazyVideo = ({ src, title }) => {
+  const containerRef = React.useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if (!containerRef.current) return undefined;
+    if (shouldLoad) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setShouldLoad(true);
+        });
+      },
+      { rootMargin: '150px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  return (
+    <div ref={containerRef} className="relative w-full h-full">
+      {shouldLoad ? (
+        <iframe
+          className="w-full h-full"
+          src={src}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          loading="lazy"
+          allowFullScreen
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-slate-100 via-white to-slate-100">
+          <div className="h-full w-full animate-pulse bg-[linear-gradient(110deg,rgba(226,232,240,0.35),rgba(255,255,255,0.8),rgba(226,232,240,0.35))] bg-[length:200%_100%]" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-geist text-slate-500 shadow-sm">
+              Preparing preview…
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const PartnerDashboard = () => {
   const [partnerData, setPartnerData] = useState(null);
@@ -267,160 +309,6 @@ const PartnerDashboard = () => {
       return bHasVideo ? 1 : -1;
     });
   }, [embeddedCountryKey, searchTerm, t, i18n.language]);
-
-  useEffect(() => {
-    if (!walkthroughStorageKey || !partnerData || loading) return;
-
-    const storedStatus = localStorage.getItem(walkthroughStorageKey);
-    if (storedStatus === 'completed' || storedStatus === 'dismissed') return;
-
-    setWalkthroughStep(0);
-    setIsWalkthroughActive(true);
-  }, [walkthroughStorageKey, partnerData, loading]);
-
-  const updateWalkthroughRect = () => {
-    const activeStep = walkthroughSteps[walkthroughStep];
-    const target = activeStep?.ref?.current;
-    if (!target) return;
-
-    const rect = target.getBoundingClientRect();
-    setWalkthroughRect({
-      top: rect.top,
-      left: rect.left,
-      width: rect.width,
-      height: rect.height
-    });
-  };
-
-  useEffect(() => {
-    if (!isWalkthroughActive) return;
-
-    const activeStep = walkthroughSteps[walkthroughStep];
-    activeStep?.ref?.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-      inline: 'nearest'
-    });
-  }, [isWalkthroughActive, walkthroughStep, walkthroughSteps]);
-
-  useLayoutEffect(() => {
-    if (!isWalkthroughActive) return undefined;
-
-    updateWalkthroughRect();
-    window.addEventListener('resize', updateWalkthroughRect);
-    window.addEventListener('scroll', updateWalkthroughRect, true);
-
-    return () => {
-      window.removeEventListener('resize', updateWalkthroughRect);
-      window.removeEventListener('scroll', updateWalkthroughRect, true);
-    };
-  }, [isWalkthroughActive, walkthroughStep, selectedCountry, embeddedServices.length, showAIProfile, i18n.language]);
-
-  const persistWalkthroughState = (value) => {
-    if (!walkthroughStorageKey) return;
-    localStorage.setItem(walkthroughStorageKey, value);
-  };
-
-  const closeWalkthrough = (value) => {
-    persistWalkthroughState(value);
-    setIsWalkthroughActive(false);
-    setWalkthroughRect(null);
-  };
-
-  const handleWalkthroughNext = () => {
-    if (walkthroughStep >= walkthroughSteps.length - 1) {
-      closeWalkthrough('completed');
-      return;
-    }
-
-    setWalkthroughStep((prev) => prev + 1);
-  };
-
-  const handleWalkthroughBack = () => {
-    setWalkthroughStep((prev) => Math.max(prev - 1, 0));
-  };
-
-  const handleWalkthroughSkip = () => {
-    closeWalkthrough('dismissed');
-  };
-
-  const activeWalkthroughStep = isWalkthroughActive ? walkthroughSteps[walkthroughStep] : null;
-
-  const coachmarkStyle = useMemo(() => {
-    if (!walkthroughRect || typeof window === 'undefined') return null;
-
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const coachmarkWidth = viewportWidth < 640 ? Math.min(viewportWidth - 32, 320) : WALKTHROUGH_COACHMARK_WIDTH;
-    const highlightBottom = walkthroughRect.top + walkthroughRect.height;
-    const showBelow = highlightBottom + WALKTHROUGH_COACHMARK_HEIGHT + WALKTHROUGH_SPACING < viewportHeight;
-    const top = showBelow
-      ? Math.min(highlightBottom + WALKTHROUGH_SPACING, Math.max(viewportHeight - WALKTHROUGH_COACHMARK_HEIGHT - 16, 16))
-      : Math.max(16, walkthroughRect.top - WALKTHROUGH_COACHMARK_HEIGHT - WALKTHROUGH_SPACING);
-
-    let left = isRtl
-      ? walkthroughRect.left + walkthroughRect.width - coachmarkWidth
-      : walkthroughRect.left;
-
-    left = Math.max(16, Math.min(left, viewportWidth - coachmarkWidth - 16));
-
-    return {
-      top,
-      left,
-      width: coachmarkWidth
-    };
-  }, [isRtl, walkthroughRect]);
-
-  const LazyVideo = ({ src, title }) => {
-    const containerRef = React.useRef(null);
-    const [shouldLoad, setShouldLoad] = useState(false);
-
-    useEffect(() => {
-      if (!containerRef.current) return undefined;
-      if (shouldLoad) return undefined;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setShouldLoad(true);
-            }
-          });
-        },
-        { rootMargin: '150px' }
-      );
-
-      observer.observe(containerRef.current);
-
-      return () => {
-        observer.disconnect();
-      };
-    }, [shouldLoad]);
-
-    return (
-      <div ref={containerRef} className="relative w-full h-full">
-        {shouldLoad ? (
-          <iframe
-            className="w-full h-full"
-            src={src}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            loading="lazy"
-            allowFullScreen
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-slate-100 via-white to-slate-100">
-            <div className="h-full w-full animate-pulse bg-[linear-gradient(110deg,rgba(226,232,240,0.35),rgba(255,255,255,0.8),rgba(226,232,240,0.35))] bg-[length:200%_100%]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-geist text-slate-500 shadow-sm">
-                {t('countryServices.preparingPreview')}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
 
   if (loading) {
     return (
