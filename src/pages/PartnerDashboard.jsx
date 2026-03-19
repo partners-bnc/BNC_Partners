@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { FaUser, FaMicrophone, FaSitemap } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -64,18 +64,28 @@ const PartnerDashboard = () => {
   const [isRequirementModalOpen, setIsRequirementModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('india');
+  const [isWalkthroughActive, setIsWalkthroughActive] = useState(false);
+  const [walkthroughStep, setWalkthroughStep] = useState(0);
+  const [walkthroughRect, setWalkthroughRect] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  const aiProfileRef = useRef(null);
+  const referralRef = useRef(null);
+  const agreementRef = useRef(null);
+  const requirementRef = useRef(null);
+  const servicesRef = useRef(null);
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
   const inputAlign = isRtl ? 'text-right' : 'text-left';
   const searchButtonMargin = isRtl ? 'mr-3' : 'ml-3';
-  const voiceButtonMargin = isRtl ? 'mr-4' : 'ml-4';
   const statusAlign = isRtl ? 'sm:mr-auto sm:w-auto sm:items-start' : 'sm:ml-auto sm:w-auto sm:items-end';
   const quickAlign = isRtl ? 'justify-start' : 'justify-end';
   const cardButtonPos = isRtl ? 'left-6' : 'right-6';
+  const walkthroughStorageKey = partnerData?.id || partnerData?.email
+    ? `partnerDashboardTour:${partnerData?.id || partnerData?.email}`
+    : null;
 
   useEffect(() => {
     let isRefreshing = false;
@@ -192,6 +202,41 @@ const PartnerDashboard = () => {
   const agreementSigned = Boolean(partnerData?.agreementSigned);
   const aiProfileCompleted = Boolean(partnerData?.aiProfileCompleted);
 
+  const walkthroughSteps = useMemo(() => ([
+    {
+      key: 'aiProfile',
+      ref: aiProfileRef,
+      title: t('partnerDashboard.walkthrough.steps.aiProfile.title'),
+      description: t('partnerDashboard.walkthrough.steps.aiProfile.description')
+    },
+    {
+      key: 'referralModel',
+      ref: referralRef,
+      title: t('partnerDashboard.walkthrough.steps.referralModel.title'),
+      description: t('partnerDashboard.walkthrough.steps.referralModel.description')
+    },
+    {
+      key: 'agreement',
+      ref: agreementRef,
+      title: t('partnerDashboard.walkthrough.steps.agreement.title'),
+      description: aiProfileCompleted
+        ? t('partnerDashboard.walkthrough.steps.agreement.description')
+        : t('partnerDashboard.walkthrough.steps.agreement.lockedDescription')
+    },
+    {
+      key: 'requirement',
+      ref: requirementRef,
+      title: t('partnerDashboard.walkthrough.steps.requirement.title'),
+      description: t('partnerDashboard.walkthrough.steps.requirement.description')
+    },
+    {
+      key: 'services',
+      ref: servicesRef,
+      title: t('partnerDashboard.walkthrough.steps.services.title'),
+      description: t('partnerDashboard.walkthrough.steps.services.description')
+    }
+  ]), [aiProfileCompleted, t]);
+
   const statusConfig = aiProfileCompleted
     ? agreementSigned
       ? {
@@ -211,9 +256,11 @@ const PartnerDashboard = () => {
         buttonLabel: t('partnerDashboard.status.completeProfileButton'),
         onClick: () => setIsAIModalOpen(true)
       };
+
   const query = searchTerm.trim().toLowerCase();
   const matchesSearch = (value) =>
     !query || (value && value.toLowerCase().includes(query));
+
   const normalizeTokensText = (tokens) => {
     if (Array.isArray(tokens)) return tokens.join(' ');
     if (typeof tokens === 'string') return tokens;
@@ -227,7 +274,7 @@ const PartnerDashboard = () => {
   };
 
   const aiProfileTokens = t('partnerDashboard.aiProfileSearchTokens', { returnObjects: true });
-  const showAIProfile = matchesSearch(normalizeTokensText(aiProfileTokens));
+  const showAIProfile = isWalkthroughActive || matchesSearch(normalizeTokensText(aiProfileTokens));
 
   const embeddedCountryKey = selectedCountry === 'global' ? 'other' : selectedCountry;
   const embeddedServices = useMemo(() => {
@@ -245,14 +292,15 @@ const PartnerDashboard = () => {
         bullets: Array.isArray(localizedBullets) ? localizedBullets : service.bullets
       };
     });
+
     const term = searchTerm.trim().toLowerCase();
     const filtered = !term
       ? services
       : services.filter((service) => {
-      if (service.title.toLowerCase().includes(term)) return true;
-      if (service.id.toLowerCase().includes(term)) return true;
-      return (service.bullets || []).some((item) => item.toLowerCase().includes(term));
-    });
+          if (service.title.toLowerCase().includes(term)) return true;
+          if (service.id.toLowerCase().includes(term)) return true;
+          return (service.bullets || []).some((item) => item.toLowerCase().includes(term));
+        });
 
     return [...filtered].sort((a, b) => {
       const aHasVideo = Boolean(a.videoUrl);
@@ -278,7 +326,6 @@ const PartnerDashboard = () => {
       <Header />
       <div className="min-h-screen bg-[#f7f3ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
-          {/* Top Structure */}
           <div className="rounded-3xl bg-[#f7f3ee] px-6 py-10 sm:px-10">
             <div className="mt-0 flex flex-col gap-4 rounded-2xl bg-[#efede8] px-5 py-4 text-sm text-slate-600 sm:flex-row sm:items-center">
               <div className="flex flex-wrap items-center gap-3">
@@ -355,7 +402,14 @@ const PartnerDashboard = () => {
             <div className={`mt-2 flex ${quickAlign}`}>
               <div className="flex flex-wrap items-stretch gap-3">
                 {showAIProfile && (
-                  <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
+                  <div
+                    ref={aiProfileRef}
+                    className={`w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 transition-all ${
+                      isWalkthroughActive && activeWalkthroughStep?.key === 'aiProfile'
+                        ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                        : 'ring-slate-200/70'
+                    }`}
+                  >
                     <div className={`flex items-center gap-2 ${rowDirection}`}>
                       <FaUser className="h-3.5 w-3.5 text-[#2C5AA0]" />
                       <div className="flex-1">
@@ -381,7 +435,14 @@ const PartnerDashboard = () => {
                     </button>
                   </div>
                 )}
-                <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
+                <div
+                  ref={referralRef}
+                  className={`w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 transition-all ${
+                    isWalkthroughActive && activeWalkthroughStep?.key === 'referralModel'
+                      ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                      : 'ring-slate-200/70'
+                  }`}
+                >
                   <div className={`flex items-center gap-2 ${rowDirection}`}>
                     <FaSitemap className="h-3.5 w-3.5 text-[#2C5AA0]" />
                     <div className="flex-1">
@@ -398,7 +459,14 @@ const PartnerDashboard = () => {
                     {t('partnerDashboard.referralProgram.cta')}
                   </button>
                 </div>
-                <div className="w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 ring-slate-200/70">
+                <div
+                  ref={agreementRef}
+                  className={`w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 transition-all ${
+                    isWalkthroughActive && activeWalkthroughStep?.key === 'agreement'
+                      ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                      : 'ring-slate-200/70'
+                  }`}
+                >
                   <div className={`flex items-center gap-2 ${rowDirection}`}>
                     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-slate-700" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M7 4h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
@@ -450,9 +518,14 @@ const PartnerDashboard = () => {
                     Use voice recording to share your business requirement instantly.
                   </p>
                   <button
+                    ref={requirementRef}
                     type="button"
                     onClick={handleOpenRequirementModal}
-                    className="w-full inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
+                    className={`w-full inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 transition-all ${
+                      isWalkthroughActive && activeWalkthroughStep?.key === 'requirement'
+                        ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                        : 'ring-slate-200 hover:bg-slate-50'
+                    }`}
                     aria-label="Open voice requirement"
                   >
                     <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
@@ -486,8 +559,14 @@ const PartnerDashboard = () => {
             </div>
           </div>
 
-          {/* Country Services Embed */}
-          <div className="mt-4">
+          <div
+            ref={servicesRef}
+            className={`mt-4 rounded-3xl transition-all ${
+              isWalkthroughActive && activeWalkthroughStep?.key === 'services'
+                ? 'relative z-[1001] ring-2 ring-[#2C5AA0] ring-offset-4 ring-offset-[#f7f3ee]'
+                : ''
+            }`}
+          >
             <div className="flex flex-wrap items-center gap-3">
               {[
                 { key: 'india', label: t('partnerDashboard.countryTabs.india') },
@@ -569,16 +648,89 @@ const PartnerDashboard = () => {
               ))}
             </div>
           </div>
-
         </div>
       </div>
       <Footer />
-      
-      <AIProfileModal 
-        isOpen={isAIModalOpen} 
+
+      {isWalkthroughActive && walkthroughRect && activeWalkthroughStep && coachmarkStyle && (
+        <>
+          <div className="fixed inset-0 z-[1000] bg-slate-950/45 pointer-events-none" />
+          <div
+            className="fixed z-[1001] rounded-2xl border-2 border-[#2C5AA0] bg-transparent shadow-[0_0_0_9999px_rgba(15,23,42,0.45)] pointer-events-none transition-all duration-200"
+            style={{
+              top: Math.max(walkthroughRect.top - 8, 8),
+              left: Math.max(walkthroughRect.left - 8, 8),
+              width: walkthroughRect.width + 16,
+              height: walkthroughRect.height + 16
+            }}
+          />
+          <div
+            className="fixed z-[1002] rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl"
+            style={coachmarkStyle}
+            dir={isRtl ? 'rtl' : 'ltr'}
+          >
+            <div className={`flex items-start justify-between gap-4 ${rowDirection}`}>
+              <div className={textAlign}>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#2C5AA0]">
+                  {t('partnerDashboard.walkthrough.label')}
+                </p>
+                <h3 className="mt-2 font-poppins text-lg font-semibold text-slate-900">
+                  {activeWalkthroughStep.title}
+                </h3>
+              </div>
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                {t('partnerDashboard.walkthrough.stepCounter', {
+                  current: walkthroughStep + 1,
+                  total: walkthroughSteps.length
+                })}
+              </span>
+            </div>
+
+            <p className={`mt-3 text-sm leading-6 text-slate-600 ${textAlign}`}>
+              {walkthroughStep === 0 ? t('partnerDashboard.walkthrough.intro') : activeWalkthroughStep.description}
+            </p>
+
+            {walkthroughStep === 0 && (
+              <p className={`mt-2 text-sm leading-6 text-slate-500 ${textAlign}`}>
+                {activeWalkthroughStep.description}
+              </p>
+            )}
+
+            <div className={`mt-5 flex flex-wrap items-center gap-2 ${isRtl ? 'justify-start' : 'justify-end'}`}>
+              <button
+                type="button"
+                onClick={handleWalkthroughSkip}
+                className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
+              >
+                {t('partnerDashboard.walkthrough.actions.skip')}
+              </button>
+              <button
+                type="button"
+                onClick={handleWalkthroughBack}
+                disabled={walkthroughStep === 0}
+                className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {t('partnerDashboard.walkthrough.actions.back')}
+              </button>
+              <button
+                type="button"
+                onClick={handleWalkthroughNext}
+                className="rounded-full bg-[#2C5AA0] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1e3a8a]"
+              >
+                {walkthroughStep === walkthroughSteps.length - 1
+                  ? t('partnerDashboard.walkthrough.actions.finish')
+                  : t('partnerDashboard.walkthrough.actions.next')}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      <AIProfileModal
+        isOpen={isAIModalOpen}
         onClose={() => setIsAIModalOpen(false)}
         onSubmitted={() => {
-          setPartnerData(prev => {
+          setPartnerData((prev) => {
             const updated = { ...(prev || {}), aiProfileCompleted: true };
             localStorage.setItem('partnerUser', JSON.stringify(updated));
             return updated;
@@ -586,7 +738,7 @@ const PartnerDashboard = () => {
         }}
         partnerData={partnerData}
       />
-      
+
       <TermsAgreementModal
         isOpen={isAgreementOpen}
         onClose={() => setIsAgreementOpen(false)}
@@ -610,6 +762,7 @@ const PartnerDashboard = () => {
           });
         }}
       />
+
       <RequirementVoiceModal
         isOpen={isRequirementModalOpen}
         onClose={() => setIsRequirementModalOpen(false)}
