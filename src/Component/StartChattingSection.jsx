@@ -11,7 +11,8 @@ import {
   Users,
   Sparkles,
   ArrowRight,
-  Volume2
+  Volume2,
+  X
 } from 'lucide-react';
 import RequirementVoiceModal from './RequirementVoiceModal';
 import { submitVoiceRequirement } from '../lib/supabaseData';
@@ -38,6 +39,16 @@ const StartChattingSection = ({ embedded = false }) => {
   const isDraggingRef = useRef(false);
   const containerRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [showVideoPopup, setShowVideoPopup] = useState(false);
+
+  useEffect(() => {
+    const hasSeenVideo = localStorage.getItem('hasSeenStartChattingVideo');
+    if (!hasSeenVideo) {
+      setShowVideoPopup(true);
+      localStorage.setItem('hasSeenStartChattingVideo', 'true');
+    }
+  }, []);
+
   const quickCardsRaw = t('startChatting.quickCards', { returnObjects: true });
   const categoryItemsRaw = t('startChatting.categories.items', { returnObjects: true });
   const insightCardsRaw = t('startChatting.enablement.cards', { returnObjects: true });
@@ -636,6 +647,30 @@ const StartChattingSection = ({ embedded = false }) => {
         onClose={() => setIsRequirementModalOpen(false)}
         onSend={handleRequirementSend}
       />
+
+      {showVideoPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+          <div className="relative w-full max-w-4xl bg-black rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+            <button
+              onClick={() => setShowVideoPopup(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 text-white rounded-full transition-colors"
+              aria-label="Close video"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="relative pt-[56.25%] w-full bg-black">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/asQCZp6mTjo?autoplay=1"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
