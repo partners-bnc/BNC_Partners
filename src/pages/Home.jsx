@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../Component/Hero';
 import PartnershipOpportunities from '../Component/PartnershipOpportunities';
+import AboutPlatform from '../Component/AboutPlatform';
 import CTA from '../Component/CTA';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <Hero />
       <PartnershipOpportunities />
+      <AboutPlatform />
       <CTA />
     </div>
   );
