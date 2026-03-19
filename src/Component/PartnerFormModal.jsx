@@ -479,7 +479,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
         <div className="flex min-h-screen items-start justify-center px-3 pt-3 pb-6 text-center sm:items-center sm:px-4 sm:pt-4 sm:pb-20">
           <div className="fixed inset-0 bg-black/50"></div>
 
-          <div className={`relative inline-block w-full max-w-md my-3 overflow-visible ${textAlign} align-middle z-10 sm:my-8`}>
+          <div className={`relative inline-block w-full max-w-2xl my-3 overflow-visible ${textAlign} align-middle z-10 sm:my-8`}>
             <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
             <button
               onClick={handleLoginRedirect}
@@ -494,16 +494,20 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Application Submitted Successfully!</h3>
-              <p className="text-gray-600 mb-4">Thank you for registering with us. Our team will contact you shortly.</p>
-              <p className="text-sm text-gray-500 mb-6">
+              <p className="text-gray-600 mb-4">Please Check your email for confirmation.</p>
+              <p className="text-sm text-gray-500 mb-4">
                 Your registered email: <span className="font-medium text-gray-700">{formData.email}</span>
               </p>
-              <button
-                onClick={handleLoginRedirect}
-                className="w-full bg-[#254C89] hover:bg-[#1e3f73] text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-              >
-                Go to Login
-              </button>
+              <div className="aspect-w-16 aspect-h-9 w-full mb-6 relative" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full rounded-lg"
+                  src="https://www.youtube.com/embed/X20EaJAyKv0?autoplay=1"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
             </div>
           </div>
