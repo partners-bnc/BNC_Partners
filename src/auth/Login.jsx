@@ -53,6 +53,7 @@ const Login = () => {
         return;
       }
 
+      localStorage.removeItem('adminUser');
       localStorage.removeItem('partnerUser');
       setIsGoogleLoading(true);
       setErrors((prev) => ({ ...prev, general: '' }));
@@ -156,6 +157,7 @@ const Login = () => {
     try {
       if (activeTab === 'admin') {
         const { admin } = await loginAdmin(formData.email, formData.password);
+        localStorage.removeItem('partnerUser');
         localStorage.setItem('adminUser', JSON.stringify(admin));
         alert(t('login.alerts.adminSuccess'));
         window.location.href = '/admin-dashboard';
@@ -168,6 +170,7 @@ const Login = () => {
         throw new Error('Partner profile not found');
       }
 
+      localStorage.removeItem('adminUser');
       localStorage.setItem('partnerUser', JSON.stringify(partner));
       alert(t('login.alerts.partnerSuccess', { name: partner.firstName }));
       window.location.href = isPartnerProfileComplete(partner) ? '/dashboard' : '/complete-profile';
@@ -180,6 +183,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
+    localStorage.removeItem('adminUser');
     localStorage.removeItem('partnerUser');
     setErrors((prev) => ({ ...prev, general: '' }));
     setIsGoogleLoading(true);

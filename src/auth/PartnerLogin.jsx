@@ -60,6 +60,7 @@ const PartnerLogin = () => {
         throw new Error('Partner profile not found');
       }
 
+      localStorage.removeItem('adminUser');
       localStorage.setItem('partnerUser', JSON.stringify(partner));
       alert('Login successful! Welcome ' + partner.firstName);
       window.location.href = '/dashboard';

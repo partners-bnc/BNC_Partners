@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAdminDashboardData, logout } from '../lib/supabaseData';
+import { supabase } from '../lib/supabaseClient';
 import { NavSidebar } from '../../componentCRM/NavSidebar';
 import { LeftPanel } from '../../componentCRM/LeftPanel';
 import { StatsCards } from '../../componentCRM/StatsCards';
@@ -151,6 +152,37 @@ const AdminDashboard = () => {
 
       const refreshDashboard = async () => {
         try {
+          const {
+            data: { user },
+            error: userError
+          } = await supabase.auth.getUser();
+
+          if (userError) {
+            throw userError;
+          }
+
+          if (!user) {
+            localStorage.removeItem('adminUser');
+            navigate('/login');
+            return;
+          }
+
+          const { data: adminRow, error: adminError } = await supabase
+            .from('admin_profiles')
+            .select('id')
+            .eq('id', user.id)
+            .maybeSingle();
+
+          if (adminError) {
+            throw adminError;
+          }
+
+          if (!adminRow) {
+            localStorage.removeItem('adminUser');
+            navigate('/login');
+            return;
+          }
+
           const data = await fetchAdminDashboardData();
           setDashboardData(data);
         } catch (error) {
