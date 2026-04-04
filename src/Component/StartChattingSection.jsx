@@ -71,7 +71,7 @@ const StartChattingSection = ({ embedded = false }) => {
 
   const WEBHOOK_URL =
     import.meta.env.VITE_N8N_WEBHOOK_URL ||
-    'https://akbn91.app.n8n.cloud/webhook/9a509226-33b8-4b59-a977-9b5bdae0ba4a';
+    'https://bncpartnersglobal.app.n8n.cloud/webhook/9a509226-33b8-4b59-a977-9b5bdae0ba4a';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
