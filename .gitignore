@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Supabase local migration files
+supabase/migrations/
+supabase/.temp/
+supabase/dumps/
+supabase/functions/notify-voice-requirement-brevo-v9/
+supabase/schema.sql
+
+public/edge_secrets.png
+scripts/create-auth-users-from-public.mjs
+signup.html

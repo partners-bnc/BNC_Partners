@@ -1,9 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
-  const { t } = useTranslation();
   const location = useLocation();
 
   if (location.pathname === '/start-chatting') {
@@ -11,30 +9,73 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-white py-16">
-      <div className="container mx-auto px-4 text-center">
-        {/* Logo */}
-        <div className="mb-8">
-          <img 
-            src="https://static.wixstatic.com/media/0446e3_fedc15f797314360941d294da192fd9e~mv2.png/v1/crop/x_0,y_112,w_500,h_276/fill/w_490,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/B.png" 
-            alt="BnC Global Services" 
-            className="mx-auto h-32"
-          />
+    <footer className="border-t border-slate-200 bg-white py-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid gap-10 rounded-[2rem] border border-slate-200 bg-[linear-gradient(135deg,#ffffff_0%,#f8fbff_55%,#eef4ff_100%)] p-8 shadow-[0_20px_50px_rgba(15,23,42,0.06)] lg:grid-cols-[1.3fr_0.7fr]">
+          <div>
+            <div className="flex items-center gap-4">
+              <img
+                src="https://static.wixstatic.com/media/0446e3_fedc15f797314360941d294da192fd9e~mv2.png/v1/crop/x_0,y_112,w_500,h_276/fill/w_490,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/B.png"
+                alt="BnC Global Services"
+                className="h-16 w-auto object-contain"
+              />
+              <div>
+                <p className="font-poppins text-lg font-semibold text-slate-900">BnC Global Partners</p>
+                <p className="font-geist text-sm text-slate-500">Partner onboarding and collaboration portal</p>
+              </div>
+            </div>
+
+            <p className="mt-6 max-w-2xl font-geist text-sm leading-6 text-slate-600">
+              This portal helps prospective and active partners register, sign in, complete onboarding, manage their partner profile, and submit partnership or service requirements. Privacy Policy and Terms of Service are published on this domain to meet Google OAuth app verification requirements.
+            </p>
+
+            <p className="mt-4 font-geist text-sm leading-6 text-slate-600">
+              Google Sign-In is used only for account authentication and partner profile access.
+            </p>
+          </div>
+
+          <div className="lg:pl-8">
+            <p className="font-poppins text-sm font-semibold uppercase tracking-[0.2em] text-[#2C5AA0]">
+              Legal
+            </p>
+            <div className="mt-5 flex flex-col gap-3">
+              <Link
+                to="/privacy-policy"
+                className="inline-flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 font-geist text-sm text-slate-700 transition hover:border-[#2C5AA0]/40 hover:text-[#2C5AA0]"
+              >
+                <span>Privacy Policy</span>
+                <span aria-hidden="true">Open</span>
+              </Link>
+              <Link
+                to="/terms-of-service"
+                className="inline-flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 font-geist text-sm text-slate-700 transition hover:border-[#2C5AA0]/40 hover:text-[#2C5AA0]"
+              >
+                <span>Terms of Service</span>
+                <span aria-hidden="true">Open</span>
+              </Link>
+              <a
+                href="mailto:info@bncglobal.in"
+                className="inline-flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 font-geist text-sm text-slate-700 transition hover:border-[#2C5AA0]/40 hover:text-[#2C5AA0]"
+              >
+                <span>info@bncglobal.in</span>
+                <span aria-hidden="true">Email</span>
+              </a>
+            </div>
+          </div>
         </div>
-        
-        {/* Copyright */}
-        <div className="text-gray-600">
+
+        <div className="mt-6 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-geist">
-            Copyrights © 2026{' '}
-            <a
-              href="https://www.bncglobal.in/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              BnC Global
-            </a>
+            Copyright © 2026 BnC Global. All rights reserved.
           </p>
+          <a
+            href="https://www.bncglobal.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-geist transition hover:text-[#2C5AA0]"
+          >
+            www.bncglobal.in
+          </a>
         </div>
       </div>
     </footer>

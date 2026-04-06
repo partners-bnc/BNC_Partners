@@ -17,6 +17,8 @@ import SaudiArabiaServices from './pages/services/saudi-arabia/SaudiArabiaServic
 import GlobalServices from './pages/services/global/GlobalServices';
 import ServiceDetail from './pages/services/ServiceDetail';
 import StartChatting from './pages/StartChatting';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -55,6 +57,8 @@ function App() {
                   <Route path="/partnerships/service" element={<ServicePartners />} />
                   <Route path="/partner-form" element={<Home />} />
                   <Route path="/referral-program" element={<ReferralProgram />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-of-service" element={<TermsOfService />} />
                 </Routes>
               </main>
               <Footer />
