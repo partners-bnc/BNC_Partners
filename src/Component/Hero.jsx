@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import PartnerFormModal from './PartnerFormModal';
-import { WorldMap } from '../components/ui/world-map';
+
+const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
+const WorldMap = lazy(() =>
+  import('../components/ui/world-map').then((module) => ({ default: module.WorldMap }))
+);
 
 const Hero = () => {
   const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [shouldRenderMap, setShouldRenderMap] = useState(false);
   const [partnerUser, setPartnerUser] = useState(null);
   const location = useLocation();
   const heroAnimationVideoSrc = import.meta.env.VITE_HERO_ANIMATION_VIDEO_SRC || '';
@@ -37,6 +41,28 @@ const Hero = () => {
     } catch (error) {
       console.error('Could not parse partner user from localStorage:', error);
     }
+  }, []);
+
+  useEffect(() => {
+    let timeoutId;
+    let idleId;
+
+    const enableMap = () => setShouldRenderMap(true);
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(enableMap, { timeout: 1500 });
+    } else {
+      timeoutId = window.setTimeout(enableMap, 350);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined' && 'cancelIdleCallback' in window && idleId) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   const isLoggedIn = Boolean(partnerUser);
@@ -230,14 +256,18 @@ const Hero = () => {
                     className="w-full h-auto rounded-2xl object-contain"
                     aria-label="Global network animation"
                   />
+                ) : shouldRenderMap ? (
+                  <Suspense fallback={<div className="aspect-[2/1] w-full rounded-2xl bg-white/40" aria-hidden="true" />}>
+                    <WorldMap
+                      lineColor="#2C5AA0"
+                      dots={mapDots}
+                      drawDuration={0.65}
+                      handoffPause={0.10}
+                      loopPause={0.9}
+                    />
+                  </Suspense>
                 ) : (
-                  <WorldMap
-                    lineColor="#2C5AA0"
-                    dots={mapDots}
-                    drawDuration={0.65}
-                    handoffPause={0.10}
-                    loopPause={0.9}
-                  />
+                  <div className="aspect-[2/1] w-full rounded-2xl bg-white/40" aria-hidden="true" />
                 )}
               </div>
             </div>
@@ -245,7 +275,11 @@ const Hero = () => {
         </div>
       </section>
       
-      <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {isModalOpen ? (
+        <Suspense fallback={null}>
+          <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </Suspense>
+      ) : null}
     </>
   );
 };

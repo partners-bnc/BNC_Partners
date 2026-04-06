@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaPaperPlane, FaUser, FaShieldAlt, FaTimes, FaMapMarkerAlt, FaRocketchat } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import PartnerFormModal from './PartnerFormModal';
+import bncLogo from '../assets/bnc.svg';
+
+const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 
 const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
   const { t, i18n } = useTranslation();
@@ -46,9 +48,10 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
             <div className={`flex items-start justify-between mb-6 ${rowDirection}`}>
               <div className={`flex items-center gap-3 ${rowDirection}`}>
                 <img 
-                  src="https://static.wixstatic.com/media/0446e3_50ff54e1251b45ef8a1066bca3a75b0e~mv2.png/v1/fill/w_256,h_256,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/b%20nc%20global.png" 
+                  src={bncLogo}
                   alt="BnC Global" 
                   className="h-20 w-20 object-contain"
+                  decoding="async"
                 />
                 <div className="flex flex-col">
                   <h2 className="font-poppins text-3xl font-light text-[#2C5AA0]">
@@ -201,7 +204,11 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
         </div>
       </div>
       
-      <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {isModalOpen ? (
+        <Suspense fallback={null}>
+          <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </Suspense>
+      ) : null}
     </>
   );
 };
