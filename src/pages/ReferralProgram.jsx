@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ReferralVideoDrawer from "../Component/ReferralVideoDrawer";
 
 // ─────────────────────────────────────────────
 //  DESIGN TOKENS (BNC THEME)
@@ -846,6 +847,97 @@ function PrincipleCard({ principle, delay, rtl = false }) {
 // ─────────────────────────────────────────────
 //  MAIN EXPORT
 // ─────────────────────────────────────────────
+function ReferralVideoPopup() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem('referral_video_seen')) {
+      setOpen(true);
+      localStorage.setItem('referral_video_seen', '1');
+    }
+  }, []);
+
+  if (!open) return null;
+
+  return (
+    <div
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: 'rgba(0,0,0,0.65)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '1rem',
+      }}
+      onClick={() => setOpen(false)}
+    >
+      <div
+        style={{
+          background: '#fff', borderRadius: 18, overflow: 'hidden',
+          width: '100%', maxWidth: 780,
+          boxShadow: '0 32px 80px rgba(0,0,0,0.35)',
+          position: 'relative',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '1rem 1.4rem',
+          borderBottom: `1px solid ${G.border}`,
+        }}>
+          <div>
+            <div style={{ fontFamily: FONT_HEAD, fontWeight: 700, fontSize: '1rem', color: G.ink }}>
+              How the Referral Program Works
+            </div>
+            <div style={{ fontFamily: FONT_BODY, fontSize: '0.78rem', color: G.muted, marginTop: 2 }}>
+              Watch this quick overview to get started
+            </div>
+          </div>
+          <button
+            onClick={() => setOpen(false)}
+            style={{
+              background: G.borderLight, border: 'none', borderRadius: '50%',
+              width: 34, height: 34, cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '1rem', color: G.muted, flexShrink: 0,
+            }}
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Video */}
+        <div style={{ aspectRatio: '16/9', width: '100%' }}>
+          <iframe
+            width="100%" height="100%"
+            src="https://www.youtube.com/embed/UyFc5JkECRg?autoplay=1"
+            title="Referral Program Overview"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ display: 'block' }}
+          />
+        </div>
+
+        {/* Footer */}
+        <div style={{ padding: '0.9rem 1.4rem', textAlign: 'right', borderTop: `1px solid ${G.border}` }}>
+          <button
+            onClick={() => setOpen(false)}
+            style={{
+              background: `linear-gradient(135deg, ${G.gold}, ${G.goldLight})`,
+              color: '#fff', border: 'none', borderRadius: 8,
+              padding: '9px 26px', fontFamily: FONT_BODY, fontWeight: 700,
+              fontSize: '0.88rem', cursor: 'pointer',
+              boxShadow: `0 4px 16px ${G.goldMid}44`,
+            }}
+          >
+            Got it, let's explore →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ReferralPage() {
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === "ar";
@@ -895,6 +987,8 @@ export default function ReferralPage() {
       }}
       dir={isRtl ? "rtl" : "ltr"}
     >
+      <ReferralVideoDrawer />
+      <ReferralVideoPopup />
       <style>{`
         @keyframes heroUp { from { opacity:0;transform:translateY(28px); } to { opacity:1;transform:translateY(0); } }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
