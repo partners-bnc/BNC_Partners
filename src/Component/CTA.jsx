@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PartnerFormModal from './PartnerFormModal';
-import ExpertFormModal from './ExpertFormModal';
+
+const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
+const ExpertFormModal = lazy(() => import('./ExpertFormModal'));
 
 const CTA = () => {
   const { t, i18n } = useTranslation();
@@ -89,8 +90,16 @@ const CTA = () => {
         </div>
       </section>
       
-      <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <ExpertFormModal isOpen={isExpertModalOpen} onClose={() => setIsExpertModalOpen(false)} />
+      {isModalOpen ? (
+        <Suspense fallback={null}>
+          <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </Suspense>
+      ) : null}
+      {isExpertModalOpen ? (
+        <Suspense fallback={null}>
+          <ExpertFormModal isOpen={isExpertModalOpen} onClose={() => setIsExpertModalOpen(false)} />
+        </Suspense>
+      ) : null}
     </>
   );
 };

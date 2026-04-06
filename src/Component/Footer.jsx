@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import bncLogo from '../assets/bnc.svg';
 
 const Footer = () => {
   const location = useLocation();
@@ -15,9 +16,11 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-4">
               <img
-                src="https://static.wixstatic.com/media/0446e3_fedc15f797314360941d294da192fd9e~mv2.png/v1/crop/x_0,y_112,w_500,h_276/fill/w_490,h_270,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/B.png"
+                src={bncLogo}
                 alt="BnC Global Services"
                 className="h-16 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
               />
               <div>
                 <p className="font-poppins text-lg font-semibold text-slate-900">BnC Global Partners</p>

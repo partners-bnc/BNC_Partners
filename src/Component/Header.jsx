@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Sidebar from './Sidebar';
-import PartnerFormModal from './PartnerFormModal';
-import { logout } from '../lib/supabaseData';
+import bncLogo from '../assets/bnc.svg';
+
+const Sidebar = lazy(() => import('./Sidebar'));
+const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -37,15 +38,12 @@ const Header = () => {
     setIsLoggedIn(false);
     setUser(null);
     try {
+      const { logout } = await import('../lib/supabaseData');
       await logout();
     } catch (error) {
       console.error('Logout error:', error);
     }
     window.location.href = '/';
-  };
-
-  const handleLanguageChange = (lang) => {
-    i18n.changeLanguage(lang);
   };
 
   const isActivePath = (path) => location.pathname === path;
@@ -77,9 +75,12 @@ const Header = () => {
               {/* Logo + Company Name */}
               <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' })}>
                 <img 
-                  src="https://static.wixstatic.com/media/0446e3_50ff54e1251b45ef8a1066bca3a75b0e~mv2.png/v1/fill/w_256,h_256,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/b%20nc%20global.png" 
+                  src={bncLogo}
                   alt="BnC Global" 
                   className="h-15 w-15 object-contain"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
                 
                 <span className="font-poppins font-bold text-[22px] text-[#2C5AA0] tracking-tight whitespace-nowrap">
@@ -180,14 +181,22 @@ const Header = () => {
       {/* Spacer for fixed header */}
       <div className="h-18"></div>
       
-      <Sidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
-        isLoggedIn={isLoggedIn}
-        user={user}
-        onLogout={handleLogout}
-      />
-      <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {isSidebarOpen ? (
+        <Suspense fallback={null}>
+          <Sidebar 
+            isOpen={isSidebarOpen} 
+            onClose={() => setIsSidebarOpen(false)} 
+            isLoggedIn={isLoggedIn}
+            user={user}
+            onLogout={handleLogout}
+          />
+        </Suspense>
+      ) : null}
+      {isModalOpen ? (
+        <Suspense fallback={null}>
+          <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </Suspense>
+      ) : null}
     </>
   );
 };
