@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FaTimes, FaArrowRight, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { checkPartnerEmailExists, registerPartner } from '../lib/supabaseData';
 
@@ -13,7 +12,6 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const passPadding = isRtl ? 'pl-12' : 'pr-12';
   const eyePosition = isRtl ? 'left-3' : 'right-3';
   const closePosition = isRtl ? 'left-4' : 'right-4';
-  const phoneSelectorBorder = isRtl ? 'border-b sm:border-b-0 sm:border-l' : 'border-b sm:border-b-0 sm:border-r';
   const autoMargin = isRtl ? 'mr-auto' : 'ml-auto';
   const [currentStep, setCurrentStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
@@ -24,253 +22,9 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    phone: '',
-    countryCode: '+1',
-    country: 'United States/Canada',
-    city: '',
     password: ''
   });
   const [errors, setErrors] = useState({});
-  const [countryCodeQuery, setCountryCodeQuery] = useState('+1 United States/Canada');
-  const [showCountryCodeList, setShowCountryCodeList] = useState(false);
-  const [dropdownStyle, setDropdownStyle] = useState(null);
-  const countryCodeFieldRef = useRef(null);
-  const countryCodeDropdownRef = useRef(null);
-
-  const countryCodeToCountryLabel = {
-    'United States/Canada': 'United States/Canada',
-    'United States': 'United States',
-    Canada: 'Canada',
-    'United Kingdom': 'United Kingdom',
-    India: 'India',
-    Australia: 'Australia',
-    Germany: 'Germany',
-    France: 'France',
-    Japan: 'Japan',
-    China: 'China',
-    Singapore: 'Singapore',
-    'Saudi Arabia': 'Saudi Arabia',
-    UAE: 'UAE',
-    'United Arab Emirates': 'United Arab Emirates',
-    Philippines: 'Philippines'
-  };
-
-  
-  const countryCodes = [
-    { code: "+91", label: "India" },
-    { code: "+966", label: "Saudi Arabia" },
-    { code: "+971", label: "UAE" },
-    { code: "+44", label: "United Kingdom" },
-    { code: "+1", label: "Canada" },
-    { code: "+1", label: "United States" },
-    { code: "+63", label: "Philippines" },
-    { code: "+61", label: "Australia" },
-    { code: "+1", label: "United States/Canada" },
-
-    { code: "+7", label: "Russia/Kazakhstan" },
-
-    { code: "+20", label: "Egypt" },
-    { code: "+27", label: "South Africa" },
-    { code: "+30", label: "Greece" },
-    { code: "+31", label: "Netherlands" },
-    { code: "+32", label: "Belgium" },
-    { code: "+33", label: "France" },
-    { code: "+34", label: "Spain" },
-    { code: "+36", label: "Hungary" },
-    { code: "+39", label: "Italy" },
-    { code: "+40", label: "Romania" },
-    { code: "+41", label: "Switzerland" },
-    { code: "+43", label: "Austria" },
-    { code: "+44", label: "United Kingdom" },
-    { code: "+45", label: "Denmark" },
-    { code: "+46", label: "Sweden" },
-    { code: "+47", label: "Norway" },
-    { code: "+48", label: "Poland" },
-    { code: "+49", label: "Germany" },
-
-    { code: "+51", label: "Peru" },
-    { code: "+52", label: "Mexico" },
-    { code: "+53", label: "Cuba" },
-    { code: "+54", label: "Argentina" },
-    { code: "+55", label: "Brazil" },
-    { code: "+56", label: "Chile" },
-    { code: "+57", label: "Colombia" },
-    { code: "+58", label: "Venezuela" },
-
-    { code: "+60", label: "Malaysia" },
-    { code: "+61", label: "Australia" },
-    { code: "+62", label: "Indonesia" },
-    { code: "+63", label: "Philippines" },
-    { code: "+64", label: "New Zealand" },
-    { code: "+65", label: "Singapore" },
-    { code: "+66", label: "Thailand" },
-
-    { code: "+81", label: "Japan" },
-    { code: "+82", label: "South Korea" },
-    { code: "+84", label: "Vietnam" },
-    { code: "+86", label: "China" },
-    { code: "+90", label: "Turkey" },
-
-    { code: "+91", label: "India" },
-    { code: "+92", label: "Pakistan" },
-    { code: "+93", label: "Afghanistan" },
-    { code: "+94", label: "Sri Lanka" },
-    { code: "+95", label: "Myanmar" },
-    { code: "+98", label: "Iran" },
-
-    { code: "+211", label: "South Sudan" },
-    { code: "+212", label: "Morocco" },
-    { code: "+213", label: "Algeria" },
-    { code: "+216", label: "Tunisia" },
-    { code: "+218", label: "Libya" },
-    { code: "+220", label: "Gambia" },
-    { code: "+221", label: "Senegal" },
-    { code: "+222", label: "Mauritania" },
-    { code: "+223", label: "Mali" },
-    { code: "+224", label: "Guinea" },
-    { code: "+225", label: "Ivory Coast" },
-    { code: "+226", label: "Burkina Faso" },
-    { code: "+227", label: "Niger" },
-    { code: "+228", label: "Togo" },
-    { code: "+229", label: "Benin" },
-    { code: "+230", label: "Mauritius" },
-    { code: "+231", label: "Liberia" },
-    { code: "+232", label: "Sierra Leone" },
-    { code: "+233", label: "Ghana" },
-    { code: "+234", label: "Nigeria" },
-    { code: "+235", label: "Chad" },
-    { code: "+236", label: "Central African Republic" },
-    { code: "+237", label: "Cameroon" },
-    { code: "+238", label: "Cape Verde" },
-    { code: "+239", label: "Sao Tome and Principe" },
-    { code: "+240", label: "Equatorial Guinea" },
-    { code: "+241", label: "Gabon" },
-    { code: "+242", label: "Republic of the Congo" },
-    { code: "+243", label: "DR Congo" },
-    { code: "+244", label: "Angola" },
-    { code: "+245", label: "Guinea-Bissau" },
-    { code: "+248", label: "Seychelles" },
-    { code: "+249", label: "Sudan" },
-    { code: "+250", label: "Rwanda" },
-    { code: "+251", label: "Ethiopia" },
-    { code: "+252", label: "Somalia" },
-    { code: "+253", label: "Djibouti" },
-    { code: "+254", label: "Kenya" },
-    { code: "+255", label: "Tanzania" },
-    { code: "+256", label: "Uganda" },
-    { code: "+257", label: "Burundi" },
-    { code: "+258", label: "Mozambique" },
-    { code: "+260", label: "Zambia" },
-    { code: "+261", label: "Madagascar" },
-    { code: "+263", label: "Zimbabwe" },
-    { code: "+264", label: "Namibia" },
-    { code: "+265", label: "Malawi" },
-    { code: "+266", label: "Lesotho" },
-    { code: "+267", label: "Botswana" },
-    { code: "+268", label: "Eswatini" },
-    { code: "+269", label: "Comoros" },
-
-    { code: "+350", label: "Gibraltar" },
-    { code: "+351", label: "Portugal" },
-    { code: "+352", label: "Luxembourg" },
-    { code: "+353", label: "Ireland" },
-    { code: "+354", label: "Iceland" },
-    { code: "+355", label: "Albania" },
-    { code: "+356", label: "Malta" },
-    { code: "+357", label: "Cyprus" },
-    { code: "+358", label: "Finland" },
-    { code: "+359", label: "Bulgaria" },
-
-    { code: "+370", label: "Lithuania" },
-    { code: "+371", label: "Latvia" },
-    { code: "+372", label: "Estonia" },
-    { code: "+373", label: "Moldova" },
-    { code: "+374", label: "Armenia" },
-    { code: "+375", label: "Belarus" },
-    { code: "+376", label: "Andorra" },
-    { code: "+377", label: "Monaco" },
-    { code: "+378", label: "San Marino" },
-    { code: "+379", label: "Vatican City" },
-    { code: "+380", label: "Ukraine" },
-    { code: "+381", label: "Serbia" },
-    { code: "+382", label: "Montenegro" },
-    { code: "+383", label: "Kosovo" },
-    { code: "+385", label: "Croatia" },
-    { code: "+386", label: "Slovenia" },
-    { code: "+387", label: "Bosnia and Herzegovina" },
-    { code: "+389", label: "North Macedonia" },
-
-    { code: "+420", label: "Czech Republic" },
-    { code: "+421", label: "Slovakia" },
-    { code: "+423", label: "Liechtenstein" },
-
-    { code: "+500", label: "Falkland Islands" },
-    { code: "+501", label: "Belize" },
-    { code: "+502", label: "Guatemala" },
-    { code: "+503", label: "El Salvador" },
-    { code: "+504", label: "Honduras" },
-    { code: "+505", label: "Nicaragua" },
-    { code: "+506", label: "Costa Rica" },
-    { code: "+507", label: "Panama" },
-    { code: "+509", label: "Haiti" },
-
-    { code: "+591", label: "Bolivia" },
-    { code: "+592", label: "Guyana" },
-    { code: "+593", label: "Ecuador" },
-    { code: "+595", label: "Paraguay" },
-    { code: "+597", label: "Suriname" },
-    { code: "+598", label: "Uruguay" },
-
-    { code: "+670", label: "Timor-Leste" },
-    { code: "+673", label: "Brunei" },
-    { code: "+674", label: "Nauru" },
-    { code: "+675", label: "Papua New Guinea" },
-    { code: "+676", label: "Tonga" },
-    { code: "+677", label: "Solomon Islands" },
-    { code: "+678", label: "Vanuatu" },
-    { code: "+679", label: "Fiji" },
-    { code: "+680", label: "Palau" },
-    { code: "+681", label: "Wallis and Futuna" },
-    { code: "+682", label: "Cook Islands" },
-    { code: "+683", label: "Niue" },
-    { code: "+685", label: "Samoa" },
-    { code: "+686", label: "Kiribati" },
-    { code: "+687", label: "New Caledonia" },
-    { code: "+688", label: "Tuvalu" },
-    { code: "+689", label: "French Polynesia" },
-
-    { code: "+850", label: "North Korea" },
-    { code: "+852", label: "Hong Kong" },
-    { code: "+853", label: "Macau" },
-    { code: "+855", label: "Cambodia" },
-    { code: "+856", label: "Laos" },
-    { code: "+880", label: "Bangladesh" },
-    { code: "+886", label: "Taiwan" },
-
-    { code: "+960", label: "Maldives" },
-    { code: "+961", label: "Lebanon" },
-    { code: "+962", label: "Jordan" },
-    { code: "+963", label: "Syria" },
-    { code: "+964", label: "Iraq" },
-    { code: "+965", label: "Kuwait" },
-    { code: "+966", label: "Saudi Arabia" },
-    { code: "+967", label: "Yemen" },
-    { code: "+968", label: "Oman" },
-    { code: "+970", label: "Palestine" },
-    { code: "+971", label: "United Arab Emirates" },
-    { code: "+972", label: "Israel" },
-    { code: "+973", label: "Bahrain" },
-    { code: "+974", label: "Qatar" },
-    { code: "+975", label: "Bhutan" },
-    { code: "+976", label: "Mongolia" },
-    { code: "+977", label: "Nepal" },
-    { code: "+992", label: "Tajikistan" },
-    { code: "+993", label: "Turkmenistan" },
-    { code: "+994", label: "Azerbaijan" },
-    { code: "+995", label: "Georgia" },
-    { code: "+996", label: "Kyrgyzstan" },
-    { code: "+998", label: "Uzbekistan" }
-  ];
 
   const checkEmailExists = async (email) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
@@ -305,20 +59,8 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
           newErrors.email = 'Please enter a valid email address';
         }
-        if (!formData.countryCode) {
-          newErrors.countryCode = 'Country code is required';
-        }
-        if (!formData.phone.trim()) {
-          newErrors.phone = 'Phone number is required';
-        } else if (!/^\d{6,15}$/.test(formData.phone.replace(/\D/g, ''))) {
-          newErrors.phone = 'Phone number must be 6 to 15 digits';
-        }
         break;
       case 3:
-        if (!formData.country) newErrors.country = 'Country is required';
-        if (!formData.city) newErrors.city = 'City is required';
-        break;
-      case 4:
         if (!formData.password) {
           newErrors.password = 'Password is required';
         } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(formData.password)) {
@@ -337,8 +79,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
-      ...(name === 'country' && { city: '' })
+      [name]: value
     }));
 
     if (name === 'email' && value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
@@ -349,60 +90,6 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
-
-  const handleSelectCountryCode = (code, label) => {
-    const resolvedCountry = countryCodeToCountryLabel[label] || label;
-    setFormData((prev) => ({
-      ...prev,
-      countryCode: code,
-      country: resolvedCountry,
-      city: ''
-    }));
-    setCountryCodeQuery(`${code} ${label}`);
-    setShowCountryCodeList(false);
-    if (errors.countryCode) {
-      setErrors((prev) => ({ ...prev, countryCode: '' }));
-    }
-  };
-
-  useEffect(() => {
-    if (!showCountryCodeList) return undefined;
-
-    const updateDropdownPosition = () => {
-      const trigger = countryCodeFieldRef.current;
-      if (!trigger) return;
-
-      const rect = trigger.getBoundingClientRect();
-      const mobileWidth = window.innerWidth < 640 ? rect.width : 260;
-      const left = isRtl ? rect.right - mobileWidth : rect.left;
-
-      setDropdownStyle({
-        position: 'fixed',
-        top: rect.bottom + 8,
-        left: Math.max(12, Math.min(left, window.innerWidth - mobileWidth - 12)),
-        width: mobileWidth,
-        maxHeight: window.innerWidth < 640 ? 280 : 400,
-        zIndex: 10050,
-      });
-    };
-
-    const handlePointerDown = (event) => {
-      if (countryCodeFieldRef.current?.contains(event.target)) return;
-      if (countryCodeDropdownRef.current?.contains(event.target)) return;
-      setShowCountryCodeList(false);
-    };
-
-    updateDropdownPosition();
-    window.addEventListener('resize', updateDropdownPosition);
-    window.addEventListener('scroll', updateDropdownPosition, true);
-    document.addEventListener('mousedown', handlePointerDown);
-
-    return () => {
-      window.removeEventListener('resize', updateDropdownPosition);
-      window.removeEventListener('scroll', updateDropdownPosition, true);
-      document.removeEventListener('mousedown', handlePointerDown);
-    };
-  }, [isRtl, showCountryCodeList]);
 
   const handleNext = () => {
     if (currentStep === 2 && emailExists) {
@@ -419,7 +106,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateStep(4)) return;
+    if (!validateStep(3)) return;
     if (emailExists) return;
 
     setIsSubmitting(true);
@@ -427,10 +114,10 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
       await registerPartner({
         fullName: formData.fullName,
         email: formData.email,
-        phone: formData.phone,
-        countryCode: formData.countryCode,
-        country: formData.country,
-        city: formData.city,
+        phone: '',
+        countryCode: '',
+        country: '',
+        city: '',
         password: formData.password
       });
 
@@ -457,14 +144,8 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
     setFormData({
       fullName: '',
       email: '',
-      phone: '',
-      countryCode: '+1',
-      country: 'United States/Canada',
-      city: '',
       password: ''
     });
-    setCountryCodeQuery('+1 United States/Canada');
-    setShowCountryCodeList(false);
     setCurrentStep(1);
     setErrors({});
     setIsSubmitted(false);
@@ -562,105 +243,10 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
               {isCheckingEmail && <p className="text-blue-500 text-sm mt-1">Checking email availability...</p>}
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number
-              </label>
-              <div className={`relative flex w-full flex-col items-stretch overflow-visible rounded-lg border focus-within:border-transparent focus-within:ring-2 focus-within:ring-[#254C89] sm:flex-row ${
-                errors.phone || errors.countryCode ? 'border-red-500' : 'border-gray-300'
-              }`}>
-                <div
-                  ref={countryCodeFieldRef}
-                  className={`relative w-full shrink-0 ${phoneSelectorBorder} border-gray-200 bg-gray-50 sm:w-[190px]`}
-                >
-                  <input
-                    type="text"
-                    name="countryCodeQuery"
-                    value={countryCodeQuery}
-                    readOnly
-                    onClick={() => setShowCountryCodeList((prev) => !prev)}
-                    onFocus={() => setShowCountryCodeList(true)}
-                    className={`w-full px-3 py-3 text-sm text-gray-700 focus:outline-none bg-transparent cursor-pointer ${inputAlign}`}
-                    placeholder="+1 United States/Canada"
-                  />
-                </div>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`min-w-0 flex-1 px-4 py-3 focus:outline-none ${inputAlign}`}
-                  placeholder="Enter phone number"
-                  maxLength="15"
-                />
-              </div>
-              {showCountryCodeList && dropdownStyle && createPortal(
-                <div
-                  ref={countryCodeDropdownRef}
-                  className="overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl"
-                  style={dropdownStyle}
-                >
-                  {countryCodes.map((code) => (
-                    <button
-                      key={`${code.code}-${code.label}`}
-                      type="button"
-                      onMouseDown={(e) => e.preventDefault()}
-                      onClick={() => handleSelectCountryCode(code.code, code.label)}
-                      className={`w-full ${textAlign} border-b border-gray-100 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50`}
-                    >
-                      {code.code} {code.label}
-                    </button>
-                  ))}
-                </div>,
-                document.body
-              )}
-              {errors.countryCode && <p className="text-red-500 text-sm mt-1">{errors.countryCode}</p>}
-              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-              <p className="text-gray-500 text-sm mt-1">Phone number should be 6 to 15 digits</p>
-            </div>
           </div>
         );
 
       case 3:
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Location</h3>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Country
-              </label>
-              <input
-                type="text"
-                name="country"
-                value={formData.country}
-                readOnly
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#254C89] focus:border-transparent ${inputAlign} ${
-                  errors.country ? 'border-red-500' : 'border-gray-300'
-                } bg-gray-100`}
-                placeholder="Auto-filled from country code"
-              />
-              {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                City
-              </label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#254C89] focus:border-transparent ${inputAlign} ${
-                  errors.city ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="Enter your city"
-              />
-              {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
-            </div>
-          </div>
-        );
-
-      case 4:
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Create Password</h3>
@@ -717,13 +303,13 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
             <h2 className="mb-1 pr-8 text-lg font-bold sm:text-xl">Partner Application</h2>
             <p className="text-blue-100 text-sm">Join our growing network of partners</p>
             <div className={`mt-3 flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm ${rowDirection}`}>
-              <span className="text-sm">Step {currentStep} of 4</span>
-              <span className="text-sm">{Math.round((currentStep / 4) * 100)}% complete</span>
+              <span className="text-sm">Step {currentStep} of 3</span>
+              <span className="text-sm">{Math.round((currentStep / 3) * 100)}% complete</span>
             </div>
             <div className="w-full bg-[#1a3d6b] rounded-full h-2 mt-2">
               <div
                 className="bg-white h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(currentStep / 4) * 100}%` }}
+                style={{ width: `${(currentStep / 3) * 100}%` }}
               ></div>
             </div>
           </div>
@@ -743,7 +329,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                 </button>
               )}
 
-              {currentStep < 4 ? (
+              {currentStep < 3 ? (
                 <button
                   type="button"
                   onClick={handleNext}
