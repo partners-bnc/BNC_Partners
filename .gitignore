@@ -27,9 +27,13 @@ dist-ssr
 supabase/migrations/
 supabase/.temp/
 supabase/dumps/
-supabase/functions/notify-voice-requirement-brevo-v9/
 supabase/schema.sql
 
 public/edge_secrets.png
 scripts/create-auth-users-from-public.mjs
 signup.html
+# Project-specific ignores
+public/edge_secrets.png
+scripts/create-auth-users-from-public.mjs
+signup.html
+supabase/functions/notify-voice-requirement-brevo-v9/
