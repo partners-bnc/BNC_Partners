@@ -53,7 +53,13 @@ export const services = [
       'Processes are compliance-led to support faster approvals and cleaner credit trails.'
     ],
     manpowerDescription:
-      'We support loan documentation, eligibility structuring, and lender coordination so approvals move faster and more smoothly.'
+      'We support loan documentation, eligibility structuring, and lender coordination so approvals move faster and more smoothly.',
+    documents: [
+      {
+        label: 'Loan Application - Document Checklist',
+        url: 'https://drive.google.com/file/d/1JQ85tFfJN6gw8nlSOS5ks7Nf9W3Lxjg3/view?usp=sharing'
+      }
+    ]
   },
   {
     id: 'cybersecurity-data-privacy',

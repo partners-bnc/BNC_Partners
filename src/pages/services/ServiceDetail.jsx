@@ -105,6 +105,55 @@ const ServiceDetail = () => {
       url: 'https://drive.google.com/file/d/1XV4OlKqt_7YhIR4B4koFVXYISw7Oa8Er/view?usp=sharing'
     }
   ];
+  const loanChecklistDocument = {
+    label: 'Loan Application - Document Checklist',
+    url: 'https://drive.google.com/file/d/1JQ85tFfJN6gw8nlSOS5ks7Nf9W3Lxjg3/view?usp=sharing'
+  };
+  const loanDocumentChecklist = [
+    {
+      title: '1. KYC Documents (Mandatory for All)',
+      items: ['PAN Card', 'Aadhaar Card / Passport / Voter ID / Driving License', 'Passport Size Photograph']
+    },
+    {
+      title: '2. Income Documents',
+      groups: [
+        {
+          title: 'For Salaried Applicants',
+          items: ['Last 3 Months Salary Slips', 'Last 6 Months Bank Statement (Salary Account)', 'Latest Form 16 / ITR (Last 2 Years)']
+        },
+        {
+          title: 'For Self-Employed Applicants',
+          items: [
+            'ITR (Last 2-3 Years)',
+            'Business Financials (Balance Sheet & P&L)',
+            'Last 6-12 Months Bank Statement (Business + Personal)',
+            'GST Returns (if applicable)'
+          ]
+        }
+      ]
+    },
+    {
+      title: '3. Property Documents (For Home Loan / LAP)',
+      items: ['Sale Deed / Agreement to Sell', 'Property Chain Documents', 'Approved Map / Layout Plan', 'Registry Papers', 'Latest Property Tax Receipt']
+    },
+    {
+      title: '4. Vehicle Loan Documents',
+      items: ['Proforma Invoice / Quotation of Vehicle', 'RC (if refinance case)', 'Insurance Copy']
+    },
+    {
+      title: '5. Business Loan / MSME Loan',
+      items: [
+        'Business Proof (GST Certificate / Shop Act / Udyam Registration)',
+        'Company PAN & Incorporation Certificate',
+        'Partnership Deed / MOA-AOA (if applicable)',
+        'Current Loan Statement (if any running loan)'
+      ]
+    },
+    {
+      title: '6. Additional Documents',
+      items: ['CIBIL Report (if available)', 'Existing Loan Details', 'Co-applicant / Guarantor Documents', 'Processing Fee Cheque / Bank Details']
+    }
+  ];
 
   const sections = [
     {
@@ -132,10 +181,20 @@ const ServiceDetail = () => {
       description: t('serviceDetail.sections.contact.description')
     }
   ];
+  const loanChecklistSection = {
+    key: 'document-checklist',
+    label: 'Document checklist',
+    heading: 'Loan Application - Document Checklist',
+    description: 'Review the required documents by applicant type and loan category before starting the application.'
+  };
 
   const visibleSections =
     service?.id === 'personal-business-loan'
-      ? sections.filter((section) => section.key !== 'manpower' && section.key !== 'training')
+      ? [
+          ...sections.filter((section) => section.key !== 'manpower' && section.key !== 'training' && section.key !== 'contact'),
+          loanChecklistSection,
+          sections.find((section) => section.key === 'contact')
+        ].filter(Boolean)
       : sections;
   const activeSectionData =
     visibleSections.find((section) => section.key === activeSection) || visibleSections[0];
@@ -2280,6 +2339,63 @@ const ServiceDetail = () => {
                       </div>
                     </div>
                   </>
+                ) : activeSection === 'document-checklist' ? (
+                  <div className="border border-slate-200 rounded-2xl p-6 bg-white">
+                    <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                        <FiFileText className="h-3.5 w-3.5" aria-hidden="true" />
+                      </span>
+                      <div>
+                        <h3 className="font-poppins text-xl font-semibold">
+                          {loanChecklistSection.heading}
+                        </h3>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                      </div>
+                    </div>
+                    <div className={`mt-5 space-y-5 ${sectionPadding}`}>
+                      {loanDocumentChecklist.map((section) => (
+                        <div key={section.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                          <h4 className="font-poppins text-base font-semibold text-slate-900">
+                            {section.title}
+                          </h4>
+                          {section.items?.length > 0 && (
+                            <ul className={`mt-3 space-y-2 list-disc list-outside font-geist text-gray-700 ${listPadding}`}>
+                              {section.items.map((item) => (
+                                <li key={item}>{item}</li>
+                              ))}
+                            </ul>
+                          )}
+                          {section.groups?.length > 0 && (
+                            <div className="mt-4 space-y-4">
+                              {section.groups.map((group) => (
+                                <div key={group.title}>
+                                  <p className="font-geist text-sm font-semibold text-[#1e3a8a]">
+                                    {group.title}
+                                  </p>
+                                  <ul className={`mt-2 space-y-2 list-disc list-outside font-geist text-gray-700 ${listPadding}`}>
+                                    {group.items.map((item) => (
+                                      <li key={item}>{item}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <div className={`mt-6 ${sectionPadding}`}>
+                      <a
+                        href={loanChecklistDocument.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-[#2C5AA0] px-5 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e3a8a]"
+                      >
+                        <FiFileText className="h-4 w-4" aria-hidden="true" />
+                        {loanChecklistDocument.label}
+                      </a>
+                    </div>
+                  </div>
                 ) : activeSection === 'manpower' ? (
                   <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
