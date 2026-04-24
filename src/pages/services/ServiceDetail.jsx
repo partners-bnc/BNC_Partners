@@ -19,6 +19,7 @@ import Footer from '../../Component/Footer';
 import { getServiceById } from '../../data/services';
 import RequirementVoiceModal from '../../Component/RequirementVoiceModal';
 import { submitEnquiry, submitVoiceRequirement } from '../../lib/supabaseData';
+import ServicesVideoSkeleton from './ServicesVideoSkeleton';
 
 const ServiceDetail = () => {
   const navigate = useNavigate();
@@ -1879,6 +1880,7 @@ const ServiceDetail = () => {
   const LazyVideo = ({ src, title }) => {
     const containerRef = useRef(null);
     const [shouldLoad, setShouldLoad] = useState(false);
+    const [isFrameLoaded, setIsFrameLoaded] = useState(false);
 
     useEffect(() => {
       if (!containerRef.current) return undefined;
@@ -1902,26 +1904,31 @@ const ServiceDetail = () => {
       };
     }, [shouldLoad]);
 
+    useEffect(() => {
+      setIsFrameLoaded(false);
+    }, [src]);
+
     return (
       <div ref={containerRef} className="relative w-full h-full">
         {shouldLoad ? (
-          <iframe
-            className="w-full h-full"
-            src={src}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            loading="lazy"
-            allowFullScreen
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-slate-100 via-white to-slate-100">
-            <div className="h-full w-full animate-pulse bg-[linear-gradient(110deg,rgba(226,232,240,0.35),rgba(255,255,255,0.8),rgba(226,232,240,0.35))] bg-[length:200%_100%]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-geist text-slate-500 shadow-sm">
-                {t('countryServices.preparingPreview')}
+          <>
+            <iframe
+              className={`w-full h-full transition-opacity duration-500 ${isFrameLoaded ? 'opacity-100' : 'opacity-0'}`}
+              src={src}
+              title={title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              loading="lazy"
+              allowFullScreen
+              onLoad={() => setIsFrameLoaded(true)}
+            />
+            {!isFrameLoaded && (
+              <div className="absolute inset-0">
+                <ServicesVideoSkeleton />
               </div>
-            </div>
-          </div>
+            )}
+          </>
+        ) : (
+          <ServicesVideoSkeleton />
         )}
       </div>
     );
