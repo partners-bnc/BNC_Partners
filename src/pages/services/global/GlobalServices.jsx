@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { FiBookOpen, FiHelpCircle, FiMail, FiPhone, FiUsers } from 'react-icons/fi';
 import Header from '../../../Component/Header';
 import Footer from '../../../Component/Footer';
+import { submitEnquiry } from '../../../lib/supabaseData';
 
 const countries = [
   {
@@ -87,6 +88,7 @@ const GlobalServices = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -173,15 +175,47 @@ const GlobalServices = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
+    if (submitError) {
+      setSubmitError('');
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    setSubmitError('');
+
+    try {
+      let partnerId = null;
+      const stored = localStorage.getItem('partnerUser');
+      if (stored) {
+        try {
+          partnerId = JSON.parse(stored)?.id || null;
+        } catch (error) {
+          console.error('Could not parse partner user from localStorage:', error);
+        }
+      }
+
+      await submitEnquiry({
+        partnerId,
+        country: selectedCountry.key,
+        countryLabel: selectedCountryLabel,
+        service: activeSectionData.label,
+        formType: activeSectionData.label,
+        name: formValues.name || '',
+        email: formValues.email || '',
+        phone: formValues.phone || '',
+        company: formValues.company || '',
+        message: formValues.message || ''
+      });
+
       setSubmitted(true);
+    } catch (error) {
+      console.error('Global service enquiry submission error:', error);
+      setSubmitError(t('globalServices.form.submitFailed', { defaultValue: 'Submission failed. Please try again.' }));
+    } finally {
       setIsSubmitting(false);
-    }, 400);
+    }
   };
 
   return (
@@ -513,6 +547,11 @@ const GlobalServices = () => {
                           placeholder={messagePlaceholder}
                           className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
                         />
+                        {submitError && (
+                          <p className="font-geist text-sm text-red-600">
+                            {submitError}
+                          </p>
+                        )}
                         <button
                           type="submit"
                           disabled={isSubmitting}
