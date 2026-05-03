@@ -1846,7 +1846,7 @@ const ServiceDetail = () => {
         audioFile,
         partnerId,
         partnerEmail,
-        recipientEmail: 'rohanbncglobal@gmail.com',
+        recipientEmail: 'summit@bncglobal.in',
         source: 'service-detail'
       });
     } catch (error) {

@@ -208,7 +208,7 @@ const StartChattingSection = ({ embedded = false }) => {
         audioFile,
         partnerId,
         partnerEmail,
-        recipientEmail: 'rohanbncglobal@gmail.com',
+        recipientEmail: 'summit@bncglobal.in',
         source: 'start-chatting'
       });
       sendMessage(requirementText);

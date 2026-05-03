@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import { notifyFormSubmission } from '../lib/supabaseData';
 
 const PartnerModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -20,21 +21,34 @@ const PartnerModal = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your interest! We will contact you soon.');
-    onClose();
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      company: '',
-      partnershipType: '',
-      experience: '',
-      message: ''
-    });
+    try {
+      await notifyFormSubmission({
+        formType: 'Partner Interest',
+        source: 'partner-modal',
+        submittedBy: {
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email
+        },
+        fields: formData
+      });
+      alert('Thank you for your interest! We will contact you soon.');
+      onClose();
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        company: '',
+        partnershipType: '',
+        experience: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Partner interest notification failed:', error);
+      alert('Could not submit your interest. Please try again.');
+    }
   };
 
   if (!isOpen) return null;
