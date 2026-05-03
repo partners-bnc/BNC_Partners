@@ -25,6 +25,8 @@ dist-ssr
 
 # Supabase local migration files
 supabase/migrations/
+!supabase/migrations/
+!supabase/migrations/20260503120000_update_voice_requirement_recipient_policy.sql
 supabase/.temp/
 supabase/dumps/
 supabase/schema.sql

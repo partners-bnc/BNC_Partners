@@ -2,6 +2,59 @@ import { supabase } from './supabaseClient';
 
 const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
 const VOICE_REQUIREMENT_AUDIO_BUCKET = 'voice-requirement-audio';
+const FORM_NOTIFICATION_RECIPIENT = 'summit@bncglobal.in';
+
+export const notifyFormSubmission = async ({
+  formType,
+  source = 'unknown',
+  submittedBy = {},
+  fields = {},
+  createdAt = new Date().toISOString()
+}) => {
+  const resolvedFormType = String(formType || '').trim();
+  if (!resolvedFormType) {
+    throw new Error('Form type is required for notification.');
+  }
+
+  const { error } = await withTimeout(
+    supabase.functions.invoke('notify-form-submission-brevo-v1', {
+      body: {
+        formType: resolvedFormType,
+        source,
+        submittedBy,
+        fields,
+        createdAt
+      }
+    }),
+    12000,
+    'FORM_NOTIFICATION_TIMEOUT'
+  );
+
+  if (error) {
+    let details = '';
+    try {
+      const context = error?.context;
+      if (context && typeof context.json === 'function') {
+        const payload = await context.json();
+        details = [payload?.error, payload?.details].filter(Boolean).join(' - ');
+      }
+    } catch {
+      details = '';
+    }
+
+    const suffix = details ? ` (${details})` : '';
+    throw new Error(`Form notification failed${suffix}.`);
+  }
+};
+
+const notifyFormSubmissionSafely = async (payload) => {
+  try {
+    await notifyFormSubmission(payload);
+  } catch (error) {
+    console.error('Form notification failed:', error);
+  }
+};
+
 const isAuthSessionMissingError = (error) => {
   const message = String(error?.message || '').toLowerCase();
   const code = String(error?.code || '').toLowerCase();
@@ -152,6 +205,25 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
   if (!authUser?.id) {
     throw new Error('Could not create partner auth user.');
   }
+
+  await notifyFormSubmissionSafely({
+    formType: 'Partner Registration',
+    source: 'partner-application',
+    submittedBy: {
+      name: [resolvedFirstName, resolvedLastName].filter(Boolean).join(' '),
+      email: normalizedEmail
+    },
+    fields: {
+      firstName: resolvedFirstName,
+      lastName: resolvedLastName,
+      email: normalizedEmail,
+      phone,
+      countryCode,
+      country,
+      city,
+      status: 'Email Sent'
+    }
+  });
 
   return authUser;
 };
@@ -328,6 +400,15 @@ export const updatePartnerContactDetails = async ({ partnerId, phone, countryCod
     throw error;
   }
 
+  await notifyFormSubmissionSafely({
+    formType: 'Complete Profile',
+    source: 'complete-profile',
+    submittedBy: {
+      partnerId: resolvedPartnerId
+    },
+    fields: payload
+  });
+
   return fetchPartnerData('', resolvedPartnerId);
 };
 
@@ -447,6 +528,16 @@ export const submitAIProfile = async ({ partnerEmail, partnerId, partnerType, se
   if (error) {
     throw error;
   }
+
+  await notifyFormSubmissionSafely({
+    formType: 'AI Profile',
+    source: 'ai-profile',
+    submittedBy: {
+      partnerId: partnerId || null,
+      email: normalizedEmail
+    },
+    fields: upsertRow
+  });
 };
 
 export const saveOnboardingProgress = async ({
@@ -517,10 +608,24 @@ export const submitPartnerAgreement = async ({ partnerId, partnerEmail, signedNa
   if (progressError) {
     throw progressError;
   }
+
+  await notifyFormSubmissionSafely({
+    formType: 'Partner Agreement',
+    source: 'terms-agreement',
+    submittedBy: {
+      partnerId: resolvedPartnerId,
+      email: normalizedEmail
+    },
+    fields: {
+      signedName: trimmedName,
+      signedAt: signedTimestamp,
+      agreementSigned: true
+    }
+  });
 };
 
 export const submitEnquiry = async ({ partnerId, country, countryLabel, service, formType, name, email, phone, company, message }) => {
-  const { error } = await supabase.from('service_enquiries').insert({
+  const payload = {
     partner_id: partnerId || null,
     country: country || null,
     country_label: countryLabel || null,
@@ -531,11 +636,24 @@ export const submitEnquiry = async ({ partnerId, country, countryLabel, service,
     phone: phone || null,
     company: company || null,
     message: message || null
-  });
+  };
+
+  const { error } = await supabase.from('service_enquiries').insert(payload);
 
   if (error) {
     throw error;
   }
+
+  await notifyFormSubmissionSafely({
+    formType: formType || 'Service Enquiry',
+    source: 'service-enquiry',
+    submittedBy: {
+      partnerId: partnerId || null,
+      name,
+      email: normalizeEmail(email)
+    },
+    fields: payload
+  });
 };
 
 export const submitExpertRequest = async ({
@@ -592,6 +710,27 @@ export const submitExpertRequest = async ({
     }
     throw error;
   }
+
+  await notifyFormSubmissionSafely({
+    formType: 'Expert Request',
+    source: 'cta-talk-to-expert',
+    submittedBy: {
+      partnerId: user?.id || null,
+      name,
+      email: resolvedEmail
+    },
+    fields: {
+      partnerId: user?.id || null,
+      partnerEmail: jwtEmail || null,
+      fullName: String(name || '').trim(),
+      company: String(company || '').trim() || null,
+      email: resolvedEmail,
+      mobile: String(mobile || '').trim(),
+      requirement: String(requirement || '').trim(),
+      framework: String(framework || '').trim() || null,
+      source: 'cta_talk_to_expert'
+    }
+  });
 };
 
 export const submitVoiceRequirement = async ({
@@ -599,7 +738,7 @@ export const submitVoiceRequirement = async ({
   audioFile = null,
   partnerId = null,
   partnerEmail = '',
-  recipientEmail = 'rohanbncglobal@gmail.com',
+  recipientEmail = FORM_NOTIFICATION_RECIPIENT,
   source = 'unknown'
 }) => {
   const trimmedRequirement = String(requirement || '').trim();
@@ -680,7 +819,7 @@ export const submitVoiceRequirement = async ({
         partner_id: resolvedPartnerId,
         partner_email: resolvedPartnerEmail,
         requirement_text: trimmedRequirement,
-        recipient_email: normalizeEmail(recipientEmail) || 'rohanbncglobal@gmail.com',
+        recipient_email: normalizeEmail(recipientEmail) || FORM_NOTIFICATION_RECIPIENT,
         source,
         audio_bucket: audioPath ? VOICE_REQUIREMENT_AUDIO_BUCKET : null,
         audio_path: audioPath,
@@ -723,7 +862,7 @@ export const submitVoiceRequirement = async ({
 
   const { error: emailError } = await supabase.functions.invoke('notify-voice-requirement-brevo-v9', {
     body: {
-      to: normalizeEmail(recipientEmail) || 'rohanbncglobal@gmail.com',
+      to: normalizeEmail(recipientEmail) || FORM_NOTIFICATION_RECIPIENT,
       partnerEmail: resolvedPartnerEmail,
       requirementText: trimmedRequirement,
       source,

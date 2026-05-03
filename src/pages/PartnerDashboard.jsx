@@ -187,7 +187,7 @@ const PartnerDashboard = () => {
         audioFile,
         partnerId: partnerData?.id || null,
         partnerEmail: partnerData?.email || '',
-        recipientEmail: 'rohanbncglobal@gmail.com',
+        recipientEmail: 'summit@bncglobal.in',
         source: 'partner-dashboard'
       });
     } catch (error) {
