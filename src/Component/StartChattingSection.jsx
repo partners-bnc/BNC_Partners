@@ -33,7 +33,6 @@ const StartChattingSection = ({ embedded = false }) => {
   const recognitionRef = useRef(null);
   const speechStopTimerRef = useRef(null);
   const messagesEndRef = useRef(null);
-  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`);
   const hasUserMessage = messages.some((item) => item.type === 'user');
   const [leftWidth, setLeftWidth] = useState(65);
   const isDraggingRef = useRef(false);
@@ -68,10 +67,6 @@ const StartChattingSection = ({ embedded = false }) => {
     ...meta,
     ...(categoryItems[index] || {})
   }));
-
-  const WEBHOOK_URL =
-    import.meta.env.VITE_N8N_WEBHOOK_URL ||
-    'https://bncpartnersglobal.app.n8n.cloud/webhook/9a509226-33b8-4b59-a977-9b5bdae0ba4a';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -138,37 +133,53 @@ const StartChattingSection = ({ embedded = false }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(WEBHOOK_URL, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, sessionId })
+        body: JSON.stringify({ message: text })
       });
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
 
-      const contentType = response.headers.get('content-type') || '';
-      let replyText = '';
-      if (contentType.includes('application/json')) {
-        const data = await response.json();
-        replyText =
-          data?.message ||
-          data?.text ||
-          data?.reply ||
-          data?.output ||
-          '';
-      } else {
-        replyText = await response.text();
+      if (!response.body) {
+        throw new Error('Streaming is not supported by this browser.');
       }
 
-      const botMessage = {
-        type: 'bot',
-        text: replyText?.trim() || t('startChatting.chat.botFallback'),
-        time: formatTime(new Date())
-      };
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
+      const botMessageId = `bot_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let replyText = '';
+
+      setMessages((prev) => [
+        ...prev,
+        { id: botMessageId, type: 'bot', text: '', time: formatTime(new Date()) }
+      ]);
+      setIsLoading(false);
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        replyText += decoder.decode(value, { stream: true });
+        setMessages((prev) =>
+          prev.map((item) =>
+            item.id === botMessageId ? { ...item, text: replyText } : item
+          )
+        );
+      }
+
+      const finalText = replyText.trim() || t('startChatting.chat.botFallback');
+      setMessages((prev) =>
+        prev.map((item) =>
+          item.id === botMessageId ? { ...item, text: finalText } : item
+        )
+      );
+    } catch {
       setMessages((prev) => [
         ...prev,
         { type: 'bot', text: t('startChatting.chat.errorGeneric'), time: formatTime(new Date()) }
@@ -401,7 +412,7 @@ const StartChattingSection = ({ embedded = false }) => {
 
               <div className="mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden">
                 {messages.map((msg, idx) => (
-                  <div key={idx} className={`mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div key={msg.id || idx} className={`mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
                       <div className={`${botAvatarMarginClass} mt-1 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm`}>
                         <Building2 className="h-4 w-4 text-[#2C5AA0]" />

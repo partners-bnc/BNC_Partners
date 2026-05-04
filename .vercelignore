@@ -1,0 +1,3 @@
+*.doc
+*.docx
+scripts/ingest.js

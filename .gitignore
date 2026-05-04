@@ -39,3 +39,5 @@ public/edge_secrets.png
 scripts/create-auth-users-from-public.mjs
 signup.html
 supabase/functions/notify-voice-requirement-brevo-v9/
+.vercel
+.env*.local
