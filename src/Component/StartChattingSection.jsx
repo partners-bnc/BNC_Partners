@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import {
   Send,
   Mic,
@@ -264,33 +265,35 @@ const StartChattingSection = ({ embedded = false }) => {
     setSpeakingIndex(idx);
     window.speechSynthesis.speak(utterance);
   };
-  const formatBotText = (text) => {
-    if (!text) return '';
-    let formatted = text;
-    formatted = formatted.replace(/(^|\s)(\d+)\.\s*/g, '\n$2. ');
-    formatted = formatted.replace(/\s-\s/g, '\n- ');
-    formatted = formatted.replace(/\s•\s/g, '\n• ');
-    formatted = formatted.replace(/\s—\s/g, '\n— ');
-    formatted = formatted.replace(/(\*\*[^*]+\*\*)/g, '\n$1');
-    formatted = formatted.replace(/(^|\n)\s*(\d+)\.\s*\n+\s*/g, '$1$2. ');
-    formatted = formatted.replace(/(\d+\.\s)\n\*\*/g, '$1**');
-    formatted = formatted.replace(/\n{2,}/g, '\n');
-    return formatted.trim();
+  const omitMarkdownNode = (props) => {
+    const cleanProps = { ...props };
+    delete cleanProps.node;
+    return cleanProps;
   };
 
-  const renderBotText = (text) => {
-    const formatted = formatBotText(text);
-    const parts = formatted.split('**');
+  const renderBotMarkdown = (text) => {
     return (
-      <span className="whitespace-pre-line">
-        {parts.map((part, idx) =>
-          idx % 2 === 1 ? (
-            <strong key={`${idx}-${part}`}>{part}</strong>
-          ) : (
-            <span key={`${idx}-${part}`}>{part}</span>
-          )
-        )}
-      </span>
+      <ReactMarkdown
+        components={{
+          h2: (props) => <h2 className="mb-2 mt-3 first:mt-0 text-base font-semibold leading-snug" {...omitMarkdownNode(props)} />,
+          h3: (props) => <h3 className="mb-2 mt-3 first:mt-0 text-sm font-semibold leading-snug" {...omitMarkdownNode(props)} />,
+          p: (props) => <p className="mb-2 last:mb-0 leading-relaxed" {...omitMarkdownNode(props)} />,
+          ul: (props) => <ul className="mb-2 list-disc space-y-1 pl-5 last:mb-0" {...omitMarkdownNode(props)} />,
+          ol: (props) => <ol className="mb-2 list-decimal space-y-1 pl-5 last:mb-0" {...omitMarkdownNode(props)} />,
+          li: (props) => <li className="leading-relaxed" {...omitMarkdownNode(props)} />,
+          blockquote: (props) => (
+            <blockquote className="mb-2 border-l-2 border-[#2C5AA0]/40 pl-3 italic text-gray-700 last:mb-0" {...omitMarkdownNode(props)} />
+          ),
+          a: (props) => <a className="font-medium text-[#2C5AA0] underline underline-offset-2" {...omitMarkdownNode(props)} />,
+          code: (props) => <code className="rounded bg-white/70 px-1 py-0.5 text-[0.92em]" {...omitMarkdownNode(props)} />,
+          pre: (props) => (
+            <pre className="mb-2 overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs leading-relaxed text-white last:mb-0" {...omitMarkdownNode(props)} />
+          ),
+          strong: (props) => <strong className="font-semibold text-gray-900" {...omitMarkdownNode(props)} />
+        }}
+      >
+        {text || ''}
+      </ReactMarkdown>
     );
   };
   const handleMicClick = () => {
@@ -432,7 +435,7 @@ const StartChattingSection = ({ embedded = false }) => {
                           } ${textAlign}`}
                           dir={isRtl ? 'rtl' : 'ltr'}
                         >
-                          {msg.type === 'bot' ? renderBotText(msg.text) : msg.text}
+                          {msg.type === 'bot' ? renderBotMarkdown(msg.text) : msg.text}
                         </div>
                         {msg.type === 'bot' && (
                           <button

@@ -2,8 +2,27 @@ export const config = {
   runtime: "edge"
 };
 
-const SYSTEM_MESSAGE =
-  "Answer using only the provided knowledge-base context. If the context is insufficient, say what is missing. Answer in 3-4 sentences. Do not invent facts. Include source filenames when useful.";
+const SYSTEM_MESSAGE = `You are an AI assistant that formats all responses in simple Markdown compatible with CommonMark.
+
+Rules:
+
+* Use headings (##, ###) for structure
+* Use bullet points (-) or numbered lists (1.)
+* Use bold (**) and italics (*) for emphasis
+* Use inline code (\`code\`) and fenced code blocks (\`\`\`language)
+* Use links in [text](url) format
+* Use blockquotes (>) when needed
+
+Strictly avoid:
+
+* Tables
+* Task lists (- [ ])
+* Strikethrough (~~text~~)
+* Raw HTML
+* Embedded media (iframes, videos)
+* Any advanced or GitHub-specific Markdown
+
+Keep formatting clean, minimal, and consistent.`;
 
 const OPENAI_API_BASE = "https://api.openai.com/v1";
 
