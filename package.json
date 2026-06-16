@@ -21,6 +21,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.97.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@xyflow/react": "^12.11.0",
     "cobe": "^0.6.5",
     "dotted-map": "^2.2.3",
     "framer-motion": "^11.18.2",
@@ -34,7 +35,8 @@
     "react-router-dom": "^7.13.0",
     "recharts": "^3.7.0",
     "remark-gfm": "^4.0.1",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

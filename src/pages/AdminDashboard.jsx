@@ -9,6 +9,13 @@ import { OrdersChart } from '../../componentCRM/OrdersChart';
 import { PlannedIncomeChart } from '../../componentCRM/PlannedIncomeChart';
 import { LatestSales } from '../../componentCRM/LatestSales';
 import { PartnerCRMTable } from '../../componentCRM/PartnerCRMTable';
+import {
+  CampaignBuilderView,
+  CampaignsView,
+  EmailTemplatesView,
+  ImportLeads,
+  LeadsPipeline
+} from './adminCRM/AdminCRMViews';
 
 const formatDateLabel = (isoValue) => {
   const date = new Date(isoValue);
@@ -129,6 +136,7 @@ const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeView, setActiveView] = useState('dashboard');
+  const [activeCampaignId, setActiveCampaignId] = useState(null);
   const navigate = useNavigate();
   const adminData = useMemo(() => {
     try {
@@ -219,6 +227,18 @@ const AdminDashboard = () => {
       console.error('Logout error:', error);
     }
     navigate('/login');
+  };
+
+  const handleViewChange = (view) => {
+    setActiveView(view);
+    if (view !== 'campaignBuilder') {
+      setActiveCampaignId(null);
+    }
+  };
+
+  const openCampaignBuilder = (campaignId) => {
+    setActiveCampaignId(campaignId);
+    setActiveView('campaignBuilder');
   };
 
   const mappedPartners = useMemo(() => {
@@ -347,7 +367,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="h-screen bg-[#f5f5fa] flex overflow-hidden">
-      <NavSidebar activeView={activeView} onViewChange={setActiveView} />
+      <NavSidebar activeView={activeView === 'campaignBuilder' ? 'campaigns' : activeView} onViewChange={handleViewChange} />
 
       <LeftPanel
         adminName={adminData?.adminId || adminData?.email || 'Admin'}
@@ -362,6 +382,16 @@ const AdminDashboard = () => {
             adminLabel={adminData?.adminId || adminData?.email || 'Admin'}
             onLogout={handleLogout}
           />
+        ) : activeView === 'leads' ? (
+          <LeadsPipeline onNavigate={handleViewChange} />
+        ) : activeView === 'importLeads' ? (
+          <ImportLeads onNavigate={handleViewChange} />
+        ) : activeView === 'campaigns' ? (
+          <CampaignsView onOpenCampaign={openCampaignBuilder} />
+        ) : activeView === 'campaignBuilder' ? (
+          <CampaignBuilderView campaignId={activeCampaignId} onBack={() => handleViewChange('campaigns')} />
+        ) : activeView === 'templates' ? (
+          <EmailTemplatesView />
         ) : (
           <>
             <div className="flex items-center justify-between px-7 h-[84px] bg-[#f5f5fa] border-b border-[#ececf2] shrink-0">
