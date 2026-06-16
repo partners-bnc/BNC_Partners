@@ -39,6 +39,22 @@ const embedTemplates = (flow) => {
   return { ...flow, nodes, defaults: PUBLISH_DEFAULTS };
 };
 
+// Pull the real status + body out of a FunctionsHttpError so failures are debuggable
+// instead of the opaque "Edge Function returned a non-2xx status code".
+const explainInvokeError = async (error) => {
+  const ctx = error?.context;
+  if (ctx && typeof ctx.json === 'function') {
+    try {
+      const status = ctx.status;
+      const body = await ctx.clone().json();
+      return new Error(`campaign-admin ${status}: ${body?.error || JSON.stringify(body)}${body?.detail ? ` (${body.detail})` : ''}`);
+    } catch {
+      /* fall through */
+    }
+  }
+  return error instanceof Error ? error : new Error(String(error));
+};
+
 // Snapshot the campaign (with embedded templates) to the server so the engine can run it.
 export const publishCampaign = async (campaign) => {
   const flow = embedTemplates(campaign.flow);
@@ -53,7 +69,7 @@ export const publishCampaign = async (campaign) => {
       }
     }
   });
-  if (error) throw error;
+  if (error) throw await explainInvokeError(error);
   if (data?.error) throw new Error(data.error);
   return data;
 };
@@ -63,7 +79,7 @@ export const enrollLeads = async (campaignId, leadIds) => {
   const { data, error } = await supabase.functions.invoke('campaign-admin', {
     body: { action: 'enroll', campaign_id: campaignId, lead_ids: leadIds }
   });
-  if (error) throw error;
+  if (error) throw await explainInvokeError(error);
   if (data?.error) throw new Error(data.error);
   return data;
 };

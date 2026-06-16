@@ -50,3 +50,5 @@ supabase/migrations/20260601085756_rename_partner_form_tables.sql
 
 .mcp.json
 scripts/sendgrid-test.mjs
+
+docs/
