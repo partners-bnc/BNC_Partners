@@ -8,19 +8,18 @@
 // user has a row in admin_profiles before doing any service-role write.
 // Deploy normally (JWT verification ON): supabase functions deploy campaign-admin
 //
-// Required secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_ANON_KEY.
+// Required secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (auto-injected by Supabase).
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
 
 const admin = createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, content-type",
+  "Access-Control-Allow-Headers": "authorization, content-type, x-client-info, apikey",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
@@ -33,14 +32,16 @@ function json(body: unknown, status = 200) {
 
 async function requireAdmin(req: Request): Promise<{ userId: string } | Response> {
   const authHeader = req.headers.get("Authorization") ?? "";
-  if (!authHeader) return json({ error: "Missing Authorization." }, 401);
+  if (!authHeader) return json({ error: "Missing Authorization header." }, 401);
 
-  const userClient = createClient(SUPABASE_URL, ANON_KEY, {
-    global: { headers: { Authorization: authHeader } },
-    auth: { persistSession: false },
-  });
-  const { data: { user }, error } = await userClient.auth.getUser();
-  if (error || !user) return json({ error: "Invalid session." }, 401);
+  // Extract the JWT from "Bearer <token>"
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : authHeader;
+
+  // Use the admin client to verify the JWT — getUser() with the token validates it server-side.
+  const { data: { user }, error } = await admin.auth.getUser(token);
+  if (error || !user) {
+    return json({ error: "Invalid or expired session.", detail: error?.message }, 401);
+  }
 
   const { data: adminRow } = await admin
     .from("admin_profiles")
