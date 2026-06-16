@@ -1,8 +1,9 @@
 // campaign-admin — admin-only control plane for the campaign engine.
 //
-// Two actions (POST { action, ... }):
-//   • publish: snapshot a flow (with embedded template content) into crm_campaign_flows.
-//   • enroll:  enroll one or more crm_leads into a published campaign (creates the first job).
+// Actions (POST { action, ... }):
+//   • publish:       snapshot a flow (with embedded template content) into crm_campaign_flows.
+//   • enroll:        enroll one or more crm_leads into a published campaign (creates the first job).
+//   • lead_activity: read-only per-lead stats + enrollment status + event timeline for the CRM drawer.
 //
 // Auth: JWT-protected. The caller's Supabase session JWT is verified, then we confirm the
 // user has a row in admin_profiles before doing any service-role write.
@@ -146,6 +147,141 @@ Deno.serve(async (req) => {
     }
 
     return json({ ok: true, enrolled, skipped });
+  }
+
+  if (action === "lead_activity") {
+    const leadId = String(body?.lead_id || "");
+    if (!leadId) return json({ error: "lead_id is required." }, 400);
+
+    // Sends for this lead (one row per email the engine dispatched).
+    const { data: sends } = await admin
+      .from("crm_email_sends")
+      .select("id, node_id, subject, sg_message_id, sent_at")
+      .eq("lead_id", leadId)
+      .order("sent_at", { ascending: false });
+    const sendRows = sends || [];
+    const sendIds = sendRows.map((s) => s.id);
+
+    // Engagement events for those sends.
+    const { data: events } = sendIds.length
+      ? await admin
+          .from("crm_email_events")
+          .select("send_id, event_type, url, occurred_at")
+          .in("send_id", sendIds)
+      : { data: [] as any[] };
+    const eventRows = events || [];
+
+    // Stats: count a send as opened/clicked at most once (SendGrid fires repeats).
+    const openedSends = new Set<string>();
+    const clickedSends = new Set<string>();
+    let bounced = 0;
+    let spam = 0;
+    let unsub = 0;
+    for (const e of eventRows) {
+      const t = String(e.event_type);
+      if (t === "open") openedSends.add(String(e.send_id));
+      else if (t === "click") clickedSends.add(String(e.send_id));
+      else if (t === "bounce" || t === "dropped") bounced++;
+      else if (t === "spamreport") spam++;
+      else if (t === "unsubscribe" || t === "group_unsubscribe") unsub++;
+    }
+    const stats = {
+      sent: sendRows.length,
+      opens: openedSends.size,
+      clicks: clickedSends.size,
+      bounced,
+      spam,
+      unsub,
+    };
+
+    // Latest enrollment for this lead, and a human label for the node it's parked on.
+    const { data: enrollment } = await admin
+      .from("crm_enrollments")
+      .select("status, current_node_id, campaign_id, updated_at")
+      .eq("lead_id", leadId)
+      .order("updated_at", { ascending: false })
+      .maybeSingle();
+
+    let currentStep: string | null = null;
+    let campaignName: string | null = null;
+    if (enrollment?.campaign_id) {
+      const { data: flowRow } = await admin
+        .from("crm_campaign_flows")
+        .select("name, flow")
+        .eq("id", enrollment.campaign_id)
+        .maybeSingle();
+      campaignName = flowRow?.name ?? enrollment.campaign_id;
+      const node = (flowRow?.flow?.nodes || []).find(
+        (n: any) => n.id === enrollment.current_node_id,
+      );
+      currentStep = node?.data?.label ?? enrollment.current_node_id ?? null;
+    }
+
+    // Build one timeline from sends + events, newest first.
+    const EVENT_LABEL: Record<string, { title: string; detail: string }> = {
+      delivered: { title: "Email delivered", detail: "Message accepted by the recipient's mail server." },
+      open: { title: "Email opened", detail: "Lead opened the message." },
+      click: { title: "Link clicked", detail: "Lead clicked a link in the email." },
+      bounce: { title: "Bounced", detail: "The address could not receive the message." },
+      dropped: { title: "Dropped", detail: "SendGrid dropped the message before sending." },
+      deferred: { title: "Deferred", detail: "Delivery temporarily delayed by the recipient server." },
+      spamreport: { title: "Marked as spam", detail: "Lead reported the message as spam." },
+      unsubscribe: { title: "Unsubscribed", detail: "Lead unsubscribed from emails." },
+      group_unsubscribe: { title: "Unsubscribed", detail: "Lead unsubscribed from this group." },
+      processed: { title: "Email processed", detail: "Message queued for delivery." },
+    };
+
+    const timeline = [
+      ...sendRows.map((s) => ({
+        kind: "sent",
+        title: "Email sent",
+        detail: s.subject || "Campaign email dispatched.",
+        at: s.sent_at,
+      })),
+      ...eventRows.map((e) => {
+        const meta = EVENT_LABEL[String(e.event_type)] || {
+          title: String(e.event_type),
+          detail: "",
+        };
+        return {
+          kind: String(e.event_type),
+          title: meta.title,
+          detail: e.url ? `${meta.detail} (${e.url})`.trim() : meta.detail,
+          at: e.occurred_at,
+        };
+      }),
+    ]
+      .filter((x) => x.at)
+      .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime())
+      .slice(0, 30);
+
+    // A plain-language, non-AI summary of what actually happened.
+    let summary: string;
+    if (stats.sent === 0) {
+      summary = "No campaign emails have been sent to this lead yet.";
+    } else {
+      const parts = [`${stats.sent} email${stats.sent === 1 ? "" : "s"} sent`];
+      if (stats.opens) parts.push(`opened ${stats.opens}`);
+      if (stats.clicks) parts.push(`clicked ${stats.clicks}`);
+      if (stats.spam) parts.push(`reported spam`);
+      if (stats.unsub) parts.push(`unsubscribed`);
+      if (stats.bounced) parts.push(`${stats.bounced} bounced`);
+      let s = parts.join(", ") + ".";
+      if (enrollment) {
+        s += ` Currently ${enrollment.status}` + (currentStep ? ` at "${currentStep}".` : ".");
+      }
+      summary = s;
+    }
+
+    return json({
+      ok: true,
+      stats,
+      summary,
+      enrollment: enrollment
+        ? { status: enrollment.status, currentStep, campaignName }
+        : null,
+      timeline,
+    });
   }
 
   return json({ error: `Unknown action: ${action}` }, 400);

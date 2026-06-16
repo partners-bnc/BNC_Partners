@@ -14,7 +14,6 @@ import {
 import '@xyflow/react/dist/style.css';
 import { supabase } from '../../lib/supabaseClient';
 import { LEAD_FIELDS, coerceValue } from '../../crm/leadsSchema';
-import { SAMPLE_REVERT } from '../../crm/sampleRevert';
 import {
   SAMPLE_VARIABLES,
   STARTER_EMAIL_TEMPLATES,
@@ -47,6 +46,13 @@ const fmtDate = (value) => {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return String(value);
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
+
+const fmtDateTime = (value) => {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 };
 
 const initials = (name) => {
@@ -272,11 +278,39 @@ function EmptyLeads({ onImport }) {
 function LeadDrawer({ lead, onClose, onDelete, deleting }) {
   const [confirm, setConfirm] = useState(false);
   const [enroll, setEnroll] = useState({ status: 'idle', message: '' });
+  const [activity, setActivity] = useState({ status: 'idle', data: null, error: '' });
 
   useEffect(() => {
     setConfirm(false);
     setEnroll({ status: 'idle', message: '' });
   }, [lead?.id]);
+
+  // Pull real outreach stats + event timeline for the open lead (admin-gated, service-role read).
+  useEffect(() => {
+    if (!lead?.id) {
+      setActivity({ status: 'idle', data: null, error: '' });
+      return;
+    }
+    let cancelled = false;
+    setActivity({ status: 'loading', data: null, error: '' });
+    supabase.functions
+      .invoke('campaign-admin', { body: { action: 'lead_activity', lead_id: lead.id } })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+        if (error || data?.error) {
+          setActivity({ status: 'error', data: null, error: data?.error || error?.message || 'Could not load activity.' });
+        } else {
+          setActivity({ status: 'done', data, error: '' });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [lead?.id]);
+
+  const stats = activity.data?.stats || { sent: 0, opens: 0, clicks: 0 };
+  const timeline = activity.data?.timeline || [];
+  const summary = activity.data?.summary || '';
 
   const handleEnroll = async () => {
     if (!lead?.id) return;
@@ -338,30 +372,58 @@ function LeadDrawer({ lead, onClose, onDelete, deleting }) {
                 </div>
               </div>
               <div>
-                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-wider text-ink/30">Outreach Stats</h3>
+                <div className="mb-3 flex items-center justify-between">
+                  <h3 className="text-[10px] font-bold uppercase tracking-wider text-ink/30">Outreach Stats</h3>
+                  {activity.data?.enrollment ? (
+                    <span className="rounded-full bg-violet-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-violet-700">
+                      {activity.data.enrollment.status}
+                    </span>
+                  ) : null}
+                </div>
                 <div className="grid grid-cols-4 gap-2">
-                  <SmallStat label="Sent" value={SAMPLE_REVERT.emailsSent} />
-                  <SmallStat label="Opens" value={SAMPLE_REVERT.opens} />
-                  <SmallStat label="Clicks" value={SAMPLE_REVERT.clicks} />
-                  <SmallStat label="Replies" value={SAMPLE_REVERT.replies} />
+                  <SmallStat label="Sent" value={stats.sent} />
+                  <SmallStat label="Opens" value={stats.opens} />
+                  <SmallStat label="Clicks" value={stats.clicks} />
+                  <SmallStat label="Bounced" value={stats.bounced ?? 0} />
                 </div>
               </div>
-              <div className="rounded-xl border border-line bg-violet-500/[0.04] p-4">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-violet-700">Sample AI Summary</div>
-                <p className="mt-2 text-xs leading-relaxed text-ink/70">{SAMPLE_REVERT.headline}</p>
-              </div>
-              <ol className="relative ml-2.5 border-l-2 border-line/60">
-                {SAMPLE_REVERT.events.map((event, index) => (
-                  <li key={`${event.title}-${index}`} className="relative pb-6 pl-6 last:pb-0">
-                    <span className="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-2 border-surface bg-violet-500" />
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-bold text-ink">{event.title}</span>
-                      <span className="text-[10px] text-ink/40">{event.date}</span>
+              {activity.status === 'loading' ? (
+                <div className="text-xs text-ink/40">Loading activity…</div>
+              ) : activity.status === 'error' ? (
+                <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">{activity.error}</div>
+              ) : (
+                <>
+                  {summary ? (
+                    <div className="rounded-xl border border-line bg-violet-500/[0.04] p-4">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-violet-700">Activity Summary</div>
+                      <p className="mt-2 text-xs leading-relaxed text-ink/70">{summary}</p>
+                      {activity.data?.enrollment?.currentStep ? (
+                        <p className="mt-2 text-[10px] font-medium text-ink/40">
+                          Current step: {activity.data.enrollment.currentStep}
+                        </p>
+                      ) : null}
                     </div>
-                    <p className="mt-1 text-xs leading-relaxed text-ink/50">{event.detail}</p>
-                  </li>
-                ))}
-              </ol>
+                  ) : null}
+                  {timeline.length ? (
+                    <ol className="relative ml-2.5 border-l-2 border-line/60">
+                      {timeline.map((event, index) => (
+                        <li key={`${event.title}-${index}`} className="relative pb-6 pl-6 last:pb-0">
+                          <span className="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-2 border-surface bg-violet-500" />
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-xs font-bold text-ink">{event.title}</span>
+                            <span className="text-[10px] text-ink/40">{fmtDateTime(event.at)}</span>
+                          </div>
+                          {event.detail ? <p className="mt-1 text-xs leading-relaxed text-ink/50">{event.detail}</p> : null}
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <div className="rounded-xl border border-dashed border-line py-6 text-center text-xs text-ink/40">
+                      No outreach activity yet.
+                    </div>
+                  )}
+                </>
+              )}
             </div>
             {enroll.message ? (
               <div
