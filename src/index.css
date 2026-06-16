@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+:root {
+  --theme-ink: #0f172a;
+  --theme-accent: #7c3aed;
+  --theme-accent-soft: rgba(124, 58, 237, 0.06);
+  --theme-canvas: #f8fafc;
+  --theme-surface: #ffffff;
+  --theme-line: #e2e8f0;
+}
+
+.dark {
+  --theme-ink: #f8fafc;
+  --theme-accent: #a78bfa;
+  --theme-accent-soft: rgba(167, 139, 250, 0.15);
+  --theme-canvas: #090d16;
+  --theme-surface: #131a26;
+  --theme-line: #1e293b;
+}
+
+@theme inline {
+  --color-ink: var(--theme-ink);
+  --color-accent: var(--theme-accent);
+  --color-accent-soft: var(--theme-accent-soft);
+  --color-canvas: var(--theme-canvas);
+  --color-surface: var(--theme-surface);
+  --color-line: var(--theme-line);
+  --font-heading: "Poppins", "Geist", system-ui, sans-serif;
+}
+
 /* Local Font Definitions */
 @font-face {
   font-family: 'Geist';
@@ -269,4 +297,103 @@ html[dir="rtl"] elevenlabs-convai {
 .scrollbar-hidden {
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.crm-surface {
+  --color-ink: var(--theme-ink);
+  --color-accent: var(--theme-accent);
+  --color-accent-soft: var(--theme-accent-soft);
+  --color-canvas: var(--theme-canvas);
+  --color-surface: var(--theme-surface);
+  --color-line: var(--theme-line);
+  background: var(--theme-canvas);
+  color: var(--theme-ink);
+}
+
+.crm-field {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--theme-line);
+  background: var(--theme-surface);
+  padding: 0.6rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--theme-ink);
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.crm-field:focus {
+  border-color: var(--theme-accent);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--theme-line);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.campaign-flow .react-flow {
+  background: var(--theme-canvas);
+}
+
+/* Custom nodes own their own card visuals — strip xyflow's default node chrome. */
+.campaign-flow .react-flow__node {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: auto;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.campaign-flow .react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: var(--theme-surface);
+  border: 2px solid var(--theme-accent);
+}
+
+.campaign-flow .react-flow__handle.campaign-handle {
+  background: var(--theme-surface);
+  border: 2px solid var(--theme-accent);
+}
+
+.campaign-flow .react-flow__edge-path {
+  stroke: var(--theme-accent);
+}
+
+.campaign-flow .react-flow__edge-text {
+  fill: #5b5550;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.campaign-flow .react-flow__edge-textbg {
+  fill: #ffffff;
+}
+
+.campaign-flow .react-flow__controls,
+.campaign-flow .react-flow__minimap {
+  border: 1px solid var(--theme-line);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--theme-surface) !important;
+}
+
+.campaign-flow .react-flow__attribution {
+  display: none;
 }

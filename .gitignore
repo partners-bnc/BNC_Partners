@@ -41,3 +41,12 @@ signup.html
 supabase/functions/notify-voice-requirement-brevo-v9/
 .vercel
 .env*.local
+
+
+CRM_Deep_Research_and_Logic_Build.md
+crm-ai-skill.md
+passss.png
+supabase/migrations/20260601085756_rename_partner_form_tables.sql
+
+.mcp.json
+scripts/sendgrid-test.mjs
