@@ -347,7 +347,7 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
   }
 
   const { data: profileRow, error: profileError } = await supabase
-    .from('partner_profiles')
+    .from('registration_partner_profiles')
     .select('*')
     .eq('id', userId)
     .maybeSingle();
@@ -392,7 +392,7 @@ export const updatePartnerContactDetails = async ({ partnerId, phone, countryCod
   }
 
   const { error } = await supabase
-    .from('partner_profiles')
+    .from('registration_partner_profiles')
     .update(payload)
     .eq('id', resolvedPartnerId);
 
@@ -441,7 +441,7 @@ export const fetchAdminDashboardData = async () => {
     );
 
     const { data: profileRows } = await supabase
-      .from('partner_profiles')
+      .from('registration_partner_profiles')
       .select('id, agreement_signed')
       .in('id', partnerIds);
 
@@ -585,7 +585,7 @@ export const submitPartnerAgreement = async ({ partnerId, partnerEmail, signedNa
 
   const signedTimestamp = signedAt || new Date().toISOString();
   const { error: profileError } = await supabase
-    .from('partner_profiles')
+    .from('registration_partner_profiles')
     .update({
       agreement_signed: true,
       agreement_signed_name: trimmedName,
