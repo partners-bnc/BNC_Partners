@@ -10,7 +10,7 @@ type PartnerRow = {
   agreement_completed_at: string | null;
   last_reminder_stage: number | null;
   reminders_stopped_at: string | null;
-  partner_profiles: {
+  registration_partner_profiles: {
     first_name: string | null;
     last_name: string | null;
     created_at: string | null;
@@ -52,8 +52,8 @@ const escapeHtml = (value: string) =>
 const normalizeEmail = (value: string | null | undefined) => String(value || "").trim().toLowerCase();
 
 const getAnchorDate = (row: PartnerRow) =>
-  row.ai_last_activity_at || row.ai_started_at || row.partner_profiles?.created_at
-    ? new Date(row.ai_last_activity_at || row.ai_started_at || (row.partner_profiles?.created_at as string))
+  row.ai_last_activity_at || row.ai_started_at || row.registration_partner_profiles?.created_at
+    ? new Date(row.ai_last_activity_at || row.ai_started_at || (row.registration_partner_profiles?.created_at as string))
     : null;
 
 const formatDate = (date: Date) =>
@@ -420,7 +420,7 @@ Deno.serve(async (req: Request) => {
         agreement_completed_at,
         last_reminder_stage,
         reminders_stopped_at,
-        partner_profiles!inner(
+        registration_partner_profiles!inner(
           first_name,
           last_name,
           created_at,
@@ -451,7 +451,7 @@ Deno.serve(async (req: Request) => {
 
       const aiCompleted = Boolean(row.ai_completed_at);
       const agreementCompleted = Boolean(
-        row.partner_profiles?.agreement_signed || row.agreement_completed_at || row.partner_profiles?.agreement_signed_at
+        row.registration_partner_profiles?.agreement_signed || row.agreement_completed_at || row.registration_partner_profiles?.agreement_signed_at
       );
 
       if (aiCompleted && agreementCompleted) {
@@ -476,7 +476,7 @@ Deno.serve(async (req: Request) => {
         continue;
       }
 
-      const fullName = `${row.partner_profiles?.first_name || ""} ${row.partner_profiles?.last_name || ""}`.trim() || "Partner";
+      const fullName = `${row.registration_partner_profiles?.first_name || ""} ${row.registration_partner_profiles?.last_name || ""}`.trim() || "Partner";
       const pendingDays = Math.max(1, Math.floor(hoursPending / 24));
       const deadline = new Date(anchorDate.getTime() + STOP_HOURS * MS_HOUR);
       const html = renderEmailHtml({

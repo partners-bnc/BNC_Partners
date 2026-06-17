@@ -79,7 +79,7 @@ identities_insert as (
   )
   returning id
 )
-insert into public.partner_profiles (
+insert into public.registration_partner_profiles (
   id, first_name, last_name, email, phone, country, city, status, notes, registered_at
 )
 select
@@ -139,7 +139,7 @@ select
   a.bio,
   coalesce(a.created_at::timestamptz, now())
 from ai_seed a
-left join public.partner_profiles p on lower(p.email) = lower(a.partner_email)
+left join public.registration_partner_profiles p on lower(p.email) = lower(a.partner_email)
 on conflict ((lower(partner_email))) do update
 set
   partner_id = excluded.partner_id,
@@ -174,5 +174,5 @@ select
   e.message,
   coalesce(e.created_at::timestamptz, now())
 from enquiry_seed e
-left join public.partner_profiles p on lower(p.email) = lower(e.email);
+left join public.registration_partner_profiles p on lower(p.email) = lower(e.email);
 
