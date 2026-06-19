@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { fetchAdminDashboardData, logout } from '../lib/supabaseData';
 import { supabase } from '../lib/supabaseClient';
 import { NavSidebar } from '../../componentCRM/NavSidebar';
-import { LeftPanel } from '../../componentCRM/LeftPanel';
 import { StatsCards } from '../../componentCRM/StatsCards';
 import { OrdersChart } from '../../componentCRM/OrdersChart';
 import { PlannedIncomeChart } from '../../componentCRM/PlannedIncomeChart';
@@ -369,12 +368,6 @@ const AdminDashboard = () => {
   return (
     <div className="h-screen bg-[#f5f5fa] flex overflow-hidden">
       <NavSidebar activeView={activeView === 'campaignBuilder' ? 'campaigns' : activeView} onViewChange={handleViewChange} />
-
-      <LeftPanel
-        adminName={adminData?.adminId || adminData?.email || 'Admin'}
-        updates={sideUpdates}
-        monthDelta={monthDelta}
-      />
 
       <div className="flex-1 min-w-0 overflow-hidden flex flex-col">
         {activeView === 'partners' ? (
