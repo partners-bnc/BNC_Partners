@@ -484,6 +484,220 @@ function SmallStat({ label, value }) {
   );
 }
 
+const SUBMISSION_TABS = [
+  {
+    key: 'cta_form_requests',
+    label: 'Talk to Expert',
+    subtitle: 'CTA "Talk to Expert" form requests.',
+    searchKeys: ['full_name', 'email', 'company', 'mobile', 'requirement', 'framework', 'source', 'partner_email'],
+    columns: [
+      { key: 'full_name', label: 'Name' },
+      { key: 'email', label: 'Email' },
+      { key: 'mobile', label: 'Mobile' },
+      { key: 'company', label: 'Company' },
+      { key: 'requirement', label: 'Requirement', wide: true },
+      { key: 'framework', label: 'Framework' },
+      { key: 'source', label: 'Source' },
+      { key: 'created_at', label: 'Submitted', type: 'datetime' }
+    ]
+  },
+  {
+    key: 'voice_requirements',
+    label: 'Voice Requirements',
+    subtitle: 'Voice-note requirements submitted by partners.',
+    searchKeys: ['partner_email', 'requirement_text', 'source', 'recipient_email'],
+    columns: [
+      { key: 'partner_email', label: 'Partner Email' },
+      { key: 'requirement_text', label: 'Requirement', wide: true },
+      { key: 'source', label: 'Source' },
+      { key: 'recipient_email', label: 'Recipient' },
+      { key: 'audio_path', label: 'Audio', type: 'audio' },
+      { key: 'created_at', label: 'Submitted', type: 'datetime' }
+    ]
+  },
+  {
+    key: 'service_enquiry_form',
+    label: 'Service Enquiries',
+    subtitle: 'Enquiries submitted from service pages.',
+    searchKeys: ['full_name', 'email', 'phone', 'company', 'service', 'country_label', 'form_type', 'message'],
+    columns: [
+      { key: 'full_name', label: 'Name' },
+      { key: 'email', label: 'Email' },
+      { key: 'phone', label: 'Phone' },
+      { key: 'company', label: 'Company' },
+      { key: 'service', label: 'Service' },
+      { key: 'country_label', label: 'Country' },
+      { key: 'form_type', label: 'Form Type' },
+      { key: 'message', label: 'Message', wide: true },
+      { key: 'created_at', label: 'Submitted', type: 'datetime' }
+    ]
+  }
+];
+
+function SubmissionCell({ column, row }) {
+  const value = row[column.key];
+  if (column.type === 'datetime') {
+    return <span className="whitespace-nowrap text-ink/70">{fmtDateTime(value) || '-'}</span>;
+  }
+  if (column.type === 'audio') {
+    return value ? (
+      <span className="rounded-full bg-violet-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-violet-700">
+        Recording
+      </span>
+    ) : (
+      <span className="text-ink/30">-</span>
+    );
+  }
+  const text = value === null || value === undefined || value === '' ? '-' : String(value);
+  return (
+    <span className={cx('block text-ink/80', column.wide ? 'max-w-[320px] truncate' : 'truncate')} title={text}>
+      {text}
+    </span>
+  );
+}
+
+export function FormSubmissionsView() {
+  const [activeTab, setActiveTab] = useState(SUBMISSION_TABS[0].key);
+  const [rowsByTab, setRowsByTab] = useState({});
+  const [counts, setCounts] = useState({});
+  const [query, setQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    setLoadError('');
+    try {
+      const results = await Promise.all(
+        SUBMISSION_TABS.map((tab) => supabase.from(tab.key).select('*').order('created_at', { ascending: false }))
+      );
+      const nextRows = {};
+      const nextCounts = {};
+      let firstError = '';
+      results.forEach((result, index) => {
+        const tab = SUBMISSION_TABS[index];
+        if (result.error) {
+          firstError = firstError || result.error.message || `Could not load ${tab.label}.`;
+          nextRows[tab.key] = [];
+          nextCounts[tab.key] = 0;
+        } else {
+          nextRows[tab.key] = result.data || [];
+          nextCounts[tab.key] = (result.data || []).length;
+        }
+      });
+      setRowsByTab(nextRows);
+      setCounts(nextCounts);
+      if (firstError) setLoadError(firstError);
+    } catch (error) {
+      setLoadError(error?.message || 'Could not load submissions.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      refresh();
+    });
+  }, [refresh]);
+
+  const tab = useMemo(() => SUBMISSION_TABS.find((item) => item.key === activeTab) || SUBMISSION_TABS[0], [activeTab]);
+
+  const filtered = useMemo(() => {
+    const rows = rowsByTab[tab.key] || [];
+    const needle = query.trim().toLowerCase();
+    if (!needle) return rows;
+    return rows.filter((row) =>
+      tab.searchKeys.some((key) => String(row[key] || '').toLowerCase().includes(needle))
+    );
+  }, [rowsByTab, query, tab]);
+
+  return (
+    <div className="crm-surface min-h-full overflow-y-auto px-7 py-6">
+      <CrmHeader
+        title="Form Submissions"
+        subtitle="All inbound form requests from across the platform in one place."
+        action={
+          <div className="flex items-center gap-3">
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search submissions..."
+              className="w-64 rounded-xl border border-line bg-surface px-4 py-2 text-sm text-ink outline-none focus:border-accent focus:ring-4 focus:ring-accent/10"
+            />
+            <button onClick={refresh} className="rounded-xl border border-line bg-surface px-4 py-2 text-sm font-bold text-ink/70">
+              Refresh
+            </button>
+          </div>
+        }
+      />
+
+      <div className="mb-5 flex flex-wrap gap-2">
+        {SUBMISSION_TABS.map((item) => (
+          <button
+            key={item.key}
+            onClick={() => {
+              setActiveTab(item.key);
+              setQuery('');
+            }}
+            className={cx(
+              'rounded-xl border px-4 py-2 text-sm font-bold transition',
+              activeTab === item.key ? 'border-accent bg-accent text-white' : 'border-line bg-surface text-ink/70 hover:border-accent/40'
+            )}
+          >
+            {item.label}
+            <span className={cx('ml-2 rounded-full px-2 py-0.5 text-[10px]', activeTab === item.key ? 'bg-white/20 text-white' : 'bg-canvas text-ink/50')}>
+              {counts[item.key] ?? 0}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <p className="mb-4 text-sm text-ink/50">{tab.subtitle}</p>
+
+      {loadError ? <Banner tone="error">{loadError}</Banner> : null}
+
+      {loading ? (
+        <div className="rounded-2xl border border-line bg-surface p-10 text-center text-sm text-ink/50">Loading submissions...</div>
+      ) : filtered.length === 0 ? (
+        <div className="rounded-2xl border-2 border-dashed border-line bg-surface px-6 py-16 text-center shadow-sm">
+          <h2 className="font-heading text-lg font-bold text-ink">No submissions{query ? ' match your search' : ' yet'}</h2>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-ink/50">
+            {query ? 'Try a different search term.' : 'New form submissions will appear here as they come in.'}
+          </p>
+        </div>
+      ) : (
+        <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
+          <div className="scroll-thin overflow-x-auto">
+            <table className="w-full min-w-[900px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-line bg-canvas/40 text-[10px] font-bold uppercase tracking-wider text-ink/40">
+                  {tab.columns.map((column) => (
+                    <th key={column.key} className="px-6 py-4">
+                      {column.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line/40">
+                {filtered.map((row) => (
+                  <tr key={row.id} className="hover:bg-violet-500/[0.03]">
+                    {tab.columns.map((column) => (
+                      <td key={column.key} className="px-6 py-4">
+                        <SubmissionCell column={column} row={row} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const normalizeHeader = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
 const aliases = (key) => ({
