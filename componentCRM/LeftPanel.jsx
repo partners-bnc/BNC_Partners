@@ -8,7 +8,7 @@ const iconByType = {
   thisMonth: Activity
 };
 
-function LeftPanel({ adminName = "Admin", updates = [], monthDelta = "+0%" }) {
+function LeftPanel({ adminName = "Admin", updates = [] }) {
   return (
     <div className="hidden 2xl:flex flex-col bg-white border-r border-[#f0f0f3] w-[280px] shrink-0 h-full overflow-y-auto">
       <div className="px-6 pt-6 pb-4">
@@ -39,21 +39,6 @@ function LeftPanel({ adminName = "Admin", updates = [], monthDelta = "+0%" }) {
               </div>
             );
           })}
-        </div>
-      </div>
-
-      <div className="px-6 pb-6">
-        <div className="bg-[rgba(94,129,244,0.08)] rounded-[12px] p-4 flex items-center gap-3">
-          <div
-            className="w-[36px] h-[36px] rounded-[10px] flex items-center justify-center shrink-0"
-            style={{ background: "rgba(94,129,244,0.15)" }}
-          >
-            <Activity size={18} className="text-[#5e81f4]" />
-          </div>
-          <div>
-            <p className="text-[#1c1d21] text-[12px] font-bold">This month</p>
-            <p className="text-[#5e81f4] text-[11px]">{monthDelta} vs previous month</p>
-          </div>
         </div>
       </div>
     </div>
