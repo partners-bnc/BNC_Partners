@@ -13,6 +13,7 @@ import {
   CampaignBuilderView,
   CampaignsView,
   EmailTemplatesView,
+  FormSubmissionsView,
   ImportLeads,
   LeadsPipeline
 } from './adminCRM/AdminCRMViews';
@@ -382,6 +383,8 @@ const AdminDashboard = () => {
             adminLabel={adminData?.adminId || adminData?.email || 'Admin'}
             onLogout={handleLogout}
           />
+        ) : activeView === 'submissions' ? (
+          <FormSubmissionsView />
         ) : activeView === 'leads' ? (
           <LeadsPipeline onNavigate={handleViewChange} />
         ) : activeView === 'importLeads' ? (

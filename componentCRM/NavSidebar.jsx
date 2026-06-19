@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
-import { FileSpreadsheet, GitBranch, LayoutDashboard, Mail, Upload, Users } from "lucide-react";
+import { FileSpreadsheet, GitBranch, Inbox, LayoutDashboard, Mail, Upload, Users } from "lucide-react";
 
 function NavSidebar({ activeView, onViewChange }) {
   const navItems = [
     { icon: LayoutDashboard, view: "dashboard", label: "Dashboard" },
     { icon: Users, view: "partners", label: "Partners" },
+    { icon: Inbox, view: "submissions", label: "Form Submissions" },
     { icon: FileSpreadsheet, view: "leads", label: "Leads" },
     { icon: Upload, view: "importLeads", label: "Import Leads" },
     { icon: GitBranch, view: "campaigns", label: "Campaigns" },
