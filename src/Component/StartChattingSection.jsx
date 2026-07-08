@@ -58,10 +58,10 @@ const StartChattingSection = ({ embedded = false }) => {
   const insightCards = Array.isArray(insightCardsRaw) ? insightCardsRaw : [];
 
   const bncServiceMeta = [
-    { icon: Building2, image: '/favicon/001.jpg.jpeg', route: '/partnerships/international' },
-    { icon: Users, image: '/favicon/002.jpg.jpeg', route: '/partnerships/sales' },
-    { icon: Sparkles, image: '/favicon/003.jpg.jpeg', route: '/partnerships/technology' },
-    { icon: Briefcase, image: '/favicon/004.jpg.jpeg', route: '/partnerships/service' }
+    { icon: Building2, image: '/Photas/001.jpg.jpeg', route: '/partnerships/international' },
+    { icon: Users, image: '/Photas/002.jpg.jpeg', route: '/partnerships/sales' },
+    { icon: Sparkles, image: '/Photas/003.jpg.jpeg', route: '/partnerships/technology' },
+    { icon: Briefcase, image: '/Photas/004.jpg.jpeg', route: '/partnerships/service' }
   ];
 
   const bncServices = bncServiceMeta.map((meta, index) => ({

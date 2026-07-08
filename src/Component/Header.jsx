@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import bncLogo from '../assets/bnc.svg';
+import bncLogo from '../assets/bnc.png';
 
 const Sidebar = lazy(() => import('./Sidebar'));
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
@@ -72,20 +72,16 @@ const Header = () => {
                 <div className="w-5 h-0.5 bg-gray-700"></div>
               </button>
               
-              {/* Logo + Company Name */}
-              <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' })}>
+              {/* Logo */}
+              <Link to="/" className="flex items-center gap-2 ms-10" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' })}>
                 <img 
                   src={bncLogo}
-                  alt="BnC Global" 
-                  className="h-15 w-15 object-contain"
+                  alt="BNC Consultech" 
+                  className="h-40 w-40 object-contain"
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"
                 />
-                
-                <span className="font-poppins font-bold text-[22px] text-[#2C5AA0] tracking-tight whitespace-nowrap">
-                  BnC Global
-                </span>
               </Link>
             </div>
             

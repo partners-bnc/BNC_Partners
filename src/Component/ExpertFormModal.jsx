@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import bncLogo from '../assets/bnc.svg';
+import bncLogo from '../assets/bnc.png';
 import { getSessionUser, submitExpertRequest } from '../lib/supabaseData';
 
 const ExpertFormModal = ({ isOpen, onClose }) => {
@@ -109,7 +109,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
         <div className="p-6 flex items-center justify-between border-b border-gray-100 sticky top-0 bg-white z-10">
           <div className="flex items-center gap-2 text-[#224491] font-bold tracking-wide">
             <img src={bncLogo} alt="BNC Logo" className="h-8 w-auto" />
-            <span>BNC Global</span>
+            <span>BNC Consultech</span>
           </div>
           <button
             onClick={onClose}

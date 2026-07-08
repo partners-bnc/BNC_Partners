@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import bncLogo from '../assets/bnc.svg';
+import bncLogo from '../assets/bnc.png';
 
 const Footer = () => {
   const location = useLocation();
@@ -17,13 +17,13 @@ const Footer = () => {
             <div className="flex items-center gap-4">
               <img
                 src={bncLogo}
-                alt="BnC Global Services"
-                className="h-16 w-auto object-contain"
+                alt="BNC Consultech Services"
+                className="h-24 w-auto object-contain"
                 loading="lazy"
                 decoding="async"
               />
               <div>
-                <p className="font-poppins text-lg font-semibold text-slate-900">BnC Global Partners</p>
+                <p className="font-poppins text-lg font-semibold text-slate-900">BNC Consultech Partners</p>
                 <p className="font-geist text-sm text-slate-500">Partner onboarding and collaboration portal</p>
               </div>
             </div>
@@ -69,7 +69,7 @@ const Footer = () => {
 
         <div className="mt-6 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-geist">
-            Copyright © 2026 BnC Global. All rights reserved.
+            Copyright © 2026 BNC Consultech. All rights reserved.
           </p>
           <a
             href="https://www.bncglobal.in/"

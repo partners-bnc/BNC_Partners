@@ -15,7 +15,7 @@ const WorldMapSection = () => {
             Connecting Partners Across Regions
           </h2>
           <p className="font-geist text-slate-600 max-w-4xl mx-auto mt-4 whitespace-nowrap">
-            Visualize how BnC Global connects India, Saudi Arabia, and worldwide
+            Visualize how BNC Consultech connects India, Saudi Arabia, and worldwide
             partners through a trusted delivery network.
           </p>
         </div>
