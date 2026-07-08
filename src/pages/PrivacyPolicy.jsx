@@ -4,7 +4,7 @@ const sections = [
   {
     title: '1. Overview',
     body: [
-      'BnC Global Partners is a partner onboarding and collaboration portal operated by BnC Global. This Privacy Policy explains what information we collect, how we use it, and how we protect it when you use this website, create an account, submit forms, or sign in with Google.'
+      'BNC Consultech Partners is a partner onboarding and collaboration portal operated by BNC Consultech. This Privacy Policy explains what information we collect, how we use it, and how we protect it when you use this website, create an account, submit forms, or sign in with Google.'
     ]
   },
   {
@@ -24,7 +24,7 @@ const sections = [
   {
     title: '4. Google Data and Limited Use',
     body: [
-      'BnC Global Partners uses Google Sign-In to authenticate partner users. We do not use Google user data for advertising, and we do not sell Google user data.',
+      'BNC Consultech Partners uses Google Sign-In to authenticate partner users. We do not use Google user data for advertising, and we do not sell Google user data.',
       'We only use Google-provided account data for authentication, account linking, and security purposes that are directly related to the user-facing functionality of this portal.'
     ]
   },
@@ -32,7 +32,7 @@ const sections = [
     title: '5. Sharing of Information',
     body: [
       'We may share information with service providers that help us operate the portal, such as hosting, authentication, database, storage, analytics, and communications providers, but only as needed to run the service.',
-      'We may also disclose information when required by law, to enforce our agreements, or to protect the rights, security, and operations of BnC Global, our users, or the public.'
+      'We may also disclose information when required by law, to enforce our agreements, or to protect the rights, security, and operations of BNC Consultech, our users, or the public.'
     ]
   },
   {

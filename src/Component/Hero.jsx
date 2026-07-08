@@ -120,7 +120,7 @@ const Hero = () => {
           aria-label="Get AI help"
         >
           <img
-            src="/favicon/WhatsApp_Image_2026-02-23_at_1.56.29_PM-removebg-preview.png"
+            src="/Photas/WhatsApp_Image_2026-02-23_at_1.56.29_PM-removebg-preview.png"
             alt="ChatBot AI"
             className="h-50 w-50 object-contain"
           />
@@ -157,7 +157,7 @@ const Hero = () => {
                 ) : (
                   <>
                     {t('hero.titlePrefix')}
-                    <span className="block" style={{ color: '#2C5AA0' }}>BnC Global</span>
+                    <span className="block" style={{ color: '#2C5AA0' }}>BNC Consultech</span>
                   </>
                 )}
               </h1>

@@ -4,13 +4,13 @@ const sections = [
   {
     title: '1. Acceptance of Terms',
     body: [
-      'By accessing or using BnC Global Partners, you agree to these Terms of Service. If you do not agree, do not use the portal.'
+      'By accessing or using BNC Consultech Partners, you agree to these Terms of Service. If you do not agree, do not use the portal.'
     ]
   },
   {
     title: '2. Description of Service',
     body: [
-      'BnC Global Partners is a partner onboarding, collaboration, and enquiry management portal operated by BnC Global. The portal allows prospective and active partners to register, sign in, complete profile details, submit onboarding information, and communicate service-related requirements.'
+      'BNC Consultech Partners is a partner onboarding, collaboration, and enquiry management portal operated by BNC Consultech. The portal allows prospective and active partners to register, sign in, complete profile details, submit onboarding information, and communicate service-related requirements.'
     ]
   },
   {
@@ -41,7 +41,7 @@ const sections = [
   {
     title: '7. Intellectual Property',
     body: [
-      'The portal, including its branding, design, content, software, and related materials, is owned by or licensed to BnC Global and is protected by applicable intellectual property laws. These Terms do not grant you ownership rights in the portal.'
+      'The portal, including its branding, design, content, software, and related materials, is owned by or licensed to BNC Consultech and is protected by applicable intellectual property laws. These Terms do not grant you ownership rights in the portal.'
     ]
   },
   {
@@ -53,8 +53,8 @@ const sections = [
   {
     title: '9. Disclaimer and Limitation of Liability',
     body: [
-      'The portal is provided on an "as is" and "as available" basis to the fullest extent permitted by law. BnC Global disclaims warranties of merchantability, fitness for a particular purpose, and non-infringement.',
-      'To the fullest extent permitted by law, BnC Global will not be liable for indirect, incidental, special, consequential, or punitive damages, or for loss of profits, data, goodwill, or business opportunities arising from your use of the portal.'
+      'The portal is provided on an "as is" and "as available" basis to the fullest extent permitted by law. BNC Consultech disclaims warranties of merchantability, fitness for a particular purpose, and non-infringement.',
+      'To the fullest extent permitted by law, BNC Consultech will not be liable for indirect, incidental, special, consequential, or punitive damages, or for loss of profits, data, goodwill, or business opportunities arising from your use of the portal.'
     ]
   },
   {
@@ -86,7 +86,7 @@ const TermsOfService = () => {
             Effective Date: April 6, 2026
           </p>
           <p className="mt-6 font-geist text-base leading-7 text-slate-700">
-            These terms describe the rules for using the BnC Global partner portal and are published on the same production domain for Google OAuth verification readiness.
+            These terms describe the rules for using the BNC Consultech partner portal and are published on the same production domain for Google OAuth verification readiness.
           </p>
 
           <div className="mt-10 space-y-8">

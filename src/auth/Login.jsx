@@ -203,7 +203,7 @@ const Login = () => {
       <div
         className="absolute inset-0 -z-10 bg-center bg-cover bg-no-repeat"
         style={{
-          backgroundImage: "url('/favicon/WhatsApp%20Image%202026-02-25%20at%206.49.50%20PM.jpeg')",
+          backgroundImage: "url('/Photas/WhatsApp%20Image%202026-02-25%20at%206.49.50%20PM.jpeg')",
           filter: 'blur(2px)'
         }}
       />
@@ -237,14 +237,14 @@ const Login = () => {
               <div className={`inline-flex items-center gap-3 ${rowDirection}`}>
                 <div className="h-14 w-14 rounded-full flex items-center justify-center">
                   <img
-                    src="/favicon/trans.png"
-                    alt="BnC Global"
+                    src="/Photas/trans.png"
+                    alt="BNC Consultech"
                     className="h-14 w-14 object-contain"
                   />
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-white/70">
-                    BnC Global
+                    BNC Consultech
                   </p>
                   <h1 className="text-2xl font-semibold mt-1">{t('login.welcomeBack')}</h1>
                 </div>
@@ -320,8 +320,8 @@ const Login = () => {
             <div className="md:hidden text-center mb-6">
               <div className="inline-flex items-center justify-center h-12 w-12 rounded-full mb-3">
                 <img
-                  src="/favicon/b%20nc%20global%20(2).avif"
-                  alt="BnC Global"
+                  src="/Photas/b%20nc%20global%20(2).avif"
+                  alt="BNC Consultech"
                   className="h-10 w-10 object-contain"
                 />
               </div>

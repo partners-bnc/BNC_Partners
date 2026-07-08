@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaPaperPlane, FaUser, FaShieldAlt, FaTimes, FaMapMarkerAlt, FaRocketchat } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import bncLogo from '../assets/bnc.svg';
+import bncLogo from '../assets/bnc.png';
 
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 
@@ -43,34 +43,26 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
         ></div>
         
         <div className={`absolute top-0 h-full w-80 bg-gradient-to-b from-white via-[#f7f9ff] to-[#edf2fb] shadow-2xl transform transition-all duration-150 ease-out ${sidePosition} ${isOpen ? 'translate-x-0' : hiddenTranslate}`}>
-          <div className={`p-6 h-full flex flex-col ${textAlign}`}>
+          <div className={`px-6 pb-6 pt-1.5 h-full flex flex-col ${textAlign}`}>
             {/* Header */}
-            <div className={`flex items-start justify-between mb-6 ${rowDirection}`}>
-              <div className={`flex items-center gap-3 ${rowDirection}`}>
-                <img 
-                  src={bncLogo}
-                  alt="BnC Global" 
-                  className="h-20 w-20 object-contain"
-                  decoding="async"
-                />
-                <div className="flex flex-col">
-                  <h2 className="font-poppins text-3xl font-light text-[#2C5AA0]">
-                    BnC Global
-                  </h2>
-                  <div className="h-0.5 w-28 bg-black mt-2"></div>
-                </div>
-              </div>
+            <div className={`relative flex flex-col ${isRtl ? 'items-end' : 'items-start'} -mb-3 w-full`}>
               <button 
                 onClick={onClose} 
-                className="p-2 rounded-full bg-white/80 border border-white/60 shadow-sm hover:shadow-md text-gray-500 hover:text-gray-700 transition-all duration-200"
+                className={`absolute top-1 ${isRtl ? 'left-0' : 'right-0'} p-2 rounded-full bg-white/80 border border-white/60 shadow-sm hover:shadow-md text-gray-500 hover:text-gray-700 transition-all duration-200`}
               >
                 <FaTimes size={20} />
               </button>
+              <img 
+                src={bncLogo}
+                alt="BNC Consultech" 
+                className="w-57 h-auto object-contain -mt-12 -mb-8 -ml-3"
+                decoding="async"
+              />
             </div>
             
             {/* Navigation */}
             <div className="flex-1">
-              <div className="mb-4">
+              <div className="mb-5">
                 <div className={`inline-flex items-center rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm ${rowDirection}`}>
                   {languageOptions.map((option) => (
                     <button

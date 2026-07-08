@@ -287,212 +287,7 @@ function ReferralChain({ nodes = [], connectors = [], rtl = false }) {
   );
 }
 
-// ─────────────────────────────────────────────
-//  NETWORK MARKETING DIAGRAM
-// ─────────────────────────────────────────────
-function NetworkDiagram({ rtl = false }) {
-  const BASE_WIDTH = 1000;
-  const BASE_HEIGHT = 720;
 
-  const root = {
-    code: "A",
-    title: "You (Partner A)",
-    subtitle: "Founder of your referral network",
-    level: "Level 0",
-    color: G.ink,
-    bg: G.cream,
-    border: G.inkMid,
-  };
-
-  const level1 = [
-    {
-      code: "A1",
-      title: "Partner A1",
-      subtitle: "Directly referred by you",
-      level: "Level 1",
-      color: G.blue,
-      bg: G.blueBg,
-      border: G.blueBorder,
-    },
-    {
-      code: "A2",
-      title: "Partner A2",
-      subtitle: "Directly referred by you",
-      level: "Level 1",
-      color: G.green,
-      bg: G.greenBg,
-      border: G.greenBorder,
-    },
-  ];
-
-  const level2 = [
-    {
-      code: "A1.1",
-      title: "A1's Referral",
-      subtitle: "Referred by A1",
-      level: "Level 2",
-      color: G.blue,
-      bg: G.blueBg,
-      border: G.blueBorder,
-    },
-    {
-      code: "A1.2",
-      title: "A1's Referral",
-      subtitle: "Referred by A1",
-      level: "Level 2",
-      color: G.blue,
-      bg: G.blueBg,
-      border: G.blueBorder,
-    },
-    {
-      code: "A2.1",
-      title: "A2's Referral",
-      subtitle: "Referred by A2",
-      level: "Level 2",
-      color: G.green,
-      bg: G.greenBg,
-      border: G.greenBorder,
-    },
-    {
-      code: "A2.2",
-      title: "A2's Referral",
-      subtitle: "Referred by A2",
-      level: "Level 2",
-      color: G.green,
-      bg: G.greenBg,
-      border: G.greenBorder,
-    },
-  ];
-
-  const clients = [
-    {
-      code: "💼",
-      title: "Client",
-      subtitle: "Closes deal. Revenue realised",
-      level: "Revenue Trigger",
-      color: G.client,
-      bg: G.clientBg,
-      border: G.clientBorder,
-      isClient: true,
-    },
-    {
-      code: "💼",
-      title: "Client",
-      subtitle: "Closes deal. Revenue realised",
-      level: "Revenue Trigger",
-      color: G.client,
-      bg: G.clientBg,
-      border: G.clientBorder,
-      isClient: true,
-    },
-  ];
-
-  const shellRef = useRef(null);
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    const shell = shellRef.current;
-    if (!shell) return undefined;
-
-    const updateScale = () => {
-      const nextScale = Math.min(1, shell.clientWidth / BASE_WIDTH);
-      if (!Number.isFinite(nextScale) || nextScale <= 0) return;
-      setScale((prev) => (Math.abs(prev - nextScale) < 0.001 ? prev : nextScale));
-    };
-
-    updateScale();
-
-    let ro;
-    if (typeof ResizeObserver !== "undefined") {
-      ro = new ResizeObserver(updateScale);
-      ro.observe(shell);
-    } else if (typeof window !== "undefined") {
-      window.addEventListener("resize", updateScale);
-    }
-
-    return () => {
-      if (ro) {
-        ro.disconnect();
-      } else if (typeof window !== "undefined") {
-        window.removeEventListener("resize", updateScale);
-      }
-    };
-  }, [BASE_WIDTH]);
-
-  const scaledHeight = BASE_HEIGHT * scale;
-
-  const Node = ({ data, className }) => (
-    <div className={`network-node ${className}`} style={{ color: data.color }}>
-      <div className="network-node-level" style={{ borderColor: data.border, color: data.color, background: `${data.bg}` }}>
-        {data.level}
-      </div>
-      <div
-        className="network-node-circle"
-        style={{
-          borderColor: data.border,
-          background: data.bg,
-          color: data.color,
-          fontFamily: data.isClient ? FONT_EMOJI : FONT_HEAD,
-        }}
-      >
-        {data.code}
-      </div>
-      <div className="network-node-title" style={{ color: data.color }}>
-        {data.title}
-      </div>
-      <div className="network-node-sub">{data.subtitle}</div>
-    </div>
-  );
-
-  return (
-    <div className={`network-diagram-shell ${rtl ? "rtl" : ""}`} ref={shellRef}>
-      <div className="network-diagram-stage" style={{ height: `${scaledHeight}px` }}>
-        <div
-          className={`network-diagram ${rtl ? "rtl" : ""}`}
-          style={{ transform: `translateX(-50%) scale(${scale})` }}
-        >
-      <svg className="network-lines" viewBox="0 0 1000 700" preserveAspectRatio="none">
-        <defs>
-          <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <polygon points="0 0, 6 3, 0 6" fill={G.goldMid} />
-          </marker>
-          <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <polygon points="0 0, 6 3, 0 6" fill={G.blueBorder} />
-          </marker>
-          <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <polygon points="0 0, 6 3, 0 6" fill={G.greenBorder} />
-          </marker>
-          <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <polygon points="0 0, 6 3, 0 6" fill={G.purpleBorder} />
-          </marker>
-        </defs>
-
-        <line className="line-root" x1="500" y1="95" x2="300" y2="165" stroke={G.goldMid} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGold)" />
-        <line className="line-root" x1="500" y1="95" x2="700" y2="165" stroke={G.goldMid} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGold)" />
-
-        <line className="line-l1" x1="300" y1="245" x2="210" y2="345" stroke={G.blueBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowBlue)" />
-        <line className="line-l1" x1="300" y1="245" x2="390" y2="345" stroke={G.blueBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowBlue)" />
-        <line className="line-l1" x1="700" y1="245" x2="610" y2="345" stroke={G.greenBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGreen)" />
-        <line className="line-l1" x1="700" y1="245" x2="790" y2="345" stroke={G.greenBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGreen)" />
-
-        <line className="line-l2" x1="210" y1="420" x2="210" y2="520" stroke={G.blueBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowBlue)" />
-        <line className="line-l2" x1="610" y1="420" x2="610" y2="520" stroke={G.greenBorder} strokeDasharray="6 6" strokeWidth="2" markerEnd="url(#arrowGreen)" />
-      </svg>
-
-      <Node data={root} className="node-root pulse-l0" />
-      <Node data={level1[0]} className="node-a1 pulse-l1" />
-      <Node data={level1[1]} className="node-a2 pulse-l1" />
-      <Node data={level2[0]} className="node-a11 pulse-l2" />
-      <Node data={level2[1]} className="node-a12 pulse-l2" />
-      <Node data={level2[2]} className="node-a21 pulse-l2" />
-      <Node data={level2[3]} className="node-a22 pulse-l2" />
-      <Node data={clients[0]} className="node-client-left pulse-client" />
-      <Node data={clients[1]} className="node-client-right pulse-client" />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─────────────────────────────────────────────
 //  OUTCOME CARDS — what each partner earns
@@ -973,6 +768,23 @@ export default function ReferralPage() {
   const principleTexts = Array.isArray(principles?.items) ? principles.items : [];
   const principleItems = principleIcons.map((icon, idx) => ({ icon, ...(principleTexts[idx] || {}) }));
 
+  const chainDiagram = t("referralProgramPageSimple.chainDiagram", { returnObjects: true });
+  const chainNodesText = Array.isArray(chainDiagram?.nodes) ? chainDiagram.nodes : [];
+  const chainStyles = [
+    { color: G.gold, bg: G.goldTint, border: G.goldMid },
+    { color: G.blue, bg: G.blueBg, border: G.blueBorder },
+    { color: G.green, bg: G.greenBg, border: G.greenBorder },
+    { color: G.client, bg: G.clientBg, border: G.clientBorder, isClient: true },
+  ];
+  const chainNodes = chainStyles.map((style, idx) => {
+    const node = { ...style, ...(chainNodesText[idx] || {}) };
+    if (node.isClient) {
+      node.letter = "💼";
+    }
+    return node;
+  });
+  const chainConnectors = Array.isArray(chainDiagram?.connectors) ? chainDiagram.connectors : [];
+
   return (
     <div
       style={{
@@ -993,103 +805,7 @@ export default function ReferralPage() {
         @keyframes heroUp { from { opacity:0;transform:translateY(28px); } to { opacity:1;transform:translateY(0); } }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
         @keyframes ripple { 0%{transform:scale(1);opacity:0.55} 100%{transform:scale(1.55);opacity:0} }
-        @keyframes nodePulse { 0%{transform:translate(-50%,-50%) scale(1);} 35%{transform:translate(-50%,-50%) scale(1.08);} 60%{transform:translate(-50%,-50%) scale(1);} }
-        @keyframes dashMove { 0%{stroke-dashoffset:24;opacity:0.4;} 50%{opacity:1;} 100%{stroke-dashoffset:0;opacity:0.75;} }
-        .network-diagram-shell {
-          width: 100%;
-          overflow: hidden;
-          padding-bottom: 0.25rem;
-        }
-        .network-diagram-shell.rtl {
-          direction: rtl;
-        }
-        .network-diagram-stage {
-          width: 100%;
-          position: relative;
-        }
-        .network-diagram {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          transform-origin: top center;
-          width: 1000px;
-          height: 720px;
-          box-sizing: border-box;
-          background: #FCF7EE;
-          border-radius: 18px;
-          border: 1px solid ${G.border};
-          overflow: hidden;
-          padding: 3.5rem 1.75rem 2.75rem;
-        }
-        .network-lines {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-          z-index: 1;
-        }
-        .network-node {
-          position: absolute;
-          transform: translate(-50%, -50%);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          gap: 0.2rem;
-          font-family: ${FONT_BODY};
-          z-index: 2;
-        }
-        .pulse-l0 { animation: nodePulse 6s ease-in-out 0s infinite; }
-        .pulse-l1 { animation: nodePulse 6s ease-in-out 0.9s infinite; }
-        .pulse-l2 { animation: nodePulse 6s ease-in-out 1.8s infinite; }
-        .pulse-client { animation: nodePulse 6s ease-in-out 2.7s infinite; }
-        .line-root { animation: dashMove 6s ease-in-out 0.3s infinite; }
-        .line-l1 { animation: dashMove 6s ease-in-out 1.2s infinite; }
-        .line-l2 { animation: dashMove 6s ease-in-out 2.1s infinite; }
-        .network-node-circle {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          border: 2px solid;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.1rem;
-          font-weight: 700;
-          box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-          margin-bottom: 0.35rem;
-        }
-        .network-node-title {
-          font-weight: 700;
-          font-size: 0.86rem;
-        }
-        .network-node-sub {
-          color: ${G.muted};
-          font-size: 0.62rem;
-          max-width: 120px;
-          line-height: 1.45;
-        }
-        .network-node-level {
-          margin-bottom: 0.35rem;
-          padding: 0.18rem 0.5rem;
-          border-radius: 999px;
-          border: 1px solid;
-          font-size: 0.6rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-        }
-        .node-root { left: 50%; top: 14%; }
-        .node-a1 { left: 30%; top: 35%; }
-        .node-a2 { left: 70%; top: 35%; }
-        .node-a11 { left: 21%; top: 60%; }
-        .node-a12 { left: 39%; top: 60%; }
-        .node-a21 { left: 61%; top: 60%; }
-        .node-a22 { left: 79%; top: 60%; }
-        .node-client-left { left: 21%; top: 86%; }
-        .node-client-right { left: 61%; top: 86%; }
+
       `}</style>
 
       <section
@@ -1284,7 +1000,7 @@ export default function ReferralPage() {
         </FadeIn>
 
         <FadeIn delay={0.12}>
-          <NetworkDiagram rtl={isRtl} />
+          <ReferralChain nodes={chainNodes} connectors={chainConnectors} rtl={isRtl} />
         </FadeIn>
 
         <FadeIn delay={0.2}>

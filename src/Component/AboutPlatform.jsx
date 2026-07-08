@@ -61,7 +61,7 @@ const AboutPlatform = () => {
               Empowering Partners to <span className="text-[#2C5AA0]">Grow Together</span>
             </h2>
             <p className="font-geist text-gray-600 text-lg leading-relaxed mb-6">
-              BNC Global is a next-generation partner ecosystem platform designed to connect businesses, technology providers, and service experts across the globe. Our platform streamlines collaboration, accelerates deal cycles, and unlocks new revenue streams for every partner in the network.
+              BNC Consultech is a next-generation partner ecosystem platform designed to connect businesses, technology providers, and service experts across the globe. Our platform streamlines collaboration, accelerates deal cycles, and unlocks new revenue streams for every partner in the network.
             </p>
             <p className="font-geist text-gray-600 leading-relaxed">
               Whether you're a sales partner, technology integrator, or service provider — BNC gives you the tools, insights, and support to scale your business with confidence. From real-time dashboards to AI-powered lead matching, we make partnership simple, transparent, and profitable.
