@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import bncLogo from '../assets/bnc.png';
 import { getSessionUser, submitExpertRequest } from '../lib/supabaseData';
 
 const ExpertFormModal = ({ isOpen, onClose }) => {
@@ -107,9 +106,9 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 sm:p-0">
       <div className="bg-white w-full max-w-2xl h-full sm:h-auto sm:max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl flex flex-col relative">
         <div className="p-6 flex items-center justify-between border-b border-gray-100 sticky top-0 bg-white z-10">
-          <div className="flex items-center gap-2 text-[#224491] font-bold tracking-wide">
-            <img src={bncLogo} alt="BNC Logo" className="h-8 w-auto" />
-            <span>BNC Consultech</span>
+          <div className="flex items-center gap-2 text-[#000000] font-bold tracking-wide">
+            <img src="/Photas/aaf68a14-dda6-4743-824f-5bc2592df449.png" alt="BNC Logo" className="h-8 w-auto" />
+            <span>BNC LEG</span>
           </div>
           <button
             onClick={onClose}
@@ -132,7 +131,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-8 py-3 bg-[#224491] text-white font-medium rounded-lg hover:bg-[#142c64] transition-colors"
+                className="px-8 py-3 bg-[#000000] text-white font-medium rounded-lg hover:bg-[#142c64] transition-colors"
               >
                 {t('expertFormModal.success.close')}
               </button>
@@ -157,7 +156,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder={t('expertFormModal.placeholders.fullName')}
-                      className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
+                      className="w-full bg-transparent border-[#DC2626] border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#000000] placeholder-gray-400 outline-none transition-colors"
                       required
                     />
                   </div>
@@ -168,7 +167,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       value={formData.company}
                       onChange={handleChange}
                       placeholder={t('expertFormModal.placeholders.companyName')}
-                      className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
+                      className="w-full bg-transparent border-[#DC2626] border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#000000] placeholder-gray-400 outline-none transition-colors"
                     />
                   </div>
                 </div>
@@ -186,7 +185,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder={t('expertFormModal.placeholders.emailAddress')}
-                      className="flex-1 bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
+                      className="flex-1 bg-transparent border-[#DC2626] border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#000000] placeholder-gray-400 outline-none transition-colors"
                       required
                       readOnly={isSessionUser}
                     />
@@ -201,7 +200,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       value={formData.mobile}
                       onChange={handleChange}
                       placeholder={t('expertFormModal.placeholders.mobileNumber')}
-                      className="flex-1 bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
+                      className="flex-1 bg-transparent border-[#DC2626] border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#000000] placeholder-gray-400 outline-none transition-colors"
                       required
                     />
                   </div>
@@ -217,7 +216,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       value={formData.framework}
                       onChange={handleChange}
                       placeholder={t('expertFormModal.placeholders.preferredFramework')}
-                      className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors"
+                      className="w-full bg-transparent border-[#DC2626] border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#000000] placeholder-gray-400 outline-none transition-colors"
                     />
                   </div>
                   <div>
@@ -227,7 +226,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                       onChange={handleChange}
                       placeholder={t('expertFormModal.placeholders.requirement')}
                       rows={3}
-                      className="w-full bg-transparent border-0 border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#224491] placeholder-gray-400 outline-none transition-colors resize-none"
+                      className="w-full bg-transparent border-[#DC2626] border-b border-gray-300 px-0 py-2 focus:ring-0 focus:border-[#000000] placeholder-gray-400 outline-none transition-colors resize-none"
                       required
                     />
                   </div>
@@ -241,7 +240,7 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-3 bg-[#224491] text-white font-medium rounded-lg hover:bg-[#142c64] transition-colors flex items-center gap-2 disabled:opacity-60"
+                    className="px-8 py-3 bg-[#000000] text-white font-medium rounded-lg hover:bg-[#142c64] transition-colors flex items-center gap-2 disabled:opacity-60"
                   >
                     {isSubmitting ? t('expertFormModal.actions.submitting') : t('expertFormModal.actions.submit')}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

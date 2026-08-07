@@ -159,7 +159,7 @@ const CompleteProfile = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white shadow-sm p-6">
-        <h1 className="text-2xl font-semibold text-slate-900">Complete your profile</h1>
+        <h1 className="text-[#DC2626]xl font-semibold text-slate-900">Complete your profile</h1>
         <p className="mt-2 text-sm text-slate-600">
           Please provide your phone number, country and city before continuing.
         </p>
@@ -173,7 +173,7 @@ const CompleteProfile = () => {
         <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-slate-700">Phone</label>
-            <div className="mt-1 flex rounded-lg border border-slate-300 focus-within:ring-2 focus-within:ring-[#2C5AA0]/20 focus-within:border-[#2C5AA0]">
+            <div className="mt-1 flex rounded-lg border border-slate-300 focus-within:ring-2 focus-within:ring-[#DC2626]/20 focus-within:border-[#DC2626]">
               <span className="inline-flex items-center px-3 text-sm text-slate-700 border-r border-slate-300 bg-slate-50 rounded-l-lg">
                 {formData.countryCode}
               </span>
@@ -196,7 +196,7 @@ const CompleteProfile = () => {
               name="country"
               value={formData.country}
               onChange={handleChange}
-              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#2C5AA0] focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20"
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#DC2626] focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20"
             >
               {COUNTRY_OPTIONS.map((country) => (
                 <option key={country.value} value={country.value}>
@@ -215,14 +215,14 @@ const CompleteProfile = () => {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter city"
-              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#2C5AA0] focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20"
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#DC2626] focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20"
             />
           </div>
 
           <button
             type="submit"
             disabled={saving}
-            className="w-full rounded-lg bg-[#2C5AA0] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#1e3f73] disabled:opacity-60"
+            className="w-full rounded-lg bg-[#DC2626] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#B91C1C] disabled:opacity-60"
           >
             {saving ? 'Saving...' : 'Save and continue'}
           </button>

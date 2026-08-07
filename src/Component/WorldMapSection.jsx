@@ -4,7 +4,7 @@ import { WorldMap } from '../components/ui/world-map';
 const WorldMapSection = () => {
   return (
     <section className="relative py-16 bg-[#f5f7fb] overflow-hidden">
-      <div className="absolute -top-28 right-0 h-72 w-72 rounded-full bg-[#2C5AA0]/10 blur-3xl" />
+      <div className="absolute -top-28 right-0 h-72 w-72 rounded-full bg-[#DC2626]/10 blur-3xl" />
       <div className="absolute bottom-0 -left-16 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
@@ -15,7 +15,7 @@ const WorldMapSection = () => {
             Connecting Partners Across Regions
           </h2>
           <p className="font-geist text-slate-600 max-w-4xl mx-auto mt-4 whitespace-nowrap">
-            Visualize how BNC Consultech connects India, Saudi Arabia, and worldwide
+            Visualize how BNC LEG connects India, Saudi Arabia, and worldwide
             partners through a trusted delivery network.
           </p>
         </div>
@@ -23,7 +23,7 @@ const WorldMapSection = () => {
         <div className="mt-10" style={{ perspective: '1200px' }}>
           <div className="rounded-3xl border border-white/70 bg-white/80 p-4 shadow-[0_30px_70px_rgba(15,23,42,0.12)] transform-gpu [transform:rotateX(6deg)_rotateY(-6deg)] transition duration-500 hover:[transform:rotateX(0deg)_rotateY(0deg)]">
             <WorldMap
-              lineColor="#2C5AA0"
+              lineColor="#DC2626"
               dots={[
                 {
                   start: { lat: 17.6139, lng: 77.209, label: 'New Delhi' },

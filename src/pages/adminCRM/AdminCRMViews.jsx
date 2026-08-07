@@ -68,7 +68,7 @@ const leadStatusStyle = (status) => {
   const value = String(status || '').toLowerCase();
   if (/(won|closed won|converted|customer)/.test(value)) return 'bg-emerald-500/10 text-emerald-700 border border-emerald-500/20';
   if (/(lost|dead|closed lost|unqualified)/.test(value)) return 'bg-rose-500/10 text-rose-700 border border-rose-500/20';
-  if (/(new|fresh)/.test(value)) return 'bg-blue-500/10 text-blue-700 border border-blue-500/20';
+  if (/(new|fresh)/.test(value)) return 'bg-red-500/10 text-blue-700 border border-blue-500/20';
   if (/(contacted|follow|nurtur|progress|working|qualified)/.test(value)) return 'bg-amber-500/10 text-amber-700 border border-amber-500/20';
   return 'bg-slate-500/10 text-slate-600 border border-slate-500/20';
 };
@@ -253,7 +253,7 @@ function Metric({ label, value }) {
   return (
     <div className="rounded-2xl border border-line bg-surface p-5 shadow-sm">
       <div className="text-[11px] font-bold uppercase tracking-wider text-ink/40">{label}</div>
-      <div className="mt-2 font-heading text-2xl font-bold text-ink">{value}</div>
+      <div className="mt-2 font-heading text-[#DC2626]xl font-bold text-ink">{value}</div>
     </div>
   );
 }
@@ -265,7 +265,7 @@ function Banner({ tone = 'info', children }) {
 
 function EmptyLeads({ onImport }) {
   return (
-    <div className="rounded-2xl border-2 border-dashed border-line bg-surface px-6 py-16 text-center shadow-sm">
+    <div className="rounded-2xl border-[#DC2626] border-dashed border-line bg-surface px-6 py-16 text-center shadow-sm">
       <h2 className="font-heading text-lg font-bold text-ink">No leads yet</h2>
       <p className="mx-auto mt-2 max-w-sm text-sm text-ink/50">Import a CSV or Excel file to populate the pipeline.</p>
       <button onClick={onImport} className="mt-5 rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-white">
@@ -408,7 +408,7 @@ function LeadDrawer({ lead, onClose, onDelete, deleting }) {
                     <ol className="relative ml-2.5 border-l-2 border-line/60">
                       {timeline.map((event, index) => (
                         <li key={`${event.title}-${index}`} className="relative pb-6 pl-6 last:pb-0">
-                          <span className="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-2 border-surface bg-violet-500" />
+                          <span className="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-[#DC2626] border-surface bg-violet-500" />
                           <div className="flex items-center justify-between gap-2">
                             <span className="text-xs font-bold text-ink">{event.title}</span>
                             <span className="text-[10px] text-ink/40">{fmtDateTime(event.at)}</span>
@@ -660,7 +660,7 @@ export function FormSubmissionsView() {
       {loading ? (
         <div className="rounded-2xl border border-line bg-surface p-10 text-center text-sm text-ink/50">Loading submissions...</div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-2xl border-2 border-dashed border-line bg-surface px-6 py-16 text-center shadow-sm">
+        <div className="rounded-2xl border-[#DC2626] border-dashed border-line bg-surface px-6 py-16 text-center shadow-sm">
           <h2 className="font-heading text-lg font-bold text-ink">No submissions{query ? ' match your search' : ' yet'}</h2>
           <p className="mx-auto mt-2 max-w-sm text-sm text-ink/50">
             {query ? 'Try a different search term.' : 'New form submissions will appear here as they come in.'}
@@ -836,7 +836,7 @@ export function ImportLeads({ onNavigate }) {
             if (file) handleFile(file);
           }}
           className={cx(
-            'flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed p-16 text-center transition',
+            'flex cursor-pointer flex-col items-center justify-center rounded-3xl border-[#DC2626] border-dashed p-16 text-center transition',
             dragOver ? 'border-accent bg-violet-500/[0.04]' : 'border-line bg-surface hover:border-accent/50'
           )}
         >
@@ -1207,7 +1207,7 @@ export function EmailTemplatesView() {
           </div>
           <div className="scroll-thin flex min-h-0 flex-1 justify-center overflow-auto bg-canvas/50 p-6">
             <div className={cx('overflow-hidden border border-line bg-white shadow-xl', previewMode === 'mobile' ? 'h-[620px] w-[320px] rounded-[28px]' : 'h-full w-full max-w-[850px] rounded-xl')}>
-              <iframe title="Email template preview" sandbox="allow-same-origin" srcDoc={previewDoc} className="h-full w-full border-0 bg-white" />
+              <iframe title="Email template preview" sandbox="allow-same-origin" srcDoc={previewDoc} className="h-full w-full border-[#DC2626] bg-white" />
             </div>
           </div>
         </section>
@@ -1263,8 +1263,8 @@ export function CampaignsView({ onOpenCampaign }) {
             </div>
           </button>
         ))}
-        <button onClick={createCampaign} className="flex min-h-[240px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-line bg-surface/50 p-5 text-center hover:border-accent/40">
-          <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-2xl text-violet-700">+</span>
+        <button onClick={createCampaign} className="flex min-h-[240px] flex-col items-center justify-center rounded-2xl border-[#DC2626] border-dashed border-line bg-surface/50 p-5 text-center hover:border-accent/40">
+          <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-[#DC2626]xl text-violet-700">+</span>
           <span className="font-heading text-sm font-bold text-ink">Create Campaign</span>
           <span className="mt-1 max-w-[160px] text-xs leading-normal text-ink/40">Start a blank automated sequence</span>
         </button>
@@ -1471,7 +1471,7 @@ function NodeInspector({ node, templates, onChange, onDelete, onPreview, onClose
   if (!node) {
     return (
       <div className="flex w-80 shrink-0 flex-col items-center justify-center border-l border-line bg-surface p-6 text-center">
-        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/10 text-2xl text-violet-600">+</div>
+        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/10 text-[#DC2626]xl text-violet-600">+</div>
         <p className="text-xs font-bold text-ink">Properties Inspector</p>
         <p className="mt-1 max-w-[200px] text-[10px] leading-relaxed text-ink/40">Click any step on the canvas to edit its properties.</p>
       </div>

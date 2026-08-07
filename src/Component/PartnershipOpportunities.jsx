@@ -28,11 +28,11 @@ const PartnershipOpportunities = () => {
           {opportunities.map((opportunity) => (
             <div
               key={opportunity.key}
-              className={`group relative bg-white p-9 rounded-3xl border border-slate-100 shadow-xl shadow-[#2C5AA0]/10 hover:shadow-[0_28px_70px_rgba(44,90,160,0.28)] hover:-translate-y-3 hover:scale-[1.02] transition-all duration-150 ease-out flex flex-col ${textAlign}`}
+              className={`group relative bg-white p-9 rounded-3xl border border-slate-100 shadow-xl shadow-[#DC2626]/10 hover:shadow-[0_28px_70px_rgba(220, 38, 38,0.28)] hover:-translate-y-3 hover:scale-[1.02] transition-all duration-150 ease-out flex flex-col ${textAlign}`}
             >
-              <div className="absolute inset-x-0 -top-px h-1 rounded-t-3xl bg-gradient-to-r from-[#2C5AA0] via-[#3b6cc4] to-[#1e3f73]" />
+              <div className="absolute inset-x-0 -top-px h-1 rounded-t-3xl bg-gradient-to-r from-[#DC2626] via-[#3b6cc4] to-[#B91C1C]" />
               <div className={`flex items-center gap-4 mb-6 ${rowDirection}`}>
-                <div className="h-14 w-14 rounded-2xl bg-[#2C5AA0]/10 text-[#2C5AA0] flex items-center justify-center transition duration-150 ease-out group-hover:scale-110">
+                <div className="h-14 w-14 rounded-2xl bg-[#DC2626]/10 text-[#DC2626] flex items-center justify-center transition duration-150 ease-out group-hover:scale-110">
                   <opportunity.icon className="text-3xl" />
                 </div>
                 <h3 className="font-poppins text-xl font-semibold text-gray-900">
@@ -45,7 +45,7 @@ const PartnershipOpportunities = () => {
               <ul className="space-y-3 mb-8">
                 {t(`partnershipOpportunities.cards.${opportunity.key}.features`, { returnObjects: true }).map((feature, idx) => (
                   <li key={idx} className={`flex items-start gap-3 font-geist text-gray-700 ${rowDirection}`}>
-                    <span className="mt-1 text-[#2C5AA0]">
+                    <span className="mt-1 text-[#DC2626]">
                       <FaCheckCircle className="h-5 w-5" />
                     </span>
                     <span>{feature}</span>
@@ -54,7 +54,7 @@ const PartnershipOpportunities = () => {
               </ul>
               <Link
                 to={opportunity.path}
-                className="mt-auto w-full inline-flex items-center justify-center font-poppins text-white px-6 py-2.5 rounded-full font-semibold bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] transition-all duration-150 ease-out hover:shadow-[0_16px_32px_rgba(44,90,160,0.35)] hover:-translate-y-0.5"
+                className="mt-auto w-full inline-flex items-center justify-center font-poppins text-white px-6 py-2.5 rounded-full font-semibold bg-gradient-to-r from-[#DC2626] to-[#B91C1C] transition-all duration-150 ease-out hover:shadow-[0_16px_32px_rgba(220, 38, 38,0.35)] hover:-translate-y-0.5"
               >
                 {t('partnershipOpportunities.learnMore')}
               </Link>

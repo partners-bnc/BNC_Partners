@@ -240,7 +240,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                 }`}
                 placeholder="Enter your email"
               />
-              {isCheckingEmail && <p className="text-blue-500 text-sm mt-1">Checking email availability...</p>}
+              {isCheckingEmail && <p className="text-red-500 text-sm mt-1">Checking email availability...</p>}
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
           </div>
@@ -293,7 +293,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
         <div className={`relative inline-block w-full max-w-xl my-3 overflow-visible ${textAlign} align-middle z-10 sm:my-8`}>
           <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
-          <div className="relative bg-gradient-to-r from-[#254C89] to-[#1e3f73] px-4 py-4 text-white sm:px-6">
+          <div className="relative bg-gradient-to-r from-[#254C89] to-[#B91C1C] px-4 py-4 text-white sm:px-6">
             <button
               onClick={onClose}
               className={`absolute top-4 ${closePosition} text-white hover:text-gray-200 transition-colors`}
@@ -301,7 +301,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
               <FaTimes size={18} />
             </button>
             <h2 className="mb-1 pr-8 text-lg font-bold sm:text-xl">Partner Application</h2>
-            <p className="text-blue-100 text-sm">Join our growing network of partners</p>
+            <p className="text-red-100 text-sm">Join our growing network of partners</p>
             <div className={`mt-3 flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm ${rowDirection}`}>
               <span className="text-sm">Step {currentStep} of 3</span>
               <span className="text-sm">{Math.round((currentStep / 3) * 100)}% complete</span>
@@ -337,7 +337,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                   className={`flex w-full items-center justify-center px-6 py-2 rounded-lg font-semibold transition-colors sm:w-auto ${autoMargin} ${
                     currentStep === 2 && emailExists
                       ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                      : 'bg-[#254C89] hover:bg-[#1e3f73] text-white'
+                      : 'bg-[#254C89] hover:bg-[#B91C1C] text-white'
                   }`}
                 >
                   Next
@@ -348,7 +348,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className={`w-full bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 sm:w-auto ${autoMargin}`}
+                  className={`w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 sm:w-auto ${autoMargin}`}
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Application'}
                 </button>

@@ -6,13 +6,13 @@ const AboutPlatform = () => {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <section className="bg-white py-20">
+    <section id="about" className="bg-white py-20">
       <div className="mx-auto px-4 max-w-[1400px]">
         <div className="flex flex-col lg:flex-row gap-10">
 
           {/* Left - Video */}
           <div className="w-full lg:w-[55%] flex-shrink-0">
-            <div className="rounded-2xl overflow-hidden shadow-2xl shadow-[#2C5AA0]/20 h-full min-h-[420px] relative">
+            <div className="rounded-2xl overflow-hidden shadow-2xl shadow-[#DC2626]/20 h-full min-h-[420px] relative">
               {playing ? (
                 <iframe
                   className="w-full h-full absolute inset-0"
@@ -54,14 +54,14 @@ const AboutPlatform = () => {
 
           {/* Right - Content */}
           <div className="w-full lg:w-[45%]">
-            <span className="inline-block text-sm font-semibold text-[#2C5AA0] uppercase tracking-widest mb-3 font-poppins">
+            <span className="inline-block text-sm font-semibold text-[#DC2626] uppercase tracking-widest mb-3 font-poppins">
               About Our Platform
             </span>
             <h2 className="font-poppins text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-              Empowering Partners to <span className="text-[#2C5AA0]">Grow Together</span>
+              Empowering Partners to <span className="text-[#DC2626]">Grow Together</span>
             </h2>
             <p className="font-geist text-gray-600 text-lg leading-relaxed mb-6">
-              BNC Consultech is a next-generation partner ecosystem platform designed to connect businesses, technology providers, and service experts across the globe. Our platform streamlines collaboration, accelerates deal cycles, and unlocks new revenue streams for every partner in the network.
+              BNC LEG is a next-generation partner ecosystem platform designed to connect businesses, technology providers, and service experts across the globe. Our platform streamlines collaboration, accelerates deal cycles, and unlocks new revenue streams for every partner in the network.
             </p>
             <p className="font-geist text-gray-600 leading-relaxed">
               Whether you're a sales partner, technology integrator, or service provider — BNC gives you the tools, insights, and support to scale your business with confidence. From real-time dashboards to AI-powered lead matching, we make partnership simple, transparent, and profitable.

@@ -26,6 +26,7 @@
   --color-surface: var(--theme-surface);
   --color-line: var(--theme-line);
   --font-heading: "Poppins", "Geist", system-ui, sans-serif;
+  --font-capriola: "Capriola", sans-serif;
 }
 
 /* Local Font Definitions */
@@ -146,11 +147,11 @@ html[dir="rtl"] .flipInRtl {
   transform: scaleX(-1);
 }
 
-html[dir="rtl"] [class*="space-x-"] > :not([hidden]) ~ :not([hidden]) {
+html[dir="rtl"] [class*="space-x-"]> :not([hidden])~ :not([hidden]) {
   --tw-space-x-reverse: 1;
 }
 
-html[dir="rtl"] [class*="divide-x"] > :not([hidden]) ~ :not([hidden]) {
+html[dir="rtl"] [class*="divide-x"]> :not([hidden])~ :not([hidden]) {
   --tw-divide-x-reverse: 1;
 }
 
@@ -171,12 +172,21 @@ a:hover {
   font-family: 'Geist', sans-serif;
 }
 
+.font-capriola {
+  font-family: 'Capriola', sans-serif;
+}
+
 .font-sora {
   font-family: 'Poppins', 'Geist', sans-serif;
 }
 
 /* Headings use Poppins */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -186,6 +196,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -197,6 +208,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -238,10 +250,12 @@ html {
 }
 
 @keyframes wave-float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-6px);
   }

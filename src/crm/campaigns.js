@@ -8,7 +8,7 @@ export const NODE_KIND_META = {
   aiEmail: { label: 'Send AI Email', blurb: 'AI rewrites a base template', chip: 'bg-indigo-100 text-indigo-700', icon: 'aiEmail' },
   wait: { label: 'Wait', blurb: 'Delay before the next step', chip: 'bg-amber-100 text-amber-700', icon: 'wait' },
   condition: { label: 'Branch', blurb: "Split on the lead's reaction", chip: 'bg-sky-100 text-sky-700', icon: 'condition' },
-  action: { label: 'Action', blurb: 'Internal CRM action', chip: 'bg-blue-100 text-blue-700', icon: 'action' },
+  action: { label: 'Action', blurb: 'Internal CRM action', chip: 'bg-red-100 text-blue-700', icon: 'action' },
   end: { label: 'End', blurb: 'Terminal outcome', chip: 'bg-rose-100 text-rose-700', icon: 'end' }
 };
 

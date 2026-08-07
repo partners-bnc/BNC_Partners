@@ -282,9 +282,9 @@ const StartChattingSection = ({ embedded = false }) => {
           ol: (props) => <ol className="mb-2 list-decimal space-y-1 pl-5 last:mb-0" {...omitMarkdownNode(props)} />,
           li: (props) => <li className="leading-relaxed" {...omitMarkdownNode(props)} />,
           blockquote: (props) => (
-            <blockquote className="mb-2 border-l-2 border-[#2C5AA0]/40 pl-3 italic text-gray-700 last:mb-0" {...omitMarkdownNode(props)} />
+            <blockquote className="mb-2 border-l-2 border-[#DC2626]/40 pl-3 italic text-gray-700 last:mb-0" {...omitMarkdownNode(props)} />
           ),
-          a: (props) => <a className="font-medium text-[#2C5AA0] underline underline-offset-2" {...omitMarkdownNode(props)} />,
+          a: (props) => <a className="font-medium text-[#DC2626] underline underline-offset-2" {...omitMarkdownNode(props)} />,
           code: (props) => <code className="rounded bg-white/70 px-1 py-0.5 text-[0.92em]" {...omitMarkdownNode(props)} />,
           pre: (props) => (
             <pre className="mb-2 overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs leading-relaxed text-white last:mb-0" {...omitMarkdownNode(props)} />
@@ -386,7 +386,7 @@ const StartChattingSection = ({ embedded = false }) => {
               {!hasUserMessage && (
                 <div className="text-center">
                   <div className="relative mb-6">
-                    <div className="w-20 h-20 rounded-[28px] bg-gradient-to-br from-[#2C5AA0] to-[#1e3f73] flex items-center justify-center shadow-[0_12px_24px_rgba(30,63,115,0.25)] mx-auto ring-1 ring-white/60">
+                    <div className="w-20 h-20 rounded-[28px] bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60">
                       <Building2 className="w-10 h-10 text-white" />
                     </div>
                   </div>
@@ -403,10 +403,10 @@ const StartChattingSection = ({ embedded = false }) => {
                       <button
                         key={`${item.title}-${index}`}
                         onClick={() => handleQuickCardClick(item.title, item.subtitle)}
-                        className={`p-4 bg-white border border-slate-200/70 rounded-2xl ${textAlign} transition-all group shadow-[0_10px_24px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:border-[#2C5AA0]/30 hover:bg-[#f8faff]`}
+                        className={`p-4 bg-white border border-slate-200/70 rounded-2xl ${textAlign} transition-all group shadow-[0_10px_24px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:border-[#DC2626]/30 hover:bg-[#f8faff]`}
                       >
-                        <div className="text-sm font-semibold text-gray-900 group-hover:text-[#2C5AA0]">{item.title}</div>
-                        <div className="text-xs text-gray-500 group-hover:text-[#2C5AA0]/80 mt-1">{item.subtitle}</div>
+                        <div className="text-sm font-semibold text-gray-900 group-hover:text-[#DC2626]">{item.title}</div>
+                        <div className="text-xs text-gray-500 group-hover:text-[#DC2626]/80 mt-1">{item.subtitle}</div>
                       </button>
                     ))}
                   </div>
@@ -418,7 +418,7 @@ const StartChattingSection = ({ embedded = false }) => {
                   <div key={msg.id || idx} className={`mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
                       <div className={`${botAvatarMarginClass} mt-1 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm`}>
-                        <Building2 className="h-4 w-4 text-[#2C5AA0]" />
+                        <Building2 className="h-4 w-4 text-[#DC2626]" />
                       </div>
                     )}
                     <div className="max-w-[90%] lg:max-w-[75%]">
@@ -430,7 +430,7 @@ const StartChattingSection = ({ embedded = false }) => {
                         <div
                           className={`px-4 py-2.5 rounded-2xl text-sm ${
                             msg.type === 'user'
-                              ? 'bg-[#2C5AA0] text-white rounded-br-sm'
+                              ? 'bg-[#DC2626] text-white rounded-br-sm'
                               : 'bg-gray-100 text-gray-800 rounded-bl-sm'
                           } ${textAlign}`}
                           dir={isRtl ? 'rtl' : 'ltr'}
@@ -442,8 +442,8 @@ const StartChattingSection = ({ embedded = false }) => {
                             onClick={() => handleSpeak(msg.text, idx)}
                             className={`mt-1 h-7 w-7 rounded-full flex items-center justify-center transition-colors ${
                               speakingIndex === idx
-                                ? 'bg-[#2C5AA0] text-white'
-                                : 'bg-white text-[#2C5AA0] hover:bg-[#eaf1ff]'
+                                ? 'bg-[#DC2626] text-white'
+                                : 'bg-white text-[#DC2626] hover:bg-[#eaf1ff]'
                             }`}
                             aria-label={t('startChatting.chat.speakMessage')}
                           >
@@ -468,9 +468,9 @@ const StartChattingSection = ({ embedded = false }) => {
                   <div className="mb-4 flex justify-start">
                     <div className="bg-white border border-gray-200 rounded-2xl px-4 py-2.5 shadow-sm">
                       <div className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-[#2C5AA0] animate-bounce [animation-delay:-0.2s]" />
-                        <span className="h-2 w-2 rounded-full bg-[#2C5AA0] animate-bounce [animation-delay:-0.1s]" />
-                        <span className="h-2 w-2 rounded-full bg-[#2C5AA0] animate-bounce" />
+                        <span className="h-2 w-2 rounded-full bg-[#DC2626] animate-bounce [animation-delay:-0.2s]" />
+                        <span className="h-2 w-2 rounded-full bg-[#DC2626] animate-bounce [animation-delay:-0.1s]" />
+                        <span className="h-2 w-2 rounded-full bg-[#DC2626] animate-bounce" />
                       </div>
                     </div>
                   </div>
@@ -483,13 +483,13 @@ const StartChattingSection = ({ embedded = false }) => {
             <div className="p-4 bg-white">
               <div className="relative max-w-3xl mx-auto group">
                 <div className="absolute -inset-3 rounded-3xl bg-gradient-to-r from-[#e6efff] via-[#f5f7ff] to-[#e9f2ff] opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative rounded-2xl transition-all duration-300 shadow-[0_10px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_30px_rgba(44,90,160,0.18)]">
+                <div className="relative rounded-2xl transition-all duration-300 shadow-[0_10px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_30px_rgba(220, 38, 38,0.18)]">
                   <input
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t('startChatting.chat.placeholder')}
-                  className={`w-full px-14 py-4 bg-white border border-gray-300/70 rounded-2xl outline-none text-gray-900 placeholder-gray-400 focus:border-[#2C5AA0] transition-all ${inputTextAlign}`}
+                  className={`w-full px-14 py-4 bg-white border border-gray-300/70 rounded-2xl outline-none text-gray-900 placeholder-gray-400 focus:border-[#DC2626] transition-all ${inputTextAlign}`}
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
@@ -520,7 +520,7 @@ const StartChattingSection = ({ embedded = false }) => {
                   </button>
                   <button
                     onClick={handleSendMessage}
-                    className="p-2.5 bg-[#2C5AA0] hover:bg-[#1e3f73] rounded-lg transition-all"
+                    className="p-2.5 bg-[#DC2626] hover:bg-[#B91C1C] rounded-lg transition-all"
                     aria-label={t('startChatting.chat.sendMessage')}
                   >
                     <Send className="w-5 h-5 text-white" />
@@ -562,10 +562,10 @@ const StartChattingSection = ({ embedded = false }) => {
               }}
             >
               <div className={rightPanelInnerClass}>
-              <div className="bg-white rounded-2xl p-5 shadow-[0_18px_40px_rgba(15,23,42,0.08)] border border-transparent hover:border-[#2C5AA0]/15 transition-all">
+              <div className="bg-white rounded-2xl p-5 shadow-[0_18px_40px_rgba(15,23,42,0.08)] border border-transparent hover:border-[#DC2626]/15 transition-all">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`flex items-center gap-2 ${rowDirection}`}>
-                    <Building2 className="w-4 h-4 text-[#2C5AA0]" />
+                    <Building2 className="w-4 h-4 text-[#DC2626]" />
                     <h3 className={`text-base font-bold text-gray-900 ${textAlign}`}>{t('startChatting.categories.title')}</h3>
                   </div>
                 </div>
@@ -576,7 +576,7 @@ const StartChattingSection = ({ embedded = false }) => {
                     <div
                       key={index}
                       onClick={() => navigate(service.route)}
-                      className="bg-white border border-gray-200 hover:border-[#2C5AA0] rounded-xl overflow-hidden cursor-pointer transition-all group hover:shadow-md hover:scale-[1.02] duration-200"
+                      className="bg-white border border-gray-200 hover:border-[#DC2626] rounded-xl overflow-hidden cursor-pointer transition-all group hover:shadow-md hover:scale-[1.02] duration-200"
                     >
                       <div className="h-24 relative overflow-hidden bg-gray-100">
                         <img
@@ -588,7 +588,7 @@ const StartChattingSection = ({ embedded = false }) => {
                       </div>
                       <div className="p-3">
                         <div className={`flex items-center gap-2 mb-2 ${rowDirection}`}>
-                          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#DC2626]/10 text-[#DC2626]">
                             <Icon className="w-4 h-4" />
                           </span>
                           <div className={`text-sm font-bold text-gray-900 line-clamp-2 ${textAlign}`}>{service.title}</div>
@@ -602,7 +602,7 @@ const StartChattingSection = ({ embedded = false }) => {
                 </div>
               </div>
 
-              <div className="rounded-2xl p-5 shadow-sm border border-[#2C5AA0]/20 bg-[radial-gradient(circle_at_top_left,#ffffff_0%,#e8f1ff_40%,#d6e6ff_72%,#c7dbff_100%)]">
+              <div className="rounded-2xl p-5 shadow-sm border border-[#DC2626]/20 bg-[radial-gradient(circle_at_top_left,#ffffff_0%,#ffebeb_40%,#d6e6ff_72%,#c7dbff_100%)]">
                 <div className={`flex items-start justify-between gap-4 ${rowDirection}`}>
                   <div className={textAlign}>
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('startChatting.cta.title')}</h3>
@@ -610,13 +610,13 @@ const StartChattingSection = ({ embedded = false }) => {
                       {t('startChatting.cta.subtitle')}
                     </p>
                   </div>
-                  <div className="w-12 h-12 rounded-2xl bg-white shadow flex items-center justify-center text-[#2C5AA0]">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow flex items-center justify-center text-[#DC2626]">
                     <Sparkles className="w-5 h-5" />
                   </div>
                 </div>
                 <a
                   href="/?open=partner"
-                  className={`mt-5 w-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3f73] hover:from-[#1e3f73] hover:to-[#1b3562] text-white text-sm font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group ${isRtl ? 'flex-row-reverse' : ''}`}
+                  className={`mt-5 w-full bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#1b3562] text-white text-sm font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group ${isRtl ? 'flex-row-reverse' : ''}`}
                 >
                   {t('startChatting.cta.button')}
                   <ArrowRight className={`w-4 h-4 transition-transform ${isRtl ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
@@ -626,7 +626,7 @@ const StartChattingSection = ({ embedded = false }) => {
               <div className="bg-white rounded-2xl p-5 shadow-sm">
                 <div className={`flex items-center justify-between mb-4 ${rowDirection}`}>
                   <h3 className={`text-base font-bold text-gray-900 ${textAlign}`}>{t('startChatting.enablement.title')}</h3>
-                  <button className="text-xs font-medium text-[#2C5AA0] hover:text-[#1e3f73] transition-colors">
+                  <button className="text-xs font-medium text-[#DC2626] hover:text-[#B91C1C] transition-colors">
                     {t('startChatting.enablement.viewResources')}
                   </button>
                 </div>
@@ -634,13 +634,13 @@ const StartChattingSection = ({ embedded = false }) => {
                   {insightCards.map((card, index) => (
                     <div
                       key={index}
-                      className={`flex gap-3 p-3 bg-gradient-to-br from-white to-[#f6f9ff] hover:from-[#eef5ff] hover:to-white rounded-xl cursor-pointer transition-all group border border-[#e6efff] hover:border-[#2C5AA0]/20 hover:-translate-y-0.5 hover:shadow-md ${rowDirection}`}
+                      className={`flex gap-3 p-3 bg-gradient-to-br from-white to-[#f6f9ff] hover:from-[#eef5ff] hover:to-white rounded-xl cursor-pointer transition-all group border border-[#e6efff] hover:border-[#DC2626]/20 hover:-translate-y-0.5 hover:shadow-md ${rowDirection}`}
                     >
                       <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-white border border-[#dbe7ff] flex items-center justify-center shadow-sm group-hover:shadow-md">
-                        <FileText className="w-5 h-5 text-[#2C5AA0]" />
+                        <FileText className="w-5 h-5 text-[#DC2626]" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className={`text-sm font-bold text-gray-900 mb-1 line-clamp-1 group-hover:text-[#2C5AA0] transition-colors ${textAlign}`}>
+                        <h4 className={`text-sm font-bold text-gray-900 mb-1 line-clamp-1 group-hover:text-[#DC2626] transition-colors ${textAlign}`}>
                           {card.title}
                         </h4>
                         <p className={`text-xs text-gray-600 line-clamp-2 leading-relaxed ${textAlign}`}>

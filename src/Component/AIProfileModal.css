@@ -1,7 +1,7 @@
 /* AI Profile Modal Custom Styles */
 .ai-profile-modal input[type="radio"],
 .ai-profile-modal input[type="checkbox"] {
-  accent-color: #2c5aa0;
+  accent-color: #DC2626;
 }
 
 .ai-modal-shell {
@@ -116,7 +116,7 @@ html[dir="rtl"] .ai-rail-note {
 
 .ai-rail-step.is-active {
   background: #eef4ff;
-  border-color: rgba(44, 90, 160, 0.3);
+  border-color: rgba(220, 38, 38, 0.3);
 }
 
 .ai-rail-step.is-complete {
@@ -138,7 +138,7 @@ html[dir="rtl"] .ai-rail-note {
 }
 
 .ai-rail-step.is-active .ai-rail-badge {
-  background: #2c5aa0;
+  background: #DC2626;
 }
 
 .ai-rail-step.is-complete .ai-rail-badge {
@@ -201,7 +201,7 @@ html[dir="rtl"] .ai-content-progress {
 
 .ai-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #2c5aa0, #0ea5e9);
+  background: linear-gradient(90deg, #DC2626, #0ea5e9);
   border-radius: 999px;
   transition: width 0.3s ease;
 }
@@ -243,14 +243,14 @@ html[dir="rtl"] .ai-modal-footer {
   border-radius: 999px;
   font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, #2c5aa0 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #DC2626 0%, #1d4ed8 100%);
   border: none;
   transition: all 0.2s ease;
 }
 
 .ai-btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(44, 90, 160, 0.2);
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
 }
 
 .ai-btn-primary:disabled {

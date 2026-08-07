@@ -213,20 +213,20 @@ const CountryServices = ({ country, title, description }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="relative rounded-3xl shadow-xl mb-10 border border-white/60">
             <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#2C5AA0] via-[#1f4f93] to-[#12346b]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#DC2626] via-[#000000] to-[#000000]" />
               <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
               <div className="absolute -left-16 -bottom-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
             </div>
             <div className={`relative z-10 p-8 md:p-10 text-white ${textAlign}`}>
               <div className={`flex flex-col gap-5 ${mdRowDirection} md:items-center md:justify-between`}>
                 <div>
-                  <p className="font-geist text-blue-100 text-sm uppercase tracking-[0.2em]">
+                  <p className="font-geist text-red-100 text-sm uppercase tracking-[0.2em]">
                     {t('countryServices.label')}
                   </p>
                   <h1 className="font-poppins text-3xl md:text-4xl font-bold mt-2">
                     {title}
                   </h1>
-                  <p className="font-geist text-blue-100 text-lg mt-3 max-w-2xl">
+                  <p className="font-geist text-red-100 text-lg mt-3 max-w-2xl">
                     {description}
                   </p>
                 </div>
@@ -247,11 +247,11 @@ const CountryServices = ({ country, title, description }) => {
                   }}
                   onFocus={() => setIsSuggestionsOpen(true)}
                   placeholder={t('countryServices.searchPlaceholder')}
-                  className={`w-full bg-white border border-black rounded-2xl px-4 py-3 text-sm font-geist shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                  className={`w-full bg-white border border-black rounded-2xl px-4 py-3 text-sm font-geist shadow-sm focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                 />
                 <button
                   type="submit"
-                  className={`absolute ${searchButtonPos} top-1/2 -translate-y-1/2 bg-[#2C5AA0] text-white px-4 py-2 rounded-xl text-sm font-semibold shadow hover:bg-[#1e3a8a] transition`}
+                  className={`absolute ${searchButtonPos} top-1/2 -translate-y-1/2 bg-[#DC2626] text-white px-4 py-2 rounded-xl text-sm font-semibold shadow hover:bg-[#000000] transition`}
                 >
                   {t('countryServices.searchButton')}
                 </button>
@@ -288,7 +288,7 @@ const CountryServices = ({ country, title, description }) => {
                     onClick={() => setActiveTag((current) => (current === tag.key ? '' : tag.key))}
                     className={`px-4 py-2 rounded-full text-sm font-semibold font-geist border transition transform-gpu perspective-[800px] hover:-translate-y-0.5 hover:shadow-[0_10px_22px_rgba(15,23,42,0.16)] hover:[transform:translateY(-2px)_rotateX(6deg)] ${
                       activeTag === tag.key
-                        ? 'bg-[#2C5AA0]/10 text-[#1e3a8a] border-black'
+                        ? 'bg-[#DC2626]/10 text-[#000000] border-black'
                         : 'bg-white text-slate-700 border-black hover:border-black'
                     }`}
                   >
@@ -330,14 +330,14 @@ const CountryServices = ({ country, title, description }) => {
                       {service.title}
                     </h2>
                     {service.bullets.length > 0 && (
-                      <span className="inline-flex items-center gap-1 whitespace-nowrap text-xs font-geist font-semibold text-[#2C5AA0] bg-blue-50 px-2.5 py-1 rounded-full">
+                      <span className="inline-flex items-center gap-1 whitespace-nowrap text-xs font-geist font-semibold text-[#DC2626] bg-red-50 px-2.5 py-1 rounded-full">
                         {t('countryServices.servicesCount', { count: service.bullets.length })}
                       </span>
                     )}
                   </div>
                   {service.bullets.length > 0 && (
                     <>
-                      <div className="h-1 w-16 bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] rounded-full mt-3" />
+                      <div className="h-1 w-16 bg-gradient-to-r from-[#DC2626] to-[#000000] rounded-full mt-3" />
                       <ul className={`mt-4 space-y-2 text-sm text-gray-700 list-disc list-inside ${textAlign}`}>
                         {service.bullets.map((item) => (
                           <li key={item} className="font-geist">
@@ -356,7 +356,7 @@ const CountryServices = ({ country, title, description }) => {
                 <button
                   type="button"
                   onClick={() => handleOpenService(service.id)}
-                  className={`absolute bottom-4 ${cardButtonPos} inline-flex items-center gap-2 text-sm font-semibold font-geist text-white rounded-full px-5 py-2.5 bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] shadow-lg shadow-[#2C5AA0]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#2C5AA0]/30 hover:-translate-y-0.5 hover:from-[#1e3a8a] hover:to-[#163062] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2C5AA0]/40`}
+                  className={`absolute bottom-4 ${cardButtonPos} inline-flex items-center gap-2 text-sm font-semibold font-geist text-white rounded-full px-5 py-2.5 bg-gradient-to-r from-[#DC2626] to-[#000000] shadow-lg shadow-[#DC2626]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#DC2626]/30 hover:-translate-y-0.5 hover:from-[#000000] hover:to-[#163062] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DC2626]/40`}
                 >
                   {t('countryServices.viewMore')}
                   <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-white/20 text-white text-xs transition-transform duration-300 group-hover:translate-x-0.5">

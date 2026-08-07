@@ -1940,7 +1940,7 @@ const ServiceDetail = () => {
         <Header />
         <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl shadow-lg p-8 text-center max-w-lg">
-            <h2 className="font-poppins text-2xl font-bold text-gray-900 mb-3">
+            <h2 className="font-poppins text-[#DC2626]xl font-bold text-gray-900 mb-3">
               {t('serviceDetail.notFoundTitle')}
             </h2>
             <p className="font-geist text-gray-600 mb-6">
@@ -1948,7 +1948,7 @@ const ServiceDetail = () => {
             </p>
             <button
               onClick={() => navigate('/bnc-services')}
-              className="bg-[#2C5AA0] text-white px-5 py-2.5 rounded-xl font-semibold"
+              className="bg-[#DC2626] text-white px-5 py-2.5 rounded-xl font-semibold"
             >
               {t('serviceDetail.backToBncServices')}
             </button>
@@ -1980,7 +1980,7 @@ const ServiceDetail = () => {
                     <p className="font-geist text-xs uppercase tracking-[0.2em] text-slate-400">
                       {countryLabel}
                     </p>
-                    <h1 className="font-poppins text-2xl font-semibold text-gray-900 mt-2">
+                    <h1 className="font-poppins text-[#DC2626]xl font-semibold text-gray-900 mt-2">
                       {service.title}
                     </h1>
                     <p className="font-geist text-sm text-gray-600 mt-3">
@@ -1995,13 +1995,13 @@ const ServiceDetail = () => {
                     onClick={() => setActiveSection(section.key)}
                     className={`group relative w-full ${isRtl ? 'text-right' : 'text-left'} px-4 py-3 rounded-xl border transition ${
                       activeSection === section.key
-                        ? 'bg-[#2C5AA0]/10 border-[#2C5AA0]/30 text-[#1e3a8a]'
+                        ? 'bg-[#DC2626]/10 border-[#DC2626]/30 text-[#000000]'
                         : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                     }`}
                   >
                     <span className="relative inline-block text-sm font-semibold font-geist">
                       {section.label}
-                      <span className={`absolute -bottom-1 ${isRtl ? 'right-0' : 'left-0'} h-0.5 w-0 bg-[#2C5AA0] transition-all duration-500 group-hover:w-full`}></span>
+                      <span className={`absolute -bottom-1 ${isRtl ? 'right-0' : 'left-0'} h-0.5 w-0 bg-[#DC2626] transition-all duration-500 group-hover:w-full`}></span>
                     </span>
                   </button>
                 ))}
@@ -2015,7 +2015,7 @@ const ServiceDetail = () => {
                   <div>
                     {activeSection !== 'know-more' && (
                       <div>
-                        <h2 className="font-poppins text-2xl font-semibold text-gray-900">
+                        <h2 className="font-poppins text-[#DC2626]xl font-semibold text-gray-900">
                           {activeSectionData.heading}
                         </h2>
                       </div>
@@ -2023,7 +2023,7 @@ const ServiceDetail = () => {
                     <p
                       className={`mt-2 ${sectionPadding} ${
                         activeSection === 'know-more'
-                          ? 'font-poppins text-sm sm:text-base font-medium leading-relaxed text-[#1e3a8a] bg-[#eef4ff] border border-[#cfe0ff] px-4 py-3 rounded-2xl shadow-sm'
+                          ? 'font-poppins text-sm sm:text-base font-medium leading-relaxed text-[#000000] bg-[#eef4ff] border border-[#cfe0ff] px-4 py-3 rounded-2xl shadow-sm'
                           : 'font-geist text-gray-600'
                       }`}
                     >
@@ -2049,14 +2049,14 @@ const ServiceDetail = () => {
                       )}
                       <div className="mt-5 border-t border-slate-200 pt-5">
                         <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                             <FiEye className="h-3.5 w-3.5" aria-hidden="true" />
                           </span>
                           <div>
                             <h3 className="font-poppins text-xl font-semibold">
                               {t('serviceDetail.overview')}
                             </h3>
-                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                           </div>
                         </div>
                         {Array.isArray(service.description) && service.description.length > 0 ? (
@@ -2074,14 +2074,14 @@ const ServiceDetail = () => {
                     <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                       <div className={`grid gap-6 md:grid-cols-2 ${sectionPadding}`}>
                         <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                             <FiList className="h-3.5 w-3.5" aria-hidden="true" />
                           </span>
                           <div>
                             <h3 className="font-poppins text-xl font-semibold">
                               {t('serviceDetail.serviceDetails')}
                             </h3>
-                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                           </div>
                         </div>
                         <style>{`
@@ -2094,7 +2094,7 @@ const ServiceDetail = () => {
                           .voice-bar {
                             width: 4px;
                             height: 12px;
-                            background: #2C5AA0;
+                            background: #DC2626;
                             border-radius: 999px;
                             animation: voicePulse 1.15s ease-in-out infinite;
                             transform-origin: center;
@@ -2138,12 +2138,12 @@ const ServiceDetail = () => {
                                         onClick={() => setActiveSubService(isActive ? null : index)}
                                         className={`text-left w-full transition flex items-center justify-between ${isRtl ? 'flex-row-reverse' : ''} ${
                                           isActive
-                                            ? 'text-[#1e3a8a] font-semibold'
-                                            : 'text-gray-700 hover:text-[#1e3a8a]'
+                                            ? 'text-[#000000] font-semibold'
+                                            : 'text-gray-700 hover:text-[#000000]'
                                         } ${inputAlign}`}
                                       >
                                         <span>{displayText}</span>
-                                        <span className={`${isRtl ? 'ml-0 mr-3' : 'ml-3'} text-[#2C5AA0]`}>
+                                        <span className={`${isRtl ? 'ml-0 mr-3' : 'ml-3'} text-[#DC2626]`}>
                                           {isActive ? <FiChevronUp className="h-4 w-4" /> : <FiChevronDown className="h-4 w-4" />}
                                         </span>
                                       </button>
@@ -2175,7 +2175,7 @@ const ServiceDetail = () => {
                             <button
                               type="button"
                               onClick={handleOpenRequirementModal}
-                              className="inline-flex items-center gap-2 rounded-full bg-[#2C5AA0] text-white px-5 py-2.5 text-sm font-semibold shadow hover:bg-[#1e3a8a] transition"
+                              className="inline-flex items-center gap-2 rounded-full bg-[#DC2626] text-white px-5 py-2.5 text-sm font-semibold shadow hover:bg-[#000000] transition"
                             >
                               {t('serviceDetail.voiceRequirement.button')}
                             </button>
@@ -2187,14 +2187,14 @@ const ServiceDetail = () => {
                     {activeSubServiceData && (
                       <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                         <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                             <FiInfo className="h-3.5 w-3.5" aria-hidden="true" />
                           </span>
                           <div>
                             <h4 className="font-poppins text-lg font-semibold">
                               {activeSubServiceData.title}
                             </h4>
-                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                           </div>
                         </div>
                         {hasStructuredSubService ? (
@@ -2303,14 +2303,14 @@ const ServiceDetail = () => {
 
                     <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                       <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                        <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                        <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                           <FiFileText className="h-3.5 w-3.5" aria-hidden="true" />
                         </span>
                         <div>
                           <h4 className="font-poppins text-lg font-semibold">
                             {t('serviceDetail.documents')}
                           </h4>
-                          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                         </div>
                       </div>
                       <div className={`mt-4 ${sectionPadding}`}>
@@ -2333,7 +2333,7 @@ const ServiceDetail = () => {
                                     href={doc.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="inline-flex items-center gap-2 text-[#2C5AA0] hover:text-[#1e3a8a] font-semibold"
+                                    className="inline-flex items-center gap-2 text-[#DC2626] hover:text-[#000000] font-semibold"
                                   >
                                     <FiFileText className="h-4 w-4" aria-hidden="true" />
                                     {doc.label}
@@ -2349,14 +2349,14 @@ const ServiceDetail = () => {
                 ) : activeSection === 'document-checklist' ? (
                   <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiFileText className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h3 className="font-poppins text-xl font-semibold">
                           {loanChecklistSection.heading}
                         </h3>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <div className={`mt-5 space-y-5 ${sectionPadding}`}>
@@ -2376,7 +2376,7 @@ const ServiceDetail = () => {
                             <div className="mt-4 space-y-4">
                               {section.groups.map((group) => (
                                 <div key={group.title}>
-                                  <p className="font-geist text-sm font-semibold text-[#1e3a8a]">
+                                  <p className="font-geist text-sm font-semibold text-[#000000]">
                                     {group.title}
                                   </p>
                                   <ul className={`mt-2 space-y-2 list-disc list-outside font-geist text-gray-700 ${listPadding}`}>
@@ -2396,7 +2396,7 @@ const ServiceDetail = () => {
                         href={loanChecklistDocument.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-[#2C5AA0] px-5 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-[#1e3a8a]"
+                        className="inline-flex items-center gap-2 rounded-full bg-[#DC2626] px-5 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-[#000000]"
                       >
                         <FiFileText className="h-4 w-4" aria-hidden="true" />
                         {loanChecklistDocument.label}
@@ -2406,14 +2406,14 @@ const ServiceDetail = () => {
                 ) : activeSection === 'manpower' ? (
                   <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiUsers className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h3 className="font-poppins text-xl font-semibold">
                           {t('serviceDetail.manpowerSupport')}
                         </h3>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     {service.manpowerDescription ? (
@@ -2431,14 +2431,14 @@ const ServiceDetail = () => {
                     <div className={`grid gap-6 ${isRtl ? 'md:grid-cols-[0.9fr_1.1fr]' : 'md:grid-cols-[1.1fr_0.9fr]'}`}>
                       <div>
                         <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                             <FiBookOpen className="h-3.5 w-3.5" aria-hidden="true" />
                           </span>
                             <div>
                               <h3 className="font-poppins text-xl font-semibold">
                               {t('serviceDetail.training.title')}
                               </h3>
-                              <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                              <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                             </div>
                           </div>
                         <p className={`font-geist text-gray-600 mt-3 ${sectionPadding}`}>
@@ -2515,8 +2515,8 @@ const ServiceDetail = () => {
                                 info@bncglobal.in
                               </p>
                             </div>
-                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#2C5AA0]/40 group-hover:bg-[#2C5AA0]/10 transition`}>
-                              <FiMail className="h-5 w-5 text-[#2C5AA0]" aria-hidden="true" />
+                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#DC2626]/40 group-hover:bg-[#DC2626]/10 transition`}>
+                              <FiMail className="h-5 w-5 text-[#DC2626]" aria-hidden="true" />
                             </div>
                           </div>
                         </a>
@@ -2553,8 +2553,8 @@ const ServiceDetail = () => {
                                 +91 98105 75613
                               </p>
                             </div>
-                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#2C5AA0]/40 group-hover:bg-[#2C5AA0]/10 transition`}>
-                              <FiPhone className="h-5 w-5 text-[#2C5AA0]" aria-hidden="true" />
+                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#DC2626]/40 group-hover:bg-[#DC2626]/10 transition`}>
+                              <FiPhone className="h-5 w-5 text-[#DC2626]" aria-hidden="true" />
                             </div>
                           </div>
                         </a>
@@ -2564,14 +2564,14 @@ const ServiceDetail = () => {
                 ) : activeSection === 'enquiry' ? (
                   <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiHelpCircle className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h3 className="font-poppins text-xl font-semibold">
                           {t('serviceDetail.enquiryDetails')}
                         </h3>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <p className={`font-geist text-gray-600 mt-3 ${sectionPadding}`}>
@@ -2581,14 +2581,14 @@ const ServiceDetail = () => {
                 ) : (
                   <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiHelpCircle className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h3 className="font-poppins text-xl font-semibold">
                           {t('serviceDetail.howWeHelp')}
                         </h3>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <p className={`font-geist text-gray-600 mt-3 ${sectionPadding}`}>
@@ -2600,14 +2600,14 @@ const ServiceDetail = () => {
                 {activeSection !== 'contact' && activeSection !== 'know-more' && (
                   <div className="border border-slate-200 rounded-2xl p-6 bg-white">
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiMail className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h3 className="font-poppins text-xl font-semibold">
                           {formTitle}
                         </h3>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <p className={`font-geist text-gray-600 text-sm mt-3 mb-4 ${sectionPadding}`}>
@@ -2630,7 +2630,7 @@ const ServiceDetail = () => {
                           value={formValues.name}
                           onChange={handleChange}
                           placeholder={t('serviceDetail.form.fullName')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                           required
                           readOnly={isLoggedIn}
                         />
@@ -2640,7 +2640,7 @@ const ServiceDetail = () => {
                           value={formValues.email}
                           onChange={handleChange}
                           placeholder={t('serviceDetail.form.email')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                           required
                           readOnly={isLoggedIn}
                         />
@@ -2650,7 +2650,7 @@ const ServiceDetail = () => {
                           value={formValues.phone}
                           onChange={handleChange}
                           placeholder={t('serviceDetail.form.phone')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                           readOnly={isLoggedIn}
                         />
                         <input
@@ -2659,7 +2659,7 @@ const ServiceDetail = () => {
                           value={formValues.company}
                           onChange={handleChange}
                           placeholder={t('serviceDetail.form.company')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                         />
                         <textarea
                           name="message"
@@ -2667,12 +2667,12 @@ const ServiceDetail = () => {
                           onChange={handleChange}
                           rows="4"
                           placeholder={messagePlaceholder}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                         />
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full bg-[#2C5AA0] text-white py-2.5 rounded-xl font-semibold shadow hover:bg-[#1e3a8a] transition"
+                          className="w-full bg-[#DC2626] text-white py-2.5 rounded-xl font-semibold shadow hover:bg-[#000000] transition"
                         >
                           {isSubmitting ? t('serviceDetail.submitting') : formCta}
                         </button>

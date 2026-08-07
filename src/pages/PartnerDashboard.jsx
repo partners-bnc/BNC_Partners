@@ -314,7 +314,7 @@ const PartnerDashboard = () => {
     return (
       <div className="min-h-screen bg-[#f7f3ee] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C5AA0] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DC2626] mx-auto mb-4"></div>
           <p className="text-gray-600">{t('partnerDashboard.loading')}</p>
         </div>
       </div>
@@ -406,12 +406,12 @@ const PartnerDashboard = () => {
                     ref={aiProfileRef}
                     className={`w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 transition-all ${
                       isWalkthroughActive && activeWalkthroughStep?.key === 'aiProfile'
-                        ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                        ? 'relative z-[1001] ring-[#DC2626] shadow-2xl'
                         : 'ring-slate-200/70'
                     }`}
                   >
                     <div className={`flex items-center gap-2 ${rowDirection}`}>
-                      <FaUser className="h-3.5 w-3.5 text-[#2C5AA0]" />
+                      <FaUser className="h-3.5 w-3.5 text-[#DC2626]" />
                       <div className="flex-1">
                         <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
                           {t('partnerDashboard.aiProfile.title')}
@@ -428,7 +428,7 @@ const PartnerDashboard = () => {
                       className={`mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors ${
                         partnerData?.aiProfileCompleted
                           ? 'bg-emerald-500 text-white cursor-not-allowed'
-                          : 'bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]'
+                          : 'bg-gradient-to-r from-[#DC2626] to-[#000000] text-white hover:from-[#000000] hover:to-[#DC2626]'
                       }`}
                     >
                       {partnerData?.aiProfileCompleted ? t('partnerDashboard.aiProfile.done') : t('partnerDashboard.aiProfile.start')}
@@ -439,12 +439,12 @@ const PartnerDashboard = () => {
                   ref={referralRef}
                   className={`w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 transition-all ${
                     isWalkthroughActive && activeWalkthroughStep?.key === 'referralModel'
-                      ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                      ? 'relative z-[1001] ring-[#DC2626] shadow-2xl'
                       : 'ring-slate-200/70'
                   }`}
                 >
                   <div className={`flex items-center gap-2 ${rowDirection}`}>
-                    <FaSitemap className="h-3.5 w-3.5 text-[#2C5AA0]" />
+                    <FaSitemap className="h-3.5 w-3.5 text-[#DC2626]" />
                     <div className="flex-1">
                       <h3 className="font-poppins text-[10px] font-semibold text-slate-900">
                         {t('partnerDashboard.referralProgram.title')}
@@ -454,7 +454,7 @@ const PartnerDashboard = () => {
                   <button
                     type="button"
                     onClick={() => navigate('/referral-program')}
-                    className="mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors bg-linear-to-r from-[#2C5AA0] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#2C5AA0]"
+                    className="mt-2 w-full rounded-full px-2 py-1 text-[9px] font-semibold transition-colors bg-linear-to-r from-[#DC2626] to-[#000000] text-white hover:from-[#000000] hover:to-[#DC2626]"
                   >
                     {t('partnerDashboard.referralProgram.cta')}
                   </button>
@@ -463,7 +463,7 @@ const PartnerDashboard = () => {
                   ref={agreementRef}
                   className={`w-32 rounded-lg bg-white p-2.5 shadow-sm ring-1 transition-all ${
                     isWalkthroughActive && activeWalkthroughStep?.key === 'agreement'
-                      ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                      ? 'relative z-[1001] ring-[#DC2626] shadow-2xl'
                       : 'ring-slate-200/70'
                   }`}
                 >
@@ -523,12 +523,12 @@ const PartnerDashboard = () => {
                     onClick={handleOpenRequirementModal}
                     className={`w-full inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 transition-all ${
                       isWalkthroughActive && activeWalkthroughStep?.key === 'requirement'
-                        ? 'relative z-[1001] ring-[#2C5AA0] shadow-2xl'
+                        ? 'relative z-[1001] ring-[#DC2626] shadow-2xl'
                         : 'ring-slate-200 hover:bg-slate-50'
                     }`}
                     aria-label="Open voice requirement"
                   >
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2C5AA0]/10 text-[#2C5AA0]">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#DC2626]/10 text-[#DC2626]">
                       <FaMicrophone className="h-4 w-4" />
                     </span>
                     Speak your requirement — we handle the rest
@@ -563,7 +563,7 @@ const PartnerDashboard = () => {
             ref={servicesRef}
             className={`mt-4 rounded-3xl transition-all ${
               isWalkthroughActive && activeWalkthroughStep?.key === 'services'
-                ? 'relative z-[1001] ring-2 ring-[#2C5AA0] ring-offset-4 ring-offset-[#f7f3ee]'
+                ? 'relative z-[1001] ring-2 ring-[#DC2626] ring-offset-4 ring-offset-[#f7f3ee]'
                 : ''
             }`}
           >
@@ -579,7 +579,7 @@ const PartnerDashboard = () => {
                   onClick={() => setSelectedCountry(item.key)}
                   className={`rounded-full px-4 py-2 text-xs font-semibold shadow-sm transition ${
                     selectedCountry === item.key
-                      ? 'bg-[#2C5AA0] text-white'
+                      ? 'bg-[#DC2626] text-white'
                       : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                   }`}
                 >
@@ -611,14 +611,14 @@ const PartnerDashboard = () => {
                         {service.title}
                       </h2>
                       {service.bullets?.length > 0 && (
-                        <span className="inline-flex items-center gap-1 whitespace-nowrap text-xs font-geist font-semibold text-[#2C5AA0] bg-blue-50 px-2.5 py-1 rounded-full">
+                        <span className="inline-flex items-center gap-1 whitespace-nowrap text-xs font-geist font-semibold text-[#DC2626] bg-red-50 px-2.5 py-1 rounded-full">
                           {t('countryServices.servicesCount', { count: service.bullets.length })}
                         </span>
                       )}
                     </div>
                     {service.bullets?.length > 0 && (
                       <>
-                        <div className="h-1 w-16 bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] rounded-full mt-3" />
+                        <div className="h-1 w-16 bg-gradient-to-r from-[#DC2626] to-[#000000] rounded-full mt-3" />
                         <ul className={`mt-4 space-y-2 text-sm text-gray-700 list-disc list-inside ${textAlign}`}>
                           {service.bullets.map((item) => (
                             <li key={item} className="font-geist">
@@ -637,7 +637,7 @@ const PartnerDashboard = () => {
                   <button
                     type="button"
                     onClick={() => navigate(`/services/${selectedCountry}/${service.id}`)}
-                    className={`absolute bottom-4 ${cardButtonPos} inline-flex items-center gap-2 text-sm font-semibold font-geist text-white rounded-full px-5 py-2.5 bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] shadow-lg shadow-[#2C5AA0]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#2C5AA0]/30 hover:-translate-y-0.5 hover:from-[#1e3a8a] hover:to-[#163062] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2C5AA0]/40`}
+                    className={`absolute bottom-4 ${cardButtonPos} inline-flex items-center gap-2 text-sm font-semibold font-geist text-white rounded-full px-5 py-2.5 bg-gradient-to-r from-[#DC2626] to-[#000000] shadow-lg shadow-[#DC2626]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#DC2626]/30 hover:-translate-y-0.5 hover:from-[#000000] hover:to-[#163062] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DC2626]/40`}
                   >
                     {t('countryServices.viewMore')}
                     <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-white/20 text-white text-xs transition-transform duration-300 group-hover:translate-x-0.5">
@@ -656,7 +656,7 @@ const PartnerDashboard = () => {
         <>
           <div className="fixed inset-0 z-[1000] bg-slate-950/45 pointer-events-none" />
           <div
-            className="fixed z-[1001] rounded-2xl border-2 border-[#2C5AA0] bg-transparent shadow-[0_0_0_9999px_rgba(15,23,42,0.45)] pointer-events-none transition-all duration-200"
+            className="fixed z-[1001] rounded-2xl border-[#DC2626] border-[#DC2626] bg-transparent shadow-[0_0_0_9999px_rgba(15,23,42,0.45)] pointer-events-none transition-all duration-200"
             style={{
               top: Math.max(walkthroughRect.top - 8, 8),
               left: Math.max(walkthroughRect.left - 8, 8),
@@ -671,7 +671,7 @@ const PartnerDashboard = () => {
           >
             <div className={`flex items-start justify-between gap-4 ${rowDirection}`}>
               <div className={textAlign}>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#2C5AA0]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#DC2626]">
                   {t('partnerDashboard.walkthrough.label')}
                 </p>
                 <h3 className="mt-2 font-poppins text-lg font-semibold text-slate-900">
@@ -715,7 +715,7 @@ const PartnerDashboard = () => {
               <button
                 type="button"
                 onClick={handleWalkthroughNext}
-                className="rounded-full bg-[#2C5AA0] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1e3a8a]"
+                className="rounded-full bg-[#DC2626] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#000000]"
               >
                 {walkthroughStep === walkthroughSteps.length - 1
                   ? t('partnerDashboard.walkthrough.actions.finish')

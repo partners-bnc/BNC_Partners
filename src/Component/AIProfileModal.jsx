@@ -521,7 +521,7 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
       <div className={`ai-profile-modal ai-modal-shell max-w-6xl w-full ${textAlign}`}>
         <div className={`ai-modal-header flex flex-wrap items-start justify-between gap-4 ${rowDirection}`}>
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">{t('aiProfile.title')}</h2>
+            <h2 className="text-[#DC2626]xl font-bold text-slate-900">{t('aiProfile.title')}</h2>
             <p className="text-slate-600">{t('aiProfile.subtitle')}</p>
           </div>
           <div className={`${autoMargin} ${textAlign}`}>
@@ -582,7 +582,7 @@ const AIProfileModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
                       </svg>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('aiProfile.submittedTitle')}</h3>
+                  <h3 className="text-[#DC2626]xl font-bold text-gray-900 mb-4">{t('aiProfile.submittedTitle')}</h3>
                   <p className="text-gray-600 text-lg">{t('aiProfile.submittedSubtitle')}</p>
                 </div>
               ) : (

@@ -17,7 +17,7 @@ const CTA = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 relative">
             <span className="block">
-              {t('cta.title')} <span style={{color: '#2C5AA0'}}>{t('cta.highlight')}</span>
+              {t('cta.title')} <span style={{color: '#DC2626'}}>{t('cta.highlight')}</span>
             </span>
             <div className="w-60 h-0.5 bg-white mx-auto mt-2"></div>
           </h2>
@@ -28,7 +28,7 @@ const CTA = () => {
           <div className={`flex flex-col gap-4 justify-center mb-8 ${buttonDirection}`}>
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#2C5AA0] text-white px-8 py-3 rounded-full font-semibold transition-colors hover:bg-[#1e3f73] flex items-center justify-center gap-2"
+              className="bg-[#DC2626] text-white px-8 py-3 rounded-full font-semibold transition-colors hover:bg-[#B91C1C] flex items-center justify-center gap-2"
             >
               {t('cta.becomePartner')}
             </button>
@@ -44,7 +44,7 @@ const CTA = () => {
           <div className="flex justify-center space-x-4">
             <a
               href="https://www.linkedin.com/company/broccoli-and-carrots-global-services-pvt-ltd-/"
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#2C5AA0] hover:bg-gray-100 transition-colors"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#DC2626] hover:bg-gray-100 transition-colors"
               aria-label="LinkedIn"
               target="_blank"
               rel="noreferrer"
@@ -55,7 +55,7 @@ const CTA = () => {
             </a>
             <a
               href="https://www.instagram.com/bncglobal.in/"
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#2C5AA0] hover:bg-gray-100 transition-colors"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#DC2626] hover:bg-gray-100 transition-colors"
               aria-label="Instagram"
               target="_blank"
               rel="noreferrer"
@@ -66,7 +66,7 @@ const CTA = () => {
             </a>
             <a
               href="https://www.youtube.com/@bncglobal1"
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#2C5AA0] hover:bg-gray-100 transition-colors"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#DC2626] hover:bg-gray-100 transition-colors"
               aria-label="YouTube"
               target="_blank"
               rel="noreferrer"
@@ -77,7 +77,7 @@ const CTA = () => {
             </a>
             <a
               href="https://chat.whatsapp.com/JuKT39dKPEW2RxyA1vuHFK"
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#2C5AA0] hover:bg-gray-100 transition-colors"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#DC2626] hover:bg-gray-100 transition-colors"
               aria-label="WhatsApp Community"
               target="_blank"
               rel="noreferrer"

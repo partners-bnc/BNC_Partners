@@ -20,13 +20,13 @@ const FloatingChatButton = () => {
           <img
             src="https://media.licdn.com/dms/image/v2/D5603AQEra7lryPucqw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727271678522?e=1772668800&v=beta&t=SFN61g3iPBn9kHkDptoI-S75So0uBpFhC78Mhrezjkw"
             alt="AI assistant"
-            className="h-16 w-16 rounded-full object-cover border border-[#2C5AA0] shadow-md"
+            className="h-16 w-16 rounded-full object-cover border border-[#DC2626] shadow-md"
           />
         </div>
         <div className="relative z-10 flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-lg border border-slate-100 -mt-2">
           <span className="relative flex h-2.5 w-2.5 items-center justify-center">
-            <span className="absolute inline-flex h-2.5 w-2.5 rounded-full bg-[#2C5AA0]/60 animate-ping"></span>
-            <span className="h-2.5 w-2.5 rounded-full bg-[#2C5AA0] ring-2 ring-[#2C5AA0]/30"></span>
+            <span className="absolute inline-flex h-2.5 w-2.5 rounded-full bg-[#DC2626]/60 animate-ping"></span>
+            <span className="h-2.5 w-2.5 rounded-full bg-[#DC2626] ring-2 ring-[#DC2626]/30"></span>
           </span>
           <span className="font-geist text-xs font-semibold text-slate-700">
             Get AI help

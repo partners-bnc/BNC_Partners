@@ -65,7 +65,7 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
       <div className="bg-white rounded-2xl w-full max-w-3xl shadow-xl border border-slate-200">
         <div className="p-6 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#2C5AA0] flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-red-50 text-[#DC2626] flex items-center justify-center">
               <FaFileSignature className="h-5 w-5" />
             </div>
             <div>
@@ -130,7 +130,7 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
                   type="checkbox"
                   checked={accepted}
                   onChange={(event) => setAccepted(event.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-slate-300 text-[#2C5AA0] focus:ring-[#2C5AA0]"
+                  className="mt-1 h-4 w-4 rounded border-slate-300 text-[#DC2626] focus:ring-[#DC2626]"
                 />
                 <span>{t('termsAgreement.acceptText')}</span>
               </label>
@@ -147,7 +147,7 @@ const TermsAgreementModal = ({ isOpen, onClose, partnerData, onSubmitted }) => {
                 <button
                   type="submit"
                   disabled={!isAtEnd || !accepted || !signatureName.trim() || isSubmitting}
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] text-white font-semibold shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000] text-white font-semibold shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Submitting...' : t('termsAgreement.submit')}
                 </button>
