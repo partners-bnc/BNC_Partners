@@ -5,7 +5,10 @@
   },
   "header": {
     "home": "Home",
-    "services": "BnC Services",
+    "about": "About",
+    "services": "Services",
+    "howItWorks": "How It Works",
+    "contact": "Contact",
     "aiProfiling": "AI Profiling",
     "applyNow": "Apply Now",
     "aiChatting": "AI Chatting",
@@ -27,9 +30,12 @@
   "hero": {
     "badge": "Join Our Growing Network",
     "titlePrefix": "Partner with",
-    "subtitle": "Become the Partner Your Clients Can't Replace.",
+    "subtitle": "A League Of Extraordinary Gentlemen",
     "becomePartner": "Become a Partner",
     "partnerLogin": "Partner Login",
+    "getStartedFree": "Get Started — It's Free",
+    "downloadApp": "Download — Mobile App",
+    "comingSoon": "Mobile App is coming soon to iOS & Android!",
     "highlights": {
       "finance": "Unlock New Revenue Streams",
       "manpower": "Position Yourself as the Client’s Most Trusted Advisor",
@@ -43,7 +49,7 @@
   },
   "partnershipsPage": {
     "heroTitle": "Partnership Opportunities",
-    "heroSubtitle": "Discover various ways to partner with BNC Consultech and grow your business"
+    "heroSubtitle": "Discover various ways to partner with BNC LEG and grow your business"
   },
   "partnershipOpportunities": {
     "title": "Partnership Opportunities",
@@ -231,7 +237,7 @@
       "title": "Objective",
       "items": [
         "Encourage structured partner expansion up to 5 levels.",
-        "Funded by up to 3% deduction from BNC Consultech Platform Fee (10-25%).",
+        "Funded by up to 3% deduction from BNC LEG Platform Fee (10-25%).",
         "No impact on Service / Technical / Strategic / International core earnings.",
         "Paid only on realised client milestone revenue."
       ]
@@ -433,12 +439,12 @@
   "cta": {
     "title": "Ready to Launch Your",
     "highlight": "Partnership Journey?",
-    "subtitle": "Join 5000+ entrepreneurs who successfully registered their business with BNC Consultech. Get started in just 4-7 days!",
+    "subtitle": "Join 5000+ entrepreneurs who successfully registered their business with BNC LEG. Get started in just 4-7 days!",
     "becomePartner": "Become a Partner",
     "talkToExpert": "Book a consultation"
   },
   "footer": {
-    "copyright": "Copyrights © 2026 BNC Consultech"
+    "copyright": "Copyright © 2026 BNC LEG 'A League Of Extraordinary Gentlemen'. All rights reserved."
   },
   "bncServices": {
     "title": "BnC Services",
@@ -600,8 +606,8 @@
     "loginRequired": "Please log in so we can pre-fill your details before submitting.",
     "submitFailed": "Submission failed. Please try again.",
     "documentsLabels": {
-      "bncGlobal": "BNC Consultech",
-      "bncGlobalKsa": "BNC Consultech (KSA)"
+      "bncGlobal": "BNC LEG",
+      "bncGlobalKsa": "BNC LEG (KSA)"
     },
     "voiceRequirement": {
       "title": "Say It. Send It. Done.",
@@ -2445,7 +2451,7 @@
     "loading": "Loading dashboard...",
     "title": "Partner Dashboard",
     "welcomeBack": "Welcome back, {{name}}",
-    "subtitle": "Ready to grow your services with BNC Consultech? Collaborate, manage, and expand your reach.",
+    "subtitle": "Ready to grow your services with BNC LEG? Collaborate, manage, and expand your reach.",
     "searchPlaceholder": "Search for a service or keyword",
     "searchAria": "Search",
     "accountIdLabel": "Account ID",
@@ -2610,7 +2616,7 @@
     "summaryItems": [
       "Partner commits to accurate, timely service delivery and ethical business practices.",
       "Confidential information must be protected and used solely for collaboration purposes.",
-      "All engagements are subject to BNC Consultech quality standards and compliance policies.",
+      "All engagements are subject to BNC LEG quality standards and compliance policies.",
       "Any disputes will be handled in good faith and resolved per applicable laws.",
       "Agreement remains valid until terminated by either party with written notice."
     ],
@@ -2618,14 +2624,14 @@
       {
         "title": "1. Parties and Purpose",
         "paragraphs": [
-          "This Partner Agreement (\"Agreement\") is entered into between BNC Consultech Pvt. Ltd. (\"BNC Consultech\") and the undersigned partner (\"Partner\"). The purpose of this Agreement is to define the terms under which the Partner may collaborate with BNC Consultech to deliver services, generate qualified enquiries, and participate in joint opportunities.",
-          "By signing, the Partner confirms authority to enter this Agreement on behalf of its organization and agrees to operate in alignment with BNC Consultech standards and brand values."
+          "This Partner Agreement (\"Agreement\") is entered into between BNC LEG Pvt. Ltd. (\"BNC LEG\") and the undersigned partner (\"Partner\"). The purpose of this Agreement is to define the terms under which the Partner may collaborate with BNC LEG to deliver services, generate qualified enquiries, and participate in joint opportunities.",
+          "By signing, the Partner confirms authority to enter this Agreement on behalf of its organization and agrees to operate in alignment with BNC LEG standards and brand values."
         ]
       },
       {
         "title": "2. Scope of Collaboration",
         "paragraphs": [
-          "BNC Consultech may refer opportunities, share leads, or invite the Partner to deliver defined services. The Partner may also introduce client requirements or opportunities to BNC Consultech for joint delivery.",
+          "BNC LEG may refer opportunities, share leads, or invite the Partner to deliver defined services. The Partner may also introduce client requirements or opportunities to BNC LEG for joint delivery.",
           "Specific project scope, pricing, and timelines will be documented separately for each engagement and will form part of this Agreement once accepted by both parties."
         ],
         "bullets": [
@@ -2645,7 +2651,7 @@
         "title": "4. Roles and Responsibilities",
         "paragraphs": [
           "The Partner is responsible for timely delivery, professional conduct, and maintaining accurate records related to work performed.",
-          "BNC Consultech will provide engagement details, agreed commercial terms, and collaboration support as required."
+          "BNC LEG will provide engagement details, agreed commercial terms, and collaboration support as required."
         ],
         "bullets": [
           "Maintain confidentiality of all client and platform information.",
@@ -2656,7 +2662,7 @@
       {
         "title": "5. Quality Standards",
         "paragraphs": [
-          "All deliverables must meet BNC Consultech quality benchmarks. Where required, BNC Consultech may conduct quality reviews, audits, or request corrective actions.",
+          "All deliverables must meet BNC LEG quality benchmarks. Where required, BNC LEG may conduct quality reviews, audits, or request corrective actions.",
           "Repeated quality issues or material non-compliance may lead to suspension or termination."
         ]
       },
@@ -2676,34 +2682,34 @@
         "bullets": [
           "No disclosure to third parties without written consent.",
           "Maintain reasonable administrative, technical, and physical safeguards.",
-          "Promptly notify BNC Consultech of any suspected breach."
+          "Promptly notify BNC LEG of any suspected breach."
         ]
       },
       {
         "title": "8. Intellectual Property",
         "paragraphs": [
           "Pre-existing intellectual property remains with the originating party. Work products created specifically for an engagement will be owned as agreed in the project scope.",
-          "The Partner may not use BNC Consultech trademarks or brand assets without prior written approval."
+          "The Partner may not use BNC LEG trademarks or brand assets without prior written approval."
         ]
       },
       {
         "title": "9. Non-Solicitation",
         "paragraphs": [
-          "During the term of this Agreement and for twelve (12) months thereafter, the Partner shall not directly solicit BNC Consultech clients, prospects, or employees for competing services without written consent."
+          "During the term of this Agreement and for twelve (12) months thereafter, the Partner shall not directly solicit BNC LEG clients, prospects, or employees for competing services without written consent."
         ]
       },
       {
         "title": "10. Liability and Indemnity",
         "paragraphs": [
-          "Each party is responsible for its own acts and omissions. The Partner agrees to indemnify BNC Consultech against claims arising from Partner negligence, misconduct, or breach of this Agreement.",
+          "Each party is responsible for its own acts and omissions. The Partner agrees to indemnify BNC LEG against claims arising from Partner negligence, misconduct, or breach of this Agreement.",
           "Neither party shall be liable for indirect, incidental, or consequential damages, except where prohibited by law."
         ]
       },
       {
         "title": "11. Termination",
         "paragraphs": [
-          "Either party may terminate this Agreement with written notice. BNC Consultech may terminate immediately in the event of material breach, fraud, or compliance violations.",
-          "Upon termination, the Partner must return or securely destroy confidential materials and cease use of BNC Consultech brand assets."
+          "Either party may terminate this Agreement with written notice. BNC LEG may terminate immediately in the event of material breach, fraud, or compliance violations.",
+          "Upon termination, the Partner must return or securely destroy confidential materials and cease use of BNC LEG brand assets."
         ]
       },
       {
@@ -2995,7 +3001,7 @@
   },
   "startChatting": {
     "hero": {
-      "title": "Ready to partner with BNC Consultech?",
+      "title": "Ready to partner with BNC LEG?",
       "subtitle": "We work globally to help partners onboard, stay compliant, and grow together."
     },
     "quickCards": [
@@ -3019,7 +3025,7 @@
     "quickCardMessage": "{{title}} - {{subtitle}}",
     "chat": {
       "placeholder": "Ask anything...",
-      "assistantDisclaimer": "BNC Consultech AI can make mistakes. Check important info.",
+      "assistantDisclaimer": "BNC LEG AI can make mistakes. Check important info.",
       "speakMessage": "Speak message",
       "openRequirement": "Open requirement recorder",
       "voiceInput": "Voice input",
@@ -3200,7 +3206,7 @@
       "titleHighlight": "Grow",
       "titleSuffix": "Our Network",
       "subtitle": "Refer partners, build a 5-level network, and earn structured commissions on every project milestone they close - up to",
-      "subtitleTail": "from the BNC Consultech Platform Fee.",
+      "subtitleTail": "from the BNC LEG Platform Fee.",
       "primaryCta": "Become a Referral Partner",
       "secondaryCta": "See How It Works"
     },
@@ -3233,7 +3239,7 @@
     },
     "note": {
       "label": "Important:",
-      "text": "If fewer than 5 levels exist in your chain, unused percentage stays with the BNC Platform. The total commission pool is strictly capped at 3%, deducted only from the BNC Consultech Platform Fee (10-25%). Your Service, Technical, Strategic, and International earnings are completely untouched."
+      "text": "If fewer than 5 levels exist in your chain, unused percentage stays with the BNC Platform. The total commission pool is strictly capped at 3%, deducted only from the BNC LEG Platform Fee (10-25%). Your Service, Technical, Strategic, and International earnings are completely untouched."
     },
     "donut": {
       "title": "Share of 3% Pool per Level",
@@ -3295,7 +3301,7 @@
       "r2": {
         "icon": "💰",
         "title": "Realised Revenue Only",
-        "desc": "Commissions are paid only after project milestone revenue is confirmed and received by BNC Consultech."
+        "desc": "Commissions are paid only after project milestone revenue is confirmed and received by BNC LEG."
       },
       "r3": {
         "icon": "🚫",
@@ -3321,7 +3327,7 @@
     "cta": {
       "titleLine1": "Build Your Network.",
       "titleLine2": "Earn on Every Level.",
-      "subtitle": "Join BNC Consultech's Referral Program today. Refer a partner, grow your chain, and watch commissions flow automatically with every closed project.",
+      "subtitle": "Join BNC LEG's Referral Program today. Refer a partner, grow your chain, and watch commissions flow automatically with every closed project.",
       "primaryCta": "Register as Referral Partner",
       "secondaryCta": "Contact Our Team"
     }
@@ -3491,11 +3497,11 @@
         },
         {
           "title": "BNC Sets the Split",
-          "desc": "The exact split across levels is defined by BNC Consultech based on the deal."
+          "desc": "The exact split across levels is defined by BNC LEG based on the deal."
         }
       ],
-      "footerTitle": "BNC Consultech Defines the Split",
-      "footerText": "The exact referral split across levels is set by BNC Consultech based on the deal scope and contribution."
+      "footerTitle": "BNC LEG Defines the Split",
+      "footerText": "The exact referral split across levels is set by BNC LEG based on the deal scope and contribution."
     },
     "cta": {
       "label": "Ready to Build Your Referral Network?",

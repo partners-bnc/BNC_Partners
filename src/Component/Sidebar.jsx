@@ -2,7 +2,6 @@ import React, { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaPaperPlane, FaUser, FaShieldAlt, FaTimes, FaMapMarkerAlt, FaRocketchat } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import bncLogo from '../assets/bnc.png';
 
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 
@@ -42,27 +41,33 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
           onClick={onClose}
         ></div>
         
-        <div className={`absolute top-0 h-full w-80 bg-gradient-to-b from-white via-[#f7f9ff] to-[#edf2fb] shadow-2xl transform transition-all duration-150 ease-out ${sidePosition} ${isOpen ? 'translate-x-0' : hiddenTranslate}`}>
+        <div 
+          onMouseLeave={onClose}
+          className={`absolute top-0 h-full w-80 bg-gradient-to-b from-white via-[#f7f9ff] to-[#edf2fb] shadow-2xl transform transition-all duration-150 ease-out ${sidePosition} ${isOpen ? 'translate-x-0' : hiddenTranslate}`}
+        >
           <div className={`px-6 pb-6 pt-1.5 h-full flex flex-col ${textAlign}`}>
             {/* Header */}
-            <div className={`relative flex flex-col ${isRtl ? 'items-end' : 'items-start'} -mb-3 w-full`}>
+            <div className={`relative flex flex-col ${isRtl ? 'items-end' : 'items-start'} w-full pt-6`}>
               <button 
                 onClick={onClose} 
-                className={`absolute top-1 ${isRtl ? 'left-0' : 'right-0'} p-2 rounded-full bg-white/80 border border-white/60 shadow-sm hover:shadow-md text-gray-500 hover:text-gray-700 transition-all duration-200`}
+                className={`absolute top-4 ${isRtl ? 'left-0' : 'right-0'} p-2 rounded-full bg-white/80 border border-white/60 shadow-sm hover:shadow-md text-gray-500 hover:text-gray-700 transition-all duration-200`}
               >
                 <FaTimes size={20} />
               </button>
               <img 
-                src={bncLogo}
-                alt="BNC Consultech" 
-                className="w-57 h-auto object-contain -mt-12 -mb-8 -ml-3"
+                src="/Photas/aaf68a14-dda6-4743-824f-5bc2592df449.png"
+                alt="BNC LEG" 
+                className={`w-36 h-auto object-contain mb-2 ${isRtl ? 'mr-8' : 'ml-8'}`}
                 decoding="async"
               />
             </div>
             
+            {/* Divider Line */}
+            <div className="border-b border-slate-200/60 w-full mt-6 mb-4"></div>
+            
             {/* Navigation */}
             <div className="flex-1">
-              <div className="mb-5">
+              <div className="mb-5 mt-4">
                 <div className={`inline-flex items-center rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm ${rowDirection}`}>
                   {languageOptions.map((option) => (
                     <button
@@ -71,8 +76,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                       onClick={() => i18n.changeLanguage(option.code)}
                       className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
                         i18n.language === option.code
-                          ? 'bg-[#2C5AA0] text-white shadow'
-                          : 'text-slate-600 hover:text-[#1e3a8a]'
+                          ? 'bg-[#DC2626] text-white shadow'
+                          : 'text-slate-600 hover:text-[#000000]'
                       }`}
                     >
                       {option.label}
@@ -90,8 +95,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                       className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
                       onClick={onClose}
                     >
-                      <Icon size={18} className="text-[#2C5AA0]/80 transition-colors duration-300 group-hover:text-[#1e3a8a]" />
-                      <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#1e3a8a]">
+                      <Icon size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
+                      <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
                         {item.label}
                       </span>
                     </Link>
@@ -105,8 +110,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
                     onClick={onClose}
                   >
-                    <FaMapMarkerAlt size={18} className="text-[#2C5AA0]/80 transition-colors duration-300 group-hover:text-[#1e3a8a]" />
-                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#1e3a8a]">
+                    <FaMapMarkerAlt size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
+                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
                       {t('countries.india')}
                     </span>
                   </Link>
@@ -115,8 +120,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
                     onClick={onClose}
                   >
-                    <FaMapMarkerAlt size={18} className="text-[#2C5AA0]/80 transition-colors duration-300 group-hover:text-[#1e3a8a]" />
-                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#1e3a8a]">
+                    <FaMapMarkerAlt size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
+                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
                       {t('countries.saudi')}
                     </span>
                   </Link>
@@ -125,8 +130,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
                     onClick={onClose}
                   >
-                    <FaMapMarkerAlt size={18} className="text-[#2C5AA0]/80 transition-colors duration-300 group-hover:text-[#1e3a8a]" />
-                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#1e3a8a]">
+                    <FaMapMarkerAlt size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
+                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
                       {t('countries.global')}
                     </span>
                   </Link>
@@ -136,8 +141,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     onClick={handleApplyNowClick} 
                     className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 text-slate-700 hover:bg-white/70 w-full ${rowDirection} ${textAlign}`}
                   >
-                    <FaPaperPlane size={18} className="text-[#2C5AA0]/80 transition-colors duration-300 group-hover:text-[#1e3a8a] flipInRtl" />
-                    <span className="font-geist font-semibold transition-colors duration-300 group-hover:text-[#1e3a8a]">{t('sidebar.applyNow')}</span>
+                    <FaPaperPlane size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000] flipInRtl" />
+                    <span className="font-geist font-semibold transition-colors duration-300 group-hover:text-[#000000]">{t('sidebar.applyNow')}</span>
                   </button>
                 )}
               </nav>
@@ -148,11 +153,11 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
               <div className="space-y-3">
                 {isLoggedIn ? (
                   <>
-                    <div className={`flex items-center gap-3 py-3 px-4 border border-[#2C5AA0] rounded-xl bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] shadow-md ${rowDirection}`}>
+                    <div className={`flex items-center gap-3 py-3 px-4 border border-[#DC2626] rounded-xl bg-gradient-to-r from-[#DC2626] to-[#000000] shadow-md ${rowDirection}`}>
                       <FaUser size={20} className="text-white" />
                       <div>
                         <div className="font-geist font-semibold text-white">{user?.firstName} {user?.lastName}</div>
-                        <div className="font-geist text-sm text-blue-100 truncate">{user?.email}</div>
+                        <div className="font-geist text-sm text-red-100 truncate">{user?.email}</div>
                       </div>
                     </div>
                     
@@ -172,7 +177,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     <Link 
                       to="/login" 
                       onClick={onClose} 
-                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-[#2C5AA0] bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a] text-white shadow-md ${rowDirection}`}
+                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-[#DC2626] bg-gradient-to-r from-[#DC2626] to-[#000000] text-white shadow-md ${rowDirection}`}
                     >
                       <FaUser size={20} className="transition-colors duration-300" />
                       <span className="font-geist font-medium transition-colors duration-300">{t('sidebar.partnerLogin')}</span>
@@ -181,7 +186,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     <Link 
                       to="/login?type=admin" 
                       onClick={onClose} 
-                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-gray-200 transition-all duration-300 hover:text-white hover:border-blue-500 text-gray-700 bg-white/70 hover:bg-gradient-to-r hover:from-[#2C5AA0] hover:to-[#1e3a8a] ${rowDirection}`}
+                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-gray-200 transition-all duration-300 hover:text-white hover:border-blue-500 text-gray-700 bg-white/70 hover:bg-gradient-to-r hover:from-[#DC2626] hover:to-[#000000] ${rowDirection}`}
                     >
                       <FaShieldAlt size={20} className="transition-colors duration-300" />
                       <span className="font-geist font-medium transition-colors duration-300">{t('sidebar.adminLogin')}</span>

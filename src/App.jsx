@@ -20,6 +20,7 @@ const ServiceDetail = lazy(() => import('./pages/services/ServiceDetail'));
 const StartChatting = lazy(() => import('./pages/StartChatting'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const RoleSelectionModal = lazy(() => import('./Component/RoleSelectionModal'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -37,6 +38,9 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <Suspense fallback={null}>
+        <RoleSelectionModal />
+      </Suspense>
       <div className="min-h-screen flex flex-col">
         <Suspense fallback={routeFallback}>
           <Routes>

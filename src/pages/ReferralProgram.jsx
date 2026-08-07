@@ -7,7 +7,7 @@ import ReferralVideoDrawer from "../Component/ReferralVideoDrawer";
 //  DESIGN TOKENS (BNC THEME)
 // ─────────────────────────────────────────────
 const G = {
-  gold: "#2C5AA0",
+  gold: "#DC2626",
   goldMid: "#4E7FC2",
   goldLight: "#7FB0F3",
   goldBg: "#F1F6FF",
@@ -23,7 +23,7 @@ const G = {
   green: "#1F7A5A",
   greenBg: "#EAF7F2",
   greenBorder: "#7AD4B4",
-  blue: "#2C5AA0",
+  blue: "#DC2626",
   blueBg: "#E8F1FF",
   blueBorder: "#4E7FC2",
   purple: "#5B6EE1",

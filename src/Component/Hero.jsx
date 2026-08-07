@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Star, ArrowDown } from 'lucide-react';
 
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 const WorldMap = lazy(() =>
@@ -18,6 +19,15 @@ const Hero = () => {
   const textAlign = isRtl ? 'text-right' : 'text-left';
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
   const lgTextAlign = isRtl ? 'lg:text-right' : 'lg:text-left';
+
+  const handleExploreClick = (e) => {
+    e.preventDefault();
+    const element = document.getElementById('services');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', '/#services');
+    }
+  };
   const lgContainerAlign = isRtl ? 'lg:mr-0 lg:ml-auto' : 'lg:mx-0';
   const highlightContainerAlign = isRtl ? 'lg:mr-0 lg:ml-auto' : 'lg:mx-0';
   const highlightRowJustify = isRtl ? 'justify-end' : 'justify-start';
@@ -113,168 +123,144 @@ const Hero = () => {
 
   return (
     <>
-      <section className="relative min-h-screen overflow-hidden text-slate-900 -mt-16 pt-16 sm:pt-24 lg:pt-15" dir={isRtl ? 'rtl' : 'ltr'}>
+      <section id="home" className="relative min-h-screen overflow-hidden text-slate-900 -mt-16 pt-16 sm:pt-24 lg:pt-15" dir={isRtl ? 'rtl' : 'ltr'}>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes liquid-blob-1 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(45px, -55px) scale(1.15); }
+            66% { transform: translate(-35px, 35px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+          }
+          @keyframes liquid-blob-2 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(-55px, 55px) scale(1.1); }
+            100% { transform: translate(0px, 0px) scale(1); }
+          }
+          @keyframes liquid-blob-3 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-35px, -45px) scale(0.95); }
+            66% { transform: translate(55px, 35px) scale(1.15); }
+            100% { transform: translate(0px, 0px) scale(1); }
+          }
+          .animate-liquid-1 {
+            animation: liquid-blob-1 16s infinite alternate ease-in-out;
+          }
+          .animate-liquid-2 {
+            animation: liquid-blob-2 20s infinite alternate ease-in-out;
+          }
+          .animate-liquid-3 {
+            animation: liquid-blob-3 24s infinite alternate ease-in-out;
+          }
+        `}} />
         <Link
           to="/start-chatting"
           className={`fixed -bottom-10 ${floatingChatPosition} z-40 inline-flex items-center justify-center rounded-full bg-transparent p-2 hover:opacity-90 transition-all`}
           aria-label="Get AI help"
         >
           <img
-            src="/Photas/WhatsApp_Image_2026-02-23_at_1.56.29_PM-removebg-preview.png"
+            src="/Photas/chatbot_red_carrot-removebg-preview.png"
             alt="ChatBot AI"
-            className="h-50 w-50 object-contain"
+            className="h-36 w-36 object-contain"
           />
         </Link>
-        <div className="absolute inset-0 bg-[#F7F2ED]">
-          <div className={`absolute -top-28 ${isRtl ? '-left-20' : '-right-20'} h-96 w-96 rounded-full bg-gradient-to-br from-[#2C5AA0]/25 via-[#7ea5ff]/25 to-transparent blur-3xl`} />
-          <div className={`absolute ${isRtl ? 'left-[-120px]' : 'right-[-120px]'} top-[-60px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(44,90,160,0.35),rgba(126,165,255,0.18),rgba(255,255,255,0))] blur-3xl`} />
-          <div className={`absolute ${isRtl ? 'left-10' : 'right-10'} top-40 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(30,63,115,0.22),rgba(126,165,255,0.12),rgba(245,242,237,0))] blur-2xl`} />
-          <div className={`absolute bottom-0 ${isRtl ? 'right-0' : 'left-0'} h-80 w-80 rounded-full bg-gradient-to-tr from-emerald-400/20 via-cyan-400/15 to-transparent blur-3xl`} />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(44,90,160,0.12),transparent_55%)]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#f1f6ff] via-[#f7f2ed] to-[#eef2ff]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(255,255,255,0.7),rgba(255,255,255,0.15),rgba(245,242,237,0))]" />
+        {/* Liquid Glass Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#fffcfc] via-[#fcfbf9] to-[#f8f6f2]">
+          {/* Animated Liquid Blobs */}
+          <div className={`absolute -top-12 ${isRtl ? '-left-12' : '-right-12'} w-[450px] h-[450px] rounded-full bg-[#DC2626]/12 blur-[80px] animate-liquid-1`} />
+          <div className={`absolute top-48 ${isRtl ? 'right-24' : 'left-24'} w-[400px] h-[400px] rounded-full bg-rose-500/8 blur-[90px] animate-liquid-2`} />
+          <div className="absolute bottom-24 right-[15%] w-[420px] h-[420px] rounded-full bg-amber-400/8 blur-[100px] animate-liquid-3" />
+          <div className={`absolute bottom-[-10%] ${isRtl ? 'right-0' : 'left-0'} w-[380px] h-[380px] rounded-full bg-[#DC2626]/8 blur-[85px] animate-liquid-1`} />
+
+          {/* Frosted Glass Overlay */}
+          <div className="absolute inset-0 backdrop-blur-[80px] bg-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.15)_100%)]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-10 sm:py-12 lg:py-20">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-            <div className={`${textAlign} ${lgTextAlign} lg:-mt-10 mt-0 sm:mt-10 relative z-20`}>
-              <div className={`relative inline-flex items-center gap-2 rounded-full border border-slate-900/60 bg-[#e8f1ff] px-4 py-1.5 text-xs font-semibold mb-4 sm:mb-6 -mt-1 backdrop-blur-sm text-slate-900 overflow-hidden shadow-[0_10px_26px_rgba(15,23,42,0.12)] ${rowDirection}`}>
-                <span className="absolute inset-0 bg-gradient-to-r from-[#2C5AA0]/20 via-[#7ea5ff]/20 to-transparent blur-md" />
-                <span className={`relative flex items-center gap-2 ${rowDirection}`}>
-                  <svg className="h-4 w-4 text-slate-900" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 2.5l1.9 4.7 4.9 1.2-4.1 3.4 1.2 5-3.9-2.6-3.9 2.6 1.2-5-4.1-3.4 4.9-1.2L12 2.5z" />
-                  </svg>
-                  {t('hero.badge')}
-                </span>
-              </div>
-
-              <h1 className={`font-sora text-4xl md:text-6xl font-semibold mb-3 leading-tight -mt-3 sm:-mt-5 ${textAlign}`}>
-                {isLoggedIn ? (
-                  <>
-                    Welcome
-                    <span className="block" style={{ color: '#2C5AA0' }}>{partnerName}</span>
-                  </>
-                ) : (
-                  <>
-                    {t('hero.titlePrefix')}
-                    <span className="block" style={{ color: '#2C5AA0' }}>BNC Consultech</span>
-                  </>
-                )}
-              </h1>
-
-              <p className={`font-geist text-lg md:text-xl mb-8 max-w-2xl mx-auto ${lgContainerAlign} text-slate-600`}>
-                {t('hero.subtitle')
-                  .split('\n')
-                  .map((line, index) => (
-                    <span key={index} className="block">
-                      {line}
-                    </span>
-                  ))}
-              </p>
-
-              <div className={`mb-8 -mt-2 max-w-md mx-auto ${highlightContainerAlign} ${textAlign}`}>
-                <div className={`flex w-full items-center gap-3 text-slate-700 ${rowDirection} ${highlightRowJustify}`}>
-                  <span className="inline-flex h-4 w-4 items-center justify-center text-[#2C5AA0]">
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="M8.5 12.5l2.4 2.4 4.6-5.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <p className="font-geist text-sm md:text-base">{t('hero.highlights.finance')}</p>
-                </div>
-                <div className={`mt-3 flex w-full items-center gap-3 text-slate-700 ${rowDirection} ${highlightRowJustify}`}>
-                  <span className="inline-flex h-4 w-4 items-center justify-center text-[#2C5AA0]">
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="M8.5 12.5l2.4 2.4 4.6-5.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <p className="font-geist text-sm md:text-base">{t('hero.highlights.manpower')}</p>
-                </div>
-                <div className={`mt-3 flex w-full items-center gap-3 text-slate-700 ${rowDirection} ${highlightRowJustify}`}>
-                  <span className="inline-flex h-4 w-4 items-center justify-center text-[#2C5AA0]">
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="M8.5 12.5l2.4 2.4 4.6-5.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <p className="font-geist text-sm md:text-base">{t('hero.highlights.dataAi')}</p>
-                </div>
-              </div>
-
-              {!isLoggedIn && (
-                <div className={`flex gap-2 justify-between mb-6 w-full max-w-md mx-auto ${lgContainerAlign} ${rowDirection}`}>
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
-                  >
-                    {t('hero.becomePartner')}
-                  </button>
-                  <Link
-                    to="/login"
-                    className="bg-white hover:bg-slate-50 text-slate-800 border border-black px-4 py-3.5 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 hover:scale-[1.02] transform flex-1"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                    </svg>
-                    {t('hero.partnerLogin')}
-                  </Link>
-                </div>
-              )}
-
-              <div className={`mt-5 sm:mt-7 max-w-md mx-auto ${lgContainerAlign}`} style={{ perspective: '1400px' }}>
-                <div className={`relative cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-b from-white/95 via-white/80 to-slate-100/80 px-5 py-3 shadow-[0_26px_60px_rgba(15,23,42,0.18)] backdrop-blur transform-gpu ${isRtl ? '[transform:rotateX(6deg)_rotateY(6deg)]' : '[transform:rotateX(6deg)_rotateY(-6deg)]'} transition duration-300 hover:[transform:rotateX(0deg)_rotateY(0deg)_translateY(-8px)_scale(1.01)] hover:shadow-[0_44px_96px_rgba(15,23,42,0.24)] hover:ring-1 hover:ring-[#2C5AA0]/30`}>
-                  <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.9),transparent_55%)] pointer-events-none" />
-                  <div className={`relative grid grid-cols-3 gap-2 ${textAlign} sm:text-center`}>
-                    <div>
-                      <p className="font-poppins text-lg sm:text-xl font-semibold text-slate-900">50+</p>
-                      <p className="text-[11px] sm:text-xs text-slate-600">{t('hero.stats.global')}</p>
-                    </div>
-                    <div>
-                      <p className="font-poppins text-lg sm:text-xl font-semibold text-slate-900">25+</p>
-                      <p className="text-[11px] sm:text-xs text-slate-600">{t('hero.stats.indian')}</p>
-                    </div>
-                    <div>
-                      <p className="font-poppins text-lg sm:text-xl font-semibold text-slate-900">14+</p>
-                      <p className="text-[11px] sm:text-xs text-slate-600">{t('hero.stats.countries')}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 sm:pt-12 lg:pt-16 pb-0 z-20">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center text-[#DC2626] text-sm sm:text-base font-bold tracking-widest uppercase mb-2 font-geist">
+              <span>{t('hero.badge')}</span>
             </div>
 
-            <div className={`relative flex justify-center ${mapWrapAlign} z-10`}>
-              <div className={`relative w-full max-w-[1500px] -mt-8 lg:-mt-68 ${mapShift} lg:scale-[1.55] xl:scale-[1.7] 2xl:scale-[1.85] ${mapOrigin}`}>
-                {heroAnimationVideoSrc ? (
-                  <video
-                    src={heroAnimationVideoSrc}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-auto rounded-2xl object-contain"
-                    aria-label="Global network animation"
-                  />
-                ) : shouldRenderMap ? (
-                  <Suspense fallback={<div className="aspect-[2/1] w-full rounded-2xl bg-white/40" aria-hidden="true" />}>
-                    <WorldMap
-                      lineColor="#2C5AA0"
-                      dots={mapDots}
-                      drawDuration={0.65}
-                      handoffPause={0.10}
-                      loopPause={0.9}
-                    />
-                  </Suspense>
-                ) : (
-                  <div className="aspect-[2/1] w-full rounded-2xl bg-white/40" aria-hidden="true" />
-                )}
-              </div>
+
+            {/* Heading */}
+            <h1 className="font-capriola text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 leading-tight tracking-tight max-w-5xl mx-auto mb-1">
+              {isLoggedIn ? (
+                <>
+                  Welcome <span className="text-[#DC2626] font-extrabold">{partnerName}</span>
+                </>
+              ) : (
+                <>
+                  {t('hero.titlePrefix')}{' '}
+                  <span className="text-slate-900 font-extrabold">BnC</span>{' '}
+                  <span className="inline-block border-2 border-[#DC2626] px-3 py-1 rounded-2xl text-[#DC2626] font-black text-4xl sm:text-5xl md:text-6xl tracking-tight ml-1 leading-none">
+                    LEG
+                  </span>
+                </>
+              )}
+            </h1>
+
+            {/* Tagline */}
+            <p className="font-geist text-lg md:text-xl font-normal text-slate-500 tracking-tight max-w-3xl mx-auto mt-0.5 mb-8 leading-relaxed">
+              {t('hero.subtitle')
+                .split('\n')
+                .map((line, index) => (
+                  <span key={index} className="block">
+                    {line}
+                  </span>
+                ))}
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="mb-6 flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-lg mx-auto">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-geist font-medium text-base text-white bg-black hover:bg-neutral-900 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center"
+              >
+                {t('hero.becomePartner')}
+              </button>
+              <Link
+                to={isLoggedIn ? "/dashboard" : "/login"}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-geist font-medium text-base text-slate-900 bg-white border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer flex items-center justify-center text-center"
+              >
+                {t('hero.partnerLogin')}
+              </Link>
             </div>
           </div>
         </div>
+
+        {/* Map / Video Section (Adjustable size and alignment) */}
+        <div className="relative w-full max-w-none z-10 flex justify-center mt-4 sm:mt-6 lg:mt-8 pb-12">
+          <div className="relative w-full max-w-[1350px] px-6 lg:px-8 hover:scale-[1.01] transition-transform duration-500">
+            {heroAnimationVideoSrc ? (
+              <video
+                src={heroAnimationVideoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="w-full h-auto rounded-3xl object-contain shadow-2xl shadow-red-600/5"
+                aria-label="Global network animation"
+              />
+            ) : shouldRenderMap ? (
+              <Suspense fallback={<div className="aspect-[2/1] w-full rounded-3xl bg-white/40" aria-hidden="true" />}>
+                <WorldMap
+                  lineColor="#DC2626"
+                  dots={mapDots}
+                  drawDuration={0.65}
+                  handoffPause={0.10}
+                  loopPause={0.9}
+                />
+              </Suspense>
+            ) : (
+              <div className="aspect-[2/1] w-full rounded-3xl bg-white/40" aria-hidden="true" />
+            )}
+          </div>
+        </div>
       </section>
-      
+
       {isModalOpen ? (
         <Suspense fallback={null}>
           <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

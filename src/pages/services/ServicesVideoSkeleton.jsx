@@ -34,7 +34,7 @@ const ServicesVideoSkeleton = () => (
 
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="flex h-14 w-20 items-center justify-center rounded-2xl bg-white/85 shadow-lg shadow-slate-950/20">
-        <div className="ml-1 h-0 w-0 border-y-[12px] border-l-[18px] border-y-transparent border-l-[#2C5AA0]" />
+        <div className="ml-1 h-0 w-0 border-y-[12px] border-l-[18px] border-y-transparent border-l-[#DC2626]" />
       </div>
     </div>
   </div>

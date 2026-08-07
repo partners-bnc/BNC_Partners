@@ -227,7 +227,7 @@ const GlobalServices = () => {
             <p className="font-geist text-xs uppercase tracking-[0.2em] text-slate-400">
               {t('globalServices.label')}
             </p>
-            <h1 className="font-poppins text-2xl sm:text-3xl font-semibold text-slate-900 mt-2">
+            <h1 className="font-poppins text-[#DC2626]xl sm:text-3xl font-semibold text-slate-900 mt-2">
               {t('globalServices.title')}
             </h1>
             <p className="font-geist text-sm text-slate-600 mt-2">
@@ -244,7 +244,7 @@ const GlobalServices = () => {
                   }}
                   className={`group rounded-2xl border px-4 py-3 ${isRtl ? 'text-right' : 'text-left'} transition will-change-transform ${
                     selectedCountry.key === country.key
-                      ? 'border-[#2C5AA0] bg-gradient-to-br from-[#2C5AA0]/15 via-white to-[#2C5AA0]/5 text-[#1e3a8a] shadow-[0_16px_30px_rgba(15,23,42,0.2)] scale-[1.03]'
+                      ? 'border-[#DC2626] bg-gradient-to-br from-[#DC2626]/15 via-white to-[#DC2626]/5 text-[#000000] shadow-[0_16px_30px_rgba(15,23,42,0.2)] scale-[1.03]'
                       : 'border-slate-200 bg-white text-slate-700 shadow-[0_8px_18px_rgba(15,23,42,0.08)] hover:border-slate-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(15,23,42,0.16)] hover:scale-[1.02]'
                   }`}
                   style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
@@ -276,7 +276,7 @@ const GlobalServices = () => {
                 <p className="font-geist text-xs uppercase tracking-[0.2em] text-slate-400">
                   {selectedCountryLabel}
                 </p>
-                <h2 className="font-poppins text-2xl font-semibold text-gray-900 mt-2">
+                <h2 className="font-poppins text-[#DC2626]xl font-semibold text-gray-900 mt-2">
                   {t('globalServices.asideTitle')}
                 </h2>
                 <p className="font-geist text-sm text-gray-600 mt-3">
@@ -291,13 +291,13 @@ const GlobalServices = () => {
                     onClick={() => setActiveSection(section.key)}
                     className={`group relative w-full ${isRtl ? 'text-right' : 'text-left'} px-4 py-3 rounded-xl border transition ${
                       activeSection === section.key
-                        ? 'bg-[#2C5AA0]/10 border-[#2C5AA0]/30 text-[#1e3a8a]'
+                        ? 'bg-[#DC2626]/10 border-[#DC2626]/30 text-[#000000]'
                         : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                     }`}
                   >
                     <span className="relative inline-block text-sm font-semibold font-geist">
                       {section.label}
-                      <span className={`absolute -bottom-1 ${isRtl ? 'right-0' : 'left-0'} h-0.5 w-0 bg-[#2C5AA0] transition-all duration-500 group-hover:w-full`}></span>
+                      <span className={`absolute -bottom-1 ${isRtl ? 'right-0' : 'left-0'} h-0.5 w-0 bg-[#DC2626] transition-all duration-500 group-hover:w-full`}></span>
                     </span>
                   </button>
                 ))}
@@ -308,7 +308,7 @@ const GlobalServices = () => {
               <div className="space-y-8">
                 <div className={`flex flex-col gap-4 ${mdRowDirection} md:items-center md:justify-between ${textAlign}`}>
                   <div>
-                    <h3 className="font-poppins text-2xl font-semibold text-gray-900">
+                    <h3 className="font-poppins text-[#DC2626]xl font-semibold text-gray-900">
                       {activeSectionData.heading}
                     </h3>
                     <p className={`font-geist text-gray-600 mt-2 ${sectionPadding}`}>
@@ -320,14 +320,14 @@ const GlobalServices = () => {
                 {activeSection === 'manpower' && (
                   <div className={`border border-slate-200 rounded-2xl p-6 bg-white ${textAlign}`}>
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiUsers className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h4 className="font-poppins text-xl font-semibold">
                           {t('globalServices.sections.manpower.heading')}
                         </h4>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <p className={`font-geist text-gray-600 mt-3 ${sectionPadding}`}>
@@ -341,14 +341,14 @@ const GlobalServices = () => {
                     <div className={`grid gap-6 ${isRtl ? 'md:grid-cols-[0.9fr_1.1fr]' : 'md:grid-cols-[1.1fr_0.9fr]'}`}>
                       <div className={isRtl ? 'md:order-2' : ''}>
                         <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                          <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                             <FiBookOpen className="h-3.5 w-3.5" aria-hidden="true" />
                           </span>
                           <div>
                             <h4 className="font-poppins text-xl font-semibold">
                               {t('globalServices.training.title')}
                             </h4>
-                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                           </div>
                         </div>
                         <p className={`font-geist text-gray-600 mt-3 ${sectionPadding}`}>
@@ -389,14 +389,14 @@ const GlobalServices = () => {
                 {activeSection === 'enquiry' && (
                   <div className={`border border-slate-200 rounded-2xl p-6 bg-white ${textAlign}`}>
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiHelpCircle className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h4 className="font-poppins text-xl font-semibold">
                           {t('globalServices.enquiryCard.title')}
                         </h4>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <p className={`font-geist text-gray-600 mt-3 ${sectionPadding}`}>
@@ -430,8 +430,8 @@ const GlobalServices = () => {
                                 info@bncglobal.in
                               </p>
                             </div>
-                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#2C5AA0]/40 group-hover:bg-[#2C5AA0]/10 transition`}>
-                              <FiMail className="h-5 w-5 text-[#2C5AA0]" aria-hidden="true" />
+                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#DC2626]/40 group-hover:bg-[#DC2626]/10 transition`}>
+                              <FiMail className="h-5 w-5 text-[#DC2626]" aria-hidden="true" />
                             </div>
                           </div>
                         </a>
@@ -468,8 +468,8 @@ const GlobalServices = () => {
                                 +91 98105 75613
                               </p>
                             </div>
-                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#2C5AA0]/40 group-hover:bg-[#2C5AA0]/10 transition`}>
-                              <FiPhone className="h-5 w-5 text-[#2C5AA0]" aria-hidden="true" />
+                            <div className={`${iconMargin} h-10 w-10 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-[#DC2626]/40 group-hover:bg-[#DC2626]/10 transition`}>
+                              <FiPhone className="h-5 w-5 text-[#DC2626]" aria-hidden="true" />
                             </div>
                           </div>
                         </a>
@@ -481,14 +481,14 @@ const GlobalServices = () => {
                 {activeSection !== 'contact' && (
                   <div className={`border border-slate-200 rounded-2xl p-6 bg-white ${textAlign}`}>
                     <div className={`inline-flex items-start gap-2 text-gray-900 ${rowDirection}`}>
-                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#2C5AA0]">
+                      <span className="inline-flex h-6 w-6 items-center justify-center text-[#DC2626]">
                         <FiMail className="h-3.5 w-3.5" aria-hidden="true" />
                       </span>
                       <div>
                         <h4 className="font-poppins text-xl font-semibold">
                           {formTitle}
                         </h4>
-                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#2C5AA0] to-[#1e3a8a]"></div>
+                        <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#DC2626] to-[#000000]"></div>
                       </div>
                     </div>
                     <p className={`font-geist text-gray-600 text-sm mt-3 mb-4 ${sectionPadding}`}>
@@ -508,7 +508,7 @@ const GlobalServices = () => {
                           value={formValues.name}
                           onChange={handleChange}
                           placeholder={t('globalServices.form.placeholders.fullName')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                           required
                           readOnly={isLoggedIn}
                         />
@@ -518,7 +518,7 @@ const GlobalServices = () => {
                           value={formValues.email}
                           onChange={handleChange}
                           placeholder={t('globalServices.form.placeholders.email')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                           required
                           readOnly={isLoggedIn}
                         />
@@ -528,7 +528,7 @@ const GlobalServices = () => {
                           value={formValues.phone}
                           onChange={handleChange}
                           placeholder={t('globalServices.form.placeholders.phone')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                           readOnly={isLoggedIn}
                         />
                         <input
@@ -537,7 +537,7 @@ const GlobalServices = () => {
                           value={formValues.company}
                           onChange={handleChange}
                           placeholder={t('globalServices.form.placeholders.company')}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                         />
                         <textarea
                           name="message"
@@ -545,7 +545,7 @@ const GlobalServices = () => {
                           onChange={handleChange}
                           rows="4"
                           placeholder={messagePlaceholder}
-                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#2C5AA0]/20 ${inputAlign}`}
+                          className={`w-full border border-slate-200 rounded-xl px-3 py-2 text-sm font-geist focus:outline-none focus:ring-2 focus:ring-[#DC2626]/20 ${inputAlign}`}
                         />
                         {submitError && (
                           <p className="font-geist text-sm text-red-600">
@@ -555,7 +555,7 @@ const GlobalServices = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full bg-[#2C5AA0] text-white py-2.5 rounded-xl font-semibold shadow hover:bg-[#1e3a8a] transition"
+                          className="w-full bg-[#DC2626] text-white py-2.5 rounded-xl font-semibold shadow hover:bg-[#000000] transition"
                         >
                           {isSubmitting ? t('globalServices.form.submitting') : formCta}
                         </button>

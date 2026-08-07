@@ -101,7 +101,7 @@ const PartnerLogin = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent ${inputAlign} ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent ${inputAlign} ${
                   errors.email ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Enter your email / User ID"
@@ -119,7 +119,7 @@ const PartnerLogin = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 ${passPadding} border rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent ${inputAlign} ${
+                  className={`w-full px-4 py-3 ${passPadding} border rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent ${inputAlign} ${
                     errors.password ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Enter your password"
@@ -139,7 +139,7 @@ const PartnerLogin = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
+            className="w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
           >
             {isLoading ? 'Signing in...' : 'Sign In'}
           </button>

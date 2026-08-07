@@ -1,7 +1,11 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Hero from '../Component/Hero';
 
+const StatsBar = lazy(() => import('../Component/StatsBar'));
+const AboutPlatform = lazy(() => import('../Component/AboutPlatform'));
+const WhyPartner = lazy(() => import('../Component/WhyPartner'));
 const PartnershipOpportunities = lazy(() => import('../Component/PartnershipOpportunities'));
+const HowItWorks = lazy(() => import('../Component/HowItWorks'));
 const CTA = lazy(() => import('../Component/CTA'));
 
 const Home = () => {
@@ -29,12 +33,28 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (showDeferredSections && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }, [showDeferredSections]);
+
   return (
     <div>
       <Hero />
       {showDeferredSections ? (
         <Suspense fallback={<div className="min-h-[24rem] bg-gray-50" aria-hidden="true" />}>
+          <StatsBar />
+          <AboutPlatform />
+          <WhyPartner />
           <PartnershipOpportunities />
+          <HowItWorks />
           <CTA />
         </Suspense>
       ) : null}

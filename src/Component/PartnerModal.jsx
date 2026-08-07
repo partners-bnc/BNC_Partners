@@ -60,8 +60,8 @@ const PartnerModal = ({ isOpen, onClose }) => {
         
         <div className="relative inline-block w-full max-w-2xl p-6 my-8 overflow-hidden text-left align-middle bg-white bg-opacity-95 backdrop-blur-sm shadow-xl rounded-2xl z-10">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">
-              Become a <span style={{color: '#2C5AA0'}}>Partner</span>
+            <h2 className="text-[#DC2626]xl font-bold text-gray-800">
+              Become a <span style={{color: '#DC2626'}}>Partner</span>
             </h2>
             <button
               onClick={onClose}
@@ -87,7 +87,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                   placeholder="First name"
                 />
               </div>
@@ -101,7 +101,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                   placeholder="Last name"
                 />
               </div>
@@ -118,7 +118,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -132,7 +132,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                   placeholder="Phone number"
                 />
               </div>
@@ -148,7 +148,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                 value={formData.company}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                 placeholder="Company name"
               />
             </div>
@@ -163,7 +163,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                   value={formData.partnershipType}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                 >
                   <option value="">Select type</option>
                   <option value="strategic">Strategic Partner</option>
@@ -180,7 +180,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                   value={formData.experience}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                 >
                   <option value="">Select experience</option>
                   <option value="1-3">1-3 years</option>
@@ -200,7 +200,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
                 value={formData.message}
                 onChange={handleChange}
                 rows="3"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2C5AA0] focus:border-transparent text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DC2626] focus:border-transparent text-sm"
                 placeholder="Tell us about your business..."
               ></textarea>
             </div>
@@ -215,7 +215,7 @@ const PartnerModal = ({ isOpen, onClose }) => {
               </button>
               <button
                 type="submit"
-                className="bg-[#2C5AA0] hover:bg-[#1e3f73] text-white px-6 py-2 rounded-lg font-semibold transition-colors text-sm"
+                className="bg-[#DC2626] hover:bg-[#B91C1C] text-white px-6 py-2 rounded-lg font-semibold transition-colors text-sm"
               >
                 Submit
               </button>
