@@ -2,11 +2,42 @@ import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Star, ArrowDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 const WorldMap = lazy(() =>
   import('../components/ui/world-map').then((module) => ({ default: module.WorldMap }))
 );
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+  }
+};
+
+const mapVariants = {
+  hidden: { opacity: 0, scale: 0.96, y: 40 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 1.0, delay: 0.6, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 const Hero = () => {
   const { t, i18n } = useTranslation();
@@ -176,16 +207,30 @@ const Hero = () => {
           <div className="absolute inset-0 backdrop-blur-[80px] bg-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.15)_100%)]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 sm:pt-12 lg:pt-16 pb-0 z-20">
+        <motion.div
+          className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 sm:pt-12 lg:pt-16 pb-0 z-20"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center text-[#DC2626] text-sm sm:text-base font-bold tracking-widest uppercase mb-2 font-geist">
-              <span>{t('hero.badge')}</span>
-            </div>
+            <motion.div className="mb-4 sm:mb-6" variants={itemVariants}>
+              <div className="inline-flex items-center gap-2 bg-[#fdfbf7] px-6 py-2.5 rounded-full shadow-[6px_6px_12px_#e5e2db,-6px_-6px_12px_#ffffff] border border-white/60 text-[#DC2626] text-xs sm:text-sm font-extrabold tracking-wider uppercase font-geist transition-all duration-300 hover:shadow-[3px_3px_6px_#e5e2db,-3px_-3px_6px_#ffffff] hover:-translate-y-0.5 select-none">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DC2626]/80 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#DC2626]"></span>
+                </span>
+                <span>{t('hero.badge')}</span>
+              </div>
+            </motion.div>
 
 
             {/* Heading */}
-            <h1 className="font-capriola text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 leading-tight tracking-tight max-w-5xl mx-auto mb-1">
+            <motion.h1
+              className="font-capriola text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 leading-tight tracking-tight max-w-5xl mx-auto mb-1"
+              variants={itemVariants}
+            >
               {isLoggedIn ? (
                 <>
                   Welcome <span className="text-[#DC2626] font-extrabold">{partnerName}</span>
@@ -199,10 +244,13 @@ const Hero = () => {
                   </span>
                 </>
               )}
-            </h1>
+            </motion.h1>
 
             {/* Tagline */}
-            <p className="font-geist text-lg md:text-xl font-normal text-slate-500 tracking-tight max-w-3xl mx-auto mt-0.5 mb-8 leading-relaxed">
+            <motion.p
+              className="font-geist text-lg md:text-xl font-normal text-slate-500 tracking-tight max-w-3xl mx-auto mt-0.5 mb-8 leading-relaxed"
+              variants={itemVariants}
+            >
               {t('hero.subtitle')
                 .split('\n')
                 .map((line, index) => (
@@ -210,10 +258,13 @@ const Hero = () => {
                     {line}
                   </span>
                 ))}
-            </p>
+            </motion.p>
 
             {/* CTA Buttons */}
-            <div className="mb-6 flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-lg mx-auto">
+            <motion.div
+              className="mb-6 flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-lg mx-auto"
+              variants={itemVariants}
+            >
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="w-full sm:w-auto px-8 py-3.5 rounded-full font-geist font-medium text-base text-white bg-black hover:bg-neutral-900 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center"
@@ -226,12 +277,17 @@ const Hero = () => {
               >
                 {t('hero.partnerLogin')}
               </Link>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Map / Video Section (Adjustable size and alignment) */}
-        <div className="relative w-full max-w-none z-10 flex justify-center mt-4 sm:mt-6 lg:mt-8 pb-12">
+        <motion.div
+          className="relative w-full max-w-none z-10 flex justify-center mt-4 sm:mt-6 lg:mt-8 pb-12"
+          variants={mapVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="relative w-full max-w-[1350px] px-6 lg:px-8 hover:scale-[1.01] transition-transform duration-500">
             {heroAnimationVideoSrc ? (
               <video
@@ -258,7 +314,7 @@ const Hero = () => {
               <div className="aspect-[2/1] w-full rounded-3xl bg-white/40" aria-hidden="true" />
             )}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {isModalOpen ? (
