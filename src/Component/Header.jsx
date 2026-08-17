@@ -23,40 +23,40 @@ const PROVIDER_OPTIONS = [
     title: 'Overview',
     description: 'Earnings, ratings and monthly trends',
     icon: LayoutDashboard,
-    iconBg: 'bg-blue-50 dark:bg-blue-950/45',
-    iconColor: 'text-blue-600 dark:text-blue-450'
+    iconBg: 'bg-blue-50',
+    iconColor: 'text-blue-600'
   },
   {
     key: 'services',
     title: 'Listed Services',
     description: 'Manage and publish consulting packages',
     icon: Store,
-    iconBg: 'bg-indigo-50 dark:bg-indigo-950/45',
-    iconColor: 'text-indigo-600 dark:text-indigo-450'
+    iconBg: 'bg-indigo-50',
+    iconColor: 'text-indigo-600'
   },
   {
     key: 'ledger',
     title: 'Transaction Ledger',
     description: 'Complete record of payout transactions',
     icon: Wallet,
-    iconBg: 'bg-emerald-50 dark:bg-emerald-950/45',
-    iconColor: 'text-emerald-600 dark:text-emerald-450'
+    iconBg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600'
   },
   {
     key: 'calendar',
     title: 'Bookings Calendar',
     description: 'Scheduled client consultations calendar',
     icon: Calendar,
-    iconBg: 'bg-amber-50 dark:bg-amber-950/45',
-    iconColor: 'text-amber-600 dark:text-amber-450'
+    iconBg: 'bg-amber-50',
+    iconColor: 'text-amber-600'
   },
   {
     key: 'profile',
     title: 'Profile Onboarding',
     description: 'Complete setup and partner agreement',
     icon: User,
-    iconBg: 'bg-purple-50 dark:bg-purple-950/45',
-    iconColor: 'text-purple-600 dark:text-purple-450'
+    iconBg: 'bg-purple-50',
+    iconColor: 'text-purple-600'
   }
 ];
 
@@ -66,56 +66,56 @@ const CONSUMER_OPTIONS = [
     title: 'Overview',
     description: 'Client statistics and booked calls summary',
     icon: LayoutDashboard,
-    iconBg: 'bg-blue-50 dark:bg-blue-950/45',
-    iconColor: 'text-blue-600 dark:text-blue-450'
+    iconBg: 'bg-blue-50',
+    iconColor: 'text-blue-600'
   },
   {
     key: 'directory',
     title: 'Explore Directory',
     description: 'Browse and book certified advisory experts',
     icon: Search,
-    iconBg: 'bg-indigo-50 dark:bg-indigo-950/45',
-    iconColor: 'text-indigo-600 dark:text-indigo-450'
+    iconBg: 'bg-indigo-50',
+    iconColor: 'text-indigo-600'
   },
   {
     key: 'ai-assistant',
     title: 'AI Match Assistant',
     description: 'Voice match project requirements instantly',
     icon: Mic,
-    iconBg: 'bg-rose-50 dark:bg-rose-950/45',
-    iconColor: 'text-rose-600 dark:text-rose-455'
+    iconBg: 'bg-rose-50',
+    iconColor: 'text-rose-600'
   },
   {
     key: 'bookings',
     title: 'My Bookings',
     description: 'Manage scheduled meetings and expert calls',
     icon: Calendar,
-    iconBg: 'bg-amber-50 dark:bg-amber-950/45',
-    iconColor: 'text-amber-600 dark:text-amber-455'
+    iconBg: 'bg-amber-50',
+    iconColor: 'text-amber-600'
   },
   {
     key: 'invoices',
     title: 'Invoices & Payments',
     description: 'Audit bills, invoice balance, and payments',
     icon: FileText,
-    iconBg: 'bg-emerald-50 dark:bg-emerald-950/45',
-    iconColor: 'text-emerald-600 dark:text-emerald-455'
+    iconBg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600'
   },
   {
     key: 'settings',
     title: 'Client Settings',
     description: 'Organizational details and budget preferences',
     icon: Settings,
-    iconBg: 'bg-purple-50 dark:bg-purple-950/45',
-    iconColor: 'text-purple-600 dark:text-purple-455'
+    iconBg: 'bg-purple-50',
+    iconColor: 'text-purple-600'
   },
   {
     key: 'profile',
     title: 'Profile Onboarding',
     description: 'Complete setup and partner agreement',
     icon: User,
-    iconBg: 'bg-purple-50 dark:bg-purple-950/45',
-    iconColor: 'text-purple-600 dark:text-purple-455'
+    iconBg: 'bg-purple-50',
+    iconColor: 'text-purple-600'
   }
 ];
 
@@ -125,7 +125,7 @@ const ExpertFormModal = lazy(() => import('./ExpertFormModal'));
 
 const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handleTabChange, activeTab }) => {
   const { t, i18n } = useTranslation();
-  
+
   // Calculate dynamic button label for the active role / active section
   const activeDashboardTab = activeTab || localStorage.getItem('activeDashboardTab') || 'overview';
   const role = currentRole || localStorage.getItem('dashboardRole') || 'provider';
@@ -237,7 +237,7 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
             <div className={`flex items-center gap-3 pr-0 ${isRtl ? 'flex-row-reverse' : ''}`}>
               {/* Sidebar Menu Button */}
               <button
-                className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-650 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-xs transition-all cursor-pointer flex items-center justify-center"
+                className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-650 hover:bg-slate-50 shadow-xs transition-all cursor-pointer flex items-center justify-center"
                 onClick={() => setIsSidebarOpen((prev) => !prev)}
                 onMouseEnter={() => setIsSidebarOpen(true)}
                 aria-label="Toggle sidebar"
@@ -335,13 +335,13 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
 
                 {/* Logged In Dashboard Dropdown */}
                 {isLoggedIn && (
-                  <div 
+                  <div
                     className="relative inline-block text-left"
                     onMouseEnter={() => setIsDropdownOpen(true)}
                     onMouseLeave={() => setIsDropdownOpen(false)}
                   >
                     {/* Trigger Button */}
-                    <button 
+                    <button
                       className="font-geist text-base relative transition-colors duration-300 text-gray-700 hover:text-[#DC2626] font-medium flex items-center gap-1.5 cursor-pointer py-1 focus:outline-none"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     >
@@ -358,7 +358,7 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
                           transition={{ duration: 0.15, ease: "easeOut" }}
-                          className="absolute right-0 top-full mt-2 w-[480px] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-2xl p-6 z-50 pointer-events-auto"
+                          className="absolute right-0 top-full mt-2 w-[480px] bg-white border border-slate-200/80 rounded-3xl shadow-2xl p-6 z-50 pointer-events-auto"
                         >
                           {/* 2-Column Options Grid */}
                           <div className="grid grid-cols-2 gap-4">
@@ -374,12 +374,12 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
                                     window.location.href = '/dashboard';
                                   }
                                 }}
-                                className="group/item flex items-center gap-3.5 p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/50 hover:bg-white dark:hover:bg-slate-850 hover:border-[#E52E38] dark:hover:border-[#E52E38] transition-all w-full cursor-pointer text-left font-sans shadow-sm"
+                                className="group/item flex items-center gap-3.5 p-4 rounded-2xl bg-gray-50 border border-slate-200/50 hover:bg-white hover:border-[#E52E38] transition-all w-full cursor-pointer text-left font-sans shadow-sm"
                               >
                                 {/* Black professional icon with no background container */}
-                                <opt.icon className="w-5 h-5 text-slate-800 dark:text-slate-200 group-hover/item:text-[#E52E38] transition-colors shrink-0" />
-                                
-                                <span className="font-semibold text-slate-800 dark:text-slate-100 text-sm group-hover/item:text-[#E52E38] transition-colors leading-none">
+                                <opt.icon className="w-5 h-5 text-slate-800 group-hover/item:text-[#E52E38] transition-colors shrink-0" />
+
+                                <span className="font-semibold text-slate-800 text-sm group-hover/item:text-[#E52E38] transition-colors leading-none">
                                   {opt.title}
                                 </span>
                               </button>
@@ -387,11 +387,11 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
                           </div>
 
                           {/* Footer controls: Switch Role Toggle Switch */}
-                          <div className="mt-6 pt-4 border-t border-slate-150 dark:border-slate-800 flex items-center justify-between">
-                            <span className="text-xs font-bold text-slate-550 dark:text-slate-450 font-sans">
+                          <div className="mt-6 pt-4 border-t border-slate-150 flex items-center justify-between">
+                            <span className="text-xs font-bold text-slate-550 font-sans">
                               {(currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider' ? 'Switch to Consumer' : 'Switch to Provider'}
                             </span>
-                            
+
                             <button
                               onClick={() => {
                                 if (onRoleSwitch) {
@@ -403,18 +403,16 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
                                   window.location.href = '/dashboard';
                                 }
                               }}
-                              className={`relative w-11 h-6 rounded-full transition-colors duration-250 cursor-pointer focus:outline-none flex items-center ${
-                                (currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider'
-                                  ? 'bg-slate-300 dark:bg-slate-700'
+                              className={`relative w-11 h-6 rounded-full transition-colors duration-250 cursor-pointer focus:outline-none flex items-center ${(currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider'
+                                  ? 'bg-slate-300'
                                   : 'bg-[#E52E38]'
-                              }`}
+                                }`}
                             >
                               <span
-                                className={`absolute left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-250 ${
-                                  (currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider'
+                                className={`absolute left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-250 ${(currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider'
                                     ? 'translate-x-0'
                                     : 'translate-x-5'
-                                }`}
+                                  }`}
                               />
                             </button>
                           </div>

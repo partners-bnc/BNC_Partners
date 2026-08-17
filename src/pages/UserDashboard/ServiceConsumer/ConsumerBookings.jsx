@@ -2,22 +2,22 @@ import React from 'react';
 
 const ConsumerBookings = ({ clientBookings, setClientBookings }) => {
   return (
-    <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-6 animate-fade-in">
+    <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-6 animate-fade-in">
       <div>
-        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">My Booked Consultations</h2>
-        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">View scheduled sessions and connect with matched experts.</p>
+        <h2 className="text-xl font-black text-slate-900 tracking-tight">My Booked Consultations</h2>
+        <p className="text-xs text-slate-500 font-medium">View scheduled sessions and connect with matched experts.</p>
       </div>
 
       <div className="space-y-4">
         {clientBookings.map(b => (
-          <div key={b.id} className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div key={b.id} className="p-4 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#0F2A4A] text-white flex items-center justify-center font-bold text-sm uppercase">
                 {b.expert.slice(0,2)}
               </div>
               <div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">{b.expert}</h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400">{b.service}</p>
+                <h4 className="text-sm font-bold text-slate-900">{b.expert}</h4>
+                <p className="text-xs text-slate-500">{b.service}</p>
                 <p className="text-xs text-[#E52E38] font-bold mt-0.5">{b.date} at {b.time}</p>
               </div>
             </div>
