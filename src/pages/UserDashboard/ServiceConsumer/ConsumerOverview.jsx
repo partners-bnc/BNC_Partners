@@ -1,0 +1,212 @@
+import React from 'react';
+import { Briefcase, Wallet, CheckCircle, Mic, Search, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
+
+const ConsumerOverview = ({
+  clientBookings,
+  clientInvoices,
+  handleTabChange
+}) => {
+  return (
+    <div className="space-y-8 animate-fade-in font-['Plus_Jakarta_Sans',sans-serif]">
+
+      {/* KEY METRICS BANNER (4 CARDS) - Rich hover effects with crimson border glows */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        {/* Card 1: Active Bookings */}
+        <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-5 min-h-[148px] border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between relative overflow-hidden group transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E52E38]/50 hover:shadow-[0_12px_24px_-10px_rgba(229,46,56,0.15)]">
+          <div>
+            <div className="flex items-center gap-2 text-slate-555 dark:text-slate-400">
+              <Briefcase className="w-4.5 h-4.5 text-slate-850 dark:text-slate-200 shrink-0 transition-colors group-hover:text-[#E52E38]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Active Bookings</span>
+            </div>
+            <div className="text-3xl font-black text-slate-905 dark:text-white tracking-tight mt-3 text-center transition-transform duration-300 group-hover:scale-105">
+              {clientBookings.filter(b => b.status === 'Scheduled').length}
+            </div>
+          </div>
+          <div className="text-center mt-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-455">
+              Consultations Scheduled
+            </span>
+          </div>
+        </div>
+
+        {/* Card 2: Total Bookings */}
+        <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-5 min-h-[148px] border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between relative overflow-hidden group transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E52E38]/50 hover:shadow-[0_12px_24px_-10px_rgba(229,46,56,0.15)]">
+          <div>
+            <div className="flex items-center gap-2 text-slate-555 dark:text-slate-400">
+              <CalendarIcon className="w-4.5 h-4.5 text-slate-850 dark:text-slate-200 shrink-0 transition-colors group-hover:text-[#E52E38]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Total Bookings</span>
+            </div>
+            <div className="text-3xl font-black text-slate-905 dark:text-white tracking-tight mt-3 text-center transition-transform duration-300 group-hover:scale-105">
+              {clientBookings.length}
+            </div>
+          </div>
+          <div className="text-center mt-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-450">
+              All Consultations
+            </span>
+          </div>
+        </div>
+
+        {/* Card 3: Total Invoiced */}
+        <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-5 min-h-[148px] border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between relative overflow-hidden group transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E52E38]/50 hover:shadow-[0_12px_24px_-10px_rgba(229,46,56,0.15)]">
+          <div>
+            <div className="flex items-center gap-2 text-slate-555 dark:text-slate-400">
+              <Wallet className="w-4.5 h-4.5 text-slate-850 dark:text-slate-200 shrink-0 transition-colors group-hover:text-[#E52E38]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Total Invoiced</span>
+            </div>
+            <div className="text-3xl font-black text-slate-905 dark:text-white tracking-tight mt-3 text-center transition-transform duration-300 group-hover:scale-105">
+              ${clientInvoices.reduce((acc, curr) => acc + curr.amount, 0).toLocaleString()}.00
+            </div>
+          </div>
+          <div className="text-center mt-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-455">
+              USD Total Spent
+            </span>
+          </div>
+        </div>
+
+        {/* Card 4: Invoice Balance */}
+        <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-5 min-h-[148px] border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between relative overflow-hidden group transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E52E38]/50 hover:shadow-[0_12px_24px_-10px_rgba(229,46,56,0.15)]">
+          <div>
+            <div className="flex items-center gap-2 text-slate-555 dark:text-slate-400">
+              <CheckCircle className="w-4.5 h-4.5 text-slate-850 dark:text-slate-200 shrink-0 transition-colors group-hover:text-[#E52E38]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Invoice Balance</span>
+            </div>
+            <div className="text-3xl font-black text-slate-905 dark:text-white tracking-tight mt-3 text-center transition-transform duration-300 group-hover:scale-105">
+              ${clientInvoices.filter(i => i.status === 'Unpaid').reduce((acc, curr) => acc + curr.amount, 0).toLocaleString()}.00
+            </div>
+          </div>
+          <div className="text-center mt-1">
+            <span className="text-[10px] font-bold text-red-655 dark:text-red-400">
+              Due Now
+            </span>
+          </div>
+        </div>
+
+      </section>
+
+      {/* MAIN DASHBOARD CONTENT SPLIT GRID (8 cols Left / 4 cols Right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        {/* Left Column (8 cols) */}
+        <div className="lg:col-span-8 space-y-8">
+
+          {/* AI Matcher Info box */}
+          <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6">
+            <div className="flex items-center gap-2.5">
+              <Mic className="w-5 h-5 text-slate-800 dark:text-slate-200 shrink-0" />
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                Match with an Advisor
+              </h2>
+            </div>
+            <p className="text-xs text-slate-550 dark:text-slate-400 leading-relaxed font-medium">
+              Use our AI matcher. Speak your project requirements, and we will automatically map you to certified global providers in real-time.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 items-center">
+              <button
+                onClick={() => handleTabChange('ai-assistant')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#E52E38] hover:bg-red-700 text-white px-5 py-3 text-xs font-extrabold uppercase tracking-wider shadow-sm transition-all cursor-pointer"
+              >
+                <Mic className="w-4 h-4 animate-pulse" />
+                <span>Launch AI Voice Matcher</span>
+              </button>
+
+              <button
+                onClick={() => handleTabChange('directory')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-5 py-3 text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer"
+              >
+                <Search className="w-4 h-4" />
+                <span>Browse Directory</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Featured Service Categories */}
+          <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2.5">
+                <Search className="w-5 h-5 text-slate-800 dark:text-slate-200 shrink-0" />
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  Featured Categories
+                </h2>
+              </div>
+              <button
+                onClick={() => handleTabChange('directory')}
+                className="text-xs font-bold text-[#E52E38] hover:text-red-700 transition-colors flex items-center space-x-1 cursor-pointer"
+              >
+                <span>View All Directory</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60 space-y-2 hover:border-[#E52E38] transition-all">
+                <span className="text-[10px] font-black uppercase text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">Finance</span>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white">Virtual CFO & FP&A</h4>
+                <p className="text-[11px] text-slate-500 leading-relaxed font-medium">Consolidated financial analysis, cost audits, and reporting.</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60 space-y-2 hover:border-[#E52E38] transition-all">
+                <span className="text-[10px] font-black uppercase text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full">Growth</span>
+                <h4 className="text-xs font-bold text-slate-905 dark:text-white">Capital Financing</h4>
+                <p className="text-[11px] text-slate-550 leading-relaxed font-medium">Secure loans, LAP overdrafts, and working capital lines.</p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/60 space-y-2 hover:border-[#E52E38] transition-all">
+                <span className="text-[10px] font-black uppercase text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full">Security</span>
+                <h4 className="text-xs font-bold text-slate-905 dark:text-white">AI Compliance & SOC</h4>
+                <p className="text-[11px] text-slate-555 leading-relaxed font-medium">Verify data compliance protocols, HIPAA, and GDPR audits.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Right Column (4 cols) */}
+        <div className="lg:col-span-4 bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-6">
+          <div>
+            <div className="flex items-center gap-2.5 mb-6">
+              <Briefcase className="w-5 h-5 text-slate-800 dark:text-slate-200 shrink-0" />
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                Booked consultations
+              </h2>
+            </div>
+
+            {/* Booked consultation list items */}
+            <div className="space-y-3">
+              {clientBookings.map((c) => (
+                <div
+                  key={c.id}
+                  onClick={() => handleTabChange('bookings')}
+                  className="p-3.5 rounded-2xl bg-slate-50/50 dark:bg-slate-955/30 border border-slate-200/60 dark:border-slate-700/60 flex items-start space-x-3.5 hover:border-[#E52E38] transition-all cursor-pointer font-sans"
+                >
+                  <Briefcase className="w-5 h-5 text-slate-800 dark:text-slate-200 shrink-0 mt-0.5" />
+                  <div className="overflow-hidden">
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">{c.expertName}</h4>
+                    <p className="text-[11px] text-slate-550 dark:text-slate-450 truncate mt-0.5">
+                      {c.serviceTitle} • {c.date} • {c.time}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Manage Consultations Button */}
+          <button
+            onClick={() => handleTabChange('bookings')}
+            className="w-full py-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs transition-all shadow-xs text-center cursor-pointer"
+          >
+            Manage Consultations
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  );
+};
+
+export default ConsumerOverview;

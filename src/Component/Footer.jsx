@@ -72,13 +72,16 @@ const Footer = () => {
               </h4>
               <ul className="flex flex-col gap-3 font-geist text-sm font-medium text-slate-500">
                 <li>
-                  <Link to="/services/india" className="hover:text-[#DC2626] transition-colors">INDIA</Link>
+                  <Link to="/services?category=Financial" className="hover:text-[#DC2626] transition-colors">FINANCIAL SERVICES</Link>
                 </li>
                 <li>
-                  <Link to="/services/saudi-arabia" className="hover:text-[#DC2626] transition-colors">SAUDI ARABIA</Link>
+                  <Link to="/services?category=Technology" className="hover:text-[#DC2626] transition-colors">TECHNOLOGY SERVICES</Link>
                 </li>
                 <li>
-                  <a href="#services" className="hover:text-[#DC2626] transition-colors">GLOBAL</a>
+                  <Link to="/services?category=ESG" className="hover:text-[#DC2626] transition-colors">ESG SERVICES</Link>
+                </li>
+                <li>
+                  <Link to="/services/global" className="hover:text-[#DC2626] transition-colors">GLOBAL SERVICES</Link>
                 </li>
               </ul>
             </div>

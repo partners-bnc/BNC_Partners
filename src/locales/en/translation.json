@@ -3539,5 +3539,34 @@
       "submit": "Submit Details",
       "submitting": "Submitting..."
     }
+  },
+  "discoverServices": {
+    "badge": "Services Directory",
+    "title": "Discover Services",
+    "description": "Connect with top-tier professionals for tailored financial planning, tax strategy, and investment consulting.",
+    "searchPlaceholder": "Browse Services (e.g., Wealth Management, Tax Audit...)",
+    "aiVoice": "AI Voice",
+    "exploreCategories": "Explore Categories",
+    "trendingServices": "Trending Services",
+    "viewCategory": "View Service",
+    "back": "Back",
+    "categoriesTitle": "Categories",
+    "searchResults": "Search Results for: \"{{query}}\"",
+    "noResults": "No services found matching your query.",
+    "resetSearch": "Clear Filter",
+    "categories": {
+      "all": "All",
+      "financial": "Financial",
+      "technology": "Technology",
+      "esg": "ESG"
+    },
+    "voice": {
+      "listening": "Listening... Speak your requirement",
+      "error": "Speech recognition error. Please try again.",
+      "notSupported": "Voice recognition not supported in this browser.",
+      "recognized": "Recognized: \"{{command}}\"",
+      "applied": "Voice query applied: \"{{command}}\"",
+      "modalTitle": "BNC AI Voice Assistant"
+    }
   }
 }

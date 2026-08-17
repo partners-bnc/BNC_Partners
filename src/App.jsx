@@ -9,13 +9,14 @@ const SalesPartners = lazy(() => import('./pages/partners/SalesPartners'));
 const TechnologyPartners = lazy(() => import('./pages/partners/TechnologyPartners'));
 const ServicePartners = lazy(() => import('./pages/partners/ServicePartners'));
 const Login = lazy(() => import('./auth/Login'));
-const PartnerDashboard = lazy(() => import('./pages/PartnerDashboard'));
+const PartnerDashboard = lazy(() => import('./pages/UserDashboard/UserDashboard'));
 const CompleteProfile = lazy(() => import('./pages/CompleteProfile'));
 const ReferralProgram = lazy(() => import('./pages/ReferralProgram'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const IndiaServices = lazy(() => import('./pages/services/india/IndiaServices'));
 const SaudiArabiaServices = lazy(() => import('./pages/services/saudi-arabia/SaudiArabiaServices'));
 const GlobalServices = lazy(() => import('./pages/services/global/GlobalServices'));
+const DiscoverServices = lazy(() => import('./pages/services/DiscoverServices'));
 const ServiceDetail = lazy(() => import('./pages/services/ServiceDetail'));
 const StartChatting = lazy(() => import('./pages/StartChatting'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
@@ -48,9 +49,9 @@ function App() {
             <Route path="/complete-profile" element={<CompleteProfile />} />
             <Route path="/dashboard" element={<PartnerDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/services/india" element={<IndiaServices />} />
-            <Route path="/services/saudi-arabia" element={<SaudiArabiaServices />} />
+            <Route path="/services" element={<DiscoverServices />} />
             <Route path="/services/global" element={<GlobalServices />} />
+            <Route path="/services/:serviceId" element={<ServiceDetail />} />
             <Route path="/services/:country/:serviceId" element={<ServiceDetail />} />
             <Route path="/start-chatting" element={<StartChatting />} />
             <Route path="/*" element={
