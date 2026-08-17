@@ -29,8 +29,8 @@ const ProviderServices = ({
         <div className="flex items-center space-x-3">
           <div className="w-1.5 h-7 bg-[#E52E38] rounded-full"></div>
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Manage Listed Services</h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Create and publish corporate services to clients.</p>
+            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Manage Listed Services</h2>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">Create and publish corporate services to clients.</p>
           </div>
         </div>
         <button
@@ -46,11 +46,11 @@ const ProviderServices = ({
         {listedServices.map((service) => (
           <div
             key={service.id}
-            className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col justify-between group hover:shadow-[0_16px_32px_-8px_rgba(15,42,74,0.08)] transition-all duration-300"
+            className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between group hover:shadow-[0_16px_32px_-8px_rgba(15,42,74,0.08)] transition-all duration-300"
           >
             <div>
               {/* Category banner image overlay */}
-              <div className="relative h-48 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <div className="relative h-48 w-full overflow-hidden bg-slate-100">
                 <img
                   src={getCategoryImg(service.category)}
                   alt={service.category}
@@ -63,7 +63,7 @@ const ProviderServices = ({
 
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
+                  <h3 className="text-xl font-bold text-slate-900 leading-tight">
                     {service.title}
                   </h3>
                   <span className="text-xs font-black text-[#E52E38] shrink-0 ml-2">
@@ -71,7 +71,7 @@ const ProviderServices = ({
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-550 dark:text-slate-400 leading-relaxed font-medium">
+                <p className="text-xs text-slate-500 leading-relaxed font-medium">
                   {service.description}
                 </p>
               </div>
@@ -96,49 +96,49 @@ const ProviderServices = ({
       {/* Publish New Service Modal */}
       {isCreateServiceOpen && (
         <div className="fixed inset-0 z-55 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md">
-          <div className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl relative">
-            <button onClick={() => setIsCreateServiceOpen(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
+          <div className="w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-2xl relative">
+            <button onClick={() => setIsCreateServiceOpen(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400">
               <X className="w-5 h-5" />
             </button>
 
             <span className="text-[10px] font-bold tracking-widest text-[#E52E38] uppercase">SERVICE LISTING</span>
-            <h3 className="text-xl font-black text-slate-900 dark:text-white mt-1 mb-2">Publish New Service</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 font-semibold">List a new consultation or strategy package for clients.</p>
+            <h3 className="text-xl font-black text-slate-900 mt-1 mb-2">Publish New Service</h3>
+            <p className="text-xs text-slate-500 mb-6 font-semibold">List a new consultation or strategy package for clients.</p>
 
             <form onSubmit={handleCreateServiceSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Service Title</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Service Title</label>
                 <input
                   type="text"
                   name="title"
                   placeholder="e.g. Virtual CFO & FP&A Review"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Category</label>
-                  <select name="category" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs">
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Category</label>
+                  <select name="category" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs">
                     <option>Finance</option>
                     <option>Growth</option>
                     <option>Security</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Retainer ($)</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Retainer ($)</label>
                   <input
                     type="number"
                     name="price"
                     placeholder="300"
                     required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-[#E52E38] mb-1">Unit</label>
-                  <select name="unit" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs">
+                  <select name="unit" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs">
                     <option>hr</option>
                     <option>session</option>
                     <option>plan</option>
@@ -148,13 +148,13 @@ const ProviderServices = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Service Description</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Service Description</label>
                 <textarea
                   name="description"
                   placeholder="Detail the scope, delivery, and outcome of this consulting package..."
                   rows={3}
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs"
                 />
               </div>
 

@@ -2,51 +2,51 @@ import React from 'react';
 
 const ConsumerSettings = ({ clientSettings, handleClientSettingsSubmit }) => {
   return (
-    <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-6 animate-fade-in">
+    <div className="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6 animate-fade-in">
       <div>
-        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Client Profile Settings</h2>
-        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Customize your organizational profile and budget preferences.</p>
+        <h2 className="text-xl font-black text-slate-900 tracking-tight">Client Profile Settings</h2>
+        <p className="text-xs text-slate-500 font-medium">Customize your organizational profile and budget preferences.</p>
       </div>
 
       <form onSubmit={handleClientSettingsSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Authorized Contact Person</label>
+          <label className="block text-xs font-bold text-slate-700 mb-1">Authorized Contact Person</label>
           <input
             type="text"
             name="legalName"
             defaultValue={clientSettings.legalName}
             required
-            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs"
+            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Company / Organization Name</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1">Company / Organization Name</label>
             <input
               type="text"
               name="companyName"
               defaultValue={clientSettings.companyName}
               required
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Contact Phone</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1">Contact Phone</label>
             <input
               type="text"
               name="phone"
               defaultValue={clientSettings.phone}
               required
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Company Size</label>
-            <select name="companySize" defaultValue={clientSettings.companySize} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs">
+            <label className="block text-xs font-bold text-slate-700 mb-1">Company Size</label>
+            <select name="companySize" defaultValue={clientSettings.companySize} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs">
               <option>1-10 employees</option>
               <option>11-50 employees</option>
               <option>51-200 employees</option>
@@ -54,8 +54,8 @@ const ConsumerSettings = ({ clientSettings, handleClientSettingsSubmit }) => {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Project Budget</label>
-            <select name="budgetRange" defaultValue={clientSettings.budgetRange} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs">
+            <label className="block text-xs font-bold text-slate-700 mb-1">Project Budget</label>
+            <select name="budgetRange" defaultValue={clientSettings.budgetRange} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs">
               <option>$1,000 - $5,000</option>
               <option>$5,000 - $10,000</option>
               <option>$10,000 - $50,000</option>
@@ -63,8 +63,8 @@ const ConsumerSettings = ({ clientSettings, handleClientSettingsSubmit }) => {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Primary Need</label>
-            <select name="helpNeeded" defaultValue={clientSettings.helpNeeded} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs">
+            <label className="block text-xs font-bold text-slate-700 mb-1">Primary Need</label>
+            <select name="helpNeeded" defaultValue={clientSettings.helpNeeded} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs">
               <option>Finance</option>
               <option>Growth Capital</option>
               <option>Cybersecurity</option>
