@@ -1,19 +1,144 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import {
+  ChevronDown,
+  LayoutDashboard,
+  Store,
+  Wallet,
+  Calendar,
+  User,
+  Search,
+  Mic,
+  FileText,
+  Settings,
+  RefreshCw,
+  LogOut
+} from 'lucide-react';
+
+const PROVIDER_OPTIONS = [
+  {
+    key: 'overview',
+    title: 'Overview',
+    description: 'Earnings, ratings and monthly trends',
+    icon: LayoutDashboard,
+    iconBg: 'bg-blue-50 dark:bg-blue-950/45',
+    iconColor: 'text-blue-600 dark:text-blue-450'
+  },
+  {
+    key: 'services',
+    title: 'Listed Services',
+    description: 'Manage and publish consulting packages',
+    icon: Store,
+    iconBg: 'bg-indigo-50 dark:bg-indigo-950/45',
+    iconColor: 'text-indigo-600 dark:text-indigo-450'
+  },
+  {
+    key: 'ledger',
+    title: 'Transaction Ledger',
+    description: 'Complete record of payout transactions',
+    icon: Wallet,
+    iconBg: 'bg-emerald-50 dark:bg-emerald-950/45',
+    iconColor: 'text-emerald-600 dark:text-emerald-450'
+  },
+  {
+    key: 'calendar',
+    title: 'Bookings Calendar',
+    description: 'Scheduled client consultations calendar',
+    icon: Calendar,
+    iconBg: 'bg-amber-50 dark:bg-amber-950/45',
+    iconColor: 'text-amber-600 dark:text-amber-450'
+  },
+  {
+    key: 'profile',
+    title: 'Profile Onboarding',
+    description: 'Complete setup and partner agreement',
+    icon: User,
+    iconBg: 'bg-purple-50 dark:bg-purple-950/45',
+    iconColor: 'text-purple-600 dark:text-purple-450'
+  }
+];
+
+const CONSUMER_OPTIONS = [
+  {
+    key: 'overview',
+    title: 'Overview',
+    description: 'Client statistics and booked calls summary',
+    icon: LayoutDashboard,
+    iconBg: 'bg-blue-50 dark:bg-blue-950/45',
+    iconColor: 'text-blue-600 dark:text-blue-450'
+  },
+  {
+    key: 'directory',
+    title: 'Explore Directory',
+    description: 'Browse and book certified advisory experts',
+    icon: Search,
+    iconBg: 'bg-indigo-50 dark:bg-indigo-950/45',
+    iconColor: 'text-indigo-600 dark:text-indigo-450'
+  },
+  {
+    key: 'ai-assistant',
+    title: 'AI Match Assistant',
+    description: 'Voice match project requirements instantly',
+    icon: Mic,
+    iconBg: 'bg-rose-50 dark:bg-rose-950/45',
+    iconColor: 'text-rose-600 dark:text-rose-455'
+  },
+  {
+    key: 'bookings',
+    title: 'My Bookings',
+    description: 'Manage scheduled meetings and expert calls',
+    icon: Calendar,
+    iconBg: 'bg-amber-50 dark:bg-amber-950/45',
+    iconColor: 'text-amber-600 dark:text-amber-455'
+  },
+  {
+    key: 'invoices',
+    title: 'Invoices & Payments',
+    description: 'Audit bills, invoice balance, and payments',
+    icon: FileText,
+    iconBg: 'bg-emerald-50 dark:bg-emerald-950/45',
+    iconColor: 'text-emerald-600 dark:text-emerald-455'
+  },
+  {
+    key: 'settings',
+    title: 'Client Settings',
+    description: 'Organizational details and budget preferences',
+    icon: Settings,
+    iconBg: 'bg-purple-50 dark:bg-purple-950/45',
+    iconColor: 'text-purple-600 dark:text-purple-455'
+  },
+  {
+    key: 'profile',
+    title: 'Profile Onboarding',
+    description: 'Complete setup and partner agreement',
+    icon: User,
+    iconBg: 'bg-purple-50 dark:bg-purple-950/45',
+    iconColor: 'text-purple-600 dark:text-purple-455'
+  }
+];
 
 const Sidebar = lazy(() => import('./Sidebar'));
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 const ExpertFormModal = lazy(() => import('./ExpertFormModal'));
 
-const Header = () => {
+const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handleTabChange, activeTab }) => {
   const { t, i18n } = useTranslation();
+  
+  // Calculate dynamic button label for the active role / active section
+  const activeDashboardTab = activeTab || localStorage.getItem('activeDashboardTab') || 'overview';
+  const role = currentRole || localStorage.getItem('dashboardRole') || 'provider';
+  const activeList = role === 'provider' ? PROVIDER_OPTIONS : CONSUMER_OPTIONS;
+  const activeOption = activeList.find(opt => opt.key === activeDashboardTab);
+  const buttonLabel = (isDashboardPage && activeOption) ? activeOption.title : (role === 'provider' ? 'Provider' : 'Consumer');
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const partnerUser = localStorage.getItem('partnerUser');
@@ -112,15 +237,15 @@ const Header = () => {
             <div className={`flex items-center gap-3 pr-0 ${isRtl ? 'flex-row-reverse' : ''}`}>
               {/* Sidebar Menu Button */}
               <button
-                className="flex flex-col space-y-0.5 cursor-pointer"
+                className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-650 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-xs transition-all cursor-pointer flex items-center justify-center"
                 onClick={() => setIsSidebarOpen((prev) => !prev)}
                 onMouseEnter={() => setIsSidebarOpen(true)}
                 aria-label="Toggle sidebar"
                 aria-expanded={isSidebarOpen}
               >
-                <div className="w-4 h-[1.5px] bg-gray-700"></div>
-                <div className="w-4 h-[1.5px] bg-gray-700"></div>
-                <div className="w-4 h-[1.5px] bg-gray-700"></div>
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               </button>
 
               {/* Logo */}
@@ -169,14 +294,13 @@ const Header = () => {
 
                 {/* Services */}
                 <Link
-                  to="/#services"
-                  onClick={(e) => handleNavClick(e, 'services')}
-                  className={`font-geist text-base relative transition-colors duration-300 ${isActiveNav('services') ? 'text-[#DC2626] font-semibold' : 'text-gray-700 hover:text-[#DC2626]'
+                  to="/services"
+                  className={`font-geist text-base relative transition-colors duration-300 ${location.pathname.startsWith('/services') ? 'text-[#DC2626] font-semibold' : 'text-gray-700 hover:text-[#DC2626]'
                     }`}
                 >
                   {t('header.services')}
                   <span
-                    className={`absolute bottom-0 ${underlineAlign} h-0.5 bg-[#DC2626] transition-all duration-300 ${isActiveNav('services') ? 'w-full' : 'w-0 group-hover:w-full'
+                    className={`absolute bottom-0 ${underlineAlign} h-0.5 bg-[#DC2626] transition-all duration-300 ${location.pathname.startsWith('/services') ? 'w-full' : 'w-0'
                       }`}
                   ></span>
                 </Link>
@@ -208,15 +332,113 @@ const Header = () => {
                       }`}
                   ></span>
                 </Link>
+
+                {/* Logged In Dashboard Dropdown */}
+                {isLoggedIn && (
+                  <div 
+                    className="relative inline-block text-left"
+                    onMouseEnter={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
+                    {/* Trigger Button */}
+                    <button 
+                      className="font-geist text-base relative transition-colors duration-300 text-gray-700 hover:text-[#DC2626] font-medium flex items-center gap-1.5 cursor-pointer py-1 focus:outline-none"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      <span>{buttonLabel}</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180 text-[#DC2626]' : 'text-slate-500'}`} />
+                      <span className="absolute bottom-0 left-0 w-0 group-hover:w-full h-0.5 bg-[#DC2626] transition-all duration-300"></span>
+                    </button>
+
+                    {/* Dropdown Box Menu */}
+                    <AnimatePresence>
+                      {isDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.15, ease: "easeOut" }}
+                          className="absolute right-0 top-full mt-2 w-[480px] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-2xl p-6 z-50 pointer-events-auto"
+                        >
+                          {/* 2-Column Options Grid */}
+                          <div className="grid grid-cols-2 gap-4">
+                            {((currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider' ? PROVIDER_OPTIONS : CONSUMER_OPTIONS).map((opt) => (
+                              <button
+                                key={opt.key}
+                                onClick={() => {
+                                  localStorage.setItem('dashboardRole', currentRole || localStorage.getItem('dashboardRole') || 'provider');
+                                  localStorage.setItem('activeDashboardTab', opt.key);
+                                  if (isDashboardPage && handleTabChange) {
+                                    handleTabChange(opt.key);
+                                  } else {
+                                    window.location.href = '/dashboard';
+                                  }
+                                }}
+                                className="group/item flex items-center gap-3.5 p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/50 hover:bg-white dark:hover:bg-slate-850 hover:border-[#E52E38] dark:hover:border-[#E52E38] transition-all w-full cursor-pointer text-left font-sans shadow-sm"
+                              >
+                                {/* Black professional icon with no background container */}
+                                <opt.icon className="w-5 h-5 text-slate-800 dark:text-slate-200 group-hover/item:text-[#E52E38] transition-colors shrink-0" />
+                                
+                                <span className="font-semibold text-slate-800 dark:text-slate-100 text-sm group-hover/item:text-[#E52E38] transition-colors leading-none">
+                                  {opt.title}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Footer controls: Switch Role Toggle Switch */}
+                          <div className="mt-6 pt-4 border-t border-slate-150 dark:border-slate-800 flex items-center justify-between">
+                            <span className="text-xs font-bold text-slate-550 dark:text-slate-450 font-sans">
+                              {(currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider' ? 'Switch to Consumer' : 'Switch to Provider'}
+                            </span>
+                            
+                            <button
+                              onClick={() => {
+                                if (onRoleSwitch) {
+                                  onRoleSwitch();
+                                } else {
+                                  const active = localStorage.getItem('dashboardRole') || 'provider';
+                                  const next = active === 'provider' ? 'consumer' : 'provider';
+                                  localStorage.setItem('dashboardRole', next);
+                                  window.location.href = '/dashboard';
+                                }
+                              }}
+                              className={`relative w-11 h-6 rounded-full transition-colors duration-250 cursor-pointer focus:outline-none flex items-center ${
+                                (currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider'
+                                  ? 'bg-slate-300 dark:bg-slate-700'
+                                  : 'bg-[#E52E38]'
+                              }`}
+                            >
+                              <span
+                                className={`absolute left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-250 ${
+                                  (currentRole || localStorage.getItem('dashboardRole') || 'provider') === 'provider'
+                                    ? 'translate-x-0'
+                                    : 'translate-x-5'
+                                }`}
+                              />
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
               </nav>
             </div>
 
-            {/* Right Section */}
+            {/* Right Section - Restored Dashboard & Logout buttons */}
             <div className={`flex items-center gap-3 ${rightPadding}`}>
-
               <div className="flex items-center gap-3">
                 <Link
                   to={isLoggedIn ? "/dashboard" : "/login"}
+                  onClick={(e) => {
+                    if (isLoggedIn && isDashboardPage && handleTabChange) {
+                      e.preventDefault();
+                      handleTabChange('overview');
+                    } else if (isLoggedIn) {
+                      localStorage.setItem('activeDashboardTab', 'overview');
+                    }
+                  }}
                   className="hidden md:inline-block bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 px-4 py-2 rounded-lg font-poppins font-medium text-sm transition-all shadow-sm"
                 >
                   {t('header.dashboard')}
