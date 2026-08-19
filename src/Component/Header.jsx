@@ -14,7 +14,8 @@ import {
   FileText,
   Settings,
   RefreshCw,
-  LogOut
+  LogOut,
+  Gift
 } from 'lucide-react';
 
 const PROVIDER_OPTIONS = [
@@ -57,6 +58,14 @@ const PROVIDER_OPTIONS = [
     icon: User,
     iconBg: 'bg-purple-50',
     iconColor: 'text-purple-600'
+  },
+  {
+    key: 'referral-program',
+    title: 'Referral Program',
+    description: 'Invite partners and earn rewards',
+    icon: Gift,
+    iconBg: 'bg-red-50',
+    iconColor: 'text-red-600'
   }
 ];
 
@@ -116,6 +125,14 @@ const CONSUMER_OPTIONS = [
     icon: User,
     iconBg: 'bg-purple-50',
     iconColor: 'text-purple-600'
+  },
+  {
+    key: 'referral-program',
+    title: 'Referral Program',
+    description: 'Invite partners and earn rewards',
+    icon: Gift,
+    iconBg: 'bg-red-50',
+    iconColor: 'text-red-600'
   }
 ];
 
@@ -139,6 +156,7 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   useEffect(() => {
     const partnerUser = localStorage.getItem('partnerUser');
@@ -366,6 +384,10 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
                               <button
                                 key={opt.key}
                                 onClick={() => {
+                                  if (opt.key === 'referral-program') {
+                                    window.location.href = '/referral-program';
+                                    return;
+                                  }
                                   localStorage.setItem('dashboardRole', currentRole || localStorage.getItem('dashboardRole') || 'provider');
                                   localStorage.setItem('activeDashboardTab', opt.key);
                                   if (isDashboardPage && handleTabChange) {
@@ -442,12 +464,39 @@ const Header = ({ currentRole, onRoleSwitch, onMenuClick, isDashboardPage, handl
                   {t('header.dashboard')}
                 </Link>
                 {isLoggedIn ? (
-                  <button
-                    onClick={handleLogout}
-                    className="hidden md:inline-block bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 px-4 py-2 rounded-lg font-poppins font-medium text-sm cursor-pointer transition-all shadow-sm"
+                  <div
+                    className="relative hidden md:inline-block"
+                    onMouseEnter={() => setIsUserDropdownOpen(true)}
+                    onMouseLeave={() => setIsUserDropdownOpen(false)}
                   >
-                    {t('header.logout')}
-                  </button>
+                    <div className="flex items-center gap-2 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 px-3 py-1.5 rounded-lg font-poppins font-medium text-sm cursor-pointer transition-all shadow-sm">
+                      <div className="w-6 h-6 rounded-full bg-[#0F2A4A] flex items-center justify-center text-xs font-bold text-white shadow-inner">
+                        {(user?.firstName?.[0] || user?.name?.[0] || user?.email?.[0] || 'U').toUpperCase()}
+                      </div>
+                      <span className="max-w-[120px] truncate">{user?.firstName || user?.name || user?.email?.split('@')[0]}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 text-slate-400 ${isUserDropdownOpen ? 'rotate-180' : ''}`} />
+                    </div>
+                    
+                    <AnimatePresence>
+                      {isUserDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 5 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute right-0 top-full mt-1 w-48 bg-white border border-slate-200/80 rounded-xl shadow-lg py-2 z-50 pointer-events-auto"
+                        >
+                          <button
+                            onClick={handleLogout}
+                            className="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 font-medium text-sm flex items-center gap-2 transition-colors cursor-pointer"
+                          >
+                            <LogOut className="w-4 h-4" />
+                            {t('header.logout')}
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 ) : (
                   <Link to="/login" className="hidden md:inline-block bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 px-4 py-2 rounded-lg font-poppins font-medium text-sm transition-all shadow-sm">
                     {t('header.login')}

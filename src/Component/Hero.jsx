@@ -226,24 +226,17 @@ const Hero = () => {
             </motion.div>
 
 
-            {/* Heading */}
             <motion.h1
               className="font-capriola text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 leading-tight tracking-tight max-w-5xl mx-auto mb-1"
               variants={itemVariants}
             >
-              {isLoggedIn ? (
-                <>
-                  Welcome <span className="text-[#DC2626] font-extrabold">{partnerName}</span>
-                </>
-              ) : (
-                <>
-                  {t('hero.titlePrefix')}{' '}
-                  <span className="text-slate-900 font-extrabold">BnC</span>{' '}
-                  <span className="inline-block border-2 border-[#DC2626] px-3 py-1 rounded-2xl text-[#DC2626] font-black text-4xl sm:text-5xl md:text-6xl tracking-tight ml-1 leading-none">
-                    LEG
-                  </span>
-                </>
-              )}
+              <>
+                {t('hero.titlePrefix')}{' '}
+                <span className="text-slate-900 font-extrabold">BnC</span>{' '}
+                <span className="inline-block border-2 border-[#DC2626] px-3 py-1 rounded-2xl text-[#DC2626] font-black text-4xl sm:text-5xl md:text-6xl tracking-tight ml-1 leading-none">
+                  LEG
+                </span>
+              </>
             </motion.h1>
 
             {/* Tagline */}

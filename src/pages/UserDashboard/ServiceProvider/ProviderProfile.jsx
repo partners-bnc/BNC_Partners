@@ -1,14 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   UserCheck,
-  FileText,
   Sparkles,
-  CreditCard,
   PenTool,
   Store,
   Award,
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  Gift
 } from 'lucide-react';
 
 const ProviderProfile = ({
@@ -25,13 +25,14 @@ const ProviderProfile = ({
   setIsAIModalOpen,
   handleTabChange
 }) => {
+  const navigate = useNavigate();
   // Resolve actual states including AI status
   const profileCompleted = checklistState?.profileCompleted || false;
   const bankLinked = checklistState?.bankLinked || false;
   const servicePublished = checklistState?.servicePublished || false;
   const actualAgreementSigned = agreementSigned || checklistState?.agreementSigned || false;
 
-  // Checklist configuration
+  // Checklist configuration — Steps 2 (credentials) and 4 (bank) removed
   const steps = [
     {
       id: 1,
@@ -43,18 +44,6 @@ const ProviderProfile = ({
     },
     {
       id: 2,
-      title: "Complete Profile Credentials",
-      desc: "Provide legal name, consulting firm experience, and expertise domains.",
-      completed: profileCompleted,
-      icon: FileText,
-      action: () => setIsCredentialsModalOpen(true),
-      actionLabel: "Setup Credentials",
-      details: profileCompleted && providerCredentials
-        ? `Registered: ${providerCredentials.legalName} • ${providerCredentials.firmName} (${providerCredentials.experience} yrs exp)`
-        : null
-    },
-    {
-      id: 3,
       title: "AI Profile Optimizer",
       desc: "Use AI models to draft, structure, and polish your consulting profile biography.",
       completed: aiProfileCompleted,
@@ -64,19 +53,7 @@ const ProviderProfile = ({
       details: aiProfileCompleted ? "AI optimized biography added successfully" : null
     },
     {
-      id: 4,
-      title: "Link Payment Details",
-      desc: "Connect your bank account to secure consulting payouts instantly.",
-      completed: bankLinked,
-      icon: CreditCard,
-      action: () => setIsBankModalOpen(true),
-      actionLabel: "Link Payout Info",
-      details: bankLinked && bankDetails
-        ? `Bank: ${bankDetails.bankName} • Acc: ****${bankDetails.accountNo?.slice(-4)}`
-        : null
-    },
-    {
-      id: 5,
+      id: 3,
       title: "Sign Partner Agreement",
       desc: "Digitally sign standard advisory network terms and guidelines.",
       completed: actualAgreementSigned,
@@ -88,7 +65,7 @@ const ProviderProfile = ({
         : null
     },
     {
-      id: 6,
+      id: 4,
       title: "Publish First Consulting Offer",
       desc: "Publish at least one strategy consulting package to start receiving client bookings.",
       completed: servicePublished,
@@ -100,6 +77,7 @@ const ProviderProfile = ({
         : null
     }
   ];
+
 
   // Dynamically find next incomplete step
   const nextStep = steps.find(s => !s.completed);
@@ -276,6 +254,53 @@ const ProviderProfile = ({
             </button>
           </div>
         </div>
+
+        {/* Referral Program Card */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#0F2A4A] to-[#1a4a7a] rounded-3xl p-6 border border-[#0F2A4A]/20 shadow-lg space-y-4 hover:shadow-[0_16px_32px_-8px_rgba(15,42,74,0.25)] transition-all duration-300 cursor-pointer group"
+          onClick={() => navigate('/referral-program')}
+        >
+          {/* Decorative blob */}
+          <div className="absolute -top-8 -right-8 w-32 h-32 bg-[#E52E38]/20 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full blur-xl pointer-events-none" />
+
+          {/* Header */}
+          <div className="flex items-center gap-2.5 relative">
+            <div className="w-9 h-9 rounded-xl bg-[#E52E38] flex items-center justify-center shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+              <Gift className="w-4.5 h-4.5 text-white" />
+            </div>
+            <div>
+              <span className="text-[9px] font-extrabold uppercase tracking-[2px] text-[#E52E38]/80">Earn More</span>
+              <h3 className="text-sm font-black text-white leading-tight">Referral Program</h3>
+            </div>
+          </div>
+
+          {/* Description */}
+          <p className="text-xs text-white/70 leading-relaxed font-medium relative">
+            Invite partners and earn rewards for every successful referral that joins the BnC LEG network.
+          </p>
+
+          {/* Stats row */}
+          <div className="grid grid-cols-2 gap-3 relative">
+            <div className="bg-white/10 rounded-xl p-3 text-center">
+              <p className="text-lg font-black text-white">₹</p>
+              <p className="text-[10px] text-white/60 font-semibold">Earn Rewards</p>
+            </div>
+            <div className="bg-white/10 rounded-xl p-3 text-center">
+              <p className="text-lg font-black text-white">∞</p>
+              <p className="text-[10px] text-white/60 font-semibold">No Limit</p>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <button
+            onClick={(e) => { e.stopPropagation(); navigate('/referral-program'); }}
+            className="w-full py-2.5 rounded-xl bg-[#E52E38] hover:bg-[#C81E27] text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md relative"
+          >
+            <span>View Referral Program</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
       </div>
     </div>
   );

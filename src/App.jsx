@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Header from './Component/Header';
 import Footer from './Component/Footer';
 import Home from './pages/Home';
+const FakeActivityPopup = lazy(() => import('./Component/FakeActivityPopup'));
 
 const InternationalPartners = lazy(() => import('./pages/partners/InternationalPartners'));
 const SalesPartners = lazy(() => import('./pages/partners/SalesPartners'));
@@ -74,6 +75,9 @@ function App() {
               </>
             } />
           </Routes>
+        </Suspense>
+        <Suspense fallback={null}>
+          <FakeActivityPopup />
         </Suspense>
       </div>
     </Router>

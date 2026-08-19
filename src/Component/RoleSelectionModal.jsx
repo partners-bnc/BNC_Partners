@@ -39,12 +39,10 @@ const RoleSelectionModal = () => {
 
   const handleSignUp = (role) => {
     setIsVisible(false);
-    if (role === 'provider') {
-      navigate('/?open=partner');
-    } else {
-      navigate('/?open=expert');
-    }
+    // Both roles go through the unified PartnerFormModal; role is passed as URL param
+    navigate(`/?open=partner&role=${role}`);
   };
+
 
   const handleLogIn = (role) => {
     setIsVisible(false);

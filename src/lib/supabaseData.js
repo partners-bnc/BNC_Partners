@@ -94,7 +94,8 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   bio: aiRow?.bio || '',
   agreementSigned: Boolean(profileRow?.agreement_signed),
   agreementSignedName: profileRow?.agreement_signed_name || '',
-  agreementSignedAt: profileRow?.agreement_signed_at || null
+  agreementSignedAt: profileRow?.agreement_signed_at || null,
+  loginRole: profileRow?.login_role || 'provider'
 });
 
 const isFilled = (value) => String(value || '').trim().length > 0;
@@ -164,7 +165,7 @@ const splitFullName = (fullName) => {
   return { firstName, lastName };
 };
 
-export const registerPartner = async ({ firstName, lastName, fullName, email, phone, countryCode, country, city, password }) => {
+export const registerPartner = async ({ firstName, lastName, fullName, email, phone, countryCode, country, city, password, loginRole }) => {
   const normalizedEmail = normalizeEmail(email);
   const exists = await checkPartnerEmailExists(normalizedEmail);
   if (exists) {
@@ -179,6 +180,8 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
     throw new Error('First name is required.');
   }
 
+  const resolvedLoginRole = loginRole === 'consumer' ? 'consumer' : 'provider';
+
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email: normalizedEmail,
     password,
@@ -192,7 +195,8 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
         country,
         city,
         status: 'Email Sent',
-        role: 'partner'
+        role: 'partner',
+        login_role: resolvedLoginRole
       }
     }
   });
@@ -205,6 +209,12 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
   if (!authUser?.id) {
     throw new Error('Could not create partner auth user.');
   }
+
+  // Persist login_role to the profile table (upsert in case trigger already created the row)
+  await supabase
+    .from('registration_partner_profiles')
+    .update({ login_role: resolvedLoginRole })
+    .eq('id', authUser.id);
 
   await notifyFormSubmissionSafely({
     formType: 'Partner Registration',
@@ -221,7 +231,8 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
       countryCode,
       country,
       city,
-      status: 'Email Sent'
+      status: 'Email Sent',
+      loginRole: resolvedLoginRole
     }
   });
 
@@ -373,7 +384,27 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
   return mapPartnerProfile(profileRow, aiRow);
 };
 
+export const updatePartnerLoginRole = async (partnerId, newRole) => {
+  const resolvedPartnerId = String(partnerId || '').trim();
+  if (!resolvedPartnerId) {
+    throw new Error('Partner ID is required.');
+  }
+  const resolvedRole = newRole === 'consumer' ? 'consumer' : 'provider';
+
+  const { error } = await supabase
+    .from('registration_partner_profiles')
+    .update({ login_role: resolvedRole, updated_at: new Date().toISOString() })
+    .eq('id', resolvedPartnerId);
+
+  if (error) {
+    throw error;
+  }
+
+  return resolvedRole;
+};
+
 export const updatePartnerContactDetails = async ({ partnerId, phone, countryCode, country, city }) => {
+
   const resolvedPartnerId = String(partnerId || '').trim();
   if (!resolvedPartnerId) {
     throw new Error('Partner ID is required.');
@@ -906,4 +937,37 @@ export const getSessionUser = async () => {
   }
 
   return user;
+};
+
+export const createServiceRequest = async (partnerId, title, description) => {
+  if (!partnerId) throw new Error('partnerId is required');
+  const { data, error } = await supabase
+    .from('service_requests')
+    .insert([{ partner_id: partnerId, title, description }])
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
+export const fetchAllServiceRequests = async () => {
+  const { data, error } = await supabase
+    .from('service_requests')
+    .select(`
+      id,
+      title,
+      description,
+      created_at,
+      partners (
+        id,
+        first_name,
+        last_name,
+        email
+      )
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data;
 };
