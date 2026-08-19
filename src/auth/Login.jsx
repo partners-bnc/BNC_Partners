@@ -16,8 +16,6 @@ const Login = () => {
   const iconMargin = isRtl ? 'mr-2' : 'ml-2';
   const passPadding = isRtl ? 'pl-12' : 'pr-12';
   const eyePosition = isRtl ? 'left-3' : 'right-3';
-  const topBlobPos = isRtl ? 'pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#DC2626]/15 blur-3xl' : 'pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#DC2626]/15 blur-3xl';
-  const bottomBlobPos = isRtl ? 'pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#B91C1C]/15 blur-3xl' : 'pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[#B91C1C]/15 blur-3xl';
   const [activeTab, setActiveTab] = useState('partner');
   const [selectedRole, setSelectedRole] = useState(null);
   const [isAdminOnly, setIsAdminOnly] = useState(false);
@@ -29,7 +27,6 @@ const Login = () => {
     email: '',
     password: ''
   });
-  const benefitItems = t('login.sidePanel.benefits', { returnObjects: true });
   const trustItems = t('login.trustIndicators', { returnObjects: true });
 
   const renderLeftIllustration = () => {
@@ -133,36 +130,35 @@ const Login = () => {
 
     const completeGoogleLogin = async () => {
       const searchParams = new URLSearchParams(location.search);
-      const hasCode = searchParams.has('code');
       const hasOAuthMarker = searchParams.get('oauth') === 'partner';
       const hasHashToken = String(location.hash || '').includes('access_token');
 
-      if (activeTab !== 'partner' || (!hasCode && !hasOAuthMarker && !hasHashToken)) {
+      if (activeTab !== 'partner' || (!hasOAuthMarker && !hasHashToken)) {
         return;
       }
 
       setIsGoogleLoading(true);
       try {
-        const { handleAuthCallback } = await import('../lib/supabaseData');
-        const session = await handleAuthCallback();
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        if (!session?.user) throw new Error('Authentication session not found');
         if (!isMounted) return;
 
-        if (session?.user) {
-          const { fetchPartnerProfile } = await import('../lib/supabaseData');
-          const profile = await fetchPartnerProfile(session.user.id);
-          if (!isMounted) return;
+        const partner = await fetchPartnerData(session.user.email, session.user.id);
+        if (!isMounted) return;
 
-          if (profile) {
-            localStorage.setItem('partnerUser', JSON.stringify(profile));
-            if (profile.role_completed) {
-              navigate('/dashboard');
-            } else {
-              navigate('/complete-profile');
-            }
-          } else {
-            navigate('/complete-profile');
-          }
+        if (!partner) {
+          navigate('/complete-profile');
+          return;
         }
+
+        localStorage.removeItem('adminUser');
+        localStorage.setItem('partnerUser', JSON.stringify(partner));
+
+        const dbRole = partner.loginRole === 'consumer' ? 'consumer' : 'provider';
+        localStorage.setItem('dashboardRole', dbRole);
+
+        navigate(isPartnerProfileComplete(partner) ? '/dashboard' : '/complete-profile');
       } catch (error) {
         console.error('OAuth callback processing error:', error);
         setErrors({ general: error?.message || 'Authentication callback failed' });
@@ -253,7 +249,6 @@ const Login = () => {
     setIsGoogleLoading(true);
     setErrors({});
     try {
-      const { loginPartnerWithGoogle } = await import('../lib/supabaseData');
       const redirectTo = `${window.location.origin}/login?oauth=partner`;
       await loginPartnerWithGoogle(redirectTo);
     } catch (error) {
