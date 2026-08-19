@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { FaTimes, FaArrowRight, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaBriefcase, FaUserTie } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { checkPartnerEmailExists, registerPartner } from '../lib/supabaseData';
+
+const TOTAL_STEPS = 4;
 
 const PartnerFormModal = ({ isOpen, onClose }) => {
   const { i18n } = useTranslation();
+  const location = useLocation();
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
   const rowDirection = isRtl ? 'flex-row-reverse' : 'flex-row';
@@ -19,6 +24,13 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
+
+  // Role — pre-filled from URL param (?role=provider/consumer), user must confirm in Step 4
+  const urlRole = new URLSearchParams(location.search).get('role');
+  const [selectedRole, setSelectedRole] = useState(
+    urlRole === 'consumer' ? 'consumer' : urlRole === 'provider' ? 'provider' : null
+  );
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -67,6 +79,11 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
           newErrors.password = 'Password must contain at least 8 characters, including uppercase, lowercase, number and special character';
         }
         break;
+      case 4:
+        if (!selectedRole) {
+          newErrors.role = 'Please select your role to continue';
+        }
+        break;
       default:
         break;
     }
@@ -106,7 +123,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateStep(3)) return;
+    if (!validateStep(4)) return;
     if (emailExists) return;
 
     setIsSubmitting(true);
@@ -118,11 +135,11 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
         countryCode: '',
         country: '',
         city: '',
-        password: formData.password
+        password: formData.password,
+        loginRole: selectedRole || 'provider'
       });
 
       setIsSubmitted(true);
-      console.log('Form submitted:', formData);
     } catch (error) {
       console.error('Error submitting form:', error);
       if (error?.message === 'EMAIL_ALREADY_EXISTS') {
@@ -281,6 +298,68 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
           </div>
         );
 
+      case 4:
+        return (
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-800 mb-1">How will you use BnC LEG?</h3>
+            <p className="text-sm text-gray-500 mb-4">Select your role — you can switch later from your dashboard.</p>
+            <div className="grid grid-cols-2 gap-4">
+              {/* Service Provider Card */}
+              <button
+                type="button"
+                onClick={() => { setSelectedRole('provider'); setErrors(prev => ({ ...prev, role: '' })); }}
+                className={`flex flex-col items-center gap-3 p-5 rounded-xl border-2 transition-all cursor-pointer text-center ${
+                  selectedRole === 'provider'
+                    ? 'border-[#0f294a] bg-[#0f294a]/5 shadow-md'
+                    : 'border-gray-200 bg-white hover:border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  selectedRole === 'provider' ? 'bg-[#0f294a] text-white' : 'bg-slate-100 text-slate-500'
+                }`}>
+                  <FaBriefcase className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className={`font-semibold text-sm ${
+                    selectedRole === 'provider' ? 'text-[#0f294a]' : 'text-slate-700'
+                  }`}>Service Provider</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Claim mandates & earn</p>
+                </div>
+                {selectedRole === 'provider' && (
+                  <span className="text-xs font-semibold text-white bg-[#0f294a] px-2 py-0.5 rounded-full">Selected</span>
+                )}
+              </button>
+
+              {/* Service Consumer Card */}
+              <button
+                type="button"
+                onClick={() => { setSelectedRole('consumer'); setErrors(prev => ({ ...prev, role: '' })); }}
+                className={`flex flex-col items-center gap-3 p-5 rounded-xl border-2 transition-all cursor-pointer text-center ${
+                  selectedRole === 'consumer'
+                    ? 'border-[#DC2626] bg-[#DC2626]/5 shadow-md'
+                    : 'border-gray-200 bg-white hover:border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  selectedRole === 'consumer' ? 'bg-[#DC2626] text-white' : 'bg-slate-100 text-slate-500'
+                }`}>
+                  <FaUserTie className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className={`font-semibold text-sm ${
+                    selectedRole === 'consumer' ? 'text-[#DC2626]' : 'text-slate-700'
+                  }`}>Service Consumer</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Source expert partners</p>
+                </div>
+                {selectedRole === 'consumer' && (
+                  <span className="text-xs font-semibold text-white bg-[#DC2626] px-2 py-0.5 rounded-full">Selected</span>
+                )}
+              </button>
+            </div>
+            {errors.role && <p className="text-red-500 text-sm mt-2 text-center">{errors.role}</p>}
+          </div>
+        );
+
       default:
         return null;
     }
@@ -303,13 +382,13 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
             <h2 className="mb-1 pr-8 text-lg font-bold sm:text-xl">Partner Application</h2>
             <p className="text-red-100 text-sm">Join our growing network of partners</p>
             <div className={`mt-3 flex flex-col gap-1 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm ${rowDirection}`}>
-              <span className="text-sm">Step {currentStep} of 3</span>
-              <span className="text-sm">{Math.round((currentStep / 3) * 100)}% complete</span>
+              <span className="text-sm">Step {currentStep} of {TOTAL_STEPS}</span>
+              <span className="text-sm">{Math.round((currentStep / TOTAL_STEPS) * 100)}% complete</span>
             </div>
             <div className="w-full bg-[#1a3d6b] rounded-full h-2 mt-2">
               <div
                 className="bg-white h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(currentStep / 3) * 100}%` }}
+                style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
               ></div>
             </div>
           </div>
@@ -329,7 +408,7 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                 </button>
               )}
 
-              {currentStep < 3 ? (
+              {currentStep < TOTAL_STEPS ? (
                 <button
                   type="button"
                   onClick={handleNext}
@@ -347,10 +426,14 @@ const PartnerFormModal = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className={`w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 sm:w-auto ${autoMargin}`}
+                  disabled={isSubmitting || !selectedRole}
+                  className={`w-full px-6 py-2 rounded-lg font-semibold transition-colors sm:w-auto ${autoMargin} ${
+                    !selectedRole
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-[#DC2626] hover:bg-[#B91C1C] text-white disabled:opacity-50'
+                  }`}
                 >
-                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                  {isSubmitting ? 'Submitting...' : 'Create Account'}
                 </button>
               )}
             </div>

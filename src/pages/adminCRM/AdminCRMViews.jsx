@@ -1567,3 +1567,108 @@ function TemplatePreviewModal({ templateId, onClose }) {
     </div>
   );
 }
+
+export function ServiceRequestsView() {
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  const fetchRequests = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('service_requests')
+        .select(`
+          id,
+          title,
+          description,
+          created_at,
+          registration_partner_profiles (
+            first_name,
+            last_name,
+            email
+          )
+        `)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setRequests(data || []);
+    } catch (err) {
+      setError(err.message || 'Failed to fetch requests.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+  if (loading) {
+    return <div className="p-8 text-center text-ink/60 font-medium">Loading requests...</div>;
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-ink">Service Requests</h2>
+          <p className="text-xs font-medium text-ink/60 mt-1">
+            Custom service suggestions submitted by users.
+          </p>
+        </div>
+        <button
+          onClick={fetchRequests}
+          className="px-4 py-2 bg-white border border-ink/10 rounded-lg text-xs font-bold text-ink shadow-sm hover:border-ink/20 transition-all cursor-pointer"
+        >
+          Refresh
+        </button>
+      </div>
+
+      {error && (
+        <div className="p-4 bg-red-50 text-red-600 rounded-lg text-xs font-medium border border-red-100">
+          {error}
+        </div>
+      )}
+
+      <div className="bg-white border border-ink/10 rounded-xl overflow-hidden shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-ink/5 bg-ink/5 text-[10px] font-extrabold uppercase tracking-wider text-ink/50">
+                <th className="py-3 px-4 font-bold">Date</th>
+                <th className="py-3 px-4 font-bold">User</th>
+                <th className="py-3 px-4 font-bold">Service Title</th>
+                <th className="py-3 px-4 font-bold">Description</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-ink/5 text-xs font-medium text-ink">
+              {requests.map((req) => (
+                <tr key={req.id} className="hover:bg-ink/[0.02] transition-colors">
+                  <td className="py-3.5 px-4 text-ink/60 whitespace-nowrap">
+                    {new Date(req.created_at).toLocaleDateString()}
+                  </td>
+                  <td className="py-3.5 px-4">
+                    <div className="font-bold">{req.registration_partner_profiles?.first_name} {req.registration_partner_profiles?.last_name}</div>
+                    <div className="text-ink/60 text-[10px]">{req.registration_partner_profiles?.email}</div>
+                  </td>
+                  <td className="py-3.5 px-4 font-bold">{req.title}</td>
+                  <td className="py-3.5 px-4 max-w-xs truncate" title={req.description}>
+                    {req.description}
+                  </td>
+                </tr>
+              ))}
+              {requests.length === 0 && !error && (
+                <tr>
+                  <td colSpan="4" className="py-8 text-center text-ink/50">
+                    No service requests found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}

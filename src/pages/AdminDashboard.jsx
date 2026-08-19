@@ -14,7 +14,8 @@ import {
   EmailTemplatesView,
   FormSubmissionsView,
   ImportLeads,
-  LeadsPipeline
+  LeadsPipeline,
+  ServiceRequestsView
 } from './adminCRM/AdminCRMViews';
 
 const formatDateLabel = (isoValue) => {
@@ -388,6 +389,10 @@ const AdminDashboard = () => {
           <CampaignBuilderView campaignId={activeCampaignId} onBack={() => handleViewChange('campaigns')} />
         ) : activeView === 'templates' ? (
           <EmailTemplatesView />
+        ) : activeView === 'requests' ? (
+          <div className="flex-1 overflow-y-auto px-7 py-5">
+            <ServiceRequestsView />
+          </div>
         ) : (
           <>
             <div className="flex items-center justify-between px-7 h-[84px] bg-[#f5f5fa] border-b border-[#ececf2] shrink-0">

@@ -27,7 +27,8 @@ import {
   fetchPartnerData,
   getSessionUser,
   logout,
-  submitPartnerAgreement
+  submitPartnerAgreement,
+  updatePartnerLoginRole
 } from '../../lib/supabaseData';
 
 // Service Provider Sub-Components
@@ -46,125 +47,11 @@ import ConsumerInvoices from './ServiceConsumer/ConsumerInvoices';
 import ConsumerSettings from './ServiceConsumer/ConsumerSettings';
 
 // --- INITIAL STATE VALUES ---
-const DEFAULT_PROVIDER_SERVICES = [
-  {
-    id: 'prov-1',
-    title: 'Tax Strategy Consultation',
-    category: 'Finance',
-    description: 'Comprehensive review of corporate tax structures and filing optimizations.',
-    price: 250,
-    unit: 'hr',
-    status: 'Active'
-  },
-  {
-    id: 'prov-2',
-    title: 'Portfolio Review',
-    category: 'Finance',
-    description: 'In-depth analysis of investment portfolios and asset allocations.',
-    price: 300,
-    unit: 'session',
-    status: 'Active'
-  },
-  {
-    id: 'prov-3',
-    title: 'Estate Planning',
-    category: 'Security',
-    description: 'Strategic planning for wealth transfer and succession structuring.',
-    price: 500,
-    unit: 'plan',
-    status: 'Active'
-  }
-];
-
-const DEFAULT_PROVIDER_TRANSACTIONS = [
-  {
-    id: 'TX-89102',
-    date: 'Oct 24, 2026',
-    client: 'Acme Corp',
-    service: 'Tax Strategy Consultation',
-    amount: 1250,
-    status: 'Completed'
-  },
-  {
-    id: 'TX-89103',
-    date: 'Oct 21, 2026',
-    client: 'Jane Doe',
-    service: 'Portfolio Review',
-    amount: 300,
-    status: 'Completed'
-  },
-  {
-    id: 'TX-89104',
-    date: 'Oct 18, 2026',
-    client: 'Global Tech',
-    service: 'Estate Planning',
-    amount: 500,
-    status: 'Completed'
-  }
-];
-
-const DEFAULT_PROVIDER_CONSULTATIONS = [
-  {
-    id: 'c-1',
-    date: 'Oct 26, 2026',
-    client: 'Sarah Jenkins',
-    service: 'Portfolio Review',
-    time: '10:00 AM',
-    link: 'https://meet.google.com/abc-defg-hij'
-  },
-  {
-    id: 'c-2',
-    date: 'Oct 28, 2026',
-    client: 'Tech Solutions Inc.',
-    service: 'Tax Strategy Consultation',
-    time: '02:00 PM',
-    link: 'https://meet.google.com/klm-nopq-rst'
-  },
-  {
-    id: 'c-3',
-    date: 'Nov 02, 2026',
-    client: 'Robert Chen',
-    service: 'Estate Planning',
-    time: '11:30 AM',
-    link: 'https://meet.google.com/uvw-xyz-123'
-  }
-];
-
-const DEFAULT_CLIENT_BOOKINGS = [
-  {
-    id: 'cb-1',
-    date: 'Oct 26, 2026',
-    expert: 'Tavisha Sharma',
-    service: 'Portfolio Review',
-    time: '10:00 AM',
-    status: 'Scheduled'
-  },
-  {
-    id: 'cb-2',
-    date: 'Nov 05, 2026',
-    expert: 'Rajesh Kumar',
-    service: 'Virtual CFO Services',
-    time: '03:00 PM',
-    status: 'Scheduled'
-  }
-];
-
-const DEFAULT_CLIENT_INVOICES = [
-  {
-    id: 'INV-10294',
-    date: 'Oct 12, 2026',
-    description: 'Initial Tax consultation',
-    amount: 250,
-    status: 'Paid'
-  },
-  {
-    id: 'INV-10298',
-    date: 'Oct 16, 2026',
-    description: 'Growth Capital Consultation',
-    amount: 150,
-    status: 'Unpaid'
-  }
-];
+const DEFAULT_PROVIDER_SERVICES = [];
+const DEFAULT_PROVIDER_TRANSACTIONS = [];
+const DEFAULT_PROVIDER_CONSULTATIONS = [];
+const DEFAULT_CLIENT_BOOKINGS = [];
+const DEFAULT_CLIENT_INVOICES = [];
 
 const ALL_DIRECTORY_SERVICES = [
   {
@@ -236,35 +123,19 @@ const UserDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   // --- ACTIVE VIEWPORT ROLE STATE ---
-  const [currentRole, setCurrentRole] = useState(() => {
-    return localStorage.getItem('dashboardRole') || 'provider';
-  });
+  // Starts as null — will be set from DB after fetch to avoid flashing wrong role
+  const [currentRole, setCurrentRole] = useState(null);
   const [activeTab, setActiveTab] = useState(() => {
     return localStorage.getItem('activeDashboardTab') || 'overview';
   });
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // --- MOCK STORAGE REGISTERS ---
-  const [listedServices, setListedServices] = useState(() => {
-    const saved = localStorage.getItem('providerServices');
-    return saved ? JSON.parse(saved) : DEFAULT_PROVIDER_SERVICES;
-  });
-  const [providerTransactions, setProviderTransactions] = useState(() => {
-    const saved = localStorage.getItem('providerTransactions');
-    return saved ? JSON.parse(saved) : DEFAULT_PROVIDER_TRANSACTIONS;
-  });
-  const [providerConsultations, setProviderConsultations] = useState(() => {
-    const saved = localStorage.getItem('providerConsultations');
-    return saved ? JSON.parse(saved) : DEFAULT_PROVIDER_CONSULTATIONS;
-  });
-  const [clientBookings, setClientBookings] = useState(() => {
-    const saved = localStorage.getItem('clientBookings');
-    return saved ? JSON.parse(saved) : DEFAULT_CLIENT_BOOKINGS;
-  });
-  const [clientInvoices, setClientInvoices] = useState(() => {
-    const saved = localStorage.getItem('clientInvoices');
-    return saved ? JSON.parse(saved) : DEFAULT_CLIENT_INVOICES;
-  });
+  const [listedServices, setListedServices] = useState([]);
+  const [providerTransactions, setProviderTransactions] = useState([]);
+  const [providerConsultations, setProviderConsultations] = useState([]);
+  const [clientBookings, setClientBookings] = useState([]);
+  const [clientInvoices, setClientInvoices] = useState([]);
 
   // --- MODAL / FORM ONBOARDING STATES ---
   const [providerCredentials, setProviderCredentials] = useState(() => {
@@ -343,6 +214,10 @@ const UserDashboard = () => {
       }
       if (isMounted) {
         setPartnerData(freshData);
+        // Always set role from DB — this is the source of truth
+        const dbRole = freshData.loginRole === 'consumer' ? 'consumer' : 'provider';
+        setCurrentRole(dbRole);
+        localStorage.setItem('dashboardRole', dbRole);
         setLoading(false);
       }
     };
@@ -373,13 +248,21 @@ const UserDashboard = () => {
     localStorage.setItem('clientInvoices', JSON.stringify(clientInvoices));
   }, [clientInvoices]);
 
-  // Switch role and reset tabs
-  const handleRoleSwitch = () => {
+  // Switch role and reset tabs — persists to DB
+  const handleRoleSwitch = async () => {
     const nextRole = currentRole === 'provider' ? 'consumer' : 'provider';
     setCurrentRole(nextRole);
     localStorage.setItem('dashboardRole', nextRole);
     setActiveTab('overview');
     localStorage.setItem('activeDashboardTab', 'overview');
+    // Persist to DB so next login shows the switched role
+    if (partnerData?.id) {
+      try {
+        await updatePartnerLoginRole(partnerData.id, nextRole);
+      } catch (e) {
+        console.error('Failed to persist role switch:', e);
+      }
+    }
   };
 
   const handleTabChange = (tab) => {
@@ -596,7 +479,7 @@ const UserDashboard = () => {
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0F2A4A] tracking-tight">
-              Welcome back, Anshu
+              Welcome back, {partnerData?.firstName || 'Partner'}
             </h1>
           </div>
 
@@ -605,9 +488,10 @@ const UserDashboard = () => {
             <>
               {activeTab === 'overview' && (
                 <ProviderOverview
-                  listedServices={listedServices}
                   providerTransactions={providerTransactions}
+                  listedServices={listedServices}
                   providerConsultations={providerConsultations}
+                  partnerData={partnerData}
                   handleTabChange={handleTabChange}
                 />
               )}
@@ -656,6 +540,7 @@ const UserDashboard = () => {
                   clientBookings={clientBookings}
                   clientInvoices={clientInvoices}
                   handleTabChange={handleTabChange}
+                  partnerData={partnerData}
                 />
               )}
               {activeTab === 'directory' && (
