@@ -55,6 +55,50 @@ const notifyFormSubmissionSafely = async (payload) => {
   }
 };
 
+export const sendPartnerWelcomeEmail = async ({ email, firstName, lastName, loginUrl } = {}) => {
+  const recipient = normalizeEmail(email);
+  if (!recipient) {
+    throw new Error('Recipient email is required for the welcome email.');
+  }
+
+  const { error } = await withTimeout(
+    supabase.functions.invoke('send-partner-welcome-v1', {
+      body: {
+        email: recipient,
+        firstName: firstName || '',
+        lastName: lastName || '',
+        ...(loginUrl ? { loginUrl } : {})
+      }
+    }),
+    12000,
+    'WELCOME_EMAIL_TIMEOUT'
+  );
+
+  if (error) {
+    let details = '';
+    try {
+      const context = error?.context;
+      if (context && typeof context.json === 'function') {
+        const payload = await context.json();
+        details = [payload?.error, payload?.details].filter(Boolean).join(' - ');
+      }
+    } catch {
+      details = '';
+    }
+
+    const suffix = details ? ` (${details})` : '';
+    throw new Error(`Welcome email failed${suffix}.`);
+  }
+};
+
+const sendPartnerWelcomeEmailSafely = async (payload) => {
+  try {
+    await sendPartnerWelcomeEmail(payload);
+  } catch (error) {
+    console.error('Welcome email failed:', error);
+  }
+};
+
 const isAuthSessionMissingError = (error) => {
   const message = String(error?.message || '').toLowerCase();
   const code = String(error?.code || '').toLowerCase();
@@ -234,6 +278,13 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
       status: 'Email Sent',
       loginRole: resolvedLoginRole
     }
+  });
+
+  // Send a user-facing welcome email (non-blocking: failure must not break signup).
+  await sendPartnerWelcomeEmailSafely({
+    email: normalizedEmail,
+    firstName: resolvedFirstName,
+    lastName: resolvedLastName
   });
 
   return authUser;
