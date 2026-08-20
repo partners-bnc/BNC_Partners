@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash, FaChartLine, FaBriefcase, FaHandshake, FaGraduationCap } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+// Google OAuth is temporarily disabled. Restore this import with the callback below.
+// import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner, loginPartnerWithGoogle } from '../lib/supabaseData';
-import { supabase } from '../lib/supabaseClient';
+import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner } from '../lib/supabaseData';
+// Google OAuth is temporarily disabled. Restore this import with the callback and button below.
+// import { loginPartnerWithGoogle } from '../lib/supabaseData';
+// import { supabase } from '../lib/supabaseClient';
 
 const Login = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // Google OAuth is temporarily disabled. Restore this hook with the callback below.
+  // const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
@@ -16,20 +21,18 @@ const Login = () => {
   const iconMargin = isRtl ? 'mr-2' : 'ml-2';
   const passPadding = isRtl ? 'pl-12' : 'pr-12';
   const eyePosition = isRtl ? 'left-3' : 'right-3';
-  const topBlobPos = isRtl ? 'pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#DC2626]/15 blur-3xl' : 'pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#DC2626]/15 blur-3xl';
-  const bottomBlobPos = isRtl ? 'pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#B91C1C]/15 blur-3xl' : 'pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[#B91C1C]/15 blur-3xl';
   const [activeTab, setActiveTab] = useState('partner');
   const [selectedRole, setSelectedRole] = useState(null);
   const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  // Google OAuth is temporarily disabled. Restore this state with the callback and button below.
+  // const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  const benefitItems = t('login.sidePanel.benefits', { returnObjects: true });
   const trustItems = t('login.trustIndicators', { returnObjects: true });
 
   const renderLeftIllustration = () => {
@@ -128,41 +131,41 @@ const Login = () => {
     }
   }, [location]);
 
+  /* Google OAuth callback handling is temporarily disabled.
   useEffect(() => {
     let isMounted = true;
 
     const completeGoogleLogin = async () => {
       const searchParams = new URLSearchParams(location.search);
-      const hasCode = searchParams.has('code');
       const hasOAuthMarker = searchParams.get('oauth') === 'partner';
       const hasHashToken = String(location.hash || '').includes('access_token');
 
-      if (activeTab !== 'partner' || (!hasCode && !hasOAuthMarker && !hasHashToken)) {
+      if (activeTab !== 'partner' || (!hasOAuthMarker && !hasHashToken)) {
         return;
       }
 
       setIsGoogleLoading(true);
       try {
-        const { handleAuthCallback } = await import('../lib/supabaseData');
-        const session = await handleAuthCallback();
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        if (!session?.user) throw new Error('Authentication session not found');
         if (!isMounted) return;
 
-        if (session?.user) {
-          const { fetchPartnerProfile } = await import('../lib/supabaseData');
-          const profile = await fetchPartnerProfile(session.user.id);
-          if (!isMounted) return;
+        const partner = await fetchPartnerData(session.user.email, session.user.id);
+        if (!isMounted) return;
 
-          if (profile) {
-            localStorage.setItem('partnerUser', JSON.stringify(profile));
-            if (profile.role_completed) {
-              navigate('/dashboard');
-            } else {
-              navigate('/complete-profile');
-            }
-          } else {
-            navigate('/complete-profile');
-          }
+        if (!partner) {
+          navigate('/complete-profile');
+          return;
         }
+
+        localStorage.removeItem('adminUser');
+        localStorage.setItem('partnerUser', JSON.stringify(partner));
+
+        const dbRole = partner.loginRole === 'consumer' ? 'consumer' : 'provider';
+        localStorage.setItem('dashboardRole', dbRole);
+
+        navigate(isPartnerProfileComplete(partner) ? '/dashboard' : '/complete-profile');
       } catch (error) {
         console.error('OAuth callback processing error:', error);
         setErrors({ general: error?.message || 'Authentication callback failed' });
@@ -174,6 +177,7 @@ const Login = () => {
     completeGoogleLogin();
     return () => { isMounted = false; };
   }, [location, navigate, activeTab]);
+  */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -249,11 +253,11 @@ const Login = () => {
   };
 
 
+  /* Google OAuth sign-in is temporarily disabled.
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
     setErrors({});
     try {
-      const { loginPartnerWithGoogle } = await import('../lib/supabaseData');
       const redirectTo = `${window.location.origin}/login?oauth=partner`;
       await loginPartnerWithGoogle(redirectTo);
     } catch (error) {
@@ -262,6 +266,7 @@ const Login = () => {
       setIsGoogleLoading(false);
     }
   };
+  */
 
   return (
     <div className={`min-h-screen w-full flex flex-col md:flex-row ${isRtl ? 'md:flex-row-reverse' : ''} bg-white`}>
@@ -470,13 +475,14 @@ const Login = () => {
             <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 mt-2">
               <button
                 type="submit"
-                disabled={isLoading || isGoogleLoading}
+                disabled={isLoading}
                 className="w-full bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-all flex items-center justify-center disabled:opacity-50 shadow-[0_12px_30px_rgba(32,70,129,0.25)] hover:shadow-[0_18px_45px_rgba(32,70,129,0.35)] border border-transparent"
               >
                 {isLoading
                   ? t('login.signingIn')
                   : (activeTab === 'partner' ? t('login.partnerSignIn') : t('login.adminSignIn'))}
               </button>
+              {/* Google OAuth button is temporarily disabled. Restore it with the related code above.
               {activeTab === 'partner' && (
                 <button
                   type="button"
@@ -493,6 +499,7 @@ const Login = () => {
                   {isGoogleLoading ? 'Redirecting to Google...' : 'Continue with Google'}
                 </button>
               )}
+              */}
             </div>
           </form>
 
