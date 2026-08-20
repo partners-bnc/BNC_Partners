@@ -8,13 +8,15 @@ import { OrdersChart } from '../../componentCRM/OrdersChart';
 import { PlannedIncomeChart } from '../../componentCRM/PlannedIncomeChart';
 import { LatestSales } from '../../componentCRM/LatestSales';
 import { PartnerCRMTable } from '../../componentCRM/PartnerCRMTable';
+import { PartnerAIProfileDetail } from '../../componentCRM/PartnerAIProfileDetail';
 import {
   CampaignBuilderView,
   CampaignsView,
   EmailTemplatesView,
   FormSubmissionsView,
   ImportLeads,
-  LeadsPipeline
+  LeadsPipeline,
+  ServiceRequestsView
 } from './adminCRM/AdminCRMViews';
 
 const formatDateLabel = (isoValue) => {
@@ -137,6 +139,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [activeView, setActiveView] = useState('dashboard');
   const [activeCampaignId, setActiveCampaignId] = useState(null);
+  const [selectedPartner, setSelectedPartner] = useState(null);
   const navigate = useNavigate();
   const adminData = useMemo(() => {
     try {
@@ -231,9 +234,18 @@ const AdminDashboard = () => {
 
   const handleViewChange = (view) => {
     setActiveView(view);
+    setSelectedPartner(null);
     if (view !== 'campaignBuilder') {
       setActiveCampaignId(null);
     }
+  };
+
+  const handleViewPartner = (partner) => {
+    setSelectedPartner(partner);
+  };
+
+  const handleBackFromDetail = () => {
+    setSelectedPartner(null);
   };
 
   const openCampaignBuilder = (campaignId) => {
@@ -370,11 +382,17 @@ const AdminDashboard = () => {
       <NavSidebar activeView={activeView === 'campaignBuilder' ? 'campaigns' : activeView} onViewChange={handleViewChange} />
 
       <div className="flex-1 min-w-0 overflow-hidden flex flex-col">
-        {activeView === 'partners' ? (
+        {activeView === 'partners' && selectedPartner ? (
+          <PartnerAIProfileDetail
+            partner={selectedPartner}
+            onBack={handleBackFromDetail}
+          />
+        ) : activeView === 'partners' ? (
           <PartnerCRMTable
             partners={mappedPartners}
             adminLabel={adminData?.adminId || adminData?.email || 'Admin'}
             onLogout={handleLogout}
+            onViewPartner={handleViewPartner}
           />
         ) : activeView === 'submissions' ? (
           <FormSubmissionsView />
@@ -388,6 +406,10 @@ const AdminDashboard = () => {
           <CampaignBuilderView campaignId={activeCampaignId} onBack={() => handleViewChange('campaigns')} />
         ) : activeView === 'templates' ? (
           <EmailTemplatesView />
+        ) : activeView === 'requests' ? (
+          <div className="flex-1 overflow-y-auto px-7 py-5">
+            <ServiceRequestsView />
+          </div>
         ) : (
           <>
             <div className="flex items-center justify-between px-7 h-[84px] bg-[#f5f5fa] border-b border-[#ececf2] shrink-0">

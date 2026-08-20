@@ -60,10 +60,10 @@ const WhyPartner = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-slate-50/50 dark:bg-slate-900/50 relative">
+    <section id="services" className="py-20 bg-slate-50/50 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-poppins text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white mb-4 relative inline-block">
+          <h2 className="font-poppins text-3xl md:text-4xl font-semibold text-slate-900 mb-4 relative inline-block">
             {isRtl ? (
               <>
                 لماذا تشارك مع <span className="text-[#DC2626]">BNC LEG</span>
@@ -74,7 +74,7 @@ const WhyPartner = () => {
               </>
             )}
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400">
+          <p className="mt-3 text-sm sm:text-base text-slate-600">
             {isRtl
               ? 'تمكين شبكات الوكالات والمستشارين من الشركات بأدوات وسبل نمو مؤسسية.'
               : 'Empowering agency networks and corporate advisors with institutional-grade tools and growth avenues.'}
@@ -87,15 +87,15 @@ const WhyPartner = () => {
             return (
               <div
                 key={idx}
-                className={`bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col ${textAlign}`}
+                className={`bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col ${textAlign}`}
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${card.iconBg}`}>
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {isRtl ? card.titleAr : card.titleEn}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed">
                   {isRtl ? card.descAr : card.descEn}
                 </p>
               </div>

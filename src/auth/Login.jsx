@@ -222,7 +222,6 @@ const Login = () => {
         const { admin } = await loginAdmin(formData.email, formData.password);
         localStorage.removeItem('partnerUser');
         localStorage.setItem('adminUser', JSON.stringify(admin));
-        alert(t('login.alerts.adminSuccess'));
         window.location.href = '/admin-dashboard';
         return;
       }
@@ -235,7 +234,11 @@ const Login = () => {
 
       localStorage.removeItem('adminUser');
       localStorage.setItem('partnerUser', JSON.stringify(partner));
-      alert(t('login.alerts.partnerSuccess', { name: partner.firstName }));
+
+      // Sync the dashboard role from the DB so the correct view loads immediately
+      const dbRole = partner.loginRole === 'consumer' ? 'consumer' : 'provider';
+      localStorage.setItem('dashboardRole', dbRole);
+
       window.location.href = isPartnerProfileComplete(partner) ? '/dashboard' : '/complete-profile';
     } catch (error) {
       console.error('Login error:', error);
@@ -244,6 +247,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+
 
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
@@ -311,7 +315,7 @@ const Login = () => {
             <div className="grid gap-3 w-full max-w-md">
               <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-3">
                 <a
-                  href="mailto:info@bncglobal.in"
+                  href="mailto:partners@bncglobal.in"
                   className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white pl-0 pr-4 py-3 transition hover:bg-slate-50 hover:border-slate-300 shadow-sm"
                 >
                   <div className="h-10 w-10 rounded-xl flex items-center justify-center transition text-slate-500">
@@ -325,7 +329,7 @@ const Login = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-slate-700">patner@bncglobal.in</p>
+                    <p className="text-sm font-semibold text-slate-700">partners@bncglobal.in</p>
                   </div>
                 </a>
                 <a

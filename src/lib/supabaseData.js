@@ -94,7 +94,8 @@ const mapPartnerProfile = (profileRow, aiRow) => ({
   bio: aiRow?.bio || '',
   agreementSigned: Boolean(profileRow?.agreement_signed),
   agreementSignedName: profileRow?.agreement_signed_name || '',
-  agreementSignedAt: profileRow?.agreement_signed_at || null
+  agreementSignedAt: profileRow?.agreement_signed_at || null,
+  loginRole: profileRow?.login_role || 'provider'
 });
 
 const isFilled = (value) => String(value || '').trim().length > 0;
@@ -164,7 +165,7 @@ const splitFullName = (fullName) => {
   return { firstName, lastName };
 };
 
-export const registerPartner = async ({ firstName, lastName, fullName, email, phone, countryCode, country, city, password }) => {
+export const registerPartner = async ({ firstName, lastName, fullName, email, phone, countryCode, country, city, password, loginRole }) => {
   const normalizedEmail = normalizeEmail(email);
   const exists = await checkPartnerEmailExists(normalizedEmail);
   if (exists) {
@@ -179,6 +180,8 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
     throw new Error('First name is required.');
   }
 
+  const resolvedLoginRole = loginRole === 'consumer' ? 'consumer' : 'provider';
+
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email: normalizedEmail,
     password,
@@ -192,7 +195,8 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
         country,
         city,
         status: 'Email Sent',
-        role: 'partner'
+        role: 'partner',
+        login_role: resolvedLoginRole
       }
     }
   });
@@ -205,6 +209,12 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
   if (!authUser?.id) {
     throw new Error('Could not create partner auth user.');
   }
+
+  // Persist login_role to the profile table (upsert in case trigger already created the row)
+  await supabase
+    .from('registration_partner_profiles')
+    .update({ login_role: resolvedLoginRole })
+    .eq('id', authUser.id);
 
   await notifyFormSubmissionSafely({
     formType: 'Partner Registration',
@@ -221,7 +231,8 @@ export const registerPartner = async ({ firstName, lastName, fullName, email, ph
       countryCode,
       country,
       city,
-      status: 'Email Sent'
+      status: 'Email Sent',
+      loginRole: resolvedLoginRole
     }
   });
 
@@ -373,7 +384,27 @@ export const fetchPartnerData = async (emailHint, partnerIdHint = null) => {
   return mapPartnerProfile(profileRow, aiRow);
 };
 
+export const updatePartnerLoginRole = async (partnerId, newRole) => {
+  const resolvedPartnerId = String(partnerId || '').trim();
+  if (!resolvedPartnerId) {
+    throw new Error('Partner ID is required.');
+  }
+  const resolvedRole = newRole === 'consumer' ? 'consumer' : 'provider';
+
+  const { error } = await supabase
+    .from('registration_partner_profiles')
+    .update({ login_role: resolvedRole, updated_at: new Date().toISOString() })
+    .eq('id', resolvedPartnerId);
+
+  if (error) {
+    throw error;
+  }
+
+  return resolvedRole;
+};
+
 export const updatePartnerContactDetails = async ({ partnerId, phone, countryCode, country, city }) => {
+
   const resolvedPartnerId = String(partnerId || '').trim();
   if (!resolvedPartnerId) {
     throw new Error('Partner ID is required.');
@@ -906,4 +937,111 @@ export const getSessionUser = async () => {
   }
 
   return user;
+};
+
+export const createServiceRequest = async (partnerId, title, description) => {
+  if (!partnerId) throw new Error('partnerId is required');
+  const { data, error } = await supabase
+    .from('service_requests')
+    .insert([{ partner_id: partnerId, title, description }])
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
+export const fetchAllServiceRequests = async () => {
+  const { data, error } = await supabase
+    .from('service_requests')
+    .select(`
+      id,
+      title,
+      description,
+      created_at,
+      partners (
+        id,
+        first_name,
+        last_name,
+        email
+      )
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data;
+};
+
+/**
+ * Fetches the full AI profile + agreement data for a partner by email.
+ * Used by the admin CRM detail view.
+ */
+export const fetchPartnerAIProfile = async (partnerEmail) => {
+  const normalizedEmail = normalizeEmail(partnerEmail);
+  if (!normalizedEmail) return null;
+
+  const [{ data: aiRow, error: aiError }, { data: profileRow, error: profileError }] = await Promise.all([
+    supabase
+      .from('partner_ai_profiles')
+      .select('*')
+      .eq('partner_email', normalizedEmail)
+      .maybeSingle(),
+    supabase
+      .from('registration_partner_profiles')
+      .select('id, agreement_signed, agreement_signed_name, agreement_signed_at, first_name, last_name, phone, country, city, registered_at, created_at, login_role')
+      .eq('email', normalizedEmail)
+      .maybeSingle()
+  ]);
+
+  if (aiError) throw aiError;
+  if (profileError) throw profileError;
+
+  // Parse arrays safely (they may be stored as JSON arrays or plain arrays)
+  const parseArray = (val) => {
+    if (Array.isArray(val)) return val;
+    if (typeof val === 'string') {
+      try { return JSON.parse(val); } catch { return val ? [val] : []; }
+    }
+    return [];
+  };
+
+  // Parse experience_details object (keyed by industry slug)
+  const parseExperienceDetails = (val) => {
+    if (!val) return {};
+    if (typeof val === 'object' && !Array.isArray(val)) return val;
+    if (typeof val === 'string') {
+      try { return JSON.parse(val); } catch { return {}; }
+    }
+    return {};
+  };
+
+  return {
+    // Profile basics
+    partnerId: profileRow?.id || null,
+    name: `${profileRow?.first_name || ''} ${profileRow?.last_name || ''}`.trim(),
+    email: normalizedEmail,
+    phone: profileRow?.phone || '',
+    country: profileRow?.country || '',
+    city: profileRow?.city || '',
+    registrationDate: profileRow?.registered_at || profileRow?.created_at || null,
+    loginRole: profileRow?.login_role || 'provider',
+
+    // AI Profile fields
+    hasAIProfile: Boolean(aiRow),
+    partnerType: aiRow?.partner_type || '',
+    services: parseArray(aiRow?.services),
+    industries: parseArray(aiRow?.industries),
+    experienceIndustries: parseArray(aiRow?.experience_industries),
+    experienceDetails: parseExperienceDetails(aiRow?.experience_details),
+    experienceYears: aiRow?.experience_years || '',
+    organisationName: aiRow?.organisation_name || '',
+    bio: aiRow?.bio || '',
+    aiProfileCreatedAt: aiRow?.created_at || null,
+    aiProfileUpdatedAt: aiRow?.updated_at || null,
+
+    // Agreement fields
+    agreementSigned: Boolean(profileRow?.agreement_signed),
+    agreementSignedName: profileRow?.agreement_signed_name || '',
+    agreementSignedAt: profileRow?.agreement_signed_at || null,
+  };
 };

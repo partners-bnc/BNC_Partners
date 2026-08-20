@@ -103,26 +103,46 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                   );
                 })}
                 
-                {/* Country services */}
+                {/* Services catalog and categories */}
                 <>
                   <Link
-                    to="/services/india"
+                    to="/services"
                     className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
                     onClick={onClose}
                   >
                     <FaMapMarkerAlt size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
                     <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
-                      {t('countries.india')}
+                      {t('sidebar.services', { defaultValue: 'BnC Services' })}
                     </span>
                   </Link>
                   <Link
-                    to="/services/saudi-arabia"
-                    className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
+                    to="/services?category=Financial"
+                    className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${isRtl ? 'pr-8' : 'pl-8'} ${rowDirection} ${textAlign}`}
                     onClick={onClose}
                   >
-                    <FaMapMarkerAlt size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
-                    <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
-                      {t('countries.saudi')}
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#DC2626]/60 group-hover:bg-[#000000]"></div>
+                    <span className="font-geist font-medium text-slate-600 text-sm transition-colors duration-300 group-hover:text-[#000000]">
+                      {t('discoverServices.categories.financial', { defaultValue: 'Financial' })}
+                    </span>
+                  </Link>
+                  <Link
+                    to="/services?category=Technology"
+                    className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${isRtl ? 'pr-8' : 'pl-8'} ${rowDirection} ${textAlign}`}
+                    onClick={onClose}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#DC2626]/60 group-hover:bg-[#000000]"></div>
+                    <span className="font-geist font-medium text-slate-600 text-sm transition-colors duration-300 group-hover:text-[#000000]">
+                      {t('discoverServices.categories.technology', { defaultValue: 'Technology' })}
+                    </span>
+                  </Link>
+                  <Link
+                    to="/services?category=ESG"
+                    className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${isRtl ? 'pr-8' : 'pl-8'} ${rowDirection} ${textAlign}`}
+                    onClick={onClose}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#DC2626]/60 group-hover:bg-[#000000]"></div>
+                    <span className="font-geist font-medium text-slate-600 text-sm transition-colors duration-300 group-hover:text-[#000000]">
+                      {t('discoverServices.categories.esg', { defaultValue: 'ESG' })}
                     </span>
                   </Link>
                   <Link
@@ -132,7 +152,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                   >
                     <FaMapMarkerAlt size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000]" />
                     <span className="font-geist font-semibold text-slate-700 transition-colors duration-300 group-hover:text-[#000000]">
-                      {t('countries.global')}
+                      {t('sidebar.globalServices', { defaultValue: 'Global Services' })}
                     </span>
                   </Link>
                 </>
@@ -153,11 +173,11 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
               <div className="space-y-3">
                 {isLoggedIn ? (
                   <>
-                    <div className={`flex items-center gap-3 py-3 px-4 border border-[#DC2626] rounded-xl bg-gradient-to-r from-[#DC2626] to-[#000000] shadow-md ${rowDirection}`}>
-                      <FaUser size={20} className="text-white" />
+                    <div className={`flex items-center gap-3 py-3 px-4 border border-slate-200 rounded-xl bg-white shadow-sm ${rowDirection}`}>
+                      <FaUser size={20} className="text-[#DC2626]" />
                       <div>
-                        <div className="font-geist font-semibold text-white">{user?.firstName} {user?.lastName}</div>
-                        <div className="font-geist text-sm text-red-100 truncate">{user?.email}</div>
+                        <div className="font-geist font-semibold text-slate-800">{user?.firstName} {user?.lastName}</div>
+                        <div className="font-geist text-sm text-slate-500 truncate">{user?.email}</div>
                       </div>
                     </div>
                     
@@ -177,19 +197,19 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     <Link 
                       to="/login" 
                       onClick={onClose} 
-                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-[#DC2626] bg-gradient-to-r from-[#DC2626] to-[#000000] text-white shadow-md ${rowDirection}`}
+                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm transition-all duration-200 ${rowDirection}`}
                     >
-                      <FaUser size={20} className="transition-colors duration-300" />
-                      <span className="font-geist font-medium transition-colors duration-300">{t('sidebar.partnerLogin')}</span>
+                      <FaUser size={20} className="text-[#DC2626] transition-colors duration-300" />
+                      <span className="font-geist font-semibold transition-colors duration-300">{t('sidebar.partnerLogin')}</span>
                     </Link>
                     
                     <Link 
                       to="/login?type=admin" 
                       onClick={onClose} 
-                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-gray-200 transition-all duration-300 hover:text-white hover:border-blue-500 text-gray-700 bg-white/70 hover:bg-gradient-to-r hover:from-[#DC2626] hover:to-[#000000] ${rowDirection}`}
+                      className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-gray-200 transition-all duration-300 hover:bg-gray-50 text-gray-700 bg-white/70 ${rowDirection}`}
                     >
-                      <FaShieldAlt size={20} className="transition-colors duration-300" />
-                      <span className="font-geist font-medium transition-colors duration-300">{t('sidebar.adminLogin')}</span>
+                      <FaShieldAlt size={20} className="text-slate-500 transition-colors duration-300" />
+                      <span className="font-geist font-semibold transition-colors duration-300">{t('sidebar.adminLogin')}</span>
                     </Link>
                   </>
                 )}

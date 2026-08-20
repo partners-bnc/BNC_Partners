@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { FileSpreadsheet, GitBranch, Inbox, LayoutDashboard, Mail, Upload, Users } from "lucide-react";
+import { FileSpreadsheet, GitBranch, Inbox, LayoutDashboard, Mail, Upload, Users, HelpCircle } from "lucide-react";
 
 function NavSidebar({ activeView, onViewChange }) {
   const navItems = [
@@ -9,7 +9,8 @@ function NavSidebar({ activeView, onViewChange }) {
     { icon: FileSpreadsheet, view: "leads", label: "Leads" },
     { icon: Upload, view: "importLeads", label: "Import Leads" },
     { icon: GitBranch, view: "campaigns", label: "Campaigns" },
-    { icon: Mail, view: "templates", label: "Email Templates" }
+    { icon: Mail, view: "templates", label: "Email Templates" },
+    { icon: HelpCircle, view: "requests", label: "Service Requests" }
   ];
 
   return (

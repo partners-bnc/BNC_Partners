@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   FiEye,
@@ -50,7 +50,10 @@ const ServiceDetail = () => {
 
   const service = useMemo(() => {
     const found = getServiceById(serviceId);
-    if (!found || !found.country.includes(country)) {
+    if (!found) {
+      return null;
+    }
+    if (country && country !== 'global' && country !== 'other' && !found.country.includes(country)) {
       return null;
     }
 
@@ -93,7 +96,7 @@ const ServiceDetail = () => {
     other: t('countries.other'),
     global: t('countries.other')
   };
-  const countryLabel = countryLabelMap[country] || (country ? country.replace('-', ' ') : '');
+  const countryLabel = countryLabelMap[country || 'global'] || '';
   const commonDocuments = [
     {
       label: t('serviceDetail.documentsLabels.bncGlobal'),
@@ -1940,7 +1943,7 @@ const ServiceDetail = () => {
         <Header />
         <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl shadow-lg p-8 text-center max-w-lg">
-            <h2 className="font-poppins text-[#DC2626]xl font-bold text-gray-900 mb-3">
+            <h2 className="font-poppins text-xl font-semibold text-gray-900 mb-3">
               {t('serviceDetail.notFoundTitle')}
             </h2>
             <p className="font-geist text-gray-600 mb-6">
@@ -1967,7 +1970,13 @@ const ServiceDetail = () => {
           <div className={`flex flex-col gap-6 ${isRtl ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
             <aside className="lg:w-[32%] lg:sticky lg:top-40 lg:self-start space-y-3 lg:-mt-8">
               <button
-                onClick={() => navigate(`/services/${country}`)}
+                onClick={() => {
+                  if (country === 'global') {
+                    navigate('/services/global');
+                  } else {
+                    navigate('/services');
+                  }
+                }}
                 className={`inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-black transition ${
                   isRtl ? 'flex-row-reverse' : ''
                 }`}
@@ -1980,7 +1989,7 @@ const ServiceDetail = () => {
                     <p className="font-geist text-xs uppercase tracking-[0.2em] text-slate-400">
                       {countryLabel}
                     </p>
-                    <h1 className="font-poppins text-[#DC2626]xl font-semibold text-gray-900 mt-2">
+                    <h1 className="font-poppins text-2xl font-semibold text-gray-900 mt-2">
                       {service.title}
                     </h1>
                     <p className="font-geist text-sm text-gray-600 mt-3">
@@ -2015,7 +2024,7 @@ const ServiceDetail = () => {
                   <div>
                     {activeSection !== 'know-more' && (
                       <div>
-                        <h2 className="font-poppins text-[#DC2626]xl font-semibold text-gray-900">
+                        <h2 className="font-poppins text-xl font-semibold text-gray-900">
                           {activeSectionData.heading}
                         </h2>
                       </div>
