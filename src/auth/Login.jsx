@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash, FaChartLine, FaBriefcase, FaHandshake, FaGraduationCap } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+// Google OAuth is temporarily disabled. Restore this import with the callback below.
+// import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner, loginPartnerWithGoogle } from '../lib/supabaseData';
-import { supabase } from '../lib/supabaseClient';
+import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner } from '../lib/supabaseData';
+// Google OAuth is temporarily disabled. Restore this import with the callback and button below.
+// import { loginPartnerWithGoogle } from '../lib/supabaseData';
+// import { supabase } from '../lib/supabaseClient';
 
 const Login = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // Google OAuth is temporarily disabled. Restore this hook with the callback below.
+  // const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
   const textAlign = isRtl ? 'text-right' : 'text-left';
@@ -21,7 +26,8 @@ const Login = () => {
   const [isAdminOnly, setIsAdminOnly] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  // Google OAuth is temporarily disabled. Restore this state with the callback and button below.
+  // const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     email: '',
@@ -125,6 +131,7 @@ const Login = () => {
     }
   }, [location]);
 
+  /* Google OAuth callback handling is temporarily disabled.
   useEffect(() => {
     let isMounted = true;
 
@@ -170,6 +177,7 @@ const Login = () => {
     completeGoogleLogin();
     return () => { isMounted = false; };
   }, [location, navigate, activeTab]);
+  */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -245,6 +253,7 @@ const Login = () => {
   };
 
 
+  /* Google OAuth sign-in is temporarily disabled.
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
     setErrors({});
@@ -257,6 +266,7 @@ const Login = () => {
       setIsGoogleLoading(false);
     }
   };
+  */
 
   return (
     <div className={`min-h-screen w-full flex flex-col md:flex-row ${isRtl ? 'md:flex-row-reverse' : ''} bg-white`}>
@@ -465,13 +475,14 @@ const Login = () => {
             <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 mt-2">
               <button
                 type="submit"
-                disabled={isLoading || isGoogleLoading}
+                disabled={isLoading}
                 className="w-full bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#163062] text-white py-2.5 px-4 rounded-lg font-semibold transition-all flex items-center justify-center disabled:opacity-50 shadow-[0_12px_30px_rgba(32,70,129,0.25)] hover:shadow-[0_18px_45px_rgba(32,70,129,0.35)] border border-transparent"
               >
                 {isLoading
                   ? t('login.signingIn')
                   : (activeTab === 'partner' ? t('login.partnerSignIn') : t('login.adminSignIn'))}
               </button>
+              {/* Google OAuth button is temporarily disabled. Restore it with the related code above.
               {activeTab === 'partner' && (
                 <button
                   type="button"
@@ -488,6 +499,7 @@ const Login = () => {
                   {isGoogleLoading ? 'Redirecting to Google...' : 'Continue with Google'}
                 </button>
               )}
+              */}
             </div>
           </form>
 
