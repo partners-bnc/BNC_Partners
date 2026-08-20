@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, ExternalLink } from "lucide-react";
 
 const statusStyles = {
   Complete: { color: "#5e81f4", bg: "rgba(94,129,244,0.10)" },
@@ -20,7 +20,7 @@ function StatusBadge({ value }) {
   );
 }
 
-function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
+function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout, onViewPartner }) {
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
@@ -63,7 +63,7 @@ function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
         </div>
 
         <div className="bg-white rounded-[12px] border border-[#f0f0f3] overflow-auto flex-1">
-          <table className="w-full min-w-[1200px]">
+          <table className="w-full min-w-[1300px]">
             <thead className="sticky top-0 bg-white z-10">
               <tr className="border-b border-[#f0f0f3]">
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Partner Name</th>
@@ -76,6 +76,7 @@ function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Agreement Status</th>
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Onboarding Status</th>
                 <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Last Activity</th>
+                <th className="text-left px-4 py-3 text-[#5e81f4] text-[12px] font-bold">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -102,6 +103,24 @@ function PartnerCRMTable({ partners = [], adminLabel = "Admin", onLogout }) {
                     <StatusBadge value={partner.onboardingStatus || "Pending"} />
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap text-[#8181a5] text-[12px]">{partner.lastUpdatedLabel || "-"}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">
+                    {partner.aiProfileStatus === "Complete" ? (
+                      <button
+                        onClick={() => onViewPartner && onViewPartner(partner)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold border transition-all hover:opacity-80 active:scale-95"
+                        style={{
+                          background: "#DC2626",
+                          color: "#fff",
+                          borderColor: "#DC2626"
+                        }}
+                      >
+                        <ExternalLink size={11} />
+                        View More
+                      </button>
+                    ) : (
+                      <span className="text-[#c5c5d5] text-[12px]">—</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -971,3 +971,77 @@ export const fetchAllServiceRequests = async () => {
   if (error) throw error;
   return data;
 };
+
+/**
+ * Fetches the full AI profile + agreement data for a partner by email.
+ * Used by the admin CRM detail view.
+ */
+export const fetchPartnerAIProfile = async (partnerEmail) => {
+  const normalizedEmail = normalizeEmail(partnerEmail);
+  if (!normalizedEmail) return null;
+
+  const [{ data: aiRow, error: aiError }, { data: profileRow, error: profileError }] = await Promise.all([
+    supabase
+      .from('partner_ai_profiles')
+      .select('*')
+      .eq('partner_email', normalizedEmail)
+      .maybeSingle(),
+    supabase
+      .from('registration_partner_profiles')
+      .select('id, agreement_signed, agreement_signed_name, agreement_signed_at, first_name, last_name, phone, country, city, registered_at, created_at, login_role')
+      .eq('email', normalizedEmail)
+      .maybeSingle()
+  ]);
+
+  if (aiError) throw aiError;
+  if (profileError) throw profileError;
+
+  // Parse arrays safely (they may be stored as JSON arrays or plain arrays)
+  const parseArray = (val) => {
+    if (Array.isArray(val)) return val;
+    if (typeof val === 'string') {
+      try { return JSON.parse(val); } catch { return val ? [val] : []; }
+    }
+    return [];
+  };
+
+  // Parse experience_details object (keyed by industry slug)
+  const parseExperienceDetails = (val) => {
+    if (!val) return {};
+    if (typeof val === 'object' && !Array.isArray(val)) return val;
+    if (typeof val === 'string') {
+      try { return JSON.parse(val); } catch { return {}; }
+    }
+    return {};
+  };
+
+  return {
+    // Profile basics
+    partnerId: profileRow?.id || null,
+    name: `${profileRow?.first_name || ''} ${profileRow?.last_name || ''}`.trim(),
+    email: normalizedEmail,
+    phone: profileRow?.phone || '',
+    country: profileRow?.country || '',
+    city: profileRow?.city || '',
+    registrationDate: profileRow?.registered_at || profileRow?.created_at || null,
+    loginRole: profileRow?.login_role || 'provider',
+
+    // AI Profile fields
+    hasAIProfile: Boolean(aiRow),
+    partnerType: aiRow?.partner_type || '',
+    services: parseArray(aiRow?.services),
+    industries: parseArray(aiRow?.industries),
+    experienceIndustries: parseArray(aiRow?.experience_industries),
+    experienceDetails: parseExperienceDetails(aiRow?.experience_details),
+    experienceYears: aiRow?.experience_years || '',
+    organisationName: aiRow?.organisation_name || '',
+    bio: aiRow?.bio || '',
+    aiProfileCreatedAt: aiRow?.created_at || null,
+    aiProfileUpdatedAt: aiRow?.updated_at || null,
+
+    // Agreement fields
+    agreementSigned: Boolean(profileRow?.agreement_signed),
+    agreementSignedName: profileRow?.agreement_signed_name || '',
+    agreementSignedAt: profileRow?.agreement_signed_at || null,
+  };
+};

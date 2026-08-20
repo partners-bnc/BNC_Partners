@@ -8,6 +8,7 @@ import { OrdersChart } from '../../componentCRM/OrdersChart';
 import { PlannedIncomeChart } from '../../componentCRM/PlannedIncomeChart';
 import { LatestSales } from '../../componentCRM/LatestSales';
 import { PartnerCRMTable } from '../../componentCRM/PartnerCRMTable';
+import { PartnerAIProfileDetail } from '../../componentCRM/PartnerAIProfileDetail';
 import {
   CampaignBuilderView,
   CampaignsView,
@@ -138,6 +139,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [activeView, setActiveView] = useState('dashboard');
   const [activeCampaignId, setActiveCampaignId] = useState(null);
+  const [selectedPartner, setSelectedPartner] = useState(null);
   const navigate = useNavigate();
   const adminData = useMemo(() => {
     try {
@@ -232,9 +234,18 @@ const AdminDashboard = () => {
 
   const handleViewChange = (view) => {
     setActiveView(view);
+    setSelectedPartner(null);
     if (view !== 'campaignBuilder') {
       setActiveCampaignId(null);
     }
+  };
+
+  const handleViewPartner = (partner) => {
+    setSelectedPartner(partner);
+  };
+
+  const handleBackFromDetail = () => {
+    setSelectedPartner(null);
   };
 
   const openCampaignBuilder = (campaignId) => {
@@ -371,11 +382,17 @@ const AdminDashboard = () => {
       <NavSidebar activeView={activeView === 'campaignBuilder' ? 'campaigns' : activeView} onViewChange={handleViewChange} />
 
       <div className="flex-1 min-w-0 overflow-hidden flex flex-col">
-        {activeView === 'partners' ? (
+        {activeView === 'partners' && selectedPartner ? (
+          <PartnerAIProfileDetail
+            partner={selectedPartner}
+            onBack={handleBackFromDetail}
+          />
+        ) : activeView === 'partners' ? (
           <PartnerCRMTable
             partners={mappedPartners}
             adminLabel={adminData?.adminId || adminData?.email || 'Admin'}
             onLogout={handleLogout}
+            onViewPartner={handleViewPartner}
           />
         ) : activeView === 'submissions' ? (
           <FormSubmissionsView />
