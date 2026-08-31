@@ -108,7 +108,6 @@ const ExpertFormModal = ({ isOpen, onClose }) => {
         <div className="p-6 flex items-center justify-between border-b border-gray-100 sticky top-0 bg-white z-10">
           <div className="flex items-center gap-2 text-[#000000] font-bold tracking-wide">
             <img src="/Photas/aaf68a14-dda6-4743-824f-5bc2592df449.png" alt="BNC Logo" className="h-8 w-auto" />
-            <span>BNC LEG</span>
           </div>
           <button
             onClick={onClose}

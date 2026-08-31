@@ -157,7 +157,7 @@ with enquiry_seed(created_at, country, country_label, service, form_type, full_n
     ('2026-02-16T15:03:11.000Z', 'india', 'India', 'Cybersecurity & Data Privacy', 'Manpower', 'Anshu jack', 'anshujack25@gmail.com', '7781085333', 'bnc', 'I want manpower almost 40 people. Who can build my business?'),
     ('2026-02-16T15:04:44.000Z', 'saudi-arabia', 'Saudi Arabia', 'Training & Workshop', 'Training', 'Anshu jack', 'anshujack25@gmail.com', '7781085333', 'chfg', 'I need training. For the accountant and services. For my employees.')
 )
-insert into public.service_enquiries (
+insert into public.service_enquiry_form (
   partner_id, country, country_label, service, form_type, full_name,
   email, phone, company, message, created_at
 )

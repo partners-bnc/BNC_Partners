@@ -493,6 +493,7 @@ const SUBMISSION_TABS = [
     columns: [
       { key: 'full_name', label: 'Name' },
       { key: 'email', label: 'Email' },
+      { key: 'partner_id', label: 'Is Partner', type: 'partner' },
       { key: 'mobile', label: 'Mobile' },
       { key: 'company', label: 'Company' },
       { key: 'requirement', label: 'Requirement', wide: true },
@@ -508,6 +509,7 @@ const SUBMISSION_TABS = [
     searchKeys: ['partner_email', 'requirement_text', 'source', 'recipient_email'],
     columns: [
       { key: 'partner_email', label: 'Partner Email' },
+      { key: 'partner_id', label: 'Is Partner', type: 'partner' },
       { key: 'requirement_text', label: 'Requirement', wide: true },
       { key: 'source', label: 'Source' },
       { key: 'recipient_email', label: 'Recipient' },
@@ -523,6 +525,7 @@ const SUBMISSION_TABS = [
     columns: [
       { key: 'full_name', label: 'Name' },
       { key: 'email', label: 'Email' },
+      { key: 'partner_id', label: 'Is Partner', type: 'partner' },
       { key: 'phone', label: 'Phone' },
       { key: 'company', label: 'Company' },
       { key: 'service', label: 'Service' },
@@ -534,23 +537,116 @@ const SUBMISSION_TABS = [
   }
 ];
 
+function AudioCell({ path }) {
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (!path) return;
+    let isMounted = true;
+
+    const fetchSignedUrl = async () => {
+      setLoading(true);
+      setError(false);
+      try {
+        const { data, error } = await supabase.storage
+          .from('voice-requirement-audio')
+          .createSignedUrl(path, 3600);
+        if (error) throw error;
+        if (isMounted) {
+          setAudioUrl(data.signedUrl);
+        }
+      } catch (err) {
+        console.error('Error fetching signed URL for playback:', err);
+        if (isMounted) setError(true);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchSignedUrl();
+    return () => {
+      isMounted = false;
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, [path]);
+
+  const handlePlayPause = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          console.error("Playback failed:", err);
+        });
+    }
+  };
+
+  if (!path) return <span className="text-ink/30">-</span>;
+  if (loading) return <span className="text-[10px] text-ink/40 animate-pulse">Loading URL...</span>;
+  if (error) return <span className="text-[10px] text-rose-500">Error loading audio</span>;
+  if (!audioUrl) return <span className="text-[10px] text-ink/40">No URL</span>;
+
+  return (
+    <div className="flex items-center">
+      <button
+        onClick={handlePlayPause}
+        className="flex items-center justify-center p-1.5 rounded-full bg-violet-600 hover:bg-violet-700 text-white transition-colors shadow-sm"
+        title={isPlaying ? "Pause voice note" : "Play voice note"}
+      >
+        {isPlaying ? (
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        ) : (
+          <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        )}
+      </button>
+      <audio
+        ref={audioRef}
+        src={audioUrl}
+        onEnded={() => setIsPlaying(false)}
+        className="hidden"
+        preload="auto"
+      />
+    </div>
+  );
+}
+
 function SubmissionCell({ column, row }) {
   const value = row[column.key];
   if (column.type === 'datetime') {
     return <span className="whitespace-nowrap text-ink/70">{fmtDateTime(value) || '-'}</span>;
   }
   if (column.type === 'audio') {
+    return <AudioCell path={value} />;
+  }
+  if (column.type === 'partner') {
     return value ? (
-      <span className="rounded-full bg-violet-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-violet-700">
-        Recording
+      <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+        Yes
       </span>
     ) : (
-      <span className="text-ink/30">-</span>
+      <span className="rounded-full bg-rose-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-rose-700">
+        No
+      </span>
     );
   }
   const text = value === null || value === undefined || value === '' ? '-' : String(value);
   return (
-    <span className={cx('block text-ink/80', column.wide ? 'max-w-[320px] truncate' : 'truncate')} title={text}>
+    <span className={cx('block text-ink/80', column.wide ? 'max-w-[350px] whitespace-pre-wrap break-words leading-relaxed text-xs' : 'truncate')} title={text}>
       {text}
     </span>
   );

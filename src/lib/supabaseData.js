@@ -722,7 +722,7 @@ export const submitEnquiry = async ({ partnerId, country, countryLabel, service,
     message: message || null
   };
 
-  const { error } = await supabase.from('service_enquiries').insert(payload);
+  const { error } = await supabase.from('service_enquiry_form').insert(payload);
 
   if (error) {
     throw error;
@@ -766,7 +766,7 @@ export const submitExpertRequest = async ({
     throw new Error('Email is required.');
   }
 
-  const { error } = await supabase.from('expert_requests').insert({
+  const { error } = await supabase.from('cta_form_requests').insert({
     partner_id: user?.id || null,
     partner_email: jwtEmail || null,
     full_name: String(name || '').trim(),
