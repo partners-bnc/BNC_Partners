@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash, FaChartLine, FaBriefcase, FaHandshake, FaGraduationCap } from 'react-icons/fa';
+import { FaUser, FaShieldAlt, FaLock, FaIdCard, FaArrowLeft, FaEye, FaEyeSlash, FaChartLine, FaBriefcase, FaHandshake, FaGraduationCap, FaEnvelope, FaTimes, FaCheckCircle } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 // Google OAuth is temporarily disabled. Restore this import with the callback below.
 // import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner } from '../lib/supabaseData';
+import { fetchPartnerData, isPartnerProfileComplete, loginAdmin, loginPartner, requestPasswordReset } from '../lib/supabaseData';
 // Google OAuth is temporarily disabled. Restore this import with the callback and button below.
 // import { loginPartnerWithGoogle } from '../lib/supabaseData';
 // import { supabase } from '../lib/supabaseClient';
@@ -33,79 +33,56 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [isResetLoading, setIsResetLoading] = useState(false);
+  const [resetError, setResetError] = useState('');
+  const [resetSuccess, setResetSuccess] = useState('');
+
+  const handleOpenForgotModal = () => {
+    setResetEmail(formData.email || '');
+    setResetError('');
+    setResetSuccess('');
+    setIsForgotModalOpen(true);
+  };
+
+  const handleSendResetEmail = async (e) => {
+    e.preventDefault();
+    setResetError('');
+    setResetSuccess('');
+
+    if (!resetEmail.trim()) {
+      setResetError(t('login.errors.emailRequired'));
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resetEmail.trim())) {
+      setResetError(t('login.errors.emailInvalid'));
+      return;
+    }
+
+    setIsResetLoading(true);
+    try {
+      await requestPasswordReset(resetEmail.trim());
+      setResetSuccess(t('login.resetLinkSent'));
+    } catch (err) {
+      console.error('Reset password request error:', err);
+      setResetError(err?.message || 'Failed to send reset link. Please try again.');
+    } finally {
+      setIsResetLoading(false);
+    }
+  };
+
   const trustItems = t('login.trustIndicators', { returnObjects: true });
 
   const renderLeftIllustration = () => {
-    if (selectedRole === 'provider') {
-      return (
-        <div className="flex flex-col items-start justify-center py-6 flex-grow text-left">
-          <svg viewBox="0 0 400 300" className="w-full max-w-xs h-auto text-slate-800 drop-shadow-sm" fill="none">
-            <path d="M50 250 L350 250 M50 200 L350 200 M50 150 L350 150 M50 100 L350 100" stroke="rgba(0,0,0,0.06)" strokeWidth="1.5" />
-            <rect x="80" y="160" width="28" height="90" rx="6" fill="rgba(15,41,74,0.08)" />
-            <rect x="140" y="120" width="28" height="130" rx="6" fill="rgba(15,41,74,0.18)" />
-            <rect x="200" y="90" width="28" height="160" rx="6" fill="url(#blueGrad)" />
-            <rect x="260" y="60" width="28" height="190" rx="6" fill="rgba(15,41,74,0.4)" />
-            <path d="M94 150 Q154 110 214 80 T334 40" stroke="#DC2626" strokeWidth="4" strokeLinecap="round" fill="none" />
-            <circle cx="334" cy="40" r="8" fill="#DC2626" />
-            <circle cx="334" cy="40" r="14" stroke="#DC2626" strokeWidth="2" opacity="0.5" className="animate-ping" style={{ transformOrigin: '334px 40px' }} />
-            <circle cx="214" cy="210" r="28" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
-            <path d="M204 210 L224 210 M214 200 L214 220" stroke="#0f294a" strokeWidth="2" strokeLinecap="round" />
-            <defs>
-              <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.8" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <p className="text-xl font-poppins font-medium mt-6 text-slate-800">
-            Claim Project Mandates
-          </p>
-          <p className="text-sm font-geist text-slate-500 mt-2 max-w-xs leading-relaxed">
-            Access verified corporate mandates and build recurring advisory revenue.
-          </p>
-        </div>
-      );
-    }
-    if (selectedRole === 'consumer') {
-      return (
-        <div className="flex flex-col items-start justify-center py-6 flex-grow text-left">
-          <svg viewBox="0 0 400 300" className="w-full max-w-xs h-auto text-slate-800 drop-shadow-sm" fill="none">
-            <circle cx="200" cy="150" r="36" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.15)" strokeWidth="2" />
-            <circle cx="200" cy="150" r="22" fill="#DC2626" />
-            <circle cx="80" cy="90" r="18" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
-            <circle cx="320" cy="90" r="22" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
-            <circle cx="100" cy="220" r="20" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
-            <circle cx="300" cy="220" r="18" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
-            <line x1="200" y1="150" x2="80" y2="90" stroke="rgba(0,0,0,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-            <line x1="200" y1="150" x2="320" y2="90" stroke="rgba(0,0,0,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-            <line x1="200" y1="150" x2="100" y2="220" stroke="rgba(0,0,0,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-            <line x1="200" y1="150" x2="300" y2="220" stroke="rgba(0,0,0,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-            <circle cx="200" cy="150" r="80" stroke="rgba(0,0,0,0.06)" strokeWidth="1.5" />
-            <circle cx="200" cy="150" r="120" stroke="rgba(0,0,0,0.03)" strokeWidth="1" />
-            <circle cx="320" cy="90" r="30" stroke="#DC2626" strokeWidth="2" opacity="0.6" className="animate-ping" style={{ transformOrigin: '320px 90px' }} />
-            <path d="M310 90 L330 90 M320 80 L320 100" stroke="#DC2626" strokeWidth="1.5" />
-          </svg>
-          <p className="text-xl font-poppins font-medium mt-6 text-slate-800">
-            Source Expert Partners
-          </p>
-          <p className="text-sm font-geist text-slate-500 mt-2 max-w-xs leading-relaxed">
-            Connect with verified agencies and top external experts for client needs.
-          </p>
-        </div>
-      );
-    }
     return (
-      <div className="flex flex-col items-start justify-center py-6 flex-grow text-left">
-        <svg viewBox="0 0 400 300" className="w-full max-w-xs h-auto text-slate-800 drop-shadow-sm" fill="none">
-          <polygon points="200,60 290,210 110,210" stroke="rgba(0,0,0,0.15)" strokeWidth="2" fill="rgba(0,0,0,0.02)" />
-          <circle cx="200" cy="60" r="24" fill="#DC2626" />
-          <circle cx="290" cy="210" r="20" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" />
-          <circle cx="110" cy="210" r="20" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" />
-          <line x1="200" y1="60" x2="290" y2="210" stroke="#0f294a" strokeWidth="2" />
-          <line x1="290" y1="210" x2="110" y2="210" stroke="#0f294a" strokeWidth="2" />
-          <line x1="110" y1="210" x2="200" y2="60" stroke="#0f294a" strokeWidth="2" />
-          <path d="M170 140 A 30 30 0 1 1 230 140" stroke="rgba(0,0,0,0.18)" strokeWidth="2" strokeDasharray="3 3" />
-        </svg>
+      <div className="flex flex-col items-center sm:items-start justify-center py-6 flex-grow text-left">
+        <img
+          src="/SVG/Login.svg"
+          alt="BNC Login Animation"
+          className="w-full max-w-xs sm:max-w-sm h-auto object-contain drop-shadow-sm"
+        />
         <p className="text-xl font-poppins font-medium mt-6 text-slate-800">
           BnC Global Ecosystem
         </p>
@@ -445,10 +422,21 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label className={`flex items-center gap-2 text-sm font-medium text-gray-700 mb-2 ${rowDirection}`}>
-                <FaLock className="text-[#DC2626]" />
-                {t('login.password')}
-              </label>
+              <div className={`flex items-center justify-between mb-2 ${rowDirection}`}>
+                <label className={`flex items-center gap-2 text-sm font-medium text-gray-700 ${rowDirection}`}>
+                  <FaLock className="text-[#DC2626]" />
+                  {t('login.password')}
+                </label>
+                {activeTab === 'partner' && (
+                  <button
+                    type="button"
+                    onClick={handleOpenForgotModal}
+                    className="text-xs text-[#DC2626] hover:text-[#B91C1C] font-medium hover:underline focus:outline-none"
+                  >
+                    {t('login.forgotPassword')}
+                  </button>
+                )}
+              </div>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -527,6 +515,88 @@ const Login = () => {
           )}
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {isForgotModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className={`relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 sm:p-8 ${textAlign}`}>
+            <button
+              onClick={() => setIsForgotModalOpen(false)}
+              className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} text-slate-400 hover:text-slate-600 transition-colors p-2 rounded-full hover:bg-slate-100`}
+            >
+              <FaTimes size={18} />
+            </button>
+
+            <div className="mb-5">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#DC2626]/10 text-[#DC2626] mb-3">
+                <FaLock size={20} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800">
+                {t('login.resetPasswordTitle')}
+              </h3>
+              <p className="text-sm text-slate-500 mt-1 leading-relaxed">
+                {t('login.resetPasswordSubtitle')}
+              </p>
+            </div>
+
+            {resetSuccess ? (
+              <div className="space-y-4">
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-xl flex items-start gap-3 text-sm">
+                  <FaCheckCircle className="text-emerald-500 text-lg flex-shrink-0 mt-0.5" />
+                  <p>{resetSuccess}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsForgotModalOpen(false)}
+                  className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-xl font-semibold transition-colors text-sm"
+                >
+                  {t('login.backToLogin')}
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSendResetEmail} className="space-y-4">
+                {resetError && (
+                  <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+                    {resetError}
+                  </div>
+                )}
+
+                <div>
+                  <label className={`flex items-center gap-2 text-sm font-medium text-slate-700 mb-2 ${rowDirection}`}>
+                    <FaEnvelope className="text-[#DC2626]" />
+                    {t('login.userIdEmail')}
+                  </label>
+                  <input
+                    type="email"
+                    value={resetEmail}
+                    onChange={(e) => setResetEmail(e.target.value)}
+                    required
+                    className={`w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#DC2626]/30 focus:border-transparent text-sm ${inputAlign}`}
+                    placeholder={t('login.enterEmail')}
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsForgotModalOpen(false)}
+                    className="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg font-semibold transition-colors text-sm"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isResetLoading}
+                    className="w-1/2 bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#163062] text-white py-2.5 rounded-lg font-semibold transition-all text-sm disabled:opacity-50 shadow-md"
+                  >
+                    {isResetLoading ? t('login.sendingLink') : t('login.sendResetLink')}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

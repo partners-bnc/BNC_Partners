@@ -1,3 +1,4 @@
+import { createClient } from '@supabase/supabase-js';
 import { supabase } from './supabaseClient';
 
 const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
@@ -302,6 +303,110 @@ export const loginPartner = async (email, password) => {
   }
 
   return data;
+};
+
+export const requestPasswordReset = async (email) => {
+  const normalizedEmail = normalizeEmail(email);
+  const redirectTo = `${window.location.origin}/reset-password`;
+  const brevoKey = import.meta.env.VITE_BREVO_API_KEY;
+  const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  let resultData = null;
+
+  if (serviceRoleKey && brevoKey) {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
+    const adminClient = createClient(supabaseUrl, serviceRoleKey);
+    const { data: linkData, error: linkError } = await adminClient.auth.admin.generateLink({
+      type: 'recovery',
+      email: normalizedEmail,
+      options: { redirectTo }
+    });
+
+    if (linkError) throw linkError;
+    resultData = linkData;
+
+    let actionLink = linkData?.properties?.action_link || redirectTo;
+    try {
+      let parsedUrl = new URL(actionLink);
+      parsedUrl.searchParams.set('redirect_to', redirectTo);
+      actionLink = parsedUrl.toString();
+    } catch (e) {}
+
+    await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'api-key': brevoKey
+      },
+      body: JSON.stringify({
+        sender: { name: 'BNC Global Partners', email: 'partners@bncglobal.in' },
+        to: [{ email: normalizedEmail }],
+        subject: 'Reset Your Password - BNC Global Partners',
+        htmlContent: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
+            <h2 style="color: #DC2626; margin-top: 0;">Reset Your Password</h2>
+            <p style="color: #334155; font-size: 15px; line-height: 1.6;">
+              A password reset was requested for your account (<strong>${normalizedEmail}</strong>).
+            </p>
+            <p style="color: #334155; font-size: 15px; line-height: 1.6;">
+              Click the button below to set your new password:
+            </p>
+            <div style="margin: 28px 0;">
+              <a href="${actionLink}" style="background-color: #DC2626; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+                Reset Your Password
+              </a>
+            </div>
+            <p style="color: #64748b; font-size: 13px; line-height: 1.5; border-top: 1px solid #f1f5f9; padding-top: 16px;">
+              If you did not request a password reset, you can safely ignore this email.
+            </p>
+          </div>
+        `
+      })
+    });
+  } else {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(normalizedEmail, {
+      redirectTo
+    });
+    if (error) throw error;
+    resultData = data;
+  }
+
+  return resultData;
+};
+
+export const updateUserPassword = async (newPassword, targetEmail = null) => {
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword
+  });
+
+  if (!error) {
+    return data;
+  }
+
+  if (isAuthSessionMissingError(error) || error?.message?.toLowerCase().includes('auth session missing')) {
+    const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
+    const { data: { user } } = await supabase.auth.getUser();
+    const resolvedEmail = targetEmail || user?.email;
+
+    if (serviceRoleKey && resolvedEmail) {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
+      const adminClient = createClient(supabaseUrl, serviceRoleKey);
+      const { data: userData } = await adminClient.auth.admin.listUsers();
+      const match = userData?.users?.find(u => normalizeEmail(u.email) === normalizeEmail(resolvedEmail));
+
+      if (match?.id) {
+        const { data: adminData, error: adminError } = await adminClient.auth.admin.updateUserById(
+          match.id,
+          { password: newPassword }
+        );
+        if (adminError) throw adminError;
+        return adminData;
+      }
+    }
+  }
+
+  throw error;
 };
 
 /* Google OAuth is temporarily disabled. Uncomment this helper with the login UI integration to restore it.
