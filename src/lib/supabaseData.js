@@ -308,7 +308,7 @@ export const loginPartner = async (email, password) => {
 export const requestPasswordReset = async (email) => {
   const normalizedEmail = normalizeEmail(email);
   const redirectTo = `${window.location.origin}/reset-password`;
-  const brevoKey = import.meta.env.VITE_BREVO_API_KEY;
+  const brevoKey = import.meta.env.VITE_BREVO_API_KEY || import.meta.env.BREVO_API_KEY;
   const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
 
   let resultData = null;
