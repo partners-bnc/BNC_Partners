@@ -22,6 +22,7 @@ type PartnerRow = {
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "";
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const BREVO_API_KEY = Deno.env.get("BREVO_API_KEY") || "";
+const REMINDER_SECRET = Deno.env.get("ONBOARDING_REMINDER_SECRET") || Deno.env.get("CAMPAIGN_TICK_SECRET") || "";
 const FROM_EMAIL = Deno.env.get("ONBOARDING_REMINDER_FROM_EMAIL") || "no-reply@bncglobal.in";
 const FROM_NAME = Deno.env.get("ONBOARDING_REMINDER_FROM_NAME") || "BnC Global";
 const LOGIN_URL = Deno.env.get("ONBOARDING_REMINDER_LOGIN_URL") || "https://partners.bncglobal.in/login";
@@ -89,12 +90,15 @@ const renderEmailHtml = ({
 }) => {
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);
+  const safeLoginUrl = escapeHtml(LOGIN_URL);
   const aiBadgeLabel = aiComplete ? "AI Profile Completed" : "AI Profile Not Completed";
   const aiBadgeBg = aiComplete ? "#dcfce7" : "#fee2e2";
-  const aiBadgeIcon = aiComplete ? "OK" : "X";
+  const aiBadgeColor = aiComplete ? "#166534" : "#991b1b";
+  const aiBadgeIcon = aiComplete ? "&#10003;" : "&#10005;";
   const agreementBadgeLabel = agreementSigned ? "Partner Agreement Signed" : "Partner Agreement Not Signed";
   const agreementBadgeBg = agreementSigned ? "#dcfce7" : "#fee2e2";
-  const agreementBadgeIcon = agreementSigned ? "OK" : "X";
+  const agreementBadgeColor = agreementSigned ? "#166534" : "#991b1b";
+  const agreementBadgeIcon = agreementSigned ? "&#10003;" : "&#10005;";
 
   return `
 <!DOCTYPE html>
@@ -104,29 +108,29 @@ const renderEmailHtml = ({
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Action Required - Complete Your AI Profile and Agreement | BNC Global</title>
 </head>
-<body style="margin:0; padding:0; background-color:#f0f4f8; font-family:'Segoe UI', Arial, sans-serif;">
-  <div style="display:none; max-height:0; overflow:hidden; font-size:1px; color:#f0f4f8;">
+<body style="margin:0; padding:0; background-color:#f8f7f5; font-family:Arial, 'Helvetica Neue', sans-serif;">
+  <div style="display:none; max-height:0; overflow:hidden; font-size:1px; color:#f8f7f5;">
     Your BNC Global partner registration is incomplete. Complete your AI profile and agreement to activate your account.
   </div>
 
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0f4f8; padding:40px 16px;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f8f7f5; padding:40px 16px;">
     <tr>
       <td align="center">
 
         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;">
           <tr>
-            <td style="background:#ffffff; border-radius:12px 12px 0 0; overflow:hidden;">
+            <td style="background:#ffffff; border:1px solid #ebe8e4; border-radius:16px 16px 0 0; overflow:hidden; box-shadow:0 8px 24px rgba(15,23,42,0.08);">
 
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                  <td style="background:linear-gradient(135deg,#1e3a6e 0%,#2C5AA0 60%,#1a8fc1 100%); padding:36px 40px 32px;">
+                  <td style="background:#101828; padding:36px 40px 32px; border-bottom:4px solid #ed2024;">
                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                       <tr>
                         <td>
-                          <img src="https://static.wixstatic.com/media/0446e3_50ff54e1251b45ef8a1066bca3a75b0e~mv2.png" width="100" alt="BNC Global" style="display:block; filter:brightness(1.2);">
+                          <img src="https://xsxiuvqgngikzvchjnxq.supabase.co/storage/v1/object/public/logo/BNC%20LEG%20logo.png" width="100" alt="BNC Global" style="display:block; background:#ffffff; padding:8px 12px; border-radius:8px;">
                         </td>
                         <td align="right" style="vertical-align:middle;">
-                          <span style="background:rgba(245,158,11,0.25); border:1px solid rgba(245,158,11,0.6); color:#fcd34d; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:20px;">
+                          <span style="background:rgba(237,32,36,0.13); border:1px solid rgba(237,32,36,0.75); color:#ffffff; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:20px;">
                             Action Required
                           </span>
                         </td>
@@ -136,9 +140,9 @@ const renderEmailHtml = ({
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;">
                       <tr>
                         <td>
-                          <p style="margin:0 0 6px; font-size:12px; color:rgba(255,255,255,0.7); letter-spacing:3px; text-transform:uppercase; font-weight:600;">Your Profile Is Incomplete</p>
+                          <p style="margin:0 0 6px; font-size:12px; color:#f4b7b8; letter-spacing:3px; text-transform:uppercase; font-weight:700;">Your Profile Is Incomplete</p>
                           <h1 style="margin:0 0 10px; font-size:27px; font-weight:700; color:#ffffff; line-height:1.35;">
-                            Hey <span style="color:#a8d4f5;">${safeName}</span>, you're almost there!
+                            Hey <span style="color:#ff5b5f;">${safeName}</span>, you're almost there!
                           </h1>
                           <p style="margin:0; font-size:15px; color:rgba(255,255,255,0.82); line-height:1.65;">
                             You registered successfully, but your AI profile and partner agreement are still pending. Complete them to fully activate your partner account.
@@ -153,45 +157,36 @@ const renderEmailHtml = ({
 
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                  <td style="padding:32px 40px;">
+                  <td style="padding:34px 40px;">
 
                     <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                           style="background:#fffbeb; border:1.5px solid #fcd34d; border-radius:10px; margin-bottom:28px;">
+                           style="background:#fff8f8; border:1px solid #f5cdce; border-left:4px solid #ed2024; border-radius:8px; margin-bottom:28px;">
                       <tr>
                         <td style="padding:18px 22px;">
-                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                              <td width="40" style="vertical-align:middle;">
-                                <div style="font-size:20px; line-height:1;">PENDING</div>
-                              </td>
-                              <td style="vertical-align:middle; padding-left:12px;">
-                                <p style="margin:0 0 2px; font-size:14px; font-weight:700; color:#92400e;">Account Activation Pending</p>
-                                <p style="margin:0; font-size:13px; color:#b45309; line-height:1.5;">
-                                  It's been <strong>${daysPending} days</strong> since you registered. Please complete your profile by <strong>${escapeHtml(deadlineDate)}</strong> to avoid any delays in activating your partner account.
-                                </p>
-                              </td>
-                            </tr>
-                          </table>
+                          <p style="margin:0 0 4px; font-size:14px; font-weight:700; color:#991b1b;">Account Activation Pending</p>
+                          <p style="margin:0; font-size:13px; color:#667085; line-height:1.5;">
+                            It's been <strong>${daysPending} days</strong> since you registered. Please complete your profile by <strong>${escapeHtml(deadlineDate)}</strong> to avoid any delays in activating your partner account.
+                          </p>
                         </td>
                       </tr>
                     </table>
 
-                    <p style="margin:0 0 16px; font-size:13px; font-weight:700; color:#1e3a6e; letter-spacing:1.5px; text-transform:uppercase;">
+                    <p style="margin:0 0 16px; font-size:13px; font-weight:700; color:#ed2024; letter-spacing:1.5px; text-transform:uppercase;">
                       What's Pending
                     </p>
 
                     <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                           style="background:#fafbff; border:1px solid #e0e8f8; border-radius:8px; margin-bottom:12px;">
+                           style="background:#faf9f7; border:1px solid #ebe8e4; border-radius:8px; margin-bottom:12px;">
                       <tr>
                         <td style="padding:16px 20px;">
                           <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
                               <td width="36" style="vertical-align:middle;">
-                                <div style="width:28px; height:28px; background:${aiBadgeBg}; border-radius:50%; text-align:center; line-height:28px; font-size:12px; font-weight:700; display:inline-block;">${aiBadgeIcon}</div>
+                                <div style="width:28px; height:28px; background:${aiBadgeBg}; color:${aiBadgeColor}; border-radius:50%; text-align:center; line-height:28px; font-size:12px; font-weight:700; display:inline-block;">${aiBadgeIcon}</div>
                               </td>
                               <td style="vertical-align:middle; padding-left:12px;">
                                 <p style="margin:0 0 2px; font-size:14px; font-weight:700; color:#1f2937;">${aiBadgeLabel}</p>
-                                <p style="margin:0; font-size:13px; color:#6b7280; line-height:1.5;">Tell us about your business goals, expertise, and interests so we can match you with the right opportunities.</p>
+                                <p style="margin:0; font-size:13px; color:#667085; line-height:1.5;">Tell us about your business goals, expertise, and interests so we can match you with the right opportunities.</p>
                               </td>
                             </tr>
                           </table>
@@ -200,17 +195,17 @@ const renderEmailHtml = ({
                     </table>
 
                     <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                           style="background:#fafbff; border:1px solid #e0e8f8; border-radius:8px; margin-bottom:28px;">
+                           style="background:#faf9f7; border:1px solid #ebe8e4; border-radius:8px; margin-bottom:28px;">
                       <tr>
                         <td style="padding:16px 20px;">
                           <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
                               <td width="36" style="vertical-align:middle;">
-                                <div style="width:28px; height:28px; background:${agreementBadgeBg}; border-radius:50%; text-align:center; line-height:28px; font-size:12px; font-weight:700; display:inline-block;">${agreementBadgeIcon}</div>
+                                <div style="width:28px; height:28px; background:${agreementBadgeBg}; color:${agreementBadgeColor}; border-radius:50%; text-align:center; line-height:28px; font-size:12px; font-weight:700; display:inline-block;">${agreementBadgeIcon}</div>
                               </td>
                               <td style="vertical-align:middle; padding-left:12px;">
                                 <p style="margin:0 0 2px; font-size:14px; font-weight:700; color:#1f2937;">${agreementBadgeLabel}</p>
-                                <p style="margin:0; font-size:13px; color:#6b7280; line-height:1.5;">Review and digitally sign the BNC Global Partner Agreement to formally onboard and unlock all partner benefits.</p>
+                                <p style="margin:0; font-size:13px; color:#667085; line-height:1.5;">Review and digitally sign the BNC Global Partner Agreement to formally onboard and unlock all partner benefits.</p>
                               </td>
                             </tr>
                           </table>
@@ -222,19 +217,19 @@ const renderEmailHtml = ({
                       <tr><td style="height:1px; background:#e5e7eb;"></td></tr>
                     </table>
 
-                    <p style="margin:0 0 18px; font-size:13px; font-weight:700; color:#1e3a6e; letter-spacing:1.5px; text-transform:uppercase;">
+                    <p style="margin:0 0 18px; font-size:13px; font-weight:700; color:#ed2024; letter-spacing:1.5px; text-transform:uppercase;">
                       How to Complete
                     </p>
 
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">
                       <tr>
                         <td width="46" style="vertical-align:top;">
-                          <div style="width:34px; height:34px; background:linear-gradient(135deg,#2C5AA0,#1a8fc1); border-radius:50%; text-align:center; line-height:34px; font-size:14px; font-weight:700; color:#fff; display:inline-block;">1</div>
+                          <div style="width:34px; height:34px; background:#ed2024; border-radius:50%; text-align:center; line-height:34px; font-size:14px; font-weight:700; color:#fff; display:inline-block;">1</div>
                         </td>
                         <td style="vertical-align:top; padding-top:5px;">
                           <p style="margin:0 0 3px; font-size:14px; font-weight:700; color:#1f2937;">Login to Your Account</p>
-                          <p style="margin:0; font-size:13px; color:#6b7280; line-height:1.55;">
-                            Sign in using your registered email: <strong style="color:#1e3a6e;">${safeEmail}</strong>
+                          <p style="margin:0; font-size:13px; color:#667085; line-height:1.55;">
+                            Sign in using your registered email: <strong style="color:#101828;">${safeEmail}</strong>
                           </p>
                         </td>
                       </tr>
@@ -243,11 +238,11 @@ const renderEmailHtml = ({
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">
                       <tr>
                         <td width="46" style="vertical-align:top;">
-                          <div style="width:34px; height:34px; background:linear-gradient(135deg,#1e6ea8,#2C5AA0); border-radius:50%; text-align:center; line-height:34px; font-size:14px; font-weight:700; color:#fff; display:inline-block;">2</div>
+                          <div style="width:34px; height:34px; background:#ed2024; border-radius:50%; text-align:center; line-height:34px; font-size:14px; font-weight:700; color:#fff; display:inline-block;">2</div>
                         </td>
                         <td style="vertical-align:top; padding-top:5px;">
                           <p style="margin:0 0 3px; font-size:14px; font-weight:700; color:#1f2937;">Complete Your AI Profile</p>
-                          <p style="margin:0; font-size:13px; color:#6b7280; line-height:1.55;">Answer the smart questions to build your partner profile. It only takes a few minutes.</p>
+                          <p style="margin:0; font-size:13px; color:#667085; line-height:1.55;">Answer the smart questions to build your partner profile. It only takes a few minutes.</p>
                         </td>
                       </tr>
                     </table>
@@ -255,11 +250,11 @@ const renderEmailHtml = ({
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:30px;">
                       <tr>
                         <td width="46" style="vertical-align:top;">
-                          <div style="width:34px; height:34px; background:linear-gradient(135deg,#1a5580,#1e6ea8); border-radius:50%; text-align:center; line-height:34px; font-size:14px; font-weight:700; color:#fff; display:inline-block;">3</div>
+                          <div style="width:34px; height:34px; background:#ed2024; border-radius:50%; text-align:center; line-height:34px; font-size:14px; font-weight:700; color:#fff; display:inline-block;">3</div>
                         </td>
                         <td style="vertical-align:top; padding-top:5px;">
                           <p style="margin:0 0 3px; font-size:14px; font-weight:700; color:#1f2937;">Sign the Partner Agreement</p>
-                          <p style="margin:0; font-size:13px; color:#6b7280; line-height:1.55;">Review and digitally sign your agreement to officially become a BNC Global Partner and unlock all benefits.</p>
+                          <p style="margin:0; font-size:13px; color:#667085; line-height:1.55;">Review and digitally sign your agreement to officially become a BnC Global Partner and unlock all benefits.</p>
                         </td>
                       </tr>
                     </table>
@@ -267,8 +262,8 @@ const renderEmailHtml = ({
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
                       <tr>
                         <td align="center">
-                          <a href="${escapeHtml(LOGIN_URL)}"
-                             style="display:inline-block; background:linear-gradient(135deg,#2C5AA0 0%,#1a8fc1 100%); color:#ffffff; text-decoration:none; font-size:16px; font-weight:700; padding:16px 48px; border-radius:8px; letter-spacing:0.3px;">
+                          <a href="${safeLoginUrl}"
+                             style="display:inline-block; background:#101010; color:#ffffff; text-decoration:none; font-size:16px; font-weight:700; padding:16px 48px; border-radius:999px; letter-spacing:0.3px; border:1px solid #101010;">
                             Complete Profile and Agreement
                           </a>
                         </td>
@@ -284,15 +279,15 @@ const renderEmailHtml = ({
                     </table>
 
                     <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                           style="background:#f0f6ff; border:1px solid #c7d9f5; border-radius:8px; margin-bottom:24px;">
+                           style="background:#fff8f8; border:1px solid #f5cdce; border-left:4px solid #ed2024; border-radius:8px; margin-bottom:24px;">
                       <tr>
                         <td style="padding:20px 24px;">
-                          <p style="margin:0 0 12px; font-size:13px; font-weight:700; color:#1e3a6e; letter-spacing:1px; text-transform:uppercase;">Why Complete Your Profile?</p>
+                          <p style="margin:0 0 12px; font-size:13px; font-weight:700; color:#ed2024; letter-spacing:1px; text-transform:uppercase;">Why Complete Your Profile?</p>
                           <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr><td style="font-size:13px; color:#374151; padding:3px 0;">- Get matched with relevant business opportunities</td></tr>
                             <tr><td style="font-size:13px; color:#374151; padding:3px 0;">- Unlock access to funding and consulting resources</td></tr>
                             <tr><td style="font-size:13px; color:#374151; padding:3px 0;">- Receive personalized partner support from our team</td></tr>
-                            <tr><td style="font-size:13px; color:#374151; padding:3px 0;">- Officially activate your BNC Global Partner status</td></tr>
+                            <tr><td style="font-size:13px; color:#374151; padding:3px 0;">- Officially activate your BnC Global Partner status</td></tr>
                           </table>
                         </td>
                       </tr>
@@ -302,8 +297,8 @@ const renderEmailHtml = ({
                       Need help? Our team is happy to assist you through the process.
                     </p>
                     <p style="margin:0; font-size:14px; color:#6b7280;">
-                      <a href="mailto:${escapeHtml(SUPPORT_EMAIL)}" style="color:#2C5AA0; text-decoration:none;">${escapeHtml(SUPPORT_EMAIL)}</a> |
-                      <a href="tel:${escapeHtml(SUPPORT_PHONE)}" style="color:#2C5AA0; text-decoration:none;">${escapeHtml(SUPPORT_PHONE)}</a>
+                      <a href="mailto:${escapeHtml(SUPPORT_EMAIL)}" style="color:#ed2024; text-decoration:none;">${escapeHtml(SUPPORT_EMAIL)}</a> |
+                      <a href="tel:${escapeHtml(SUPPORT_PHONE)}" style="color:#ed2024; text-decoration:none;">${escapeHtml(SUPPORT_PHONE)}</a>
                     </p>
 
                   </td>
@@ -312,23 +307,23 @@ const renderEmailHtml = ({
 
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                  <td style="background:#f8faff; border-top:1px solid #e5e7eb; padding:24px 40px;">
+                  <td style="background:#faf9f7; border-top:1px solid #ebe8e4; padding:24px 40px;">
                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                       <tr>
-                        <td width="130" style="vertical-align:middle; padding-right:20px; border-right:1px solid #dbe6f8;">
-                          <img src="https://static.wixstatic.com/media/0446e3_50ff54e1251b45ef8a1066bca3a75b0e~mv2.png"
+                        <td width="130" style="vertical-align:middle; padding-right:20px; border-right:1px solid #e6e2dd;">
+                          <img src="https://xsxiuvqgngikzvchjnxq.supabase.co/storage/v1/object/public/logo/BNC%20LEG%20logo.png"
                                width="120" alt="BNC Global" style="display:block;">
                         </td>
                         <td style="vertical-align:top; padding-left:20px;">
-                          <p style="margin:0 0 4px; font-size:14px; font-weight:700; color:#1e3a6e;">BnC Global Services Pvt. Ltd.</p>
-                          <p style="margin:0 0 2px; font-size:12px; color:#6b7280;"><a href="https://www.bncglobal.in" style="color:#2C5AA0; text-decoration:none;">www.bncglobal.in</a></p>
+                          <p style="margin:0 0 4px; font-size:14px; font-weight:700; color:#101828;">BnC Global Services Pvt. Ltd.</p>
+                          <p style="margin:0 0 2px; font-size:12px; color:#6b7280;"><a href="https://www.bncglobal.in" style="color:#ed2024; text-decoration:none;">www.bncglobal.in</a></p>
                           <p style="margin:0 0 2px; font-size:12px; color:#6b7280;">${escapeHtml(SUPPORT_EMAIL)}</p>
                           <p style="margin:0 0 8px; font-size:12px; color:#6b7280;">${escapeHtml(SUPPORT_PHONE)}</p>
                           <p style="margin:0 0 2px; font-size:11px; color:#9ca3af; line-height:1.6;">
                             Startup Consulting and Funding | Outsourcing | Training<br>
                             Shared Services | Advisory | Recruitment
                           </p>
-                          <p style="margin:6px 0 0; font-size:12px; font-style:italic; color:#2C5AA0; font-weight:600;">
+                          <p style="margin:6px 0 0; font-size:12px; font-style:italic; color:#ed2024; font-weight:600;">
                             "A Complete Financial Ecosystem!"
                           </p>
                         </td>
@@ -346,7 +341,7 @@ const renderEmailHtml = ({
           </tr>
 
           <tr>
-            <td style="background:linear-gradient(90deg,#b45309 0%,#f59e0b 50%,#b45309 100%); height:4px; border-radius:0 0 10px 10px;"></td>
+            <td style="background:#ed2024; height:4px; border-radius:0 0 16px 16px;"></td>
           </tr>
 
         </table>
@@ -388,6 +383,14 @@ const sendBrevoEmail = async (to: string, subject: string, htmlContent: string) 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
+  }
+
+  const providedSecret = req.headers.get("x-reminder-secret") || req.headers.get("x-tick-secret") || "";
+  if (!REMINDER_SECRET || providedSecret !== REMINDER_SECRET) {
+    return new Response(JSON.stringify({ error: "Forbidden" }), {
+      status: 403,
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
+    });
   }
 
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {

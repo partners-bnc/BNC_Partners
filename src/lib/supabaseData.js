@@ -409,7 +409,6 @@ export const updateUserPassword = async (newPassword, targetEmail = null) => {
   throw error;
 };
 
-/* Google OAuth is temporarily disabled. Uncomment this helper with the login UI integration to restore it.
 export const loginPartnerWithGoogle = async (redirectTo) => {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -424,7 +423,6 @@ export const loginPartnerWithGoogle = async (redirectTo) => {
 
   return data;
 };
-*/
 
 export const loginAdmin = async (adminIdOrEmail, password) => {
   const input = String(adminIdOrEmail || '').trim();

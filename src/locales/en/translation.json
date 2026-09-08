@@ -2183,6 +2183,9 @@
     "signingIn": "Signing in...",
     "partnerSignIn": "Access Dashboard",
     "adminSignIn": "Admin Sign In",
+    "continueWithGoogle": "Continue with Google",
+    "redirectingToGoogle": "Redirecting to Google...",
+    "or": "or",
     "newAccount": "New Account",
     "backToRegistration": "Return to Partner Application",
     "errors": {

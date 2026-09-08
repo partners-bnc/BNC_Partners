@@ -2251,6 +2251,9 @@
     "signingIn": "جارٍ تسجيل الدخول...",
     "partnerSignIn": "لوحة الوصول",
     "adminSignIn": "تسجيل دخول المسؤول",
+    "continueWithGoogle": "المتابعة باستخدام Google",
+    "redirectingToGoogle": "جارٍ إعادة التوجيه إلى Google...",
+    "or": "أو",
     "newAccount": "حساب جديد",
     "backToRegistration": "العودة إلى تطبيق الشريك",
     "errors": {
