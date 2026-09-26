@@ -19,6 +19,7 @@
     "locale:ar-integrity-check": "node scripts/ar-locale-integrity-check.cjs"
   },
   "dependencies": {
+    "@elevenlabs/react": "^1.15.2",
     "@supabase/supabase-js": "^2.97.0",
     "@tailwindcss/vite": "^4.1.18",
     "@xyflow/react": "^12.11.0",
@@ -36,6 +37,7 @@
     "recharts": "^3.7.0",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.18",
+    "three": "^0.170.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
