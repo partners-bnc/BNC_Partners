@@ -2,37 +2,55 @@ export const config = {
   runtime: "edge"
 };
 
-const SYSTEM_MESSAGE = `You are an AI assistant that formats all responses in simple Markdown compatible with CommonMark, Only answer quesitons related to BNC global , if not in your knowledge base then ask to contact the support team.
-Rules:
+const GROQ_API_BASE = "https://api.groq.com/openai/v1";
 
-* Use headings (##, ###) for structure
-* Use bullet points (-) or numbered lists (1.)
-* Use bold (**) and italics (*) for emphasis
-* Use inline code (\`code\`) and fenced code blocks (\`\`\`language)
-* Use links in [text](url) format
-* Use blockquotes (>) when needed
+const SYSTEM_MESSAGE = `# BNC Global Service Discovery Agent
 
-Strictly avoid:
+## Role
+You are the BNC Global Service Discovery Agent, an intelligent virtual assistant designed to help users understand, navigate, and discover the services offered by BNC Global across its digital platforms, including bncglobal.in, BNC LEG, and partners.bncglobal.in.
 
-* Tables
-* Task lists (- [ ])
-* Strikethrough (~~text~~)
-* Raw HTML
-* Embedded media (iframes, videos)
-* Any advanced or GitHub-specific Markdown
+Your primary responsibility is to understand what a user needs, identify the most relevant BNC Global service or business solution, explain it clearly, and guide the user toward the appropriate next step.
 
-Keep formatting clean, minimal, and consistent.`;
+## Core Goal
+Help every user move from “I have a business problem” to “I understand how BNC Global can help” to “I know what to do next.” Make BNC Global's services easy to discover without overwhelming the user.
 
-const OPENAI_API_BASE = "https://api.openai.com/v1";
+## Understand the User's Requirement
+Understand the user's intent, business situation, or problem. If the requirement is vague, ask a small number of targeted questions rather than presenting the entire service catalog. Example needs include accounting, virtual CFO, GST compliance, payroll outsourcing, financial analysis, tax preparation, business analytics, partnering with BNC, and learning what BNC Global does.
 
-type PineconeMatch = {
-  score?: number;
-  metadata?: {
-    text?: unknown;
-    source?: unknown;
-    chunkIndex?: unknown;
-  };
-};
+## Discover Relevant Services
+BNC Global provides services across areas including accounting and bookkeeping; accounts outsourcing; tax outsourcing and tax preparation; GST advisory; virtual CFO services; financial controller services; strategic financial advisory; working capital management; business analysis and analytics; cost analysis; reconciliation services; payroll-related services; risk and compliance; ESG; cybersecurity; hiring and recruitment; and other business and operational support services.
+
+Map the user's requirement to the most relevant service. For example, Virtual CFO services may help with financial planning, budgeting, forecasting, accounting setup, MIS, working capital, and internal controls. Accounting or accounts outsourcing may cover bookkeeping, invoicing, payroll processing, reconciliations, reporting, and accounting operations.
+
+## Explain Services Simply
+Translate professional descriptions into language a business owner, employee, startup founder, or non-finance user can understand. For a relevant service, explain what it is, who it is for, what BNC can help with, why someone might need it, and what to do next. Keep explanations concise unless the user asks for more detail.
+
+## Navigate Users
+When appropriate, guide users toward the relevant page, service, form, partner ecosystem, or contact channel. Help users work out which service to choose, how to contact BNC, where to become a partner, where to learn about services, and which service may suit their organization.
+
+## Qualify Leads Naturally
+When a user shows genuine interest, collect only information needed to understand their requirement. This may include business type, industry, company size, geography, current challenge, required service, accounting or ERP systems, approximate scale, and whether support is ongoing or one-time. Ask progressively and only when useful; do not interrogate the user.
+
+## Support Different User Types
+Adapt to business owners, startups, SMEs, finance and accounting teams, CFOs and senior management, CPA or accounting firms, professionals, potential partners, organizations seeking outsourcing, and people exploring BNC Global for the first time.
+
+## Conversation Principles
+Be helpful, clear, approachable, professional, and business-oriented, not pushy or aggressively promotional. Do not make exaggerated claims or promise guaranteed results. If multiple services could fit, explain the distinction and ask a clarifying question. For example, day-to-day accounting operations may fit Accounts Outsourcing, while financial leadership and planning may fit Virtual CFO services.
+
+Do not present yourself as a substitute for a qualified lawyer, accountant, tax professional, financial advisor, or cybersecurity professional. For specific professional advice, guide the user toward connecting with the appropriate BNC Global team.
+
+Rely only on the information in this prompt and information the user provides. Do not invent services, pricing, guarantees, client relationships, certifications, locations, team members, capabilities, policies, deadlines, links, or contact details. If information is unavailable, say so and direct the user to an appropriate BNC Global contact or official page without inventing its URL.
+
+## Success Metric
+Help the user understand their problem, which BNC Global service may address it, what that service provides, and what they should do next.
+
+## Example
+If a small business says its accounting is becoming difficult, explain that accounting and accounts outsourcing may help with bookkeeping, invoicing, reconciliations, payroll-related processes, reporting, and other accounting operations. Distinguish this from Virtual CFO services for higher-level financial planning and strategic guidance, then ask whether they need day-to-day accounting support, strategic guidance, or both.
+
+## Personality
+Professional, clear, approachable, helpful, business-oriented, concise, curious about the user's actual requirement, and never pushy. Feel like a knowledgeable BNC Global service navigator, not a generic chatbot.
+
+Format responses in simple CommonMark Markdown. Use headings, bullets, emphasis, inline code, links, and blockquotes only when useful. Do not use tables, task lists, strikethrough, raw HTML, embedded media, or GitHub-specific Markdown.`;
 
 function jsonResponse(body: unknown, init: ResponseInit = {}) {
   return new Response(JSON.stringify(body), {
@@ -44,100 +62,12 @@ function jsonResponse(body: unknown, init: ResponseInit = {}) {
   });
 }
 
-function getEnv(name: string, fallback = "") {
-  const env = {
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-    PINECONE_API_KEY: process.env.PINECONE_API_KEY,
-    PINECONE_HOST: process.env.PINECONE_HOST,
-    PINECONE_NAMESPACE: process.env.PINECONE_NAMESPACE,
-    OPENAI_EMBEDDING_MODEL: process.env.OPENAI_EMBEDDING_MODEL,
-    OPENAI_ANSWER_MODEL: process.env.OPENAI_ANSWER_MODEL,
-    QUERY_TOP_K: process.env.QUERY_TOP_K
-  } as const;
-
-  return env[name as keyof typeof env] || fallback;
-}
-
 async function readJson(request: Request) {
   try {
     return await request.json();
   } catch {
     return null;
   }
-}
-
-async function createEmbedding(message: string) {
-  const response = await fetch(`${OPENAI_API_BASE}/embeddings`, {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${getEnv("OPENAI_API_KEY")}`,
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({
-      model: getEnv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
-      input: message
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`OpenAI embedding request failed with HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
-  const embedding = data?.data?.[0]?.embedding;
-
-  if (!Array.isArray(embedding)) {
-    throw new Error("OpenAI embedding response did not include an embedding.");
-  }
-
-  return embedding;
-}
-
-async function queryPinecone(vector: number[]) {
-  const host = getEnv("PINECONE_HOST");
-
-  if (!host) {
-    throw new Error("Missing PINECONE_HOST.");
-  }
-
-  const response = await fetch(`https://${host}/query`, {
-    method: "POST",
-    headers: {
-      "api-key": getEnv("PINECONE_API_KEY"),
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({
-      vector,
-      namespace: getEnv("PINECONE_NAMESPACE", "bnc-global"),
-      topK: Number(getEnv("QUERY_TOP_K", "3")),
-      includeMetadata: true,
-      includeValues: false
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Pinecone query failed with HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
-  return Array.isArray(data?.matches) ? (data.matches as PineconeMatch[]) : [];
-}
-
-function buildContext(matches: PineconeMatch[]) {
-  return matches
-    .map((match, index) => {
-      const source = String(match.metadata?.source || "unknown");
-      const chunkIndex = match.metadata?.chunkIndex ?? "?";
-      const text = String(match.metadata?.text || "").trim();
-
-      if (!text) {
-        return "";
-      }
-
-      return `[${index + 1}] Source: ${source}, chunk ${chunkIndex}\n${text}`;
-    })
-    .filter(Boolean)
-    .join("\n\n");
 }
 
 function extractSseEvents(buffer: string) {
@@ -163,31 +93,25 @@ function getSsePayload(rawEvent: string) {
     .join("\n");
 }
 
-async function streamAnswer(message: string, context: string) {
-  const response = await fetch(`${OPENAI_API_BASE}/responses`, {
+async function streamAnswer(message: string) {
+  const response = await fetch(`${GROQ_API_BASE}/chat/completions`, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${getEnv("OPENAI_API_KEY")}`,
+      authorization: `Bearer ${process.env.GROQ_API_KEY || ""}`,
       "content-type": "application/json"
     },
     body: JSON.stringify({
-      model: getEnv("OPENAI_ANSWER_MODEL", "gpt-4.1-mini"),
+      model: process.env.OPENAI_ANSWER_MODEL || "openai/gpt-oss-20b",
       stream: true,
-      input: [
-        {
-          role: "system",
-          content: SYSTEM_MESSAGE
-        },
-        {
-          role: "user",
-          content: `Question: ${message}\n\nKnowledge-base context:\n${context || "No relevant context was retrieved."}`
-        }
+      messages: [
+        { role: "system", content: SYSTEM_MESSAGE },
+        { role: "user", content: message }
       ]
     })
   });
 
   if (!response.ok || !response.body) {
-    throw new Error(`OpenAI answer request failed with HTTP ${response.status}`);
+    throw new Error(`Groq answer request failed with HTTP ${response.status}`);
   }
 
   const encoder = new TextEncoder();
@@ -199,7 +123,6 @@ async function streamAnswer(message: string, context: string) {
   return new ReadableStream<Uint8Array>({
     async pull(controller) {
       const pendingDelta = pendingDeltas.shift();
-
       if (pendingDelta) {
         controller.enqueue(encoder.encode(pendingDelta));
         return;
@@ -207,7 +130,6 @@ async function streamAnswer(message: string, context: string) {
 
       while (true) {
         const { done, value } = await reader.read();
-
         if (done) {
           controller.close();
           return;
@@ -219,23 +141,18 @@ async function streamAnswer(message: string, context: string) {
 
         for (const event of parsed.events) {
           const payload = getSsePayload(event);
-
-          if (!payload || payload === "[DONE]") {
-            continue;
-          }
+          if (!payload || payload === "[DONE]") continue;
 
           try {
             const data = JSON.parse(payload);
-            if (data.type === "response.output_text.delta" && data.delta) {
-              pendingDeltas.push(data.delta);
-            }
+            const delta = data.choices?.[0]?.delta?.content;
+            if (typeof delta === "string" && delta) pendingDeltas.push(delta);
           } catch {
             // Ignore malformed stream events and keep reading.
           }
         }
 
         const nextDelta = pendingDeltas.shift();
-
         if (nextDelta) {
           controller.enqueue(encoder.encode(nextDelta));
           return;
@@ -253,7 +170,7 @@ export default async function handler(request: Request) {
     return jsonResponse({ error: "Method not allowed." }, { status: 405 });
   }
 
-  if (!getEnv("OPENAI_API_KEY") || !getEnv("PINECONE_API_KEY")) {
+  if (!process.env.GROQ_API_KEY) {
     return jsonResponse({ error: "Missing server configuration." }, { status: 500 });
   }
 
@@ -265,11 +182,7 @@ export default async function handler(request: Request) {
   }
 
   try {
-    const embedding = await createEmbedding(message);
-    const matches = await queryPinecone(embedding);
-    const context = buildContext(matches);
-    const stream = await streamAnswer(message, context);
-
+    const stream = await streamAnswer(message);
     return new Response(stream, {
       headers: {
         "cache-control": "no-cache, no-transform",

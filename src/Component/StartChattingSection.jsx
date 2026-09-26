@@ -1,10 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { ConversationProvider } from '@elevenlabs/react';
 import {
   Send,
   Mic,
+  AudioLines,
+  ArrowLeft,
   Plus,
   Building2,
   Briefcase,
@@ -17,8 +20,18 @@ import {
 } from 'lucide-react';
 import RequirementVoiceModal from './RequirementVoiceModal';
 import { submitVoiceRequirement } from '../lib/supabaseData';
+import { useElevenLabsOrbSource } from '../voice/useElevenLabsOrbSource';
+import { getVoiceAgentId } from '../voice/elevenLabsConfig';
 
-const StartChattingSection = ({ embedded = false }) => {
+const VoiceOrbCanvas = lazy(() => import('../voice/orb/VoiceOrbCanvas'));
+
+const StartChattingSection = (props) => (
+  <ConversationProvider>
+    <StartChattingContent {...props} />
+  </ConversationProvider>
+);
+
+const StartChattingContent = ({ embedded = false, compact = false, onVoiceModeChange }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
@@ -31,6 +44,9 @@ const StartChattingSection = ({ embedded = false }) => {
   const [micError, setMicError] = useState('');
   const [speakingIndex, setSpeakingIndex] = useState(null);
   const [isRequirementModalOpen, setIsRequirementModalOpen] = useState(false);
+  const [isVoiceModeOpen, setIsVoiceModeOpen] = useState(false);
+  const [isVoiceRequesting, setIsVoiceRequesting] = useState(false);
+  const [voiceError, setVoiceError] = useState('');
   const recognitionRef = useRef(null);
   const speechStopTimerRef = useRef(null);
   const messagesEndRef = useRef(null);
@@ -40,14 +56,34 @@ const StartChattingSection = ({ embedded = false }) => {
   const containerRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showVideoPopup, setShowVideoPopup] = useState(false);
+  const voiceRequestRef = useRef(null);
+  const voiceConversation = useElevenLabsOrbSource({
+    onConnect: () => setVoiceError(''),
+    onError: (error) => setVoiceError(error || t('startChatting.chat.voiceError'))
+  });
+  const voiceIsConnecting = isVoiceRequesting || voiceConversation.status === 'connecting';
+  const voiceIsConnected = voiceConversation.status === 'connected';
+  const voiceIsActive = voiceIsConnecting || voiceIsConnected;
+
+  const endVoiceSession = voiceConversation.end;
+  useEffect(() => () => {
+    voiceRequestRef.current?.abort();
+    endVoiceSession();
+  }, [endVoiceSession]);
 
   useEffect(() => {
+    onVoiceModeChange?.(isVoiceModeOpen);
+    return () => onVoiceModeChange?.(false);
+  }, [isVoiceModeOpen, onVoiceModeChange]);
+
+  useEffect(() => {
+    if (compact) return;
     const hasSeenVideo = localStorage.getItem('hasSeenStartChattingVideo');
     if (!hasSeenVideo) {
       setShowVideoPopup(true);
       localStorage.setItem('hasSeenStartChattingVideo', 'true');
     }
-  }, []);
+  }, [compact]);
 
   const quickCardsRaw = t('startChatting.quickCards', { returnObjects: true });
   const categoryItemsRaw = t('startChatting.categories.items', { returnObjects: true });
@@ -310,6 +346,46 @@ const StartChattingSection = ({ embedded = false }) => {
     recognitionRef.current.start();
   };
 
+  const handleBackToTextChat = () => {
+    voiceRequestRef.current?.abort();
+    voiceRequestRef.current = null;
+    setIsVoiceRequesting(false);
+    voiceConversation.end();
+    setIsVoiceModeOpen(false);
+    setVoiceError('');
+  };
+
+  const handleVoiceChatClick = async () => {
+    if (isVoiceModeOpen) {
+      handleBackToTextChat();
+      return;
+    }
+
+    if (!getVoiceAgentId()) {
+      setIsVoiceModeOpen(true);
+      setVoiceError(t('startChatting.chat.voiceNotConfigured'));
+      return;
+    }
+
+    setIsVoiceModeOpen(true);
+    setIsVoiceRequesting(true);
+    setVoiceError('');
+    const controller = new AbortController();
+    voiceRequestRef.current = controller;
+    try {
+      await voiceConversation.start(controller.signal);
+    } catch (error) {
+      if (!controller.signal.aborted) {
+        setVoiceError(error instanceof Error ? error.message : t('startChatting.chat.voiceError'));
+      }
+    } finally {
+      if (voiceRequestRef.current === controller) {
+        voiceRequestRef.current = null;
+        setIsVoiceRequesting(false);
+      }
+    }
+  };
+
   const handleMouseDown = (e) => {
     e.preventDefault();
     isDraggingRef.current = true;
@@ -349,7 +425,7 @@ const StartChattingSection = ({ embedded = false }) => {
     };
   }, []);
 
-  const containerHeightClass = embedded ? 'h-[6400px] lg:h-[635px]' : 'h-[calc(100vh-6rem)]';
+  const containerHeightClass = compact ? 'h-full min-h-0' : embedded ? 'h-[6400px] lg:h-[635px]' : 'h-[calc(100vh-6rem)]';
   const outerClass = embedded ? 'bg-white pt-0 pb-24 -mt-2' : '';
   const contentWrapperClass = `pt-2 flex flex-col lg:flex-row ${embedded ? 'w-full px-0' : 'flex-1'}`;
   const leftPanelPaddingClass = embedded ? (isRtl ? 'pr-4' : 'pl-4') : '';
@@ -357,6 +433,7 @@ const StartChattingSection = ({ embedded = false }) => {
   const inputTextAlign = isRtl ? 'text-right' : 'text-left';
   const plusPositionClass = isRtl ? 'right-4' : 'left-4';
   const actionPositionClass = isRtl ? 'left-3' : 'right-3';
+  const inputPaddingClass = isRtl ? 'pr-14 pl-36' : 'pl-14 pr-36';
   const micIndicatorPositionClass = isRtl ? '-left-0.5' : '-right-0.5';
   const botAvatarMarginClass = isRtl ? 'ml-3' : 'mr-3';
   const botTimestampAlignClass = isRtl ? 'text-right' : 'text-left';
@@ -368,8 +445,8 @@ const StartChattingSection = ({ embedded = false }) => {
     : 'space-y-6 max-w-xl mx-auto min-h-full';
 
   return (
-    <section className={outerClass} style={{ fontFamily: 'Geist, Poppins, sans-serif' }} dir={isRtl ? 'rtl' : 'ltr'}>
-      <div className={contentWrapperClass}>
+    <section className={`${outerClass} ${compact ? 'h-full' : ''}`} style={{ fontFamily: 'Geist, Poppins, sans-serif' }} dir={isRtl ? 'rtl' : 'ltr'}>
+      <div className={`${contentWrapperClass} ${compact ? 'h-full min-h-0 pt-0' : ''}`}>
         <div
           ref={containerRef}
           className={`flex flex-col lg:flex-row w-full ${containerHeightClass}`}
@@ -380,30 +457,30 @@ const StartChattingSection = ({ embedded = false }) => {
           {/* Left Panel - Chat Interface */}
           <div
             className={`w-full h-full flex flex-col bg-white ${panelBorderClass} border-gray-200 overflow-hidden ${leftPanelPaddingClass}`}
-            style={{ width: isDesktop ? `${leftWidth}%` : '100%' }}
+            style={{ width: compact ? '100%' : isDesktop ? `${leftWidth}%` : '100%' }}
           >
-            <div className="flex-1 flex flex-col p-8 bg-white min-h-0">
-              {!hasUserMessage && (
+            <div className={`flex-1 flex flex-col ${compact ? 'p-4' : 'p-8'} ${isVoiceModeOpen ? 'bg-[#0a0a0a]' : 'bg-white'} min-h-0`}>
+              {!hasUserMessage && !isVoiceModeOpen && (
                 <div className="text-center">
                   <div className="relative mb-6">
-                    <div className="w-20 h-20 rounded-[28px] bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60">
-                      <Building2 className="w-10 h-10 text-white" />
+                  <div className={`${compact ? 'w-12 h-12 rounded-2xl' : 'w-20 h-20 rounded-[28px]'} bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60`}>
+                      <Building2 className={`${compact ? 'w-6 h-6' : 'w-10 h-10'} text-white`} />
                     </div>
                   </div>
 
-                  <h2 className="text-xl font-bold text-gray-900 mb-3">
+                  <h2 className={`${compact ? 'text-base mb-1' : 'text-xl mb-3'} font-bold text-gray-900`}>
                     {t('startChatting.hero.title')}
                   </h2>
-                  <p className="text-gray-600 text-sm mb-6 max-w-lg leading-relaxed mx-auto">
+                  <p className={`text-gray-600 ${compact ? 'text-xs mb-3' : 'text-sm mb-6'} max-w-lg leading-relaxed mx-auto`}>
                     {t('startChatting.hero.subtitle')}
                   </p>
 
-                  <div className="w-full max-w-xl grid grid-cols-2 gap-3 mb-6 mx-auto">
+                  <div className={`w-full max-w-xl grid grid-cols-2 ${compact ? 'gap-2 mb-3' : 'gap-3 mb-6'} mx-auto`}>
                     {quickCards.map((item, index) => (
                       <button
                         key={`${item.title}-${index}`}
                         onClick={() => handleQuickCardClick(item.title, item.subtitle)}
-                        className={`p-4 bg-white border border-slate-200/70 rounded-2xl ${textAlign} transition-all group shadow-[0_10px_24px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:border-[#DC2626]/30 hover:bg-[#f8faff]`}
+                        className={`${compact ? 'p-2.5' : 'p-4'} bg-white border border-slate-200/70 rounded-2xl ${textAlign} transition-all group shadow-[0_10px_24px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:border-[#DC2626]/30 hover:bg-[#f8faff]`}
                       >
                         <div className="text-sm font-semibold text-gray-900 group-hover:text-[#DC2626]">{item.title}</div>
                         <div className="text-xs text-gray-500 group-hover:text-[#DC2626]/80 mt-1">{item.subtitle}</div>
@@ -413,7 +490,47 @@ const StartChattingSection = ({ embedded = false }) => {
                 </div>
               )}
 
-              <div className="mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden">
+              <div className={`mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden ${isVoiceModeOpen ? 'bg-[#0a0a0a]' : ''}`}>
+                {isVoiceModeOpen && (
+                  <div className="flex min-h-full w-full flex-col items-center bg-[#0a0a0a] px-4 pt-2 text-center" dir="ltr">
+                    <div className="flex w-full justify-start">
+                      <button
+                        type="button"
+                        onClick={handleBackToTextChat}
+                        className="rounded-lg p-2 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                        aria-label={t('startChatting.chat.backToTextChat')}
+                        title={t('startChatting.chat.backToTextChat')}
+                      >
+                        <ArrowLeft className="h-4 w-4" />
+                      </button>
+                    </div>
+                    <Suspense fallback={<div className="h-64 w-64 animate-pulse rounded-full bg-white/5" />}>
+                      <VoiceOrbCanvas
+                        source={voiceConversation.source}
+                        onError={() => setVoiceError(t('startChatting.chat.voiceOrbUnavailable'))}
+                        className="h-64 w-64 max-w-full"
+                      />
+                    </Suspense>
+                    <p className="-mt-2 text-sm font-medium text-white" aria-live="polite">
+                      {voiceError || (voiceIsConnecting
+                        ? t('startChatting.chat.voiceConnecting')
+                        : voiceIsConnected && voiceConversation.isSpeaking
+                          ? t('startChatting.chat.voiceSpeaking')
+                          : voiceIsConnected && voiceConversation.isListening
+                            ? t('startChatting.chat.voiceListening')
+                            : t('startChatting.chat.voiceDisconnected'))}
+                    </p>
+                    {voiceError ? (
+                      <button type="button" onClick={handleBackToTextChat} className="mt-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10">
+                        {t('startChatting.chat.closeVoiceChat')}
+                      </button>
+                    ) : voiceIsActive && (
+                      <button type="button" onClick={handleVoiceChatClick} className="mt-2 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20">
+                        {t('startChatting.chat.endVoiceChat')}
+                      </button>
+                    )}
+                  </div>
+                )}
                 {messages.map((msg, idx) => (
                   <div key={msg.id || idx} className={`mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
@@ -480,7 +597,7 @@ const StartChattingSection = ({ embedded = false }) => {
               </div>
             </div>
 
-            <div className="p-4 bg-white">
+            {!isVoiceModeOpen && <div className="bg-white p-4">
               <div className="relative max-w-3xl mx-auto group">
                 <div className="absolute -inset-3 rounded-3xl bg-gradient-to-r from-[#e6efff] via-[#f5f7ff] to-[#e9f2ff] opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative rounded-2xl transition-all duration-300 shadow-[0_10px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_30px_rgba(220, 38, 38,0.18)]">
@@ -489,7 +606,7 @@ const StartChattingSection = ({ embedded = false }) => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t('startChatting.chat.placeholder')}
-                  className={`w-full px-14 py-4 bg-white border border-gray-300/70 rounded-2xl outline-none text-gray-900 placeholder-gray-400 focus:border-[#DC2626] transition-all ${inputTextAlign}`}
+                  className={`w-full ${inputPaddingClass} py-4 bg-white border border-gray-300/70 rounded-2xl outline-none text-gray-900 placeholder-gray-400 focus:border-[#DC2626] transition-all ${inputTextAlign}`}
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
@@ -507,6 +624,7 @@ const StartChattingSection = ({ embedded = false }) => {
                 <div className={`absolute ${actionPositionClass} top-1/2 -translate-y-1/2 flex gap-2`}>
                   <button
                     onClick={handleMicClick}
+                    disabled={voiceIsActive}
                     className={`relative p-2 rounded-lg transition-colors ${
                       isListening ? 'bg-[#16a34a]/10 text-[#16a34a]' : 'hover:bg-gray-200 text-gray-500'
                     }`}
@@ -517,6 +635,20 @@ const StartChattingSection = ({ embedded = false }) => {
                     {isListening && (
                       <span className={`absolute -top-0.5 ${micIndicatorPositionClass} h-2.5 w-2.5 rounded-full bg-[#16a34a] ring-2 ring-white`} />
                     )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleVoiceChatClick}
+                    className={`rounded-lg p-2 transition-colors ${isVoiceModeOpen ? 'bg-[#DC2626]/10 text-[#DC2626]' : 'text-gray-500 hover:bg-gray-200'}`}
+                    aria-label={isVoiceModeOpen
+                      ? voiceIsActive ? t('startChatting.chat.endVoiceChat') : t('startChatting.chat.closeVoiceChat')
+                      : t('startChatting.chat.openVoiceChat')}
+                    aria-pressed={isVoiceModeOpen}
+                    title={isVoiceModeOpen
+                      ? voiceIsActive ? t('startChatting.chat.endVoiceChat') : t('startChatting.chat.closeVoiceChat')
+                      : t('startChatting.chat.openVoiceChat')}
+                  >
+                    <AudioLines className="h-5 w-5" />
                   </button>
                   <button
                     onClick={handleSendMessage}
@@ -533,10 +665,10 @@ const StartChattingSection = ({ embedded = false }) => {
                   {micError}
                 </p>
               )}
-              <p className="text-xs text-gray-400 text-center mt-3">
+              <p className="mt-3 text-center text-xs text-gray-400">
                {t('startChatting.chat.assistantDisclaimer')}
               </p>
-            </div>
+            </div>}
           </div>
 
           {/* Resizer - Desktop Only */}
@@ -551,7 +683,7 @@ const StartChattingSection = ({ embedded = false }) => {
           </div>
 
           {/* Right Panel - Scrollable */}
-          {isDesktop && (
+          {isDesktop && !compact && (
             <div
               className={rightPanelClass}
               style={{

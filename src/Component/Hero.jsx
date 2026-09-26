@@ -1,8 +1,9 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Star, ArrowDown } from 'lucide-react';
+import { Star, ArrowDown, Expand, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+const StartChattingSection = lazy(() => import('./StartChattingSection'));
 
 const PartnerFormModal = lazy(() => import('./PartnerFormModal'));
 const WorldMap = lazy(() =>
@@ -42,6 +43,8 @@ const mapVariants = {
 const Hero = () => {
   const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isVoiceChatMode, setIsVoiceChatMode] = useState(false);
   const [shouldRenderMap, setShouldRenderMap] = useState(false);
   const [partnerUser, setPartnerUser] = useState(null);
   const location = useLocation();
@@ -184,17 +187,39 @@ const Hero = () => {
             animation: liquid-blob-3 24s infinite alternate ease-in-out;
           }
         `}} />
-        <Link
-          to="/start-chatting"
+        {isChatOpen && (
+          <section className={`fixed bottom-4 ${isRtl ? 'left-5 sm:left-8' : 'right-5 sm:right-8'} z-50 flex h-[min(600px,calc(100dvh-5rem))] w-[min(420px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border shadow-2xl ${isVoiceChatMode ? 'border-[#0a0a0a] bg-[#0a0a0a]' : 'border-slate-200 bg-white'}`} aria-label="AI assistant chat">
+            <header className={`flex h-14 shrink-0 items-center justify-between border-b px-4 ${isVoiceChatMode ? 'border-white/10 bg-[#0a0a0a]' : 'border-slate-100 bg-white'}`}>
+              <span className={`font-semibold ${isVoiceChatMode ? 'text-white' : 'text-slate-900'}`}>BNC AI Assistant</span>
+              <div className="flex items-center gap-1">
+                <Link to="/start-chatting" className={`rounded-lg p-2 ${isVoiceChatMode ? 'text-slate-300 hover:bg-white/10 hover:text-white' : 'text-slate-500 hover:bg-slate-100 hover:text-[#DC2626]'}`} aria-label="Open full chat" title="Open full chat">
+                  <Expand className="h-4 w-4" />
+                </Link>
+                <button type="button" onClick={() => setIsChatOpen(false)} className={`rounded-lg p-2 ${isVoiceChatMode ? 'text-slate-300 hover:bg-white/10' : 'text-slate-500 hover:bg-slate-100'}`} aria-label="Close chat">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </header>
+            <div className="min-h-0 flex-1 overflow-hidden">
+              <Suspense fallback={<div className="h-full animate-pulse bg-slate-50" />}>
+                <StartChattingSection compact onVoiceModeChange={setIsVoiceChatMode} />
+              </Suspense>
+            </div>
+          </section>
+        )}
+        <button
+          type="button"
+          onClick={() => setIsChatOpen((open) => !open)}
           className={`fixed -bottom-10 ${floatingChatPosition} z-40 inline-flex items-center justify-center rounded-full bg-transparent p-2 hover:opacity-90 transition-all`}
-          aria-label="Get AI help"
+          aria-label={isChatOpen ? 'Close AI assistant' : 'Get AI help'}
+          aria-expanded={isChatOpen}
         >
           <img
             src="/Photas/chatbot_red_carrot-removebg-preview.png"
             alt="ChatBot AI"
             className="h-36 w-36 object-contain"
           />
-        </Link>
+        </button>
         {/* Liquid Glass Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#fffcfc] via-[#fcfbf9] to-[#f8f6f2]">
           {/* Animated Liquid Blobs */}
