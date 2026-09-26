@@ -21,6 +21,7 @@ export function useElevenLabsOrbSource({ onConnect, onDisconnect, onError } = {}
   }, [conversation, status]);
 
   const source = useMemo(() => ({
+    isActive: () => statusRef.current === 'connected',
     getTargetBands: () => {
       if (statusRef.current !== 'connected') return null;
 

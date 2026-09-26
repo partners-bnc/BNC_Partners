@@ -203,6 +203,7 @@ void main() {
 // ── Fragment Shader ──
 export const fragmentShader = /* glsl */ `
 uniform float uLevel;
+uniform float uVoiceActive;
 
 varying float vAlpha;
 
@@ -218,12 +219,15 @@ void main() {
   float alpha = 1.0 - smoothstep(0.2, 0.5, dist);
   alpha *= vAlpha;
 
-  // Neutral greyish-white at rest; shift each grain to a light red while
-  // there is active speech (driven by overall audio level).
-  vec3 restColor = vec3(0.82, 0.83, 0.85);
+  // Stay light red throughout a connected voice session. Audio level deepens
+  // the red while speaking, while silence never makes the grains go black.
+  vec3 restColor = vec3(0.02, 0.02, 0.02);
   vec3 speakColor = vec3(1.0, 0.55, 0.55);
-  float redMix = smoothstep(0.12, 0.40, uLevel);
-  vec3 color = mix(restColor, speakColor, redMix);
+  vec3 intenseSpeakColor = vec3(1.0, 0.12, 0.12);
+  float voiceIntensity = smoothstep(0.02, 0.40, uLevel);
+  vec3 activeColor = mix(speakColor, intenseSpeakColor, voiceIntensity);
+  float redMix = max(smoothstep(0.12, 0.40, uLevel), uVoiceActive);
+  vec3 color = mix(restColor, activeColor, redMix);
 
   gl_FragColor = vec4(color, alpha);
 }

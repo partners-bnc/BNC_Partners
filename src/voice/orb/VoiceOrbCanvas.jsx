@@ -43,6 +43,7 @@ export default function VoiceOrbCanvas({ source, className = '', onError }) {
         uMid: { value: 0 },
         uTreble: { value: 0 },
         uLevel: { value: 0 },
+        uVoiceActive: { value: 0 },
         uPixelRatio: { value: 1 },
         uRadius: { value: RADIUS }
       },
@@ -60,7 +61,7 @@ export default function VoiceOrbCanvas({ source, className = '', onError }) {
     try {
       renderer = new THREE.WebGLRenderer({
         canvas,
-        alpha: false,
+        alpha: true,
         antialias: true,
         powerPreference: 'low-power'
       });
@@ -73,7 +74,7 @@ export default function VoiceOrbCanvas({ source, className = '', onError }) {
       };
     }
 
-    renderer.setClearColor('#0a0a0a', 1);
+    renderer.setClearColor(0xffffff, 0);
     const pixelRatio = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
     renderer.setPixelRatio(pixelRatio);
     material.uniforms.uPixelRatio.value = pixelRatio;
@@ -114,6 +115,7 @@ export default function VoiceOrbCanvas({ source, className = '', onError }) {
       material.uniforms.uMid.value = smoothedBands.mid;
       material.uniforms.uTreble.value = smoothedBands.treble;
       material.uniforms.uLevel.value = smoothedBands.level;
+      material.uniforms.uVoiceActive.value = source.isActive?.() ? 1 : 0;
       cloud.rotation.y = elapsed * 0.02;
       cloud.rotation.x = Math.sin(elapsed * 0.04) * 0.03;
       renderer.render(scene, camera);

@@ -31,7 +31,7 @@ const StartChattingSection = (props) => (
   </ConversationProvider>
 );
 
-const StartChattingContent = ({ embedded = false, compact = false, onVoiceModeChange }) => {
+const StartChattingContent = ({ embedded = false, compact = false }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
@@ -70,11 +70,6 @@ const StartChattingContent = ({ embedded = false, compact = false, onVoiceModeCh
     voiceRequestRef.current?.abort();
     endVoiceSession();
   }, [endVoiceSession]);
-
-  useEffect(() => {
-    onVoiceModeChange?.(isVoiceModeOpen);
-    return () => onVoiceModeChange?.(false);
-  }, [isVoiceModeOpen, onVoiceModeChange]);
 
   useEffect(() => {
     if (compact) return;
@@ -459,7 +454,7 @@ const StartChattingContent = ({ embedded = false, compact = false, onVoiceModeCh
             className={`w-full h-full flex flex-col bg-white ${panelBorderClass} border-gray-200 overflow-hidden ${leftPanelPaddingClass}`}
             style={{ width: compact ? '100%' : isDesktop ? `${leftWidth}%` : '100%' }}
           >
-            <div className={`flex-1 flex flex-col ${compact ? 'p-4' : 'p-8'} ${isVoiceModeOpen ? 'bg-[#0a0a0a]' : 'bg-white'} min-h-0`}>
+            <div className={`flex-1 flex flex-col ${compact ? 'p-4' : 'p-8'} bg-white min-h-0`}>
               {!hasUserMessage && !isVoiceModeOpen && (
                 <div className="text-center">
                   <div className="relative mb-6">
@@ -490,28 +485,28 @@ const StartChattingContent = ({ embedded = false, compact = false, onVoiceModeCh
                 </div>
               )}
 
-              <div className={`mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden ${isVoiceModeOpen ? 'bg-[#0a0a0a]' : ''}`}>
+              <div className="mt-2 flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hidden">
                 {isVoiceModeOpen && (
-                  <div className="flex min-h-full w-full flex-col items-center bg-[#0a0a0a] px-4 pt-2 text-center" dir="ltr">
+                  <div className="flex min-h-full w-full flex-col items-center bg-white px-4 pt-2 text-center" dir="ltr">
                     <div className="flex w-full justify-start">
                       <button
                         type="button"
                         onClick={handleBackToTextChat}
-                        className="rounded-lg p-2 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                        className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
                         aria-label={t('startChatting.chat.backToTextChat')}
                         title={t('startChatting.chat.backToTextChat')}
                       >
                         <ArrowLeft className="h-4 w-4" />
                       </button>
                     </div>
-                    <Suspense fallback={<div className="h-64 w-64 animate-pulse rounded-full bg-white/5" />}>
+                    <Suspense fallback={<div className="h-64 w-64 animate-pulse rounded-full bg-slate-100" />}>
                       <VoiceOrbCanvas
                         source={voiceConversation.source}
                         onError={() => setVoiceError(t('startChatting.chat.voiceOrbUnavailable'))}
                         className="h-64 w-64 max-w-full"
                       />
                     </Suspense>
-                    <p className="-mt-2 text-sm font-medium text-white" aria-live="polite">
+                    <p className="-mt-2 text-sm font-medium text-slate-800" aria-live="polite">
                       {voiceError || (voiceIsConnecting
                         ? t('startChatting.chat.voiceConnecting')
                         : voiceIsConnected && voiceConversation.isSpeaking
@@ -521,11 +516,11 @@ const StartChattingContent = ({ embedded = false, compact = false, onVoiceModeCh
                             : t('startChatting.chat.voiceDisconnected'))}
                     </p>
                     {voiceError ? (
-                      <button type="button" onClick={handleBackToTextChat} className="mt-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10">
+                      <button type="button" onClick={handleBackToTextChat} className="mt-2 rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-100">
                         {t('startChatting.chat.closeVoiceChat')}
                       </button>
                     ) : voiceIsActive && (
-                      <button type="button" onClick={handleVoiceChatClick} className="mt-2 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20">
+                      <button type="button" onClick={handleVoiceChatClick} className="mt-2 rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-200">
                         {t('startChatting.chat.endVoiceChat')}
                       </button>
                     )}
