@@ -187,9 +187,9 @@ const Hero = () => {
           }
         `}} />
         {isChatOpen && (
-          <section className={`fixed bottom-4 ${isRtl ? 'left-5 sm:left-8' : 'right-5 sm:right-8'} z-50 flex h-[min(600px,calc(100dvh-5rem))] w-[min(420px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl`} aria-label="AI assistant chat">
-            <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-100 bg-white px-4">
-              <span className="font-semibold text-slate-900">BNC AI Assistant</span>
+          <section className={`fixed bottom-4 ${isRtl ? 'left-5 sm:left-8' : 'right-5 sm:right-8'} z-50 flex h-[min(472px,calc(100dvh-5rem))] w-[min(420px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl`} aria-label="AI assistant chat">
+            <header className="flex h-12 shrink-0 items-center justify-between border-b border-slate-100 bg-white px-4">
+              <span className="text-sm font-semibold text-slate-900">BNC AI Assistant</span>
               <div className="flex items-center gap-1">
                 <Link to="/start-chatting" className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-[#DC2626]" aria-label="Open full chat" title="Open full chat">
                   <Expand className="h-4 w-4" />

@@ -454,31 +454,31 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
             className={`w-full h-full flex flex-col bg-white ${panelBorderClass} border-gray-200 overflow-hidden ${leftPanelPaddingClass}`}
             style={{ width: compact ? '100%' : isDesktop ? `${leftWidth}%` : '100%' }}
           >
-            <div className={`flex-1 flex flex-col ${compact ? 'p-4' : 'p-8'} bg-white min-h-0`}>
+            <div className={`flex-1 flex flex-col ${compact ? 'p-3' : 'p-8'} bg-white min-h-0`}>
               {!hasUserMessage && !isVoiceModeOpen && (
                 <div className="text-center">
-                  <div className="relative mb-6">
-                  <div className={`${compact ? 'w-12 h-12 rounded-2xl' : 'w-20 h-20 rounded-[28px]'} bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60`}>
-                      <Building2 className={`${compact ? 'w-6 h-6' : 'w-10 h-10'} text-white`} />
+                  <div className={`relative ${compact ? 'mb-3' : 'mb-6'}`}>
+                  <div className={`${compact ? 'w-10 h-10 rounded-xl' : 'w-20 h-20 rounded-[28px]'} bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60`}>
+                      <Building2 className={`${compact ? 'w-5 h-5' : 'w-10 h-10'} text-white`} />
                     </div>
                   </div>
 
-                  <h2 className={`${compact ? 'text-base mb-1' : 'text-xl mb-3'} font-bold text-gray-900`}>
+                  <h2 className={`${compact ? 'text-[13px] mb-1' : 'text-xl mb-3'} font-bold text-gray-900`}>
                     {t('startChatting.hero.title')}
                   </h2>
-                  <p className={`text-gray-600 ${compact ? 'text-xs mb-3' : 'text-sm mb-6'} max-w-lg leading-relaxed mx-auto`}>
+                  <p className={`text-gray-600 ${compact ? 'text-[9px] mb-2' : 'text-sm mb-6'} max-w-lg leading-relaxed mx-auto`}>
                     {t('startChatting.hero.subtitle')}
                   </p>
 
-                  <div className={`w-full max-w-xl grid grid-cols-2 ${compact ? 'gap-2 mb-3' : 'gap-3 mb-6'} mx-auto`}>
+                  <div className={`w-full max-w-xl grid grid-cols-2 ${compact ? 'gap-1.5 mb-2' : 'gap-3 mb-6'} mx-auto`}>
                     {quickCards.map((item, index) => (
                       <button
                         key={`${item.title}-${index}`}
                         onClick={() => handleQuickCardClick(item.title, item.subtitle)}
-                        className={`${compact ? 'p-2.5' : 'p-4'} bg-white border border-slate-200/70 rounded-2xl ${textAlign} transition-all group shadow-[0_10px_24px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:border-[#DC2626]/30 hover:bg-[#f8faff]`}
+                        className={`${compact ? 'p-2 rounded-xl shadow-sm' : 'p-4 rounded-2xl shadow-[0_10px_24px_rgba(15,23,42,0.10)]'} bg-white border border-slate-200/70 ${textAlign} transition-all group hover:-translate-y-1 hover:border-[#DC2626]/30 hover:bg-[#f8faff]`}
                       >
-                        <div className="text-sm font-semibold text-gray-900 group-hover:text-[#DC2626]">{item.title}</div>
-                        <div className="text-xs text-gray-500 group-hover:text-[#DC2626]/80 mt-1">{item.subtitle}</div>
+                        <div className={`${compact ? 'text-[11px]' : 'text-sm'} font-semibold text-gray-900 group-hover:text-[#DC2626]`}>{item.title}</div>
+                        <div className={`${compact ? 'text-[9px] mt-0.5 leading-snug' : 'text-xs mt-1'} text-gray-500 group-hover:text-[#DC2626]/80`}>{item.subtitle}</div>
                       </button>
                     ))}
                   </div>
@@ -540,7 +540,7 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
                         }`}
                       >
                         <div
-                          className={`px-4 py-2.5 rounded-2xl text-sm ${
+                          className={`px-4 py-2.5 rounded-2xl ${compact ? 'text-xs' : 'text-sm'} ${
                             msg.type === 'user'
                               ? 'bg-[#DC2626] text-white rounded-br-sm'
                               : 'bg-gray-100 text-gray-800 rounded-bl-sm'
@@ -592,7 +592,7 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
               </div>
             </div>
 
-            {!isVoiceModeOpen && <div className="bg-white p-4">
+            {!isVoiceModeOpen && <div className={`bg-white ${compact ? 'p-3' : 'p-4'}`}>
               <div className="relative max-w-3xl mx-auto group">
                 <div className="absolute -inset-3 rounded-3xl bg-gradient-to-r from-[#e6efff] via-[#f5f7ff] to-[#e9f2ff] opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative rounded-2xl transition-all duration-300 shadow-[0_10px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_30px_rgba(220, 38, 38,0.18)]">
@@ -601,7 +601,7 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t('startChatting.chat.placeholder')}
-                  className={`w-full ${inputPaddingClass} py-4 bg-white border border-gray-300/70 rounded-2xl outline-none text-gray-900 placeholder-gray-400 focus:border-[#DC2626] transition-all ${inputTextAlign}`}
+                  className={`w-full ${inputPaddingClass} ${compact ? 'py-2.5 text-xs' : 'py-4'} bg-white border border-gray-300/70 rounded-2xl outline-none text-gray-900 placeholder-gray-400 focus:border-[#DC2626] transition-all ${inputTextAlign}`}
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
@@ -611,22 +611,22 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
                 />
                 <button
                   onClick={handleOpenRequirementModal}
-                  className={`absolute ${plusPositionClass} top-1/2 -translate-y-1/2 p-2 hover:bg-gray-200 rounded-lg transition-colors`}
+                  className={`absolute ${plusPositionClass} top-1/2 -translate-y-1/2 ${compact ? 'p-1.5' : 'p-2'} hover:bg-gray-200 rounded-lg transition-colors`}
                   aria-label={t('startChatting.chat.openRequirement')}
                 >
-                  <Plus className="w-5 h-5 text-gray-500" />
+                  <Plus className={`${compact ? 'w-4 h-4' : 'w-5 h-5'} text-gray-500`} />
                 </button>
                 <div className={`absolute ${actionPositionClass} top-1/2 -translate-y-1/2 flex gap-2`}>
                   <button
                     onClick={handleMicClick}
                     disabled={voiceIsActive}
-                    className={`relative p-2 rounded-lg transition-colors ${
+                    className={`relative ${compact ? 'p-1.5' : 'p-2'} rounded-lg transition-colors ${
                       isListening ? 'bg-[#16a34a]/10 text-[#16a34a]' : 'hover:bg-gray-200 text-gray-500'
                     }`}
                     aria-pressed={isListening}
                     aria-label={t('startChatting.chat.voiceInput')}
                   >
-                    <Mic className="w-5 h-5" />
+                    <Mic className={`${compact ? 'w-4 h-4' : 'w-5 h-5'}`} />
                     {isListening && (
                       <span className={`absolute -top-0.5 ${micIndicatorPositionClass} h-2.5 w-2.5 rounded-full bg-[#16a34a] ring-2 ring-white`} />
                     )}
@@ -634,7 +634,7 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
                   <button
                     type="button"
                     onClick={handleVoiceChatClick}
-                    className={`rounded-lg p-2 transition-colors ${isVoiceModeOpen ? 'bg-[#DC2626]/10 text-[#DC2626]' : 'text-gray-500 hover:bg-gray-200'}`}
+                    className={`rounded-lg ${compact ? 'p-1.5' : 'p-2'} transition-colors ${isVoiceModeOpen ? 'bg-[#DC2626]/10 text-[#DC2626]' : 'text-gray-500 hover:bg-gray-200'}`}
                     aria-label={isVoiceModeOpen
                       ? voiceIsActive ? t('startChatting.chat.endVoiceChat') : t('startChatting.chat.closeVoiceChat')
                       : t('startChatting.chat.openVoiceChat')}
@@ -643,14 +643,14 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
                       ? voiceIsActive ? t('startChatting.chat.endVoiceChat') : t('startChatting.chat.closeVoiceChat')
                       : t('startChatting.chat.openVoiceChat')}
                   >
-                    <AudioLines className="h-5 w-5" />
+                    <AudioLines className={`${compact ? 'h-4 w-4' : 'h-5 w-5'}`} />
                   </button>
                   <button
                     onClick={handleSendMessage}
-                    className="p-2.5 bg-[#DC2626] hover:bg-[#B91C1C] rounded-lg transition-all"
+                    className={`${compact ? 'p-2' : 'p-2.5'} bg-[#DC2626] hover:bg-[#B91C1C] rounded-lg transition-all`}
                     aria-label={t('startChatting.chat.sendMessage')}
                   >
-                    <Send className="w-5 h-5 text-white" />
+                    <Send className={`${compact ? 'w-4 h-4' : 'w-5 h-5'} text-white`} />
                   </button>
                 </div>
                 </div>
@@ -660,7 +660,7 @@ const StartChattingContent = ({ embedded = false, compact = false }) => {
                   {micError}
                 </p>
               )}
-              <p className="mt-3 text-center text-xs text-gray-400">
+              <p className={`${compact ? 'mt-2 text-[9px]' : 'mt-3 text-xs'} text-center text-gray-400`}>
                {t('startChatting.chat.assistantDisclaimer')}
               </p>
             </div>}
