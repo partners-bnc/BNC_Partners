@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../Component/Header';
 import Footer from '../../Component/Footer';
 import { getServicesByCountry } from '../../data/services';
@@ -353,16 +353,16 @@ const CountryServices = ({ country, title, description }) => {
                     </p>
                   )}
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleOpenService(service.id)}
+                <Link
+
+                  to={`/services/${country}/${service.id}`}
                   className={`absolute bottom-4 ${cardButtonPos} inline-flex items-center gap-2 text-sm font-semibold font-geist text-white rounded-full px-5 py-2.5 bg-gradient-to-r from-[#DC2626] to-[#000000] shadow-lg shadow-[#DC2626]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#DC2626]/30 hover:-translate-y-0.5 hover:from-[#000000] hover:to-[#163062] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DC2626]/40`}
                 >
                   {t('countryServices.viewMore')}
                   <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-white/20 text-white text-xs transition-transform duration-300 group-hover:translate-x-0.5">
                     <span className="flipInRtl">&#8594;</span>
                   </span>
-                </button>
+                </Link>
               </div>
             ))}
           </div>

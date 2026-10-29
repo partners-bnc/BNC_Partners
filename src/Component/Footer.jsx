@@ -181,8 +181,8 @@ const Footer = () => {
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-medium text-slate-500">
             <a href="#contact" className="hover:text-[#DC2626] transition-colors">Help Center</a>
-            <Link to="/privacy-policy" className="hover:text-[#DC2626] transition-colors">Privacy Policy</Link>
-            <Link to="/terms-of-service" className="hover:text-[#DC2626] transition-colors">Terms of Service</Link>
+            <a href="/privacy-policy" className="hover:text-[#DC2626] transition-colors">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-[#DC2626] transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-[#DC2626] transition-colors">Sitemap</a>
           </div>
         </div>

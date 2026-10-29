@@ -11,15 +11,15 @@ const CTA = lazy(() => import('../Component/CTA'));
 
 const scrollRevealVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
 const Home = () => {
-  const [showDeferredSections, setShowDeferredSections] = useState(false);
+  const [showDeferredSections, setShowDeferredSections] = useState(true);
 
   useEffect(() => {
     let timeoutId;

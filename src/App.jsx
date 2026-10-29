@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from
 import Header from './Component/Header';
 import Footer from './Component/Footer';
 import Home from './pages/Home';
-import { supabase } from './lib/supabaseClient';
-const FakeActivityPopup = lazy(() => import('./Component/FakeActivityPopup'));
+import { supabase, isSupabaseConfigured } from './lib/supabaseClient';
+import SiteSEO from './seo/SiteSEO';
+import NotFound from './pages/NotFound';
+import site from './seo/site.json';
+import { Navigate } from 'react-router-dom';
 
 const InternationalPartners = lazy(() => import('./pages/partners/InternationalPartners'));
 const SalesPartners = lazy(() => import('./pages/partners/SalesPartners'));
@@ -60,6 +63,7 @@ const AuthRecoveryRedirect = () => {
 
     checkHash();
 
+    if (!isSupabaseConfigured) return;
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       const hash = window.location.hash || '';
       const search = window.location.search || '';
@@ -85,8 +89,9 @@ function App() {
   const routeFallback = <div className="min-h-[40vh] bg-white" aria-hidden="true" />;
 
   return (
-    <Router>
+    <Router basename={window.location.pathname === "/ar" || window.location.pathname.startsWith("/ar/") ? "/ar" : "/"}>
       <ScrollToTop />
+      <SiteSEO />
       <AuthRecoveryRedirect />
       <Suspense fallback={null}>
         <RoleSelectionModal />
@@ -94,12 +99,15 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <Suspense fallback={routeFallback}>
           <Routes>
+            {Object.entries(site.redirects).map(([from,to]) => <Route key={from} path={from} element={<Navigate to={to} replace />} />)}
             <Route path="/login" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/complete-profile" element={<CompleteProfile />} />
             <Route path="/dashboard" element={<PartnerDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/services" element={<DiscoverServices />} />
+            <Route path="/services/india" element={<IndiaServices />} />
+            <Route path="/services/saudi-arabia" element={<SaudiArabiaServices />} />
             <Route path="/services/global" element={<GlobalServices />} />
             <Route path="/services/:serviceId" element={<ServiceDetail />} />
             <Route path="/services/:country/:serviceId" element={<ServiceDetail />} />
@@ -118,15 +126,13 @@ function App() {
                     <Route path="/referral-program" element={<ReferralProgram />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/terms-of-service" element={<TermsOfService />} />
+                    <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
                 <Footer />
               </>
             } />
           </Routes>
-        </Suspense>
-        <Suspense fallback={null}>
-          <FakeActivityPopup />
         </Suspense>
       </div>
     </Router>

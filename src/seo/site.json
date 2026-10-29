@@ -1,0 +1,821 @@
+{
+  "name": "BNC LEG Partners",
+  "origin": "https://partners.bncglobal.in",
+  "logo": "/Photas/aaf68a14-dda6-4743-824f-5bc2592df449.png",
+  "routes": [
+    {
+      "path": "/",
+      "title": "Partner Network & Consulting Services",
+      "description": "Partner Network & Consulting Services through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/services",
+      "title": "Discover Consulting Services",
+      "description": "Discover Consulting Services through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/services/india",
+      "title": "Consulting Services in India",
+      "description": "Consulting Services in India through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/services/saudi-arabia",
+      "title": "Consulting Services in Saudi Arabia",
+      "description": "Consulting Services in Saudi Arabia through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/services/global",
+      "title": "Global Consulting Services",
+      "description": "Global Consulting Services through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/partnerships/international",
+      "title": "International Partnerships",
+      "description": "International Partnerships through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/partnerships/sales",
+      "title": "Sales Partnerships",
+      "description": "Sales Partnerships through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/partnerships/technology",
+      "title": "Technology Partnerships",
+      "description": "Technology Partnerships through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/partnerships/service",
+      "title": "Service Partnerships",
+      "description": "Service Partnerships through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/referral-program",
+      "title": "Partner Referral Program",
+      "description": "Partner Referral Program through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/privacy-policy",
+      "title": "Privacy Policy",
+      "description": "Privacy Policy through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/terms-of-service",
+      "title": "Terms of Service",
+      "description": "Terms of Service through the BNC Global partner network. Explore the platform and contact the team about your requirements.",
+      "type": "page"
+    },
+    {
+      "path": "/services/global/financial-advisory",
+      "title": "Financial Advisory",
+      "description": "Strategic finance guidance to drive profitability and compliance. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/financial-advisory",
+      "title": "Financial Advisory in India",
+      "description": "Strategic finance guidance to drive profitability and compliance. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/financial-advisory",
+      "title": "Financial Advisory in Saudi Arabia",
+      "description": "Strategic finance guidance to drive profitability and compliance. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/personal-business-loan",
+      "title": "Personal & Business Loan",
+      "description": "Structured funding solutions for growth, stability, and opportunity. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/personal-business-loan",
+      "title": "Personal & Business Loan in India",
+      "description": "Structured funding solutions for growth, stability, and opportunity. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/personal-business-loan",
+      "title": "Personal & Business Loan in Saudi Arabia",
+      "description": "Structured funding solutions for growth, stability, and opportunity. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/cybersecurity-data-privacy",
+      "title": "Cybersecurity & Data Privacy",
+      "description": "Security, privacy, and compliance programs for modern businesses. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/cybersecurity-data-privacy",
+      "title": "Cybersecurity & Data Privacy in India",
+      "description": "Security, privacy, and compliance programs for modern businesses. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/cybersecurity-data-privacy",
+      "title": "Cybersecurity & Data Privacy in Saudi Arabia",
+      "description": "Security, privacy, and compliance programs for modern businesses. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/risk-advisory",
+      "title": "Risk Advisory",
+      "description": "Governance, controls, and risk assessment for resilient operations. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/risk-advisory",
+      "title": "Risk Advisory in India",
+      "description": "Governance, controls, and risk assessment for resilient operations. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/risk-advisory",
+      "title": "Risk Advisory in Saudi Arabia",
+      "description": "Governance, controls, and risk assessment for resilient operations. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/esg-advisory",
+      "title": "ESG Advisory",
+      "description": "Sustainability strategy, reporting, and climate readiness. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/esg-advisory",
+      "title": "ESG Advisory in India",
+      "description": "Sustainability strategy, reporting, and climate readiness. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/esg-advisory",
+      "title": "ESG Advisory in Saudi Arabia",
+      "description": "Sustainability strategy, reporting, and climate readiness. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/erp-implementation-digital-transformation",
+      "title": "ERP Implementation & Digital Transformation",
+      "description": "Modernize systems and processes for smarter operations. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/erp-implementation-digital-transformation",
+      "title": "ERP Implementation & Digital Transformation in India",
+      "description": "Modernize systems and processes for smarter operations. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/erp-implementation-digital-transformation",
+      "title": "ERP Implementation & Digital Transformation in Saudi Arabia",
+      "description": "Modernize systems and processes for smarter operations. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/gcc-operation-hub",
+      "title": "GCC & Operation Hub",
+      "description": "Build, operate, and transform shared services at scale. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/gcc-operation-hub",
+      "title": "GCC & Operation Hub in India",
+      "description": "Build, operate, and transform shared services at scale. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/gcc-operation-hub",
+      "title": "GCC & Operation Hub in Saudi Arabia",
+      "description": "Build, operate, and transform shared services at scale. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/training-workshop",
+      "title": "Training & Workshop",
+      "description": "Practical training programs for teams and leaders. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/training-workshop",
+      "title": "Training & Workshop in India",
+      "description": "Practical training programs for teams and leaders. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/training-workshop",
+      "title": "Training & Workshop in Saudi Arabia",
+      "description": "Practical training programs for teams and leaders. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/recruitment-manpower-services",
+      "title": "Recruitment & Manpower Services",
+      "description": "End-to-end staffing for temporary and permanent needs. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/recruitment-manpower-services",
+      "title": "Recruitment & Manpower Services in India",
+      "description": "End-to-end staffing for temporary and permanent needs. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/recruitment-manpower-services",
+      "title": "Recruitment & Manpower Services in Saudi Arabia",
+      "description": "End-to-end staffing for temporary and permanent needs. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/ksa-specific-services",
+      "title": "KSA Specific Services",
+      "description": "Saudi-specific compliance and advisory solutions. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/ksa-specific-services",
+      "title": "KSA Specific Services in Saudi Arabia",
+      "description": "Saudi-specific compliance and advisory solutions. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/ifrs",
+      "title": "IFRS",
+      "description": "IFRS guidance and implementation support. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/ifrs",
+      "title": "IFRS in India",
+      "description": "IFRS guidance and implementation support. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/ifrs",
+      "title": "IFRS in Saudi Arabia",
+      "description": "IFRS guidance and implementation support. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/transfer-pricing",
+      "title": "Transfer Pricing",
+      "description": "Transfer pricing documentation and compliance advisory. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/transfer-pricing",
+      "title": "Transfer Pricing in India",
+      "description": "Transfer pricing documentation and compliance advisory. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/transfer-pricing",
+      "title": "Transfer Pricing in Saudi Arabia",
+      "description": "Transfer pricing documentation and compliance advisory. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/esop-advisory",
+      "title": "ESOP Advisory",
+      "description": "ESOP structure, valuation, and governance guidance. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/esop-advisory",
+      "title": "ESOP Advisory in India",
+      "description": "ESOP structure, valuation, and governance guidance. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/esop-advisory",
+      "title": "ESOP Advisory in Saudi Arabia",
+      "description": "ESOP structure, valuation, and governance guidance. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/transformation-through-ai",
+      "title": "Transformation Through AI",
+      "description": "AI-enabled process redesign and decision support. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/transformation-through-ai",
+      "title": "Transformation Through AI in India",
+      "description": "AI-enabled process redesign and decision support. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/transformation-through-ai",
+      "title": "Transformation Through AI in Saudi Arabia",
+      "description": "AI-enabled process redesign and decision support. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/valuation",
+      "title": "Valuation",
+      "description": "Independent valuation support for business needs. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/valuation",
+      "title": "Valuation in India",
+      "description": "Independent valuation support for business needs. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/valuation",
+      "title": "Valuation in Saudi Arabia",
+      "description": "Independent valuation support for business needs. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/due-diligence",
+      "title": "Due Diligence",
+      "description": "Commercial and financial due diligence support. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/due-diligence",
+      "title": "Due Diligence in India",
+      "description": "Commercial and financial due diligence support. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/due-diligence",
+      "title": "Due Diligence in Saudi Arabia",
+      "description": "Commercial and financial due diligence support. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/global/physical-verification-stock-fixed-asset",
+      "title": "Physical Verification - Stock & Fixed Asset",
+      "description": "Strengthen asset control, ensure compliance, and protect financial accuracy. Discuss cross-border scope and coordination with our partner network.",
+      "type": "service"
+    },
+    {
+      "path": "/services/india/physical-verification-stock-fixed-asset",
+      "title": "Physical Verification - Stock & Fixed Asset in India",
+      "description": "Strengthen asset control, ensure compliance, and protect financial accuracy. Discuss scope, systems and operating locations for your India engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/services/saudi-arabia/physical-verification-stock-fixed-asset",
+      "title": "Physical Verification - Stock & Fixed Asset in Saudi Arabia",
+      "description": "Strengthen asset control, ensure compliance, and protect financial accuracy. Discuss local scope, documentation and stakeholder requirements for your Saudi Arabia engagement.",
+      "type": "service"
+    },
+    {
+      "path": "/ar",
+      "title": "شبكة الشركاء",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/services",
+      "title": "اكتشف الخدمات الاستشارية",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/services/india",
+      "title": "الخدمات الاستشارية في الهند",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/services/saudi-arabia",
+      "title": "الخدمات الاستشارية في المملكة العربية السعودية",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/services/global",
+      "title": "الخدمات الاستشارية العالمية",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/partnerships/international",
+      "title": "الشراكات الدولية",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/partnerships/sales",
+      "title": "شراكات المبيعات",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/partnerships/technology",
+      "title": "الشراكات التقنية",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/partnerships/service",
+      "title": "شراكات الخدمات",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/referral-program",
+      "title": "برنامج الإحالة",
+      "description": "استكشف خدمات وشراكات بي إن سي جلوبال وتواصل مع الفريق لمناقشة متطلباتك.",
+      "type": "page"
+    },
+    {
+      "path": "/ar/services/global/financial-advisory",
+      "title": "الاستشارات المالية",
+      "description": "إرشاد مالي استراتيجي لتعزيز الربحية والامتثال. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/financial-advisory",
+      "title": "الاستشارات المالية في الهند",
+      "description": "إرشاد مالي استراتيجي لتعزيز الربحية والامتثال. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/financial-advisory",
+      "title": "الاستشارات المالية في المملكة العربية السعودية",
+      "description": "إرشاد مالي استراتيجي لتعزيز الربحية والامتثال. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/personal-business-loan",
+      "title": "القروض الشخصية وقروض الأعمال",
+      "description": "حلول تمويل منظمة لدعم النمو والاستقرار والفرص. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/personal-business-loan",
+      "title": "القروض الشخصية وقروض الأعمال في الهند",
+      "description": "حلول تمويل منظمة لدعم النمو والاستقرار والفرص. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/personal-business-loan",
+      "title": "القروض الشخصية وقروض الأعمال في المملكة العربية السعودية",
+      "description": "حلول تمويل منظمة لدعم النمو والاستقرار والفرص. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/cybersecurity-data-privacy",
+      "title": "الأمن السيبراني وحماية البيانات",
+      "description": "برامج أمن وخصوصية وامتثال للأعمال الحديثة. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/cybersecurity-data-privacy",
+      "title": "الأمن السيبراني وحماية البيانات في الهند",
+      "description": "برامج أمن وخصوصية وامتثال للأعمال الحديثة. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/cybersecurity-data-privacy",
+      "title": "الأمن السيبراني وحماية البيانات في المملكة العربية السعودية",
+      "description": "برامج أمن وخصوصية وامتثال للأعمال الحديثة. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/risk-advisory",
+      "title": "استشارات المخاطر",
+      "description": "حوكمة وضوابط وتقييم مخاطر لعمليات أكثر مرونة. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/risk-advisory",
+      "title": "استشارات المخاطر في الهند",
+      "description": "حوكمة وضوابط وتقييم مخاطر لعمليات أكثر مرونة. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/risk-advisory",
+      "title": "استشارات المخاطر في المملكة العربية السعودية",
+      "description": "حوكمة وضوابط وتقييم مخاطر لعمليات أكثر مرونة. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/esg-advisory",
+      "title": "استشارات ESG",
+      "description": "استراتيجية استدامة وتقارير وجاهزية مناخية. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/esg-advisory",
+      "title": "استشارات ESG في الهند",
+      "description": "استراتيجية استدامة وتقارير وجاهزية مناخية. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/esg-advisory",
+      "title": "استشارات ESG في المملكة العربية السعودية",
+      "description": "استراتيجية استدامة وتقارير وجاهزية مناخية. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/erp-implementation-digital-transformation",
+      "title": "تنفيذ ERP والتحول الرقمي",
+      "description": "تحديث الأنظمة والعمليات لعمليات أكثر ذكاءً. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/erp-implementation-digital-transformation",
+      "title": "تنفيذ ERP والتحول الرقمي في الهند",
+      "description": "تحديث الأنظمة والعمليات لعمليات أكثر ذكاءً. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/erp-implementation-digital-transformation",
+      "title": "تنفيذ ERP والتحول الرقمي في المملكة العربية السعودية",
+      "description": "تحديث الأنظمة والعمليات لعمليات أكثر ذكاءً. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/gcc-operation-hub",
+      "title": "مركز العمليات والخدمات المشتركة (GCC)",
+      "description": "بناء وتشغيل وتحويل مراكز الخدمات المشتركة على نطاق واسع. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/gcc-operation-hub",
+      "title": "مركز العمليات والخدمات المشتركة (GCC) في الهند",
+      "description": "بناء وتشغيل وتحويل مراكز الخدمات المشتركة على نطاق واسع. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/gcc-operation-hub",
+      "title": "مركز العمليات والخدمات المشتركة (GCC) في المملكة العربية السعودية",
+      "description": "بناء وتشغيل وتحويل مراكز الخدمات المشتركة على نطاق واسع. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/training-workshop",
+      "title": "التدريب وورش العمل",
+      "description": "برامج تدريب عملية للفرق والقيادات. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/training-workshop",
+      "title": "التدريب وورش العمل في الهند",
+      "description": "برامج تدريب عملية للفرق والقيادات. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/training-workshop",
+      "title": "التدريب وورش العمل في المملكة العربية السعودية",
+      "description": "برامج تدريب عملية للفرق والقيادات. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/recruitment-manpower-services",
+      "title": "خدمات التوظيف والموارد البشرية",
+      "description": "توظيف شامل للاحتياجات المؤقتة والدائمة. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/recruitment-manpower-services",
+      "title": "خدمات التوظيف والموارد البشرية في الهند",
+      "description": "توظيف شامل للاحتياجات المؤقتة والدائمة. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/recruitment-manpower-services",
+      "title": "خدمات التوظيف والموارد البشرية في المملكة العربية السعودية",
+      "description": "توظيف شامل للاحتياجات المؤقتة والدائمة. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/ksa-specific-services",
+      "title": "خدمات خاصة بالسعودية",
+      "description": "حلول امتثال واستشارات خاصة بالسعودية. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/ksa-specific-services",
+      "title": "خدمات خاصة بالسعودية في المملكة العربية السعودية",
+      "description": "حلول امتثال واستشارات خاصة بالسعودية. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/ifrs",
+      "title": "المعايير الدولية للتقارير المالية (IFRS)",
+      "description": "إرشاد ودعم لتطبيق IFRS. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/ifrs",
+      "title": "المعايير الدولية للتقارير المالية (IFRS) في الهند",
+      "description": "إرشاد ودعم لتطبيق IFRS. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/ifrs",
+      "title": "المعايير الدولية للتقارير المالية (IFRS) في المملكة العربية السعودية",
+      "description": "إرشاد ودعم لتطبيق IFRS. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/transfer-pricing",
+      "title": "تسعير التحويل",
+      "description": "توثيق واستشارات امتثال لتسعير التحويل. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/transfer-pricing",
+      "title": "تسعير التحويل في الهند",
+      "description": "توثيق واستشارات امتثال لتسعير التحويل. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/transfer-pricing",
+      "title": "تسعير التحويل في المملكة العربية السعودية",
+      "description": "توثيق واستشارات امتثال لتسعير التحويل. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/esop-advisory",
+      "title": "استشارات برنامج أسهم الموظفين (ESOP)",
+      "description": "هيكلة وتقييم وحوكمة لبرامج ESOP. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/esop-advisory",
+      "title": "استشارات برنامج أسهم الموظفين (ESOP) في الهند",
+      "description": "هيكلة وتقييم وحوكمة لبرامج ESOP. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/esop-advisory",
+      "title": "استشارات برنامج أسهم الموظفين (ESOP) في المملكة العربية السعودية",
+      "description": "هيكلة وتقييم وحوكمة لبرامج ESOP. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/transformation-through-ai",
+      "title": "التحول عبر الذكاء الاصطناعي",
+      "description": "إعادة تصميم العمليات ودعم القرار بالذكاء الاصطناعي. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/transformation-through-ai",
+      "title": "التحول عبر الذكاء الاصطناعي في الهند",
+      "description": "إعادة تصميم العمليات ودعم القرار بالذكاء الاصطناعي. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/transformation-through-ai",
+      "title": "التحول عبر الذكاء الاصطناعي في المملكة العربية السعودية",
+      "description": "إعادة تصميم العمليات ودعم القرار بالذكاء الاصطناعي. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/valuation",
+      "title": "التقييم",
+      "description": "دعم تقييم مستقل لاحتياجات الأعمال. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/valuation",
+      "title": "التقييم في الهند",
+      "description": "دعم تقييم مستقل لاحتياجات الأعمال. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/valuation",
+      "title": "التقييم في المملكة العربية السعودية",
+      "description": "دعم تقييم مستقل لاحتياجات الأعمال. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/due-diligence",
+      "title": "الفحص النافي للجهالة",
+      "description": "دعم العناية الواجبة التجارية والمالية. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/due-diligence",
+      "title": "الفحص النافي للجهالة في الهند",
+      "description": "دعم العناية الواجبة التجارية والمالية. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/due-diligence",
+      "title": "الفحص النافي للجهالة في المملكة العربية السعودية",
+      "description": "دعم العناية الواجبة التجارية والمالية. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/global/physical-verification-stock-fixed-asset",
+      "title": "التحقق الميداني - المخزون والأصول الثابتة",
+      "description": "تحقق ميداني للمخزون والأصول الثابتة. ناقش نطاق العمل والتنسيق عبر الأسواق.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/india/physical-verification-stock-fixed-asset",
+      "title": "التحقق الميداني - المخزون والأصول الثابتة في الهند",
+      "description": "تحقق ميداني للمخزون والأصول الثابتة. ناقش نطاق العمل والمواقع التشغيلية في الهند.",
+      "type": "service"
+    },
+    {
+      "path": "/ar/services/saudi-arabia/physical-verification-stock-fixed-asset",
+      "title": "التحقق الميداني - المخزون والأصول الثابتة في المملكة العربية السعودية",
+      "description": "تحقق ميداني للمخزون والأصول الثابتة. ناقش نطاق العمل والمستندات المطلوبة في المملكة العربية السعودية.",
+      "type": "service"
+    }
+  ],
+  "redirects": {
+    "/bnc-services": "/services",
+    "/partner-form": "/",
+    "/services/financial-advisory": "/services/global/financial-advisory",
+    "/services/other/financial-advisory": "/services/global/financial-advisory",
+    "/services/personal-business-loan": "/services/global/personal-business-loan",
+    "/services/other/personal-business-loan": "/services/global/personal-business-loan",
+    "/services/cybersecurity-data-privacy": "/services/global/cybersecurity-data-privacy",
+    "/services/other/cybersecurity-data-privacy": "/services/global/cybersecurity-data-privacy",
+    "/services/risk-advisory": "/services/global/risk-advisory",
+    "/services/other/risk-advisory": "/services/global/risk-advisory",
+    "/services/esg-advisory": "/services/global/esg-advisory",
+    "/services/other/esg-advisory": "/services/global/esg-advisory",
+    "/services/erp-implementation-digital-transformation": "/services/global/erp-implementation-digital-transformation",
+    "/services/other/erp-implementation-digital-transformation": "/services/global/erp-implementation-digital-transformation",
+    "/services/gcc-operation-hub": "/services/global/gcc-operation-hub",
+    "/services/other/gcc-operation-hub": "/services/global/gcc-operation-hub",
+    "/services/training-workshop": "/services/global/training-workshop",
+    "/services/other/training-workshop": "/services/global/training-workshop",
+    "/services/recruitment-manpower-services": "/services/global/recruitment-manpower-services",
+    "/services/other/recruitment-manpower-services": "/services/global/recruitment-manpower-services",
+    "/services/ksa-specific-services": "/services/global/ksa-specific-services",
+    "/services/ifrs": "/services/global/ifrs",
+    "/services/other/ifrs": "/services/global/ifrs",
+    "/services/transfer-pricing": "/services/global/transfer-pricing",
+    "/services/other/transfer-pricing": "/services/global/transfer-pricing",
+    "/services/esop-advisory": "/services/global/esop-advisory",
+    "/services/other/esop-advisory": "/services/global/esop-advisory",
+    "/services/transformation-through-ai": "/services/global/transformation-through-ai",
+    "/services/other/transformation-through-ai": "/services/global/transformation-through-ai",
+    "/services/valuation": "/services/global/valuation",
+    "/services/other/valuation": "/services/global/valuation",
+    "/services/due-diligence": "/services/global/due-diligence",
+    "/services/other/due-diligence": "/services/global/due-diligence",
+    "/services/physical-verification-stock-fixed-asset": "/services/global/physical-verification-stock-fixed-asset",
+    "/services/other/physical-verification-stock-fixed-asset": "/services/global/physical-verification-stock-fixed-asset",
+    "/ar/bnc-services": "/ar/services",
+    "/ar/partner-form": "/ar",
+    "/ar/services/financial-advisory": "/ar/services/global/financial-advisory",
+    "/ar/services/other/financial-advisory": "/ar/services/global/financial-advisory",
+    "/ar/services/personal-business-loan": "/ar/services/global/personal-business-loan",
+    "/ar/services/other/personal-business-loan": "/ar/services/global/personal-business-loan",
+    "/ar/services/cybersecurity-data-privacy": "/ar/services/global/cybersecurity-data-privacy",
+    "/ar/services/other/cybersecurity-data-privacy": "/ar/services/global/cybersecurity-data-privacy",
+    "/ar/services/risk-advisory": "/ar/services/global/risk-advisory",
+    "/ar/services/other/risk-advisory": "/ar/services/global/risk-advisory",
+    "/ar/services/esg-advisory": "/ar/services/global/esg-advisory",
+    "/ar/services/other/esg-advisory": "/ar/services/global/esg-advisory",
+    "/ar/services/erp-implementation-digital-transformation": "/ar/services/global/erp-implementation-digital-transformation",
+    "/ar/services/other/erp-implementation-digital-transformation": "/ar/services/global/erp-implementation-digital-transformation",
+    "/ar/services/gcc-operation-hub": "/ar/services/global/gcc-operation-hub",
+    "/ar/services/other/gcc-operation-hub": "/ar/services/global/gcc-operation-hub",
+    "/ar/services/training-workshop": "/ar/services/global/training-workshop",
+    "/ar/services/other/training-workshop": "/ar/services/global/training-workshop",
+    "/ar/services/recruitment-manpower-services": "/ar/services/global/recruitment-manpower-services",
+    "/ar/services/other/recruitment-manpower-services": "/ar/services/global/recruitment-manpower-services",
+    "/ar/services/ksa-specific-services": "/ar/services/global/ksa-specific-services",
+    "/ar/services/ifrs": "/ar/services/global/ifrs",
+    "/ar/services/other/ifrs": "/ar/services/global/ifrs",
+    "/ar/services/transfer-pricing": "/ar/services/global/transfer-pricing",
+    "/ar/services/other/transfer-pricing": "/ar/services/global/transfer-pricing",
+    "/ar/services/esop-advisory": "/ar/services/global/esop-advisory",
+    "/ar/services/other/esop-advisory": "/ar/services/global/esop-advisory",
+    "/ar/services/transformation-through-ai": "/ar/services/global/transformation-through-ai",
+    "/ar/services/other/transformation-through-ai": "/ar/services/global/transformation-through-ai",
+    "/ar/services/valuation": "/ar/services/global/valuation",
+    "/ar/services/other/valuation": "/ar/services/global/valuation",
+    "/ar/services/due-diligence": "/ar/services/global/due-diligence",
+    "/ar/services/other/due-diligence": "/ar/services/global/due-diligence",
+    "/ar/services/physical-verification-stock-fixed-asset": "/ar/services/global/physical-verification-stock-fixed-asset",
+    "/ar/services/other/physical-verification-stock-fixed-asset": "/ar/services/global/physical-verification-stock-fixed-asset",
+    "/ar/privacy-policy": "/privacy-policy",
+    "/ar/terms-of-service": "/terms-of-service"
+  },
+  "privateRoutes": [
+    "/login",
+    "/reset-password",
+    "/complete-profile",
+    "/dashboard",
+    "/admin-dashboard",
+    "/start-chatting"
+  ]
+}

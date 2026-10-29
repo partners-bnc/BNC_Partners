@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/prepare-seo.mjs && vite build && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "dev:vercel": "dotenv -e .env.local -- npx vercel dev",
@@ -16,7 +16,8 @@
     "locale:sync": "npm run locale:auto-translate && npm run locale:check && npm run locale:ar-integrity-check",
     "locale:check": "node scripts/locale-parity-check.cjs",
     "i18n:expert-form-check": "node scripts/expert-form-i18n-check.cjs",
-    "locale:ar-integrity-check": "node scripts/ar-locale-integrity-check.cjs"
+    "locale:ar-integrity-check": "node scripts/ar-locale-integrity-check.cjs",
+    "test:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "@elevenlabs/react": "^1.15.2",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@pinecone-database/pinecone": "^7.2.0",
+    "@sparticuz/chromium": "^153.0.0",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -57,9 +59,13 @@
     "mammoth": "^1.12.0",
     "openai": "^6.35.0",
     "p-limit": "^7.3.0",
+    "playwright-core": "^1.64.1",
     "supabase": "^2.84.10",
     "typescript": "^6.0.3",
     "vite": "^7.2.4",
     "word-extractor": "^1.0.4"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

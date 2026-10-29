@@ -1950,7 +1950,7 @@ const ServiceDetail = () => {
               {t('serviceDetail.notFoundText')}
             </p>
             <button
-              onClick={() => navigate('/bnc-services')}
+              onClick={() => navigate('/services')}
               className="bg-[#DC2626] text-white px-5 py-2.5 rounded-xl font-semibold"
             >
               {t('serviceDetail.backToBncServices')}
@@ -2019,6 +2019,15 @@ const ServiceDetail = () => {
             </aside>
 
             <section className={`lg:w-[68%] ${textAlign}`}>
+              <section className="rounded-2xl bg-white p-6 mb-6" aria-label="Service scope">
+                <p className="mb-3">{isRtl
+                  ? country === 'india' ? 'لأعمال الهند، شارك المواقع التشغيلية والأنظمة الحالية والفرق المسؤولة عن اعتماد المخرجات.' : country === 'saudi-arabia' ? 'لأعمال المملكة العربية السعودية، حدد الكيانات والمواقع ومتطلبات المستندات ولغة المخرجات وأصحاب المصلحة.' : 'للمشاريع الدولية، حدد الأسواق والعملات والمناطق الزمنية ومسؤوليات فرق العمل قبل الاتفاق على النطاق.'
+                  : country === 'india' ? 'For an India engagement, identify your operating locations, existing systems and the teams responsible for reviewing deliverables.' : country === 'saudi-arabia' ? 'For a Saudi Arabia engagement, discuss the entities and locations in scope, documentation requirements, preferred deliverable language and local stakeholders.' : 'For a cross-border engagement, identify the markets, reporting currencies, time zones and team responsibilities before agreeing scope.'}</p>
+                <h2 className="text-xl font-semibold mb-3">{service.title}</h2>
+                {service.description.map((paragraph, index) => <p className="mb-3" key={index}>{paragraph}</p>)}
+                <ul className="list-disc pl-5">{service.bullets.map(item => <li key={item}>{item}</li>)}</ul>
+                <p className="mt-4">{service.manpowerDescription}</p>
+              </section>
               <div className="space-y-8">
                 <div className={`relative flex flex-col gap-4 ${mdRowDirection} md:items-center md:justify-between ${textAlign}`}>
                   <div>

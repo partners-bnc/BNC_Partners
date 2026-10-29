@@ -52,3 +52,6 @@ supabase/migrations/20260601085756_rename_partner_form_tables.sql
 scripts/sendgrid-test.mjs
 
 docs/
+# Generated public snapshots
+public/content/
+seo-build.json

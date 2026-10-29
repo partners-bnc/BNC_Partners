@@ -3,9 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import en from './locales/en/translation.json';
 import ar from './locales/ar/translation.json';
 
-const savedLanguage = typeof localStorage !== 'undefined'
-  ? localStorage.getItem('language')
-  : null;
+const urlLanguage = typeof window !== 'undefined' && /^\/ar(?:\/|$)/.test(window.location.pathname) ? 'ar' : 'en';
 
 i18n
   .use(initReactI18next)
@@ -14,7 +12,7 @@ i18n
       en: { translation: en },
       ar: { translation: ar }
     },
-    lng: savedLanguage || 'en',
+    lng: urlLanguage,
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false

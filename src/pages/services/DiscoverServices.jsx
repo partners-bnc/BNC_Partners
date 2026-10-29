@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Search, Mic, ChevronLeft, CheckCircle2, ArrowRight, X } from 'lucide-react';
 import Header from '../../Component/Header';
 import Footer from '../../Component/Footer';
@@ -57,7 +57,7 @@ const DiscoverServices = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const isRtl = i18n.language === 'ar';
-  
+
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
@@ -157,7 +157,7 @@ const DiscoverServices = () => {
     setTimeout(() => {
       setIsVoiceModalOpen(false);
       setSearchQuery(commandText);
-      
+
       const lowerText = commandText.toLowerCase();
       if (lowerText.includes('esg') || lowerText.includes('sustainability') || lowerText.includes('بيئة')) {
         handleCategorySelect('ESG');
@@ -235,12 +235,13 @@ const DiscoverServices = () => {
   return (
     <>
       <Header />
-      
+      <nav className="mx-auto max-w-7xl px-6 py-4" aria-label="Service directory"><Link to="/services/india">India services</Link> · <Link to="/services/saudi-arabia">Saudi Arabia services</Link> · <Link to="/services/global">Global services</Link><ul className="flex flex-wrap gap-4">{services.map(service => <li key={service.id}><Link to={`/services/global/${service.id}`}>{service.title}</Link></li>)}</ul></nav>
+
       {/* Top Brand Accent Line - Elegant fading gradient */}
       <div className="h-[1.5px] bg-gradient-to-r from-transparent via-[#E52E38]/30 to-transparent w-full"></div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow w-full font-geist" dir={isRtl ? 'rtl' : 'ltr'}>
-        
+
         {/* Hero title */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-flex items-center gap-1.5 bg-red-50 text-[#E52E38] text-xs font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider mb-3">
@@ -265,7 +266,7 @@ const DiscoverServices = () => {
               placeholder={t('discoverServices.searchPlaceholder', { defaultValue: 'Browse Services (e.g., Wealth Management, Tax Audit...)' })}
               className={`w-full bg-transparent py-2.5 px-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none ${isRtl ? 'text-right' : 'text-left'}`}
             />
-            
+
             {/* AI Voice Pill Button */}
             <button
               onClick={startVoiceAssistant}
@@ -280,7 +281,7 @@ const DiscoverServices = () => {
         {/* MAIN VIEW: Explore Categories + Trending */}
         {!isShowingResults ? (
           <div className="space-y-16 animate-in fade-in duration-300">
-            
+
             {/* Explore Categories Section */}
             <section>
               <div className="flex items-center gap-3 mb-8">
@@ -371,7 +372,7 @@ const DiscoverServices = () => {
         ) : (
           /* CATEGORIES DRILLDOWN OR SEARCH RESULTS VIEW */
           <div className="space-y-6 animate-in fade-in duration-300">
-            
+
             {/* Back Button Navigation */}
             <button
               onClick={handleBackToMain}
@@ -457,7 +458,7 @@ const DiscoverServices = () => {
       {/* AI VOICE ASSISTANT MODAL */}
       <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-300 ${isVoiceModalOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className={`w-full max-w-sm bg-white rounded-3xl p-8 border border-slate-200 shadow-2xl relative text-center transform transition-transform duration-300 ${isVoiceModalOpen ? 'scale-100' : 'scale-95'}`}>
-          
+
           <button
             onClick={closeVoiceAssistant}
             className="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400 transition-colors"

@@ -36,44 +36,44 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
   return (
     <>
       <div className={`fixed inset-0 z-50 transition-all duration-150 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-        <div 
-          className={`absolute inset-0 transition-all duration-150 ${isOpen ? 'bg-black/30 backdrop-blur-[2px]' : 'bg-transparent'}`} 
+        <div
+          className={`absolute inset-0 transition-all duration-150 ${isOpen ? 'bg-black/30 backdrop-blur-[2px]' : 'bg-transparent'}`}
           onClick={onClose}
         ></div>
-        
-        <div 
+
+        <div
           onMouseLeave={onClose}
           className={`absolute top-0 h-full w-80 bg-gradient-to-b from-white via-[#f7f9ff] to-[#edf2fb] shadow-2xl transform transition-all duration-150 ease-out ${sidePosition} ${isOpen ? 'translate-x-0' : hiddenTranslate}`}
         >
           <div className={`px-6 pb-6 pt-1.5 h-full flex flex-col ${textAlign}`}>
             {/* Header */}
             <div className={`relative flex flex-col ${isRtl ? 'items-end' : 'items-start'} w-full pt-6`}>
-              <button 
-                onClick={onClose} 
+              <button
+                onClick={onClose}
                 className={`absolute top-4 ${isRtl ? 'left-0' : 'right-0'} p-2 rounded-full bg-white/80 border border-white/60 shadow-sm hover:shadow-md text-gray-500 hover:text-gray-700 transition-all duration-200`}
               >
                 <FaTimes size={20} />
               </button>
-              <img 
+              <img
                 src="/Photas/aaf68a14-dda6-4743-824f-5bc2592df449.png"
-                alt="BNC LEG" 
+                alt="BNC LEG"
                 className={`w-36 h-auto object-contain mb-2 ${isRtl ? 'mr-8' : 'ml-8'}`}
                 decoding="async"
               />
             </div>
-            
+
             {/* Divider Line */}
             <div className="border-b border-slate-200/60 w-full mt-6 mb-4"></div>
-            
+
             {/* Navigation */}
             <div className="flex-1">
               <div className="mb-5 mt-4">
                 <div className={`inline-flex items-center rounded-full border border-slate-200 bg-white/80 p-1 shadow-sm ${rowDirection}`}>
                   {languageOptions.map((option) => (
-                    <button
+                    <a
                       key={option.code}
                       type="button"
-                      onClick={() => i18n.changeLanguage(option.code)}
+                      href={`${option.code === "ar" ? "/ar" : ""}${window.location.pathname.replace(/^\/ar(?=\/|$)/, "") || "/"}${window.location.search}`}
                       className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
                         i18n.language === option.code
                           ? 'bg-[#DC2626] text-white shadow'
@@ -81,7 +81,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                       }`}
                     >
                       {option.label}
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -89,9 +89,9 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <Link 
+                    <Link
                       key={item.to}
-                      to={item.to} 
+                      to={item.to}
                       className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 ${rowDirection} ${textAlign}`}
                       onClick={onClose}
                     >
@@ -102,7 +102,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                     </Link>
                   );
                 })}
-                
+
                 {/* Services catalog and categories */}
                 <>
                   <Link
@@ -157,8 +157,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                   </Link>
                 </>
                 {!isLoggedIn && (
-                  <button 
-                    onClick={handleApplyNowClick} 
+                  <button
+                    onClick={handleApplyNowClick}
                     className={`group flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-200 text-slate-700 hover:bg-white/70 w-full ${rowDirection} ${textAlign}`}
                   >
                     <FaPaperPlane size={18} className="text-[#DC2626]/80 transition-colors duration-300 group-hover:text-[#000000] flipInRtl" />
@@ -167,7 +167,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                 )}
               </nav>
             </div>
-            
+
             {/* Bottom border line */}
             <div className="border-t border-white/60 pt-4">
               <div className="space-y-3">
@@ -180,8 +180,8 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                         <div className="font-geist text-sm text-slate-500 truncate">{user?.email}</div>
                       </div>
                     </div>
-                    
-                    <button 
+
+                    <button
                       onClick={() => {
                         onClose();
                         onLogout();
@@ -194,18 +194,18 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
                   </>
                 ) : (
                   <>
-                    <Link 
-                      to="/login" 
-                      onClick={onClose} 
+                    <Link
+                      to="/login"
+                      onClick={onClose}
                       className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm transition-all duration-200 ${rowDirection}`}
                     >
                       <FaUser size={20} className="text-[#DC2626] transition-colors duration-300" />
                       <span className="font-geist font-semibold transition-colors duration-300">{t('sidebar.partnerLogin')}</span>
                     </Link>
-                    
-                    <Link 
-                      to="/login?type=admin" 
-                      onClick={onClose} 
+
+                    <Link
+                      to="/login?type=admin"
+                      onClick={onClose}
                       className={`flex items-center gap-3 py-3 px-4 rounded-xl border border-gray-200 transition-all duration-300 hover:bg-gray-50 text-gray-700 bg-white/70 ${rowDirection}`}
                     >
                       <FaShieldAlt size={20} className="text-slate-500 transition-colors duration-300" />
@@ -220,7 +220,7 @@ const Sidebar = ({ isOpen, onClose, isLoggedIn, user, onLogout }) => {
           </div>
         </div>
       </div>
-      
+
       {isModalOpen ? (
         <Suspense fallback={null}>
           <PartnerFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

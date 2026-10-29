@@ -1,15 +1,536 @@
 {
-  "routes": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "redirects": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/bnc-services",
+      "destination": "/services",
+      "permanent": true
     },
     {
-      "handle": "filesystem"
+      "source": "/partner-form",
+      "destination": "/",
+      "permanent": true
     },
     {
-      "src": "/((?!src/|@|node_modules/|favicon/|fonts/|partners/|.*\\..*).*)",
-      "dest": "/index.html"
+      "source": "/services/financial-advisory",
+      "destination": "/services/global/financial-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/financial-advisory",
+      "destination": "/services/global/financial-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/personal-business-loan",
+      "destination": "/services/global/personal-business-loan",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/personal-business-loan",
+      "destination": "/services/global/personal-business-loan",
+      "permanent": true
+    },
+    {
+      "source": "/services/cybersecurity-data-privacy",
+      "destination": "/services/global/cybersecurity-data-privacy",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/cybersecurity-data-privacy",
+      "destination": "/services/global/cybersecurity-data-privacy",
+      "permanent": true
+    },
+    {
+      "source": "/services/risk-advisory",
+      "destination": "/services/global/risk-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/risk-advisory",
+      "destination": "/services/global/risk-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/esg-advisory",
+      "destination": "/services/global/esg-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/esg-advisory",
+      "destination": "/services/global/esg-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/erp-implementation-digital-transformation",
+      "destination": "/services/global/erp-implementation-digital-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/erp-implementation-digital-transformation",
+      "destination": "/services/global/erp-implementation-digital-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/services/gcc-operation-hub",
+      "destination": "/services/global/gcc-operation-hub",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/gcc-operation-hub",
+      "destination": "/services/global/gcc-operation-hub",
+      "permanent": true
+    },
+    {
+      "source": "/services/training-workshop",
+      "destination": "/services/global/training-workshop",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/training-workshop",
+      "destination": "/services/global/training-workshop",
+      "permanent": true
+    },
+    {
+      "source": "/services/recruitment-manpower-services",
+      "destination": "/services/global/recruitment-manpower-services",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/recruitment-manpower-services",
+      "destination": "/services/global/recruitment-manpower-services",
+      "permanent": true
+    },
+    {
+      "source": "/services/ksa-specific-services",
+      "destination": "/services/global/ksa-specific-services",
+      "permanent": true
+    },
+    {
+      "source": "/services/ifrs",
+      "destination": "/services/global/ifrs",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/ifrs",
+      "destination": "/services/global/ifrs",
+      "permanent": true
+    },
+    {
+      "source": "/services/transfer-pricing",
+      "destination": "/services/global/transfer-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/transfer-pricing",
+      "destination": "/services/global/transfer-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/services/esop-advisory",
+      "destination": "/services/global/esop-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/esop-advisory",
+      "destination": "/services/global/esop-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/services/transformation-through-ai",
+      "destination": "/services/global/transformation-through-ai",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/transformation-through-ai",
+      "destination": "/services/global/transformation-through-ai",
+      "permanent": true
+    },
+    {
+      "source": "/services/valuation",
+      "destination": "/services/global/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/valuation",
+      "destination": "/services/global/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/services/due-diligence",
+      "destination": "/services/global/due-diligence",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/due-diligence",
+      "destination": "/services/global/due-diligence",
+      "permanent": true
+    },
+    {
+      "source": "/services/physical-verification-stock-fixed-asset",
+      "destination": "/services/global/physical-verification-stock-fixed-asset",
+      "permanent": true
+    },
+    {
+      "source": "/services/other/physical-verification-stock-fixed-asset",
+      "destination": "/services/global/physical-verification-stock-fixed-asset",
+      "permanent": true
+    },
+    {
+      "source": "/ar/bnc-services",
+      "destination": "/ar/services",
+      "permanent": true
+    },
+    {
+      "source": "/ar/partner-form",
+      "destination": "/ar",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/financial-advisory",
+      "destination": "/ar/services/global/financial-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/financial-advisory",
+      "destination": "/ar/services/global/financial-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/personal-business-loan",
+      "destination": "/ar/services/global/personal-business-loan",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/personal-business-loan",
+      "destination": "/ar/services/global/personal-business-loan",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/cybersecurity-data-privacy",
+      "destination": "/ar/services/global/cybersecurity-data-privacy",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/cybersecurity-data-privacy",
+      "destination": "/ar/services/global/cybersecurity-data-privacy",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/risk-advisory",
+      "destination": "/ar/services/global/risk-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/risk-advisory",
+      "destination": "/ar/services/global/risk-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/esg-advisory",
+      "destination": "/ar/services/global/esg-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/esg-advisory",
+      "destination": "/ar/services/global/esg-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/erp-implementation-digital-transformation",
+      "destination": "/ar/services/global/erp-implementation-digital-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/erp-implementation-digital-transformation",
+      "destination": "/ar/services/global/erp-implementation-digital-transformation",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/gcc-operation-hub",
+      "destination": "/ar/services/global/gcc-operation-hub",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/gcc-operation-hub",
+      "destination": "/ar/services/global/gcc-operation-hub",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/training-workshop",
+      "destination": "/ar/services/global/training-workshop",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/training-workshop",
+      "destination": "/ar/services/global/training-workshop",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/recruitment-manpower-services",
+      "destination": "/ar/services/global/recruitment-manpower-services",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/recruitment-manpower-services",
+      "destination": "/ar/services/global/recruitment-manpower-services",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/ksa-specific-services",
+      "destination": "/ar/services/global/ksa-specific-services",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/ifrs",
+      "destination": "/ar/services/global/ifrs",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/ifrs",
+      "destination": "/ar/services/global/ifrs",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/transfer-pricing",
+      "destination": "/ar/services/global/transfer-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/transfer-pricing",
+      "destination": "/ar/services/global/transfer-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/esop-advisory",
+      "destination": "/ar/services/global/esop-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/esop-advisory",
+      "destination": "/ar/services/global/esop-advisory",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/transformation-through-ai",
+      "destination": "/ar/services/global/transformation-through-ai",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/transformation-through-ai",
+      "destination": "/ar/services/global/transformation-through-ai",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/valuation",
+      "destination": "/ar/services/global/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/valuation",
+      "destination": "/ar/services/global/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/due-diligence",
+      "destination": "/ar/services/global/due-diligence",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/due-diligence",
+      "destination": "/ar/services/global/due-diligence",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/physical-verification-stock-fixed-asset",
+      "destination": "/ar/services/global/physical-verification-stock-fixed-asset",
+      "permanent": true
+    },
+    {
+      "source": "/ar/services/other/physical-verification-stock-fixed-asset",
+      "destination": "/ar/services/global/physical-verification-stock-fixed-asset",
+      "permanent": true
+    },
+    {
+      "source": "/ar/privacy-policy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/ar/terms-of-service",
+      "destination": "/terms-of-service",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/login/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/reset-password/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/complete-profile/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/admin-dashboard/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/start-chatting/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ar/login/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ar/reset-password/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ar/complete-profile/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ar/dashboard/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ar/admin-dashboard/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ar/start-chatting/:path*",
+      "destination": "/app.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/login/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/reset-password/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/complete-profile/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/dashboard/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/admin-dashboard/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/start-chatting/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/ar/login/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/ar/reset-password/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/ar/complete-profile/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/ar/dashboard/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/ar/admin-dashboard/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/ar/start-chatting/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/app",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
     }
   ]
 }
