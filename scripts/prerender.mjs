@@ -31,24 +31,40 @@ try {
   for(const route of [...site.routes,{path:'/404',title:'Page Not Found'}]) {
     console.log("Prerender",route.path);
     const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));
-    await page.goto(base+route.path,{waitUntil:'load',timeout:45000});
-    await page.locator('#root h1').first().waitFor({state:'attached',timeout:30000}).catch(error=>{throw new Error(route.path+': '+(errors.join('; ')||error.message));});
-    await page.waitForFunction(()=>document.head.querySelector('link[rel="canonical"]') && document.head.querySelector('#site-schema'));
-    // Wait for deferred sections and lazy route chunks to finish before taking the snapshot.
-    await page.waitForTimeout(400);
-    const html=await page.evaluate(()=>{
-      const doc=document.documentElement.cloneNode(true);
-      doc.querySelectorAll('[style]').forEach(el=>{if(el.style.opacity==='0' && el.style.transform){el.style.opacity='1';el.style.transform='none';}});
-      doc.querySelectorAll('script[src]').forEach(el=>{if(el.src.includes('localhost'))el.setAttribute('src',new URL(el.src).pathname);});
-      return '<!doctype html>\n'+doc.outerHTML;
-    });
-    const text=await page.locator('#root').innerText();
-    if(errors.length)throw new Error(route.path+': '+errors.join('; '));
-    if(text.length<(route.path==='/404'?30:120))throw new Error(route.path+': insufficient rendered content');
-    if(route.path!=='/404' && !html.includes('name="robots" content="index, follow"'))throw new Error(route.path+': not indexable');
-    const file=resolve(root,route.path==='/'?'index.html':route.path==='/404'?'404.html':route.path.slice(1)+'.html');
-    await mkdir(dirname(file),{recursive:true});await writeFile(file,html);
-    snapshots.push({path:route.path,title:await page.title(),characters:text.length});await page.close();
+    try {
+      await page.goto(base+route.path,{waitUntil:'load',timeout:45000});
+      await page.locator('#root h1').first().waitFor({state:'attached',timeout:30000}).catch(error=>{throw new Error(route.path+': '+(errors.join('; ')||error.message));});
+      await page.waitForFunction(()=>document.head.querySelector('link[rel="canonical"]') && document.head.querySelector('#site-schema'));
+      // Wait for deferred sections and lazy route chunks to finish before taking the snapshot.
+      await page.waitForTimeout(400);
+      // Snapshot in one browser task without innerText, which forces layout of
+      // this animation-heavy page and can time out on constrained build workers.
+      // Exclude non-content text so embedded CSS cannot satisfy the content check.
+      const {html,text,title}=await page.evaluate(()=>{
+        const root=document.getElementById('root');
+        if(!root)throw new Error('Rendered application root is missing');
+        const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+        const parts=[];
+        while(walker.nextNode()){
+          const node=walker.currentNode;
+          if(!node.parentElement.closest('script,style,noscript,[hidden],[aria-hidden="true"]')) parts.push(node.textContent);
+        }
+        const text=parts.join(' ').replace(/\s+/g,' ').trim();
+        const title=document.title;
+        const doc=document.documentElement.cloneNode(true);
+        doc.querySelectorAll('[style]').forEach(el=>{if(el.style.opacity==='0' && el.style.transform){el.style.opacity='1';el.style.transform='none';}});
+        doc.querySelectorAll('script[src]').forEach(el=>{if(el.src.includes('localhost'))el.setAttribute('src',new URL(el.src).pathname);});
+        return {html:'<!doctype html>\n'+doc.outerHTML,text,title};
+      });
+      if(errors.length)throw new Error(route.path+': '+errors.join('; '));
+      if(text.length<(route.path==='/404'?30:120))throw new Error(route.path+': insufficient rendered content');
+      if(route.path!=='/404' && !html.includes('name="robots" content="index, follow"'))throw new Error(route.path+': not indexable');
+      const file=resolve(root,route.path==='/'?'index.html':route.path==='/404'?'404.html':route.path.slice(1)+'.html');
+      await mkdir(dirname(file),{recursive:true});await writeFile(file,html);
+      snapshots.push({path:route.path,title,characters:text.length});
+    }catch(error){
+      throw new Error(`Prerender failed for ${route.path} (${page.url()}): ${errors.join('; ') || error.message}`,{cause:error});
+    }finally{await page.close();}
   }
   const urls=site.routes.map(p=>`  <url><loc>${escape(site.origin+p.path)}</loc>${p.modified||p.published?'<lastmod>'+escape(p.modified||p.published)+'</lastmod>':''}</url>`).join('\n');
   await writeFile(resolve(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls+'\n</urlset>\n');
