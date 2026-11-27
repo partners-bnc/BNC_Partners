@@ -2,7 +2,7 @@ export const config = {
   runtime: "edge"
 };
 
-const GROQ_API_BASE = "https://api.groq.com/openai/v1";
+const OPENAI_API_BASE = "https://api.openai.com/v1";
 
 const SYSTEM_MESSAGE = `# BNC Global Service Discovery Agent
 
@@ -140,14 +140,14 @@ function getSsePayload(rawEvent: string) {
 }
 
 async function streamAnswer(message: string) {
-  const response = await fetch(`${GROQ_API_BASE}/chat/completions`, {
+  const response = await fetch(`${OPENAI_API_BASE}/chat/completions`, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${process.env.GROQ_API_KEY || ""}`,
+      authorization: `Bearer ${process.env.OPENAI_API_KEY || ""}`,
       "content-type": "application/json"
     },
     body: JSON.stringify({
-      model: process.env.OPENAI_ANSWER_MODEL || "openai/gpt-oss-20b",
+      model: process.env.OPENAI_ANSWER_MODEL || "gpt-4.1-mini",
       stream: true,
       messages: [
         { role: "system", content: SYSTEM_MESSAGE },
@@ -157,7 +157,8 @@ async function streamAnswer(message: string) {
   });
 
   if (!response.ok || !response.body) {
-    throw new Error(`Groq answer request failed with HTTP ${response.status}`);
+    const detail = await response.text().catch(() => "");
+    throw new Error(`OpenAI answer request failed with HTTP ${response.status}: ${detail.slice(0, 500)}`);
   }
 
   const encoder = new TextEncoder();
@@ -216,7 +217,7 @@ export default async function handler(request: Request) {
     return jsonResponse({ error: "Method not allowed." }, { status: 405 });
   }
 
-  if (!process.env.GROQ_API_KEY) {
+  if (!process.env.OPENAI_API_KEY) {
     return jsonResponse({ error: "Missing server configuration." }, { status: 500 });
   }
 
