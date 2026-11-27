@@ -4,6 +4,17 @@ export const config = {
 
 const OPENAI_API_BASE = "https://api.openai.com/v1";
 
+// Dashboard-pasted values often carry spaces, newlines or quotes; strip them.
+function cleanEnv(name: string) {
+  return (process.env[name] || "").trim().replace(/^["']|["']$/g, "").trim();
+}
+
+class UpstreamError extends Error {
+  constructor(public status: number, public code: string, message: string) {
+    super(message);
+  }
+}
+
 const SYSTEM_MESSAGE = `# BNC Global Service Discovery Agent
 
 ## Role
@@ -143,11 +154,11 @@ async function streamAnswer(message: string) {
   const response = await fetch(`${OPENAI_API_BASE}/chat/completions`, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${process.env.OPENAI_API_KEY || ""}`,
+      authorization: `Bearer ${cleanEnv("OPENAI_API_KEY")}`,
       "content-type": "application/json"
     },
     body: JSON.stringify({
-      model: process.env.OPENAI_ANSWER_MODEL || "gpt-4.1-mini",
+      model: cleanEnv("OPENAI_ANSWER_MODEL") || "gpt-4.1-mini",
       stream: true,
       messages: [
         { role: "system", content: SYSTEM_MESSAGE },
@@ -158,7 +169,14 @@ async function streamAnswer(message: string) {
 
   if (!response.ok || !response.body) {
     const detail = await response.text().catch(() => "");
-    throw new Error(`OpenAI answer request failed with HTTP ${response.status}: ${detail.slice(0, 500)}`);
+    let code = "";
+    try {
+      const parsed = JSON.parse(detail);
+      code = parsed?.error?.code || parsed?.error?.type || "";
+    } catch {
+      // Non-JSON error body; keep the HTTP status only.
+    }
+    throw new UpstreamError(response.status, String(code), `OpenAI answer request failed with HTTP ${response.status}: ${detail.slice(0, 500)}`);
   }
 
   const encoder = new TextEncoder();
@@ -217,7 +235,7 @@ export default async function handler(request: Request) {
     return jsonResponse({ error: "Method not allowed." }, { status: 405 });
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!cleanEnv("OPENAI_API_KEY")) {
     return jsonResponse({ error: "Missing server configuration." }, { status: 500 });
   }
 
@@ -239,6 +257,8 @@ export default async function handler(request: Request) {
     });
   } catch (error) {
     console.error(error);
-    return jsonResponse({ error: "Could not generate an answer." }, { status: 500 });
+    // Expose only the provider status and error code (never the key) so failures are diagnosable.
+    const upstream = error instanceof UpstreamError ? { upstreamStatus: error.status, upstreamCode: error.code } : {};
+    return jsonResponse({ error: "Could not generate an answer.", ...upstream }, { status: 500 });
   }
 }
