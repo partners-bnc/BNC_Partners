@@ -7,7 +7,6 @@ const WhyPartner = lazy(() => import('../Component/WhyPartner'));
 const PartnershipOpportunities = lazy(() => import('../Component/PartnershipOpportunities'));
 const HowItWorks = lazy(() => import('../Component/HowItWorks'));
 const PartnerNetwork = lazy(() => import('../Component/PartnerNetwork'));
-const HandshakeScroll = lazy(() => import('../Component/HandshakeScroll'));
 const CTA = lazy(() => import('../Component/CTA'));
 
 const Home = () => {
@@ -59,7 +58,6 @@ const Home = () => {
           <PartnershipOpportunities />
           <HowItWorks />
           <PartnerNetwork />
-          <HandshakeScroll />
           <CTA />
         </Suspense>
       ) : null}

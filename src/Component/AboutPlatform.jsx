@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { LayoutDashboard, Sparkles, Globe2 } from 'lucide-react';
-import { Reveal, RevealGroup, RevealItem, SplitHeading } from '../components/ui/premium';
+import { Glass, Reveal, SplitHeading } from '../components/ui/premium';
 
 const VIDEO_ID = 'jZDsLV1fiOM';
 
 const FEATURES = [
-  { icon: LayoutDashboard, title: 'Real-time dashboards', text: 'Leads, deals and commissions.' },
-  { icon: Sparkles, title: 'AI-powered matching', text: 'The right partner, every time.' },
-  { icon: Globe2, title: 'One global network', text: 'Experts across borders.' },
+  { icon: LayoutDashboard, title: 'Live dashboards' },
+  { icon: Sparkles, title: 'AI matching' },
+  { icon: Globe2, title: 'Global network' },
 ];
 
 const AboutPlatform = () => {
@@ -23,8 +23,8 @@ const AboutPlatform = () => {
   return (
     <section id="about" className="lg-section bg-white">
       <div className="lg-container">
-        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.25fr] lg:gap-14">
-          {/* Content */}
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          {/* Content: heading, one paragraph, one small feature card */}
           <div>
             <Reveal>
               <span className="lg-eyebrow is-red">About the platform</span>
@@ -35,25 +35,24 @@ const AboutPlatform = () => {
             </SplitHeading>
             <Reveal delay={0.1}>
               <p className="lg-lead mt-6 max-w-xl">
-                BNC LEG is a partner ecosystem that connects businesses, technology providers and service experts
-                across the globe, so collaboration is faster and every partner gains new revenue.
+                Hear from our founder why BNC LEG exists: one trusted network where firms, specialists and
+                technology partners find each other, work as one team and grow their revenue together.
               </p>
             </Reveal>
 
-            <RevealGroup className="mt-9 grid grid-cols-3 gap-3 border-t border-black/[0.06] pt-7">
-              {FEATURES.map(({ icon: Icon, title, text }) => (
-                <RevealItem key={title} className="group">
-                  <span className="lg-icon is-react !h-10 !w-10 !rounded-xl">
-                    <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
-                  </span>
-                  <h3 className="mt-3 text-[14px] font-semibold leading-snug tracking-[-0.01em] text-[#1d1d1f]">{title}</h3>
-                  <p className="mt-1 text-[12.5px] leading-snug text-[#86868b]">{text}</p>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-
-            <Reveal className="mt-8">
-              <a href="#services" className="lg-link text-[15px]">Why partner with us ›</a>
+            <Reveal delay={0.18} className="mt-9">
+              <Glass className="!rounded-[22px] px-5 py-4">
+                <ul className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+                  {FEATURES.map(({ icon: Icon, title }, i) => (
+                    <li key={title} className={`flex items-center gap-2.5 ${i > 0 ? 'sm:border-s sm:border-black/[0.07] sm:ps-4' : ''} ${i < FEATURES.length - 1 ? 'sm:pe-4' : ''}`}>
+                      <span className="grid h-9 w-9 flex-none place-items-center rounded-xl bg-[#1d1d1f]/[0.05] text-[#1d1d1f]">
+                        <Icon className="h-[17px] w-[17px]" strokeWidth={1.7} />
+                      </span>
+                      <span className="whitespace-nowrap text-[13.5px] font-semibold leading-tight tracking-[-0.01em] text-[#1d1d1f]">{title}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Glass>
             </Reveal>
           </div>
 
@@ -61,7 +60,7 @@ const AboutPlatform = () => {
           <motion.div
             ref={frameRef}
             style={reduce ? undefined : { scale, borderRadius: radius }}
-            className="relative aspect-[16/11] w-full overflow-hidden rounded-[32px] bg-[#1d1d1f] shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_40px_80px_-40px_rgba(0,0,0,0.45)] lg:mt-[34px] lg:origin-top"
+            className="relative aspect-[16/11] w-full overflow-hidden rounded-[32px] bg-[#1d1d1f] shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_40px_80px_-40px_rgba(0,0,0,0.45)] lg:origin-center"
           >
             {playing ? (
               <iframe
@@ -73,7 +72,7 @@ const AboutPlatform = () => {
                 allowFullScreen
               />
             ) : (
-              <button type="button" className="group absolute inset-0 h-full w-full cursor-pointer" onClick={() => setPlaying(true)} aria-label="Play the platform overview video">
+              <button type="button" className="group absolute inset-0 h-full w-full cursor-pointer" onClick={() => setPlaying(true)} aria-label="Play the founder video about the platform">
                 <img
                   src={`https://i.ytimg.com/vi_webp/${VIDEO_ID}/maxresdefault.webp`}
                   width="1280"
@@ -83,20 +82,18 @@ const AboutPlatform = () => {
                   className="h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.2,.7,.1,1)] group-hover:scale-[1.03]"
                   loading="lazy"
                 />
-                <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                <span className="absolute inset-x-6 bottom-6 flex items-center justify-between gap-4">
-                  <span className="text-start">
-                    <span className="block text-[12px] font-semibold uppercase tracking-[0.16em] text-white/70">Watch the film</span>
-                    <span className="mt-1 block text-[clamp(17px,1.8vw,22px)] font-semibold tracking-[-0.02em] text-white">A quick tour of the platform</span>
-                  </span>
-                  <span
-                    className="grid h-14 w-14 flex-none place-items-center rounded-full bg-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,.6),0_0_0_1px_rgba(255,255,255,.35)] transition-transform duration-500 group-hover:scale-110"
-                    style={{ WebkitBackdropFilter: 'blur(18px) saturate(1.8)', backdropFilter: 'blur(18px) saturate(1.8)' }}
-                  >
-                    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <span className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                {/* one compact pill: the thumbnail already carries its own title */}
+                <span
+                  className="absolute bottom-5 start-5 inline-flex items-center gap-2.5 rounded-full bg-white/20 py-1.5 pe-4 ps-1.5 text-[13.5px] font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_0_0_1px_rgba(255,255,255,.3)] transition-transform duration-500 group-hover:scale-105"
+                  style={{ WebkitBackdropFilter: 'blur(18px) saturate(1.8)', backdropFilter: 'blur(18px) saturate(1.8)' }}
+                >
+                  <span className="grid h-8 w-8 place-items-center rounded-full bg-[#dc2626]">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                       <polygon points="5,3 14,8 5,13" fill="white" />
                     </svg>
                   </span>
+                  Watch: a word from our founder
                 </span>
               </button>
             )}

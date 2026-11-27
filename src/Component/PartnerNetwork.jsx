@@ -21,12 +21,11 @@ export default function PartnerNetwork() {
           eyebrow="Global network"
           title="Partners across"
           muted="42 countries"
-          lead="Explore where the league works today. Pick a country, then a state and a district, to see our partners on the ground."
         />
       </div>
-      {/* white card with a small gap from the screen edges; the map fills its full width */}
-      <div className="w-full px-3 sm:px-6 lg:px-8">
-        <Reveal className="mt-12">
+      {/* map on the left, details panel on the right */}
+      <div className="mx-auto w-full max-w-[1440px] px-3 sm:px-6 lg:px-8">
+        <Reveal className="mt-10">
           <PartnerWorldMap
             onRequest={(topic) => open('expert', `Partner in ${topic}`)}
             onJoin={() => open('partner')}

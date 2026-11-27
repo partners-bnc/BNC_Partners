@@ -20,11 +20,12 @@ const PartnershipOpportunities = () => {
       <div className="lg-container">
         <SectionHeading
           eyebrow={isRtl ? 'فرص الشراكة' : 'Partnership models'}
-          title={t('partnershipOpportunities.title')}
-          muted={isRtl ? '' : 'Choose how you grow.'}
+          title={isRtl ? '' : 'Partnership'}
+          muted={isRtl ? t('partnershipOpportunities.title') : 'Opportunities'}
+          className="!max-w-4xl"
         />
 
-        <RevealGroup className="mt-16 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {OPPORTUNITIES.map(({ key, icon: Icon, path }, idx) => {
             const features = t(`partnershipOpportunities.cards.${key}.features`, { returnObjects: true });
             return (

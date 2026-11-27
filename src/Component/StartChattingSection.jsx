@@ -297,9 +297,13 @@ const StartChattingSection = ({ embedded = false, compact = false }) => {
               {!hasUserMessage && (
                 <div className="text-center">
                   <div className={`relative ${compact ? 'mb-3' : 'mb-6'}`}>
-                  <div className={`${compact ? 'w-10 h-10 rounded-xl' : 'w-20 h-20 rounded-[28px]'} bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60`}>
-                      <Building2 className={`${compact ? 'w-5 h-5' : 'w-10 h-10'} text-white`} />
+                  {compact ? (
+                    <img src="/about-founders/assets/avatar-sg.png" alt="" width="48" height="48" className="mx-auto h-12 w-12 rounded-full bg-white object-cover ring-2 ring-white shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_10px_20px_-8px_rgba(127,29,29,0.5)]" />
+                  ) : (
+                  <div className="w-20 h-20 rounded-[28px] bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-[0_12px_24px_rgba(185, 28, 28,0.25)] mx-auto ring-1 ring-white/60">
+                      <Building2 className="w-10 h-10 text-white" />
                     </div>
+                  )}
                   </div>
 
                   <h2 className={`${compact ? 'text-[13px] mb-1' : 'text-xl mb-3'} font-bold text-gray-900`}>
@@ -328,9 +332,14 @@ const StartChattingSection = ({ embedded = false, compact = false }) => {
                 {messages.map((msg, idx) => (
                   <div key={msg.id || idx} className={`mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
-                      <div className={`${botAvatarMarginClass} mt-1 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm`}>
-                        <Building2 className="h-4 w-4 text-[#DC2626]" />
-                      </div>
+                      compact ? (
+                        // floating chat: the AI speaks as the founder
+                        <img src="/about-founders/assets/avatar-sg.png" alt="" width="32" height="32" className={`${botAvatarMarginClass} mt-1 h-8 w-8 flex-none rounded-full bg-white object-cover ring-2 ring-white shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_4px_10px_-4px_rgba(0,0,0,0.35)]`} />
+                      ) : (
+                        <div className={`${botAvatarMarginClass} mt-1 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm`}>
+                          <Building2 className="h-4 w-4 text-[#DC2626]" />
+                        </div>
+                      )
                     )}
                     <div className="max-w-[90%] lg:max-w-[75%]">
                       <div

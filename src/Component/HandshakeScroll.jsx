@@ -31,7 +31,8 @@ void main() {
   gl_FragColor = vec4(mix(c, vec3(1.0), light * grey), 1.0);
 }`;
 
-export default function HandshakeScroll() {
+// The handshake video on its own, filling whatever box it is given.
+export function HandshakeVideo({ className = '' }) {
   const boxRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -149,7 +150,25 @@ export default function HandshakeScroll() {
     };
   }, []);
 
-  // white band whose top and bottom fade softly into the page background
+  return (
+    <div ref={boxRef} className={`relative overflow-hidden ${className}`}>
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
+    </div>
+  );
+}
+
+// Stand-alone full-width band (no longer used on the home page: the handshake now
+// sits inside the Get Started section, see CTA.jsx).
+export default function HandshakeScroll() {
   return (
     <section
       id="partnership"
@@ -160,20 +179,7 @@ export default function HandshakeScroll() {
       <div className="text-center">
         <p className="lg-eyebrow is-red">Partnership</p>
       </div>
-
-      {/* full-width video: 16:9 on desktop (never taller than the screen), square crop on phones */}
-      <div ref={boxRef} className="relative mt-4 aspect-square w-full overflow-hidden md:aspect-video md:max-h-[calc(100svh-72px)]">
-        <video
-          ref={videoRef}
-          muted
-          loop
-          playsInline
-          preload="none"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
-      </div>
+      <HandshakeVideo className="mt-4 aspect-square w-full md:aspect-video md:max-h-[calc(100svh-72px)]" />
     </section>
   );
 }

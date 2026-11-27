@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronRight, Home, Minus, Plus, MapPin, Users, ArrowUpRight, Loader2, PanelRightOpen, X, ArrowLeft } from 'lucide-react';
+import { ChevronRight, Home, Minus, Plus, MapPin, Users, ArrowUpRight, Loader2, ArrowLeft } from 'lucide-react';
 import { regionOf } from '../../data/worldCountries';
 
 /* ----------------------------------------------------------------------------
@@ -61,19 +61,7 @@ export default function PartnerWorldMap({ onRequest, onJoin, className = '' }) {
   const [size, setSize] = useState({ w: 1000, h: 560 });
   const [view, setView] = useState({ k: 1, x: 0, y: 0 });
   const [moving, setMoving] = useState(false);
-  const [panelOpen, setPanelOpen] = useState(false); // details panel slides in from the right (tablet/desktop)
-  // after closing with the X, the cursor sits over the Details button; don't let hover reopen
-  // the panel until the cursor has moved off that button
-  const holdHover = useRef(false);
-  const closePanel = () => { holdHover.current = true; setPanelOpen(false); };
-  // phones: the details sit below the map instead of over it
-  const [wide, setWide] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 768px)').matches);
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)');
-    const on = () => setWide(mq.matches);
-    mq.addEventListener('change', on);
-    return () => mq.removeEventListener('change', on);
-  }, []);
+  // details panel: always shown, on the right of the map (tablet/desktop) or below it (phones)
   const tipRef = useRef(null); // hover card, updated directly (no re-render)
   const viewRef = useRef(view);
   const animRef = useRef(0);
@@ -316,13 +304,13 @@ export default function PartnerWorldMap({ onRequest, onJoin, className = '' }) {
   const requestTopic = [distF?.n, stateF?.n, sel.iso && nameOf(sel.iso)].filter(Boolean).join(', ') || 'Global';
 
   return (
-    <div ref={wrapRef} onPointerMove={(e) => { if (holdHover.current && !e.target.closest?.('[data-details-btn], aside')) holdHover.current = false; }} className={`lg-pmap relative overflow-hidden rounded-[28px] bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_30px_60px_-40px_rgba(30,41,99,0.3)] ${className}`}>
-      {/* map */}
-      <div className="relative bg-white">
+    <div ref={wrapRef} className={`lg-pmap relative overflow-hidden md:flex md:flex-row rounded-[28px] bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_30px_60px_-40px_rgba(30,41,99,0.3)] ${className}`}>
+      {/* map (left) */}
+      <div className="relative bg-white md:min-w-0 md:flex-1">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${VW} ${VH}`}
-          className="block h-[320px] w-full cursor-grab select-none active:cursor-grabbing md:aspect-[1000/548] md:h-auto"
+          className="block h-[320px] w-full cursor-grab select-none active:cursor-grabbing md:h-[560px] lg:h-[620px]"
           style={{ touchAction: 'pan-y' }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
@@ -457,9 +445,6 @@ export default function PartnerWorldMap({ onRequest, onJoin, className = '' }) {
           {sel.iso ? <button type="button" onClick={back} aria-label="Back" className="grid h-7 w-7 place-items-center rounded-full hover:bg-black/5"><ArrowLeft className="h-3.5 w-3.5 flipInRtl" /></button> : <span className="grid h-7 w-7 place-items-center"><Users className="h-3.5 w-3.5 text-[#dc2626]" /></span>}
           <span className="truncate text-[#86868b]">{crumbs.map((c) => c.label).join(' › ')}</span>
         </div>
-        <button type="button" data-details-btn onClick={() => setPanelOpen(true)} onMouseEnter={() => { if (!holdHover.current) setPanelOpen(true); }} onMouseLeave={() => { holdHover.current = false; }} aria-label="Show details" aria-expanded={panelOpen} className={`lg-pmap-btn absolute end-3 top-3 !hidden md:!flex !w-auto items-center gap-1.5 px-3 text-[13px] font-medium transition-opacity ${panelOpen ? 'pointer-events-none opacity-0' : ''}`}>
-          <PanelRightOpen className="h-4 w-4" /> Details
-        </button>
         <div className="absolute bottom-8 start-3 flex flex-col gap-1.5">
           <button type="button" onClick={() => zoomBy(1.8)} aria-label="Zoom in" className="lg-pmap-btn"><Plus className="h-4 w-4" /></button>
           <button type="button" onClick={() => zoomBy(1 / 1.8)} aria-label="Zoom out" className="lg-pmap-btn"><Minus className="h-4 w-4" /></button>
@@ -475,13 +460,9 @@ export default function PartnerWorldMap({ onRequest, onJoin, className = '' }) {
         </p>
       </div>
 
-      {/* side panel */}
-      <aside
-        aria-hidden={wide && !panelOpen}
-        className={`relative flex min-h-0 flex-col p-4 text-start ${wide ? 'lg-glass' : 'border-t border-black/[0.06] bg-white'} md:absolute md:inset-y-3 md:end-3 md:z-20 md:w-[min(360px,calc(100%-1.5rem))] md:border-0 md:!rounded-[28px_8px_28px_8px] md:p-5 md:transition-transform md:duration-500 md:ease-[cubic-bezier(.2,.7,.1,1)] ${panelOpen ? 'md:translate-x-0' : 'md:pointer-events-none md:translate-x-[calc(100%+1.5rem)] md:rtl:-translate-x-[calc(100%+1.5rem)]'}`}
-      >
-        <button type="button" onClick={closePanel} aria-label="Hide details" className="lg-slab absolute end-4 top-4 hidden h-8 w-8 place-items-center rounded-full text-[#1d1d1f] md:grid"><X className="h-4 w-4" /></button>
-        <nav className="flex flex-wrap items-center gap-1 pe-10 text-[12.5px] text-[#86868b]" aria-label="Map location">
+      {/* details panel (right), always open */}
+      <aside className="relative flex min-h-0 flex-col border-t border-black/[0.06] bg-[#f8f9fc] p-4 text-start md:h-[560px] md:w-[340px] md:flex-none md:border-s md:border-t-0 md:p-5 lg:h-[620px] lg:w-[360px]">
+        <nav className="flex flex-wrap items-center gap-1 text-[12.5px] text-[#86868b]" aria-label="Map location">
           {crumbs.map((c, i) => (
             <React.Fragment key={c.label + i}>
               {i ? <ChevronRight className="h-3 w-3 flipInRtl" /> : null}

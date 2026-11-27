@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Star, ArrowDown, Expand, X } from 'lucide-react';
+import { Star, ArrowDown, Expand, X, Sparkles } from 'lucide-react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 const StartChattingSection = lazy(() => import('./StartChattingSection'));
 
@@ -74,6 +74,14 @@ const Hero = () => {
   const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  // greeting above the AI launcher; once closed it stays hidden for this visit
+  const [showAiGreeting, setShowAiGreeting] = useState(() => {
+    try { return sessionStorage.getItem('bncAiGreetingClosed') !== '1'; } catch { return true; }
+  });
+  const dismissAiGreeting = () => {
+    setShowAiGreeting(false);
+    try { sessionStorage.setItem('bncAiGreetingClosed', '1'); } catch { /* storage unavailable */ }
+  };
   const [shouldRenderMap, setShouldRenderMap] = useState(false);
   const [partnerUser, setPartnerUser] = useState(null);
   const location = useLocation();
@@ -108,7 +116,6 @@ const Hero = () => {
   const mapWrapAlign = isRtl ? 'lg:justify-start' : 'lg:justify-end';
   const mapOrigin = isRtl ? 'origin-top-left' : 'origin-top-right';
   const mapShift = isRtl ? 'lg:-translate-x-28 xl:-translate-x-36' : 'lg:translate-x-28 xl:translate-x-36';
-  const floatingChatPosition = isRtl ? 'left-2 sm:-left-3' : 'right-2 sm:-right-3';
 
   useEffect(() => {
     if (location.pathname === '/partner-form') {
@@ -234,43 +241,88 @@ const Hero = () => {
           }
         `}} />
         {isChatOpen && (
-          <section className={`lg-glass fixed bottom-4 ${isRtl ? 'left-5 sm:left-8' : 'right-5 sm:right-8'} z-50 flex h-[min(472px,calc(100dvh-5rem))] w-[min(420px,calc(100vw-2.5rem))] flex-col !rounded-[26px]`} aria-label="AI assistant chat">
-            <header className="flex h-12 shrink-0 items-center justify-between border-b border-black/[0.06] px-4">
-              <span className="flex items-center gap-2 text-[13.5px] font-semibold text-[#1d1d1f]">
-                <span className="lg-pulse-dot" aria-hidden="true" />
-                BNC AI Assistant
+          <section className={`fixed bottom-5 ${isRtl ? 'left-5 sm:left-6' : 'right-5 sm:right-6'} z-50 flex h-[min(520px,calc(100dvh-5rem))] w-[min(360px,calc(100vw-2.5rem))] flex-col overflow-hidden bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_30px_60px_-24px_rgba(13,27,61,0.45)] ${isRtl ? 'rounded-[8px_28px_8px_28px]' : 'rounded-[28px_8px_28px_8px]'}`} aria-label="AI assistant chat">
+            {/* header: the same glassy black-to-red gradient as the launcher, with the founder's photo */}
+            <header className="relative flex h-16 shrink-0 items-center justify-between overflow-hidden bg-[linear-gradient(120deg,#0e0e10_0%,#2a0b0d_40%,#7f1d1d_75%,#dc2626_100%)] px-4 text-white shadow-[inset_0_-1px_0_rgba(255,255,255,0.08)]">
+              <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/[0.14] to-transparent" />
+              <span aria-hidden="true" className="lg-ai-sheen pointer-events-none absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+              <span className="relative flex items-center gap-3">
+                <span className="relative h-10 w-10 flex-none">
+                  <img src="/about-founders/assets/avatar-sg.png" alt="" width="40" height="40" className="h-full w-full rounded-full bg-white object-cover ring-2 ring-white/90" />
+                  <span aria-hidden="true" className={`absolute -bottom-0.5 ${isRtl ? '-left-0.5' : '-right-0.5'} h-3 w-3 rounded-full bg-[#22c55e] ring-2 ring-[#2a0b0d]`} />
+                </span>
+                <span className="flex flex-col leading-tight">
+                  <span className="text-[14.5px] font-semibold tracking-[-0.01em] [text-shadow:0_1px_2px_rgba(0,0,0,0.3)]">BNC AI Assistant</span>
+                  <span className="text-[11.5px] text-white/70">{isRtl ? 'متصل الآن · نصًا أو صوتًا' : 'Online · text or voice'}</span>
+                </span>
               </span>
-              <div className="flex items-center gap-1">
-                <Link to="/start-chatting" className="grid h-8 w-8 place-items-center rounded-full text-[#6e6e73] transition-colors hover:bg-black/[0.05] hover:text-[#1d1d1f]" aria-label="Open full chat" title="Open full chat">
+              <div className="relative flex items-center gap-1">
+                <Link to="/start-chatting" className="grid h-8 w-8 place-items-center rounded-full text-white/80 transition-colors hover:bg-white/15 hover:text-white" aria-label="Open full chat" title="Open full chat">
                   <Expand className="h-4 w-4" />
                 </Link>
-                <button type="button" onClick={() => setIsChatOpen(false)} className="grid h-8 w-8 place-items-center rounded-full text-[#6e6e73] transition-colors hover:bg-black/[0.05] hover:text-[#1d1d1f]" aria-label="Close chat">
+                <button type="button" onClick={() => setIsChatOpen(false)} className="grid h-8 w-8 place-items-center rounded-full text-white/80 transition-colors hover:bg-white/15 hover:text-white" aria-label="Close chat">
                   <X className="h-4 w-4" />
                 </button>
               </div>
             </header>
-            <div className="min-h-0 flex-1 overflow-hidden bg-white/70">
+            <div className="min-h-0 flex-1 overflow-hidden bg-white">
               <Suspense fallback={<div className="h-full animate-pulse bg-[#f5f5f7]" />}>
                 <StartChattingSection compact />
               </Suspense>
             </div>
           </section>
         )}
-        <button
-          type="button"
-          onClick={() => setIsChatOpen((open) => !open)}
-          className={`fixed bottom-3 sm:-bottom-10 ${floatingChatPosition} z-40 inline-flex items-center justify-center rounded-full bg-transparent p-0 sm:p-2 hover:opacity-90 transition-all`}
-          aria-label={isChatOpen ? 'Close AI assistant' : 'Get AI help'}
-          aria-expanded={isChatOpen}
-        >
-          <img
-            src="/Photas/chatbot-carrot.webp"
-            width="320"
-            height="103"
-            alt="ChatBot AI"
-            className="h-[60px] w-[60px] sm:h-36 sm:w-36 object-contain"
-          />
-        </button>
+        {/* floating "Ask BNC AI" launcher: founder photo pill + a dismissible greeting above it */}
+        {!isChatOpen && (
+          <div className={`fixed bottom-5 sm:bottom-6 ${isRtl ? 'left-5 sm:left-6 items-start' : 'right-5 sm:right-6 items-end'} z-40 flex flex-col gap-2.5`}>
+            {showAiGreeting && (
+              <div className="lg-ai-greet relative hidden max-w-[230px] rounded-[16px] bg-white px-3.5 py-2.5 shadow-[0_0_0_1px_rgba(0,0,0,0.07),0_18px_40px_-16px_rgba(13,27,61,0.35)] sm:block">
+                <button
+                  type="button"
+                  onClick={dismissAiGreeting}
+                  aria-label="Dismiss message"
+                  className={`absolute -top-3 ${isRtl ? '-right-3' : '-left-3'} grid h-6 w-6 place-items-center rounded-full bg-white text-[#6e6e73] shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_4px_10px_-4px_rgba(0,0,0,0.25)] transition-colors hover:text-[#1d1d1f]`}
+                >
+                  <X className="h-3 w-3" />
+                </button>
+                <button type="button" onClick={() => setIsChatOpen(true)} className="text-start text-[13px] leading-snug text-[#1d1d1f]">
+                  {isRtl ? (
+                    <>مرحبًا 👋 لديك سؤال؟ <strong className="whitespace-nowrap">اسأل BNC AI</strong>، نصًا أو صوتًا.</>
+                  ) : (
+                    <>Hi 👋 Have a question? <strong className="whitespace-nowrap">Ask BNC AI</strong>, by text or voice.</>
+                  )}
+                </button>
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={() => setIsChatOpen(true)}
+              className="lg-ai-pill group relative flex h-9 items-center gap-2.5 rounded-full pe-4 ps-0 text-white shadow-[0_16px_34px_-12px_rgba(153,27,27,0.65)] transition-transform duration-300 hover:-translate-y-0.5"
+              aria-label={isRtl ? 'اسأل BNC AI، نصًا أو صوتًا' : 'Ask BNC AI, by text or voice'}
+              aria-expanded={isChatOpen}
+            >
+              {/* glassy red-to-black background, kept in its own layer so the photo can stick out */}
+              <span aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-full bg-[linear-gradient(120deg,#0e0e10_0%,#2a0b0d_38%,#7f1d1d_72%,#dc2626_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_-1px_0_rgba(0,0,0,0.35),inset_0_0_0_1px_rgba(255,255,255,0.1)]">
+                <span className="absolute inset-x-3 top-0 h-1/2 rounded-full bg-gradient-to-b from-white/[0.16] to-transparent" />
+                <span className="lg-ai-sheen absolute inset-y-0 w-10 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+              </span>
+              <span className="relative -my-1.5 -ms-1 h-11 w-11 flex-none sm:h-[46px] sm:w-[46px]">
+                <img
+                  src="/about-founders/assets/avatar-sg.png"
+                  alt=""
+                  width="46"
+                  height="46"
+                  loading="lazy"
+                  className="h-full w-full rounded-full bg-white object-cover ring-2 ring-white shadow-[0_6px_14px_-6px_rgba(0,0,0,0.5)]"
+                />
+                <span className={`absolute -bottom-0.5 ${isRtl ? '-left-0.5' : '-right-0.5'} grid h-[18px] w-[18px] place-items-center rounded-full bg-[linear-gradient(135deg,#f97316,#dc2626)] text-white ring-2 ring-white`}>
+                  <Sparkles className="h-2.5 w-2.5 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" strokeWidth={2.2} />
+                </span>
+              </span>
+              <span className="relative whitespace-nowrap text-[13.5px] font-semibold [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] tracking-[-0.01em] sm:text-[14px]">{isRtl ? 'اسأل BNC AI' : 'Ask BNC AI'}</span>
+            </button>
+          </div>
+        )}
         {/* Liquid Glass Background */}
         <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 15% 20%, #dbe8ff 0, transparent 40%), radial-gradient(circle at 85% 30%, #e9e4ff 0, transparent 38%), linear-gradient(180deg, #f7f9fe, #eaf0fb)' }}>
           {/* Animated Liquid Blobs */}
