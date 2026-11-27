@@ -150,7 +150,9 @@ function getSsePayload(rawEvent: string) {
     .join("\n");
 }
 
-async function streamAnswer(message: string) {
+const FALLBACK_MODEL = "gpt-4.1-mini";
+
+async function requestCompletion(message: string, model: string) {
   const response = await fetch(`${OPENAI_API_BASE}/chat/completions`, {
     method: "POST",
     headers: {
@@ -158,7 +160,7 @@ async function streamAnswer(message: string) {
       "content-type": "application/json"
     },
     body: JSON.stringify({
-      model: cleanEnv("OPENAI_ANSWER_MODEL") || "gpt-4.1-mini",
+      model,
       stream: true,
       messages: [
         { role: "system", content: SYSTEM_MESSAGE },
@@ -176,12 +178,30 @@ async function streamAnswer(message: string) {
     } catch {
       // Non-JSON error body; keep the HTTP status only.
     }
-    throw new UpstreamError(response.status, String(code), `OpenAI answer request failed with HTTP ${response.status}: ${detail.slice(0, 500)}`);
+    throw new UpstreamError(response.status, String(code), `OpenAI answer request (model ${model}) failed with HTTP ${response.status}: ${detail.slice(0, 500)}`);
   }
+
+  return response;
+}
+
+async function streamAnswer(message: string) {
+  const configuredModel = cleanEnv("OPENAI_ANSWER_MODEL") || FALLBACK_MODEL;
+  let response: Response;
+  try {
+    response = await requestCompletion(message, configuredModel);
+  } catch (error) {
+    // A misconfigured OPENAI_ANSWER_MODEL (wrong id, embedding or responses-only model)
+    // is rejected with 400/403/404; fall back to a known chat model instead of failing.
+    const rejectedModel = error instanceof UpstreamError && [400, 403, 404].includes(error.status);
+    if (!rejectedModel || configuredModel === FALLBACK_MODEL) throw error;
+    console.error(error, `Retrying with ${FALLBACK_MODEL}.`);
+    response = await requestCompletion(message, FALLBACK_MODEL);
+  }
+  const body = response.body!;
 
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-  const reader = response.body.getReader();
+  const reader = body.getReader();
   let buffer = "";
   const pendingDeltas: string[] = [];
 
